@@ -1,0 +1,411 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/hp/ontologies/2026/9/17/untitled-ontology-61/"
+     xml:base="http://www.semanticweb.org/hp/ontologies/2026/9/17/untitled-ontology-61/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:career="https://example.org/cognipath/career#">
+    <owl:Ontology rdf:about="https://example.org/cognipath/career"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://example.org/cognipath/career#achievesGoal -->
+
+    <owl:ObjectProperty rdf:about="https://example.org/cognipath/career#achievesGoal">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#CareerPlan"/>
+        <rdfs:range rdf:resource="https://example.org/cognipath/career#CareerGoal"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#completedCourse -->
+
+    <owl:ObjectProperty rdf:about="https://example.org/cognipath/career#completedCourse">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#Student"/>
+        <rdfs:range rdf:resource="https://example.org/cognipath/career#Course"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#hasCareerGoal -->
+
+    <owl:ObjectProperty rdf:about="https://example.org/cognipath/career#hasCareerGoal">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#Student"/>
+        <rdfs:range rdf:resource="https://example.org/cognipath/career#CareerGoal"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#hasCareerPlan -->
+
+    <owl:ObjectProperty rdf:about="https://example.org/cognipath/career#hasCareerPlan">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#Student"/>
+        <rdfs:range rdf:resource="https://example.org/cognipath/career#CareerPlan"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#hasSkill -->
+
+    <owl:ObjectProperty rdf:about="https://example.org/cognipath/career#hasSkill">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#Student"/>
+        <rdfs:range rdf:resource="https://example.org/cognipath/career#Skill"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#helpsLearnSkill -->
+
+    <owl:ObjectProperty rdf:about="https://example.org/cognipath/career#helpsLearnSkill">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#LearningResource"/>
+        <rdfs:range rdf:resource="https://example.org/cognipath/career#Skill"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#includesActivity -->
+
+    <owl:ObjectProperty rdf:about="https://example.org/cognipath/career#includesActivity">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#CareerPlan"/>
+        <rdfs:range rdf:resource="https://example.org/cognipath/career#CareerActivity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#offeredBy -->
+
+    <owl:ObjectProperty rdf:about="https://example.org/cognipath/career#offeredBy">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#CareerOpportunity"/>
+        <rdfs:range rdf:resource="https://example.org/cognipath/career#Organization"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#requiresSkill -->
+
+    <owl:ObjectProperty rdf:about="https://example.org/cognipath/career#requiresSkill">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#CareerOpportunity"/>
+        <rdfs:range rdf:resource="https://example.org/cognipath/career#Skill"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#targetsOpportunity -->
+
+    <owl:ObjectProperty rdf:about="https://example.org/cognipath/career#targetsOpportunity">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#CareerActivity"/>
+        <rdfs:range rdf:resource="https://example.org/cognipath/career#CareerOpportunity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#teachesSkill -->
+
+    <owl:ObjectProperty rdf:about="https://example.org/cognipath/career#teachesSkill">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#Course"/>
+        <rdfs:range rdf:resource="https://example.org/cognipath/career#Skill"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#topObjectProperty -->
+
+    <owl:ObjectProperty rdf:about="https://example.org/cognipath/career#topObjectProperty">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#CareerOpportunity"/>
+        <rdfs:range rdf:resource="https://example.org/cognipath/career#Skill"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://example.org/cognipath/career#courseCode -->
+
+    <owl:DatatypeProperty rdf:about="https://example.org/cognipath/career#courseCode">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#Course"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#createdAt -->
+
+    <owl:DatatypeProperty rdf:about="https://example.org/cognipath/career#createdAt">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#CareerPlan"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#deadline -->
+
+    <owl:DatatypeProperty rdf:about="https://example.org/cognipath/career#deadline">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#CareerOpportunity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#durationMinutes -->
+
+    <owl:DatatypeProperty rdf:about="https://example.org/cognipath/career#durationMinutes">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#CareerActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#jobTitle -->
+
+    <owl:DatatypeProperty rdf:about="https://example.org/cognipath/career#jobTitle">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#CareerOpportunity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#organizationName -->
+
+    <owl:DatatypeProperty rdf:about="https://example.org/cognipath/career#organizationName">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#Organization"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#resourceURL -->
+
+    <owl:DatatypeProperty rdf:about="https://example.org/cognipath/career#resourceURL">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#LearningResource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#skillName -->
+
+    <owl:DatatypeProperty rdf:about="https://example.org/cognipath/career#skillName">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#Skill"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#sourceURL -->
+
+    <owl:DatatypeProperty rdf:about="https://example.org/cognipath/career#sourceURL">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#CareerOpportunity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.org/cognipath/career#studentId -->
+
+    <owl:DatatypeProperty rdf:about="https://example.org/cognipath/career#studentId">
+        <rdfs:domain rdf:resource="https://example.org/cognipath/career#Student"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://example.org/cognipath/career#CareerActivity -->
+
+    <owl:Class rdf:about="https://example.org/cognipath/career#CareerActivity"/>
+    
+
+
+    <!-- https://example.org/cognipath/career#CareerGoal -->
+
+    <owl:Class rdf:about="https://example.org/cognipath/career#CareerGoal"/>
+    
+
+
+    <!-- https://example.org/cognipath/career#CareerOpportunity -->
+
+    <owl:Class rdf:about="https://example.org/cognipath/career#CareerOpportunity"/>
+    
+
+
+    <!-- https://example.org/cognipath/career#CareerPlan -->
+
+    <owl:Class rdf:about="https://example.org/cognipath/career#CareerPlan"/>
+    
+
+
+    <!-- https://example.org/cognipath/career#Course -->
+
+    <owl:Class rdf:about="https://example.org/cognipath/career#Course"/>
+    
+
+
+    <!-- https://example.org/cognipath/career#Internship -->
+
+    <owl:Class rdf:about="https://example.org/cognipath/career#Internship">
+        <rdfs:subClassOf rdf:resource="https://example.org/cognipath/career#CareerOpportunity"/>
+    </owl:Class>
+    
+
+
+    <!-- https://example.org/cognipath/career#Job -->
+
+    <owl:Class rdf:about="https://example.org/cognipath/career#Job">
+        <rdfs:subClassOf rdf:resource="https://example.org/cognipath/career#CareerOpportunity"/>
+    </owl:Class>
+    
+
+
+    <!-- https://example.org/cognipath/career#LearningResource -->
+
+    <owl:Class rdf:about="https://example.org/cognipath/career#LearningResource"/>
+    
+
+
+    <!-- https://example.org/cognipath/career#Organization -->
+
+    <owl:Class rdf:about="https://example.org/cognipath/career#Organization"/>
+    
+
+
+    <!-- https://example.org/cognipath/career#Skill -->
+
+    <owl:Class rdf:about="https://example.org/cognipath/career#Skill"/>
+    
+
+
+    <!-- https://example.org/cognipath/career#Student -->
+
+    <owl:Class rdf:about="https://example.org/cognipath/career#Student"/>
+    
+
+
+    <!-- https://example.org/cognipath/career#ThesisOpportunity -->
+
+    <owl:Class rdf:about="https://example.org/cognipath/career#ThesisOpportunity">
+        <rdfs:subClassOf rdf:resource="https://example.org/cognipath/career#CareerOpportunity"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://example.org/cognipath/career#AIInternship001 -->
+
+    <owl:NamedIndividual rdf:about="https://example.org/cognipath/career#AIInternship001">
+        <rdf:type rdf:resource="https://example.org/cognipath/career#Internship"/>
+        <career:requiresSkill rdf:resource="https://example.org/cognipath/career#Docker"/>
+        <career:requiresSkill rdf:resource="https://example.org/cognipath/career#Python"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.org/cognipath/career#Docker -->
+
+    <owl:NamedIndividual rdf:about="https://example.org/cognipath/career#Docker">
+        <rdf:type rdf:resource="https://example.org/cognipath/career#Skill"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.org/cognipath/career#DockerTutorial -->
+
+    <owl:NamedIndividual rdf:about="https://example.org/cognipath/career#DockerTutorial">
+        <rdf:type rdf:resource="https://example.org/cognipath/career#LearningResource"/>
+        <career:helpsLearnSkill rdf:resource="https://example.org/cognipath/career#Docker"/>
+        <career:resourceURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://docs.docker.com/get-started/</career:resourceURL>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.org/cognipath/career#ElhamCareerPlan -->
+
+    <owl:NamedIndividual rdf:about="https://example.org/cognipath/career#ElhamCareerPlan">
+        <rdf:type rdf:resource="https://example.org/cognipath/career#CareerPlan"/>
+        <career:achievesGoal rdf:resource="https://example.org/cognipath/career#GetAIInternship"/>
+        <career:includesActivity rdf:resource="https://example.org/cognipath/career#LearnDocker"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.org/cognipath/career#ElhamPournouri -->
+
+    <owl:NamedIndividual rdf:about="https://example.org/cognipath/career#ElhamPournouri">
+        <rdf:type rdf:resource="https://example.org/cognipath/career#Student"/>
+        <career:hasCareerGoal rdf:resource="https://example.org/cognipath/career#GetAIInternship"/>
+        <career:hasCareerPlan rdf:resource="https://example.org/cognipath/career#ElhamCareerPlan"/>
+        <career:hasSkill rdf:resource="https://example.org/cognipath/career#Python"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.org/cognipath/career#GetAIInternship -->
+
+    <owl:NamedIndividual rdf:about="https://example.org/cognipath/career#GetAIInternship">
+        <rdf:type rdf:resource="https://example.org/cognipath/career#CareerGoal"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.org/cognipath/career#LearnDocker -->
+
+    <owl:NamedIndividual rdf:about="https://example.org/cognipath/career#LearnDocker">
+        <rdf:type rdf:resource="https://example.org/cognipath/career#CareerActivity"/>
+        <career:targetsOpportunity rdf:resource="https://example.org/cognipath/career#AIInternship001"/>
+        <career:durationMinutes rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">180</career:durationMinutes>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.org/cognipath/career#Python -->
+
+    <owl:NamedIndividual rdf:about="https://example.org/cognipath/career#Python">
+        <rdf:type rdf:resource="https://example.org/cognipath/career#Skill"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
