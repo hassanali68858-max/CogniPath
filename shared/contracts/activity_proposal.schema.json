@@ -1,0 +1,263 @@
+{
+  "$defs": {
+    "ActivityType": {
+      "enum": [
+        "event",
+        "learning",
+        "course_work",
+        "application",
+        "quiz",
+        "social",
+        "other"
+      ],
+      "title": "ActivityType",
+      "type": "string"
+    },
+    "FixedTime": {
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "format": "date-time",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "format": "date-time",
+          "title": "End",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "FixedTime",
+      "type": "object"
+    },
+    "ObjectiveValue": {
+      "additionalProperties": false,
+      "description": "How much the activity serves each objective, on a fixed 0-1 rubric.\n\nRubric (agree on it as a team so scores are comparable across agents):\n  0.0 no contribution, 0.3 nice to have, 0.6 clearly useful,\n  0.9 directly required for a stated goal or course.",
+      "properties": {
+        "study": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Study",
+          "type": "number"
+        },
+        "career": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Career",
+          "type": "number"
+        },
+        "social": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Social",
+          "type": "number"
+        }
+      },
+      "title": "ObjectiveValue",
+      "type": "object"
+    },
+    "Priority": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "Priority",
+      "type": "string"
+    },
+    "SessionSplit": {
+      "additionalProperties": false,
+      "description": "How a flexible activity may be cut into sessions.",
+      "properties": {
+        "min_session_min": {
+          "default": 60,
+          "minimum": 30,
+          "title": "Min Session Min",
+          "type": "integer"
+        },
+        "max_session_min": {
+          "default": 120,
+          "minimum": 30,
+          "title": "Max Session Min",
+          "type": "integer"
+        }
+      },
+      "title": "SessionSplit",
+      "type": "object"
+    },
+    "SourceAgent": {
+      "enum": [
+        "event",
+        "tutor",
+        "career",
+        "user"
+      ],
+      "title": "SourceAgent",
+      "type": "string"
+    },
+    "TimeWindow": {
+      "additionalProperties": false,
+      "properties": {
+        "earliest": {
+          "format": "date",
+          "title": "Earliest",
+          "type": "string"
+        },
+        "deadline": {
+          "format": "date",
+          "title": "Deadline",
+          "type": "string"
+        }
+      },
+      "required": [
+        "earliest",
+        "deadline"
+      ],
+      "title": "TimeWindow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "proposal_id": {
+      "minLength": 1,
+      "title": "Proposal Id",
+      "type": "string"
+    },
+    "source_agent": {
+      "$ref": "#/$defs/SourceAgent"
+    },
+    "user_id": {
+      "title": "User Id",
+      "type": "string"
+    },
+    "type": {
+      "$ref": "#/$defs/ActivityType"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "opportunity_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Opportunity Ref"
+    },
+    "resource_url": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resource Url"
+    },
+    "fixed_time": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FixedTime"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "duration_min": {
+      "anyOf": [
+        {
+          "minimum": 30,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Duration Min"
+    },
+    "window": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TimeWindow"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "split": {
+      "$ref": "#/$defs/SessionSplit"
+    },
+    "value": {
+      "$ref": "#/$defs/ObjectiveValue"
+    },
+    "priority": {
+      "$ref": "#/$defs/Priority",
+      "default": "medium"
+    },
+    "hard": {
+      "default": false,
+      "title": "Hard",
+      "type": "boolean"
+    },
+    "depends_on": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Depends On",
+      "type": "array"
+    },
+    "location": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Location"
+    },
+    "reason": {
+      "description": "Why the agent proposes this; shown to the user",
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    }
+  },
+  "required": [
+    "proposal_id",
+    "source_agent",
+    "user_id",
+    "type",
+    "title",
+    "value",
+    "reason"
+  ],
+  "title": "ActivityProposal",
+  "type": "object"
+}

@@ -1,0 +1,320 @@
+[
+  {
+    "proposal_id": "evt-career-fair",
+    "source_agent": "event",
+    "user_id": "student001",
+    "type": "event",
+    "title": "JYU Career Fair",
+    "fixed_time": {
+      "start": "2026-11-04T12:00",
+      "end": "2026-11-04T15:00"
+    },
+    "value": {
+      "social": 0.5,
+      "career": 0.7
+    },
+    "reason": "Matches your interest in AI companies",
+    "opportunity_ref": "event:jyu-career-fair-2026",
+    "location": "Agora"
+  },
+  {
+    "proposal_id": "evt-ai-meetup",
+    "source_agent": "event",
+    "user_id": "student001",
+    "type": "event",
+    "title": "AI meetup Jyvaskyla",
+    "fixed_time": {
+      "start": "2026-11-05T18:00",
+      "end": "2026-11-05T20:00"
+    },
+    "value": {
+      "social": 0.6,
+      "career": 0.4
+    },
+    "reason": "Local AI community, talk on LLM agents"
+  },
+  {
+    "proposal_id": "evt-boardgames",
+    "source_agent": "event",
+    "user_id": "student001",
+    "type": "social",
+    "title": "Board-game night",
+    "fixed_time": {
+      "start": "2026-11-06T19:00",
+      "end": "2026-11-06T22:00"
+    },
+    "value": {
+      "social": 0.8
+    },
+    "reason": "Student union event, you liked similar ones"
+  },
+  {
+    "proposal_id": "evt-hackathon",
+    "source_agent": "event",
+    "user_id": "student001",
+    "type": "event",
+    "title": "Hackathon kickoff",
+    "fixed_time": {
+      "start": "2026-11-07T10:00",
+      "end": "2026-11-07T13:00"
+    },
+    "value": {
+      "study": 0.3,
+      "career": 0.5,
+      "social": 0.5
+    },
+    "reason": "Team-based coding, good for portfolio"
+  },
+  {
+    "proposal_id": "evt-kg-lecture",
+    "source_agent": "event",
+    "user_id": "student001",
+    "type": "event",
+    "title": "Guest lecture: Knowledge graphs",
+    "fixed_time": {
+      "start": "2026-11-09T13:00",
+      "end": "2026-11-09T14:00"
+    },
+    "value": {
+      "study": 0.7
+    },
+    "reason": "Directly related to TIES4570 project"
+  },
+  {
+    "proposal_id": "evt-sauna",
+    "source_agent": "event",
+    "user_id": "student001",
+    "type": "social",
+    "title": "Sauna evening",
+    "fixed_time": {
+      "start": "2026-11-10T16:30",
+      "end": "2026-11-10T19:00"
+    },
+    "value": {
+      "social": 0.7
+    },
+    "reason": "Student union sauna evening"
+  },
+  {
+    "proposal_id": "evt-erasmus-info",
+    "source_agent": "event",
+    "user_id": "student001",
+    "type": "event",
+    "title": "Erasmus info session",
+    "fixed_time": {
+      "start": "2026-11-11T12:15",
+      "end": "2026-11-11T13:00"
+    },
+    "value": {
+      "study": 0.4,
+      "social": 0.2
+    },
+    "reason": "You marked exchange studies as a goal"
+  },
+  {
+    "proposal_id": "evt-climbing",
+    "source_agent": "event",
+    "user_id": "student001",
+    "type": "social",
+    "title": "Climbing club taster",
+    "fixed_time": {
+      "start": "2026-11-14T11:00",
+      "end": "2026-11-14T13:00"
+    },
+    "value": {
+      "social": 0.6
+    },
+    "reason": "New sport, matches your 'outdoors' interest"
+  },
+  {
+    "proposal_id": "tut-report-draft",
+    "source_agent": "tutor",
+    "user_id": "student001",
+    "type": "course_work",
+    "title": "TIES4570 report draft",
+    "duration_min": 360,
+    "window": {
+      "earliest": "2026-11-02",
+      "deadline": "2026-11-08"
+    },
+    "value": {
+      "study": 0.9
+    },
+    "reason": "Homework 6 deadline on 8 Nov",
+    "priority": "high"
+  },
+  {
+    "proposal_id": "tut-algo-ex5",
+    "source_agent": "tutor",
+    "user_id": "student001",
+    "type": "course_work",
+    "title": "Algorithms exercise set 5",
+    "duration_min": 180,
+    "window": {
+      "earliest": "2026-11-02",
+      "deadline": "2026-11-06"
+    },
+    "value": {
+      "study": 0.8
+    },
+    "reason": "Exercise deadline on 6 Nov",
+    "priority": "high"
+  },
+  {
+    "proposal_id": "tut-exam-review",
+    "source_agent": "tutor",
+    "user_id": "student001",
+    "type": "course_work",
+    "title": "Algorithms exam review",
+    "fixed_time": {
+      "start": "2026-11-10T16:00",
+      "end": "2026-11-10T18:00"
+    },
+    "value": {
+      "study": 0.9
+    },
+    "reason": "Last review session before the exam",
+    "priority": "high",
+    "hard": true
+  },
+  {
+    "proposal_id": "tut-read-rdf",
+    "source_agent": "tutor",
+    "user_id": "student001",
+    "type": "learning",
+    "title": "Read chapter 4: RDF and SPARQL",
+    "duration_min": 120,
+    "window": {
+      "earliest": "2026-11-03",
+      "deadline": "2026-11-10"
+    },
+    "value": {
+      "study": 0.6
+    },
+    "reason": "Prerequisite for the knowledge-graph quiz"
+  },
+  {
+    "proposal_id": "tut-quiz-kg",
+    "source_agent": "tutor",
+    "user_id": "student001",
+    "type": "quiz",
+    "title": "Quiz: knowledge graphs",
+    "duration_min": 60,
+    "window": {
+      "earliest": "2026-11-09",
+      "deadline": "2026-11-12"
+    },
+    "value": {
+      "study": 0.5
+    },
+    "reason": "Quiz Agent built this from your lecture notes",
+    "depends_on": [
+      "tut-read-rdf"
+    ]
+  },
+  {
+    "proposal_id": "tut-erasmus-form",
+    "source_agent": "tutor",
+    "user_id": "student001",
+    "type": "application",
+    "title": "Erasmus application form",
+    "duration_min": 120,
+    "window": {
+      "earliest": "2026-11-02",
+      "deadline": "2026-11-13"
+    },
+    "value": {
+      "study": 0.4,
+      "career": 0.3
+    },
+    "reason": "Exchange application closes 13 Nov"
+  },
+  {
+    "proposal_id": "car-update-cv",
+    "source_agent": "career",
+    "user_id": "student001",
+    "type": "application",
+    "title": "Update CV for AI internships",
+    "duration_min": 120,
+    "window": {
+      "earliest": "2026-11-02",
+      "deadline": "2026-11-09"
+    },
+    "value": {
+      "career": 0.8
+    },
+    "reason": "CV is missing your two latest projects"
+  },
+  {
+    "proposal_id": "car-apply-trainee",
+    "source_agent": "career",
+    "user_id": "student001",
+    "type": "application",
+    "title": "Apply: AI summer trainee",
+    "duration_min": 90,
+    "window": {
+      "earliest": "2026-11-05",
+      "deadline": "2026-11-12"
+    },
+    "value": {
+      "career": 0.9
+    },
+    "reason": "Application deadline 12 Nov; strong skill match",
+    "priority": "high",
+    "depends_on": [
+      "car-update-cv"
+    ]
+  },
+  {
+    "proposal_id": "car-career-fair",
+    "source_agent": "career",
+    "user_id": "student001",
+    "type": "event",
+    "title": "JYU Career Fair",
+    "fixed_time": {
+      "start": "2026-11-04T12:00",
+      "end": "2026-11-04T15:00"
+    },
+    "value": {
+      "career": 0.9,
+      "social": 0.3
+    },
+    "reason": "Three target employers attend",
+    "opportunity_ref": "event:jyu-career-fair-2026",
+    "priority": "high"
+  },
+  {
+    "proposal_id": "car-alumni",
+    "source_agent": "career",
+    "user_id": "student001",
+    "type": "social",
+    "title": "Message 3 alumni on LinkedIn",
+    "duration_min": 60,
+    "window": {
+      "earliest": "2026-11-02",
+      "deadline": "2026-11-15"
+    },
+    "value": {
+      "career": 0.4,
+      "social": 0.3
+    },
+    "reason": "Alumni in AI roles can refer you",
+    "priority": "low"
+  },
+  {
+    "proposal_id": "car-mock-interview",
+    "source_agent": "career",
+    "user_id": "student001",
+    "type": "learning",
+    "title": "Mock interview practice",
+    "duration_min": 90,
+    "window": {
+      "earliest": "2026-11-09",
+      "deadline": "2026-11-13"
+    },
+    "value": {
+      "career": 0.6
+    },
+    "reason": "Prepares for trainee interviews"
+  }
+]
