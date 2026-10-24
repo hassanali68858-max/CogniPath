@@ -1,0 +1,4 @@
+# shared tools for every agent; agent-specific packages go in agents/<agent>/requirements.txt
+pydantic>=2.6
+pytest>=8
+ruff>=0.5
