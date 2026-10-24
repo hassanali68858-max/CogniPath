@@ -2,6 +2,16 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.ruff_cache/
 .vscode/
 .idea/
 .env
+.DS_Store
+
+# generated outputs
+*.ics
+career_plan.json
+
+# frontend
+node_modules/
+.next/

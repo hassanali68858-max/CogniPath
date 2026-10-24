@@ -1,0 +1,17 @@
+[project]
+name = "cognipath"
+version = "0.1.0"
+description = "CogniPath: multi-agent cognitive companion for study, events and career (TIES4570)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["B905"]
