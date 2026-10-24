@@ -1,0 +1,13 @@
+{
+    "agent": "CareerAgent",
+    "student": "ElhamPournouri",
+    "goal": "GetAIInternship",
+    "activities": [
+        {
+            "name": "Learn Docker",
+            "target_opportunity": "AIInternship001",
+            "learning_url": "https://docs.docker.com/get-started/",
+            "estimated_duration_minutes": 180
+        }
+    ]
+}
