@@ -1,205 +1,207 @@
 "use client";
 
+import { ArrowRight, CalendarCheck, Database, Loader2, RotateCcw, Scale, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 
-import { Message, type Msg, errorText } from "@/components/Message";
+import { AgentAvatar } from "@/components/AgentBadge";
+import { useStatus } from "@/components/StatusProvider";
+import { errorText, useToast } from "@/components/Toast";
 import { useUser } from "@/components/UserProvider";
 import { api } from "@/lib/api";
-import type { ActivityProposal, Plan } from "@/lib/types";
+import { AGENTS, GOAL_META } from "@/lib/meta";
+import { GOALS } from "@/lib/types";
 
-type Status = {
-  backend: boolean;
-  profile: boolean;
-  proposals: ActivityProposal[];
-  plan: Plan | null;
-};
-
-export default function Home() {
+export default function StartPage() {
+  const { status, refresh } = useStatus();
   const { userId, setUserId } = useUser();
-  const [draftId, setDraftId] = useState(userId);
-  const [status, setStatus] = useState<Status | null>(null);
-  const [msg, setMsg] = useState<Msg>(null);
-  const [busy, setBusy] = useState(false);
+  const toast = useToast();
+  const [busy, setBusy] = useState<"seed" | "reset" | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
 
-  useEffect(() => setDraftId(userId), [userId]);
-
-  const refresh = useCallback(async () => {
-    const backend = await api.health().then(
-      () => true,
-      () => false,
-    );
-    if (!backend) {
-      setStatus({ backend, profile: false, proposals: [], plan: null });
-      return;
-    }
-    const [profile, proposals, plan] = await Promise.all([
-      api.getProfile(userId).then(
-        () => true,
-        () => false,
-      ),
-      api.listProposals(userId, "active").catch(() => [] as ActivityProposal[]),
-      api.currentPlan(userId).catch(() => null),
-    ]);
-    setStatus({ backend, profile, proposals, plan });
-  }, [userId]);
-
-  useEffect(() => {
-    refresh();
-  }, [refresh]);
+  const pending = status.plan?.items.filter((i) => i.decision === "pending").length ?? 0;
 
   async function seed() {
-    setBusy(true);
-    setMsg(null);
+    setBusy("seed");
     try {
       const r = await api.seed();
       setUserId("student001");
-      setMsg({ kind: "ok", text: `Loaded the demo student001: profile + ${r.proposals} proposals.` });
+      toast("success", "Demo student loaded", `student001 now has a profile and ${r.proposals} suggestions.`);
       await refresh();
     } catch (e) {
-      setMsg({ kind: "error", text: errorText(e) });
+      toast("error", "Could not load the demo", errorText(e));
     } finally {
-      setBusy(false);
+      setBusy(null);
     }
   }
 
   async function reset() {
     if (!confirmReset) {
       setConfirmReset(true);
+      setTimeout(() => setConfirmReset(false), 4000);
       return;
     }
     setConfirmReset(false);
-    setBusy(true);
+    setBusy("reset");
     try {
       await api.reset(userId);
-      setMsg({ kind: "ok", text: `Deleted everything stored for ${userId}.` });
+      toast("success", `Cleared ${userId}`, "Profile, suggestions, plans and decisions were deleted.");
       await refresh();
     } catch (e) {
-      setMsg({ kind: "error", text: errorText(e) });
+      toast("error", "Could not reset", errorText(e));
     } finally {
-      setBusy(false);
+      setBusy(null);
     }
   }
 
-  const byAgent = (agent: string) => status?.proposals.filter((p) => p.source_agent === agent).length ?? 0;
+  const journey = [
+    {
+      href: "/profile",
+      title: "About you",
+      body: "Your day hours, a daily limit, fixed commitments like lectures, and how much study, career and social matter.",
+      done: !!status.profile,
+      status: status.profile ? "Saved" : "To do",
+    },
+    {
+      href: "/suggestions",
+      title: "Suggestions",
+      body: "The Event, Tutor and Career agents propose things to do. Fixed events, or work with a deadline.",
+      done: status.proposals.length > 0,
+      status: status.proposals.length ? `${status.proposals.length} waiting` : "None yet",
+    },
+    {
+      href: "/plan",
+      title: "Your plan",
+      body: "The planner fits the best mix into your week, never overlapping, and explains every choice.",
+      done: !!status.plan,
+      status: status.plan ? `${status.plan.items.length} planned · ${status.plan.dropped.length} didn't fit` : "Not made yet",
+    },
+    {
+      href: "/plan",
+      title: "Decide & adapt",
+      body: "Accept or reject items. When something changes, re-plan: accepted items stay, the rest adapts.",
+      done: !!status.plan && pending === 0,
+      status: status.plan ? (pending ? `${pending} to review` : "All decided") : "After planning",
+    },
+  ];
 
   return (
     <>
-      <h1>Planner test UI</h1>
-      <p className="lead">
-        A simple front end for the Planner API. Agents send proposals, the planner builds a plan, the student accepts or
-        rejects items, and re-planning keeps what was accepted.
-      </p>
-
-      <div className="grid2">
-        <section className="panel">
-          <h2>Student</h2>
-          <div className="row">
-            <label>
-              user_id
-              <input value={draftId} onChange={(e) => setDraftId(e.target.value.trim())} />
-            </label>
-            <button onClick={() => draftId && setUserId(draftId)} disabled={!draftId || draftId === userId}>
-              Use this student
-            </button>
-          </div>
-
-          <h3>Demo data</h3>
-          <p className="muted small">
-            Loads the mock profile (lectures, work shifts, 3 h/day limit) and 20 proposals from the Event, Tutor and
-            Career agents for <b>student001</b>.
+      <section className="hero">
+        <div>
+          <span className="eyebrow">CogniPath · Planner Agent</span>
+          <h1>
+            Your week, <span>balanced</span>.
+          </h1>
+          <p>
+            Three agents suggest events, study tasks and career steps. The planner turns them into one realistic plan
+            that respects your time and doesn&apos;t let any goal fall behind. You stay in charge of every decision.
           </p>
-          <div className="row">
-            <button className="primary" onClick={seed} disabled={busy}>
-              Load demo data
-            </button>
-            <button className="danger" onClick={reset} disabled={busy}>
-              {confirmReset ? `Click again to delete ${userId}` : `Reset ${userId}`}
-            </button>
-            <button onClick={refresh} disabled={busy}>
-              Refresh
-            </button>
+          <div className="hero-actions">
+            {!status.profile && !status.proposals.length ? (
+              <button className="btn primary big" onClick={seed} disabled={!!busy || !status.backend}>
+                {busy === "seed" ? <Loader2 size={18} className="spin" /> : <Sparkles size={18} />}
+                Try it with the demo student
+              </button>
+            ) : (
+              <Link className="btn primary big" href="/plan">
+                <CalendarCheck size={18} /> Open your plan <ArrowRight size={18} />
+              </Link>
+            )}
+            <Link className="btn big" href="/profile">
+              Set up my own profile
+            </Link>
           </div>
-          <Message msg={msg} />
-        </section>
+        </div>
 
-        <section className="panel">
-          <h2>Status</h2>
-          {!status ? (
-            <p className="muted">Checking…</p>
-          ) : (
-            <dl className="kv">
-              <dt>Backend</dt>
-              <dd>
-                {status.backend ? (
-                  <span className="badge accepted">running</span>
-                ) : (
-                  <span className="badge rejected">not reachable</span>
-                )}
-              </dd>
-              <dt>Profile</dt>
-              <dd>{status.profile ? "saved" : <Link href="/profile">not set yet</Link>}</dd>
-              <dt>Active proposals</dt>
-              <dd>
-                {status.proposals.length} (event {byAgent("event")} · tutor {byAgent("tutor")} · career{" "}
-                {byAgent("career")} · user {byAgent("user")})
-              </dd>
-              <dt>Current plan</dt>
-              <dd>
-                {status.plan ? (
-                  <>
-                    <span className={`badge ${status.plan.status}`}>{status.plan.status}</span>{" "}
-                    {status.plan.items.length} items, {status.plan.dropped.length} dropped ·{" "}
-                    <Link href="/plan">open</Link>
-                  </>
-                ) : (
-                  "none yet"
-                )}
-              </dd>
-            </dl>
-          )}
-          {status && !status.backend && (
-            <p className="msg error">
-              Start the backend from the repository root: <code>uvicorn backend.main:app --reload</code>
-            </p>
-          )}
-        </section>
+        <div className="flow-visual" aria-label="How CogniPath works">
+          <div className="flow-agents">
+            {(["event", "tutor", "career"] as const).map((a) => (
+              <div className="flow-node" key={a}>
+                <AgentAvatar agent={a} size={28} />
+                {AGENTS[a].short}
+              </div>
+            ))}
+          </div>
+          <div className="flow-arrow">suggest activities ↓</div>
+          <div className="flow-node planner">
+            <Scale size={18} /> Planner balances study · career · social
+          </div>
+          <div className="flow-arrow">one plan, every choice explained ↓</div>
+          <div className="flow-node you">You accept, reject, and it adapts</div>
+        </div>
+      </section>
+
+      <div className="card-head">
+        <div className="grow">
+          <h2>How it works, step by step</h2>
+          <p>Follow the steps in order. The banner at the top always tells you what to do next.</p>
+        </div>
+      </div>
+      <div className="journey" style={{ marginBottom: 20 }}>
+        {journey.map((j, i) => (
+          <Link key={j.title} href={j.href} className={`journey-card${j.done ? " done" : ""}`}>
+            <span className="num">{j.done ? "✓" : i + 1}</span>
+            <h3>{j.title}</h3>
+            <p>{j.body}</p>
+            <span className="status">{status.loading ? "…" : j.status}</span>
+          </Link>
+        ))}
       </div>
 
-      <section className="panel">
-        <h2>How the flow works</h2>
-        <ol className="steps">
-          <li>
-            <b>
-              <Link href="/profile">Profile</Link>
-            </b>{" "}
-            — when the student is busy (lectures, shifts), day hours, daily limit and how much they care about study,
-            career and social. Saved with <code>PUT /profiles/&#123;user_id&#125;</code>.
-          </li>
-          <li>
-            <b>
-              <Link href="/proposals">Proposals</Link>
-            </b>{" "}
-            — what the Event, Tutor and Career agents suggest. Fixed events have a start and end; flexible work has a
-            duration and a deadline. Sent with <code>POST /proposals</code>.
-          </li>
-          <li>
-            <b>
-              <Link href="/plan">Plan</Link>
-            </b>{" "}
-            — the optimiser picks what to keep and when, with no overlaps, deadlines met and the daily limit respected,
-            balancing the three goals. Every kept and dropped item is explained.
-          </li>
-          <li>
-            <b>Decide</b> — accept or reject items. Rejected proposals are never planned again.
-          </li>
-          <li>
-            <b>Re-plan</b> — after new proposals or a cancelled event, accepted items stay where they are and only the
-            rest moves. The plan shows what changed.
-          </li>
-        </ol>
-      </section>
+      <div className="grid two">
+        <section className="card">
+          <div className="card-head">
+            <div className="grow">
+              <h2>How the planner decides</h2>
+              <p>Every suggestion has a value for each goal. The planner keeps as much value as it can.</p>
+            </div>
+          </div>
+          <div className="explain-goals">
+            {GOALS.map((g) => {
+              const Icon = GOAL_META[g].icon;
+              return (
+                <div className="explain-goal" key={g}>
+                  <Icon size={18} className="muted" />
+                  <div>
+                    <b>{GOAL_META[g].label}</b>
+                    <p className="small muted">{GOAL_META[g].question}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <p className="small muted" style={{ marginTop: 14 }}>
+            Hard rules: nothing overlaps, deadlines are met, your daily limit is respected, must-do items always stay.
+            A fairness rule stops one goal from being sacrificed for the others.
+          </p>
+        </section>
+
+        <section className="card">
+          <div className="card-head">
+            <div className="grow">
+              <h2>Demo data</h2>
+              <p>
+                Working as <b>{userId}</b>. Change the student in the sidebar.
+              </p>
+            </div>
+          </div>
+          <div className="row">
+            <button className="btn" onClick={seed} disabled={!!busy || !status.backend}>
+              {busy === "seed" ? <Loader2 size={16} className="spin" /> : <Database size={16} />}
+              Load demo student
+            </button>
+            <button className="btn danger" onClick={reset} disabled={!!busy || !status.backend}>
+              {busy === "reset" ? <Loader2 size={16} className="spin" /> : <RotateCcw size={16} />}
+              {confirmReset ? `Click again to clear ${userId}` : `Clear ${userId}`}
+            </button>
+          </div>
+          <p className="small faint" style={{ marginTop: 12 }}>
+            The demo student has lectures, two work shifts, a 3-hour daily limit and 20 suggestions for 2–15 November
+            2026, including the Career Agent prototype&apos;s &quot;Learn Docker&quot;.
+          </p>
+        </section>
+      </div>
     </>
   );
 }

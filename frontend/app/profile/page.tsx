@@ -1,14 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { CalendarPlus, Clock, Loader2, Lock, Save, Scale, Trash2 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 
-import { Message, type Msg, errorText } from "@/components/Message";
+import { useStatus } from "@/components/StatusProvider";
+import { errorText, useToast } from "@/components/Toast";
 import { useUser } from "@/components/UserProvider";
-import { ApiError, api } from "@/lib/api";
-import { rangeLabel } from "@/lib/format";
+import { api } from "@/lib/api";
+import { datePart, dayLabel, minutesLabel, timePart, weekday } from "@/lib/format";
+import { GOAL_META, WEIGHT_WORDS } from "@/lib/meta";
 import { type BusyBlock, GOALS, type PlannerProfile } from "@/lib/types";
 
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const hhmm = (t: string) => t.slice(0, 5);
+const toMin = (t: string) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3, 5));
 
 function defaults(userId: string): PlannerProfile {
   return {
@@ -25,198 +30,282 @@ function defaults(userId: string): PlannerProfile {
   };
 }
 
-const hhmm = (t: string) => t.slice(0, 5);
+function normalise(p: PlannerProfile): PlannerProfile {
+  return { ...p, day_start: hhmm(p.day_start), day_end: hhmm(p.day_end), evening_after: hhmm(p.evening_after) };
+}
 
 export default function ProfilePage() {
   const { userId } = useUser();
+  const { refresh } = useStatus();
+  const toast = useToast();
   const [profile, setProfile] = useState<PlannerProfile>(defaults(userId));
+  const [saved, setSaved] = useState<string>(JSON.stringify(defaults(userId)));
   const [exists, setExists] = useState(false);
-  const [msg, setMsg] = useState<Msg>(null);
+  const [saving, setSaving] = useState(false);
   const [block, setBlock] = useState<BusyBlock>({ title: "", start: "", end: "" });
 
   useEffect(() => {
-    setMsg(null);
     api
       .getProfile(userId)
       .then((p) => {
-        setProfile({ ...p, day_start: hhmm(p.day_start), day_end: hhmm(p.day_end), evening_after: hhmm(p.evening_after) });
+        const n = normalise(p);
+        setProfile(n);
+        setSaved(JSON.stringify(n));
         setExists(true);
       })
-      .catch((e) => {
-        setProfile(defaults(userId));
+      .catch(() => {
+        const d = defaults(userId);
+        setProfile(d);
+        setSaved(JSON.stringify(d));
         setExists(false);
-        if (!(e instanceof ApiError && e.status === 404)) setMsg({ kind: "error", text: errorText(e) });
       });
   }, [userId]);
 
+  const dirty = JSON.stringify(profile) !== saved || !exists;
   const set = <K extends keyof PlannerProfile>(key: K, value: PlannerProfile[K]) =>
     setProfile((p) => ({ ...p, [key]: value }));
 
-  function toggleWeekday(d: number) {
-    set(
-      "free_weekdays",
-      profile.free_weekdays.includes(d) ? profile.free_weekdays.filter((x) => x !== d) : [...profile.free_weekdays, d],
-    );
-  }
+  const blocks = useMemo(
+    () => [...profile.busy_blocks].sort((a, b) => a.start.localeCompare(b.start)),
+    [profile.busy_blocks],
+  );
+  const weightTotal = GOALS.reduce((s, g) => s + profile.weights[g], 0) || 1;
 
   function addBlock() {
     if (!block.title || !block.start || !block.end) {
-      setMsg({ kind: "error", text: "A busy block needs a title, a start and an end." });
+      toast("error", "Fill in all three fields", "A commitment needs a name, a start and an end.");
       return;
     }
-    const sorted = [...profile.busy_blocks, block].sort((a, b) => a.start.localeCompare(b.start));
-    set("busy_blocks", sorted);
-    setBlock({ title: "", start: "", end: "" });
-    setMsg(null);
+    if (block.end <= block.start) {
+      toast("error", "End must be after start");
+      return;
+    }
+    set("busy_blocks", [...profile.busy_blocks, block]);
+    setBlock({ title: "", start: block.end.slice(0, 11) + "10:00", end: block.end.slice(0, 11) + "12:00" });
   }
 
   async function save() {
+    setSaving(true);
     try {
-      const saved = await api.putProfile({ ...profile, user_id: userId });
+      const p = normalise(await api.putProfile({ ...profile, user_id: userId }));
+      setProfile(p);
+      setSaved(JSON.stringify(p));
       setExists(true);
-      setMsg({ kind: "ok", text: `Profile saved for ${saved.user_id}. Re-plan to apply changes to an existing plan.` });
+      toast("success", "Profile saved", "If you already have a plan, re-plan to apply the changes.");
+      await refresh();
     } catch (e) {
-      setMsg({ kind: "error", text: errorText(e) });
+      toast("error", "Could not save", errorText(e));
+    } finally {
+      setSaving(false);
     }
   }
 
+  const pct = (t: string) => `${(toMin(t) / 1440) * 100}%`;
+
   return (
     <>
-      <h1>Profile</h1>
-      <p className="lead">
-        What the planner needs to know about <b>{userId}</b> {exists ? "" : "(not saved yet)"}. In the real app this
-        comes from onboarding and the student&apos;s timetable.
-      </p>
+      <div className="page-head">
+        <div>
+          <span className="eyebrow">Step 1</span>
+          <h1>About you</h1>
+          <p>
+            The planner only uses your free time. Set when your day runs, how much planned work is realistic, and which
+            goals matter most. {exists ? "" : "Nothing is saved yet for this student."}
+          </p>
+        </div>
+      </div>
 
-      <section className="panel">
-        <h2>Day and limits</h2>
-        <div className="form-grid">
-          <label>
-            Day starts
-            <input type="time" value={profile.day_start} onChange={(e) => set("day_start", e.target.value)} />
-          </label>
-          <label>
-            Day ends
-            <input type="time" value={profile.day_end} onChange={(e) => set("day_end", e.target.value)} />
-          </label>
-          <label>
-            Evening after (soft penalty)
-            <input type="time" value={profile.evening_after} onChange={(e) => set("evening_after", e.target.value)} />
-          </label>
-          <label>
-            Daily limit (minutes)
+      <div className="grid two">
+        <section className="card">
+          <div className="card-head">
+            <Clock size={18} className="muted" />
+            <div className="grow">
+              <h2>Your day</h2>
+              <p>Nothing is planned outside this window. Sessions ending after the evening time count as less ideal.</p>
+            </div>
+          </div>
+          <div className="day-bar" aria-hidden>
+            <div className="window" style={{ left: pct(profile.day_start), right: `calc(100% - ${pct(profile.day_end)})` }} />
+            <div className="evening" style={{ left: pct(profile.evening_after), right: `calc(100% - ${pct(profile.day_end)})` }} />
+          </div>
+          <div className="day-scale">
+            <span>00</span>
+            <span>06</span>
+            <span>12</span>
+            <span>18</span>
+            <span>24</span>
+          </div>
+          <div className="fields" style={{ marginTop: 14 }}>
+            <label className="field">
+              <span className="field-label">Day starts</span>
+              <input type="time" value={profile.day_start} onChange={(e) => set("day_start", e.target.value)} />
+            </label>
+            <label className="field">
+              <span className="field-label">Evening from</span>
+              <input type="time" value={profile.evening_after} onChange={(e) => set("evening_after", e.target.value)} />
+            </label>
+            <label className="field">
+              <span className="field-label">Day ends</span>
+              <input type="time" value={profile.day_end} onChange={(e) => set("day_end", e.target.value)} />
+            </label>
+          </div>
+
+          <label className="field" style={{ marginTop: 18 }}>
+            <span className="field-label">
+              Daily limit: <b style={{ color: "var(--text)" }}>{minutesLabel(profile.daily_cap_min)}</b> of planned activities
+            </span>
             <input
-              type="number"
-              min={30}
+              type="range"
+              min={60}
+              max={480}
               step={30}
               value={profile.daily_cap_min}
               onChange={(e) => set("daily_cap_min", Number(e.target.value))}
             />
+            <span className="field-hint">Lectures and other commitments below don&apos;t count towards this.</span>
           </label>
-        </div>
-        <div className="row">
-          <span className="muted small">Days off:</span>
-          {WEEKDAYS.map((d, i) => (
-            <label key={d} className="inline">
-              <input type="checkbox" checked={profile.free_weekdays.includes(i)} onChange={() => toggleWeekday(i)} /> {d}
-            </label>
-          ))}
-        </div>
-      </section>
 
-      <section className="panel">
-        <h2>Goal weights</h2>
-        <p className="muted small">How much this student cares about each goal. 1 = normal, 3 = much more.</p>
-        <div className="form-grid">
-          {GOALS.map((g) => (
-            <label key={g}>
-              {g}: {profile.weights[g]}
+          <div className="field" style={{ marginTop: 18 }}>
+            <span className="field-label">Days off (nothing flexible is planned)</span>
+            <div className="chips">
+              {WEEKDAYS.map((d, i) => (
+                <button
+                  key={d}
+                  className={`chip${profile.free_weekdays.includes(i) ? " on" : ""}`}
+                  onClick={() =>
+                    set(
+                      "free_weekdays",
+                      profile.free_weekdays.includes(i)
+                        ? profile.free_weekdays.filter((x) => x !== i)
+                        : [...profile.free_weekdays, i],
+                    )
+                  }
+                >
+                  {d}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="card">
+          <div className="card-head">
+            <div className="grow">
+              <h2>What matters to you</h2>
+              <p>When there isn&apos;t time for everything, these decide what stays.</p>
+            </div>
+          </div>
+          {GOALS.map((g) => {
+            const Icon = GOAL_META[g].icon;
+            return (
+              <div className="weight-row" key={g}>
+                <span className={`agent-avatar ${g === "study" ? "tutor" : g === "career" ? "career" : "event"}`} style={{ width: 36, height: 36 }}>
+                  <Icon size={18} />
+                </span>
+                <div>
+                  <b>{GOAL_META[g].label}</b> <span className="small faint">{GOAL_META[g].question}</span>
+                  <input
+                    type="range"
+                    min={0}
+                    max={3}
+                    step={0.5}
+                    value={profile.weights[g]}
+                    onChange={(e) => set("weights", { ...profile.weights, [g]: Number(e.target.value) })}
+                  />
+                </div>
+                <span className="weight-word">
+                  {WEIGHT_WORDS(profile.weights[g])}
+                  <span className="small faint" style={{ display: "block", fontWeight: 500 }}>
+                    {Math.round((profile.weights[g] / weightTotal) * 100)}% of the weight
+                  </span>
+                </span>
+              </div>
+            );
+          })}
+          <div className="weight-row">
+            <span className="agent-avatar user" style={{ width: 36, height: 36 }}>
+              <Scale size={18} />
+            </span>
+            <div>
+              <b>Fairness</b> <span className="small faint">Don&apos;t let one goal fall far behind</span>
               <input
                 type="range"
                 min={0}
                 max={3}
                 step={0.5}
-                value={profile.weights[g]}
-                onChange={(e) => set("weights", { ...profile.weights, [g]: Number(e.target.value) })}
+                value={profile.fairness_weight}
+                onChange={(e) => set("fairness_weight", Number(e.target.value))}
               />
-            </label>
-          ))}
-          <label>
-            Fairness (nobody gets ignored): {profile.fairness_weight}
-            <input
-              type="range"
-              min={0}
-              max={3}
-              step={0.5}
-              value={profile.fairness_weight}
-              onChange={(e) => set("fairness_weight", Number(e.target.value))}
-            />
-          </label>
-        </div>
-      </section>
+            </div>
+            <span className="weight-word">{profile.fairness_weight === 0 ? "Off" : WEIGHT_WORDS(profile.fairness_weight)}</span>
+          </div>
+        </section>
+      </div>
 
-      <section className="panel">
-        <h2>Busy time ({profile.busy_blocks.length})</h2>
-        <p className="muted small">Lectures, work shifts and other fixed commitments. The planner never overlaps these.</p>
-        <div className="row" style={{ marginBottom: 12 }}>
-          <label>
-            Title
-            <input value={block.title} onChange={(e) => setBlock({ ...block, title: e.target.value })} />
+      <section className="card" style={{ marginTop: 16 }}>
+        <div className="card-head">
+          <Lock size={18} className="muted" />
+          <div className="grow">
+            <h2>Fixed commitments ({blocks.length})</h2>
+            <p>Lectures, work shifts, appointments. The planner never puts anything on top of these.</p>
+          </div>
+        </div>
+
+        <div className="fields" style={{ alignItems: "end", marginBottom: 16 }}>
+          <label className="field">
+            <span className="field-label">What</span>
+            <input placeholder="e.g. Algorithms lecture" value={block.title} onChange={(e) => setBlock({ ...block, title: e.target.value })} />
           </label>
-          <label>
-            Start
+          <label className="field">
+            <span className="field-label">Starts</span>
             <input type="datetime-local" value={block.start} onChange={(e) => setBlock({ ...block, start: e.target.value })} />
           </label>
-          <label>
-            End
+          <label className="field">
+            <span className="field-label">Ends</span>
             <input type="datetime-local" value={block.end} onChange={(e) => setBlock({ ...block, end: e.target.value })} />
           </label>
-          <button onClick={addBlock} style={{ alignSelf: "flex-end" }}>
-            Add
+          <button className="btn" onClick={addBlock}>
+            <CalendarPlus size={16} /> Add commitment
           </button>
         </div>
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>When</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {profile.busy_blocks.map((b, i) => (
-                <tr key={`${b.start}-${i}`}>
-                  <td>{b.title}</td>
-                  <td>{rangeLabel(b.start, b.end)}</td>
-                  <td>
-                    <button
-                      className="small danger"
-                      onClick={() => set("busy_blocks", profile.busy_blocks.filter((_, j) => j !== i))}
-                    >
-                      Remove
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {!profile.busy_blocks.length && (
-                <tr>
-                  <td colSpan={3} className="muted">
-                    No busy time yet.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+
+        {blocks.length ? (
+          <div className="commitments">
+            {blocks.map((b) => (
+              <div className="commitment" key={`${b.start}-${b.title}`}>
+                <div className="date">
+                  <span>{WEEKDAYS[weekday(datePart(b.start))]}</span>
+                  <b>{Number(b.start.slice(8, 10))}</b>
+                </div>
+                <div>
+                  <b>{b.title}</b>
+                  <div className="small muted">
+                    {dayLabel(datePart(b.start))} · {timePart(b.start)}–{timePart(b.end)}
+                  </div>
+                </div>
+                <button
+                  className="icon-btn"
+                  aria-label={`Remove ${b.title}`}
+                  onClick={() => set("busy_blocks", profile.busy_blocks.filter((x) => x !== b))}
+                >
+                  <Trash2 size={16} />
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="muted">No commitments yet. Add your lectures and shifts so nothing gets planned on top of them.</p>
+        )}
       </section>
 
-      <div className="row">
-        <button className="primary" onClick={save}>
-          Save profile
-        </button>
-      </div>
-      <Message msg={msg} />
+      {dirty && (
+        <div className="save-bar">
+          <span className="grow">{exists ? "You have unsaved changes." : "This profile is not saved yet."}</span>
+          <button className="btn primary" onClick={save} disabled={saving}>
+            {saving ? <Loader2 size={16} className="spin" /> : <Save size={16} />} Save profile
+          </button>
+        </div>
+      )}
     </>
   );
 }
