@@ -9,14 +9,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          for f in agents/*/requirements.txt; do pip install -r "$f"; done
+          for f in agents/*/requirements.txt; do if [ -f "$f" ]; then pip install -r "$f"; fi; done
       - name: Lint
         run: ruff check shared agents tests
       - name: Test
