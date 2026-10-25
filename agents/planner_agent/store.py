@@ -23,7 +23,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Iterable, Optional
 
-from sqlalchemy import JSON, DateTime, ForeignKey, Integer, String, create_engine, select
+from sqlalchemy import JSON, DateTime, ForeignKey, Integer, String, create_engine, delete, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 from sqlalchemy.pool import StaticPool
 
@@ -215,6 +215,16 @@ class PlannerStore:
                 s.add(
                     DecisionRow(plan_id=plan.plan_id, item_id=item_id, proposal_id=proposal_id, decision=decision.value)
                 )
+
+    def delete_user(self, user_id: str) -> None:
+        """Remove everything stored for one user (demo reset)."""
+        with self._session.begin() as s:
+            plan_ids = s.scalars(select(PlanRow.plan_id).where(PlanRow.user_id == user_id)).all()
+            if plan_ids:
+                s.execute(delete(DecisionRow).where(DecisionRow.plan_id.in_(plan_ids)))
+            s.execute(delete(PlanRow).where(PlanRow.user_id == user_id))
+            s.execute(delete(ProposalRow).where(ProposalRow.user_id == user_id))
+            s.execute(delete(ProfileRow).where(ProfileRow.user_id == user_id))
 
     def decision_log(self, plan_id: str) -> list[tuple[str, str]]:
         with self._session() as s:

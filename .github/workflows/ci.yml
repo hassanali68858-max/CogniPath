@@ -32,7 +32,22 @@ jobs:
           pip install -r requirements.txt
           for f in agents/*/requirements.txt; do if [ -f "$f" ]; then pip install -r "$f"; fi; done
       - name: Lint
-        run: ruff check shared agents tests
+        run: ruff check shared agents backend tests
       - name: Test
         # exit code 5 = no tests collected yet; treat as success
         run: pytest || [ $? -eq 5 ]
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run build
