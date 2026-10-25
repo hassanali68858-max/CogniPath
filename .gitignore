@@ -15,3 +15,6 @@ career_plan.json
 # frontend
 node_modules/
 .next/
+
+# local databases
+*.db

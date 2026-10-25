@@ -4,14 +4,17 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
+from typing import Optional
 
 from pydantic import BaseModel, Field
 
 
 class PlanStatus(str, Enum):
-    DRAFT = "draft"
-    APPROVED = "approved"
-    PARTIAL = "partial"
+    DRAFT = "draft"  # waiting for the user
+    PARTIAL = "partial"  # some items accepted
+    APPROVED = "approved"  # every item accepted
+    DISCARDED = "discarded"  # another alternative from the same run was chosen
+    SUPERSEDED = "superseded"  # replaced by a re-planned version
 
 
 class ItemDecision(str, Enum):
@@ -54,6 +57,7 @@ class PlanScores(BaseModel):
 
 class Plan(BaseModel):
     plan_id: str
+    run_id: Optional[str] = Field(None, description="Alternatives from one planning run share a run_id")
     user_id: str
     mode: str
     horizon_start: datetime

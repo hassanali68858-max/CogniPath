@@ -9,6 +9,7 @@ Usage::
 from __future__ import annotations
 
 import logging
+import uuid
 from datetime import date, datetime, timedelta
 from typing import Iterable, Optional
 
@@ -94,7 +95,9 @@ def make_plan(
     days: int = 14,
     mode: str = "balanced",
     plan_id: Optional[str] = None,
+    run_id: Optional[str] = None,
 ) -> Plan:
+    run_id = run_id or new_run_id(profile.user_id)
     candidates = merge_duplicates(p for p in proposals if p.user_id == profile.user_id)
     by_id = {c.proposal.proposal_id: c for c in candidates}
     res = solve(candidates, profile, horizon_start, days, mode=mode)
@@ -135,7 +138,8 @@ def make_plan(
 
     hs = datetime.combine(horizon_start, datetime.min.time())
     return Plan(
-        plan_id=plan_id or f"{profile.user_id}-{horizon_start.isoformat()}-{mode}",
+        plan_id=plan_id or f"{run_id}-{mode}",
+        run_id=run_id,
         user_id=profile.user_id,
         mode=mode,
         horizon_start=hs,
@@ -156,7 +160,13 @@ def make_plans(
     modes: Iterable[str] = tuple(MODES),
 ) -> list[Plan]:
     """One plan per mode (balanced, study_first, career_first) for the user to pick from."""
-    return [make_plan(proposals, profile, horizon_start, days, mode=m) for m in modes]
+    run_id = new_run_id(profile.user_id)
+    return [make_plan(proposals, profile, horizon_start, days, mode=m, run_id=run_id) for m in modes]
+
+
+def new_run_id(user_id: str) -> str:
+    """Unique id for one planning run, e.g. student001-20261102T091500-3f2a."""
+    return f"{user_id}-{datetime.now():%Y%m%dT%H%M%S}-{uuid.uuid4().hex[:4]}"
 
 
 def approved_as_busy(plan: Plan) -> list[BusyBlock]:

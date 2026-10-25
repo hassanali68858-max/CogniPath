@@ -8,6 +8,20 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: cognipath
+          POSTGRES_PASSWORD: cognipath
+          POSTGRES_DB: cognipath
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U cognipath -d cognipath"
+          --health-interval 5s --health-timeout 3s --health-retries 10
+    env:
+      TEST_DATABASE_URL: postgresql+psycopg://cognipath:cognipath@localhost:5432/cognipath
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
