@@ -55,9 +55,21 @@ class PlanScores(BaseModel):
     scheduled_minutes: int
 
 
+class PlanChanges(BaseModel):
+    """What a re-planned version changed compared with the plan it replaces."""
+
+    added: list[str] = Field(default_factory=list, description="proposal_ids new in this plan")
+    removed: list[str] = Field(default_factory=list, description="proposal_ids no longer in the plan")
+    moved: list[str] = Field(default_factory=list, description="proposal_ids at a different time")
+    kept: int = 0
+    notes: list[str] = Field(default_factory=list, description="Things the user should know, in plain words")
+    summary: str = ""
+
+
 class Plan(BaseModel):
     plan_id: str
     run_id: Optional[str] = Field(None, description="Alternatives from one planning run share a run_id")
+    based_on: Optional[str] = Field(None, description="plan_id this plan re-plans, if any")
     user_id: str
     mode: str
     horizon_start: datetime
@@ -68,3 +80,4 @@ class Plan(BaseModel):
     scores: PlanScores
     solver_status: str
     solve_seconds: float
+    changes: Optional[PlanChanges] = None

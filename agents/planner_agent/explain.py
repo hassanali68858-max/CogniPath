@@ -42,6 +42,8 @@ def explain_dropped(
     code = result.unschedulable.get(p.proposal_id)
     if code == "outside_horizon":
         return "Falls outside the planning period."
+    if code == "already_started":
+        return "Already started or in the past."
     if code == "no_free_time_in_window":
         return "There is no free slot inside its time window and your day hours."
 

@@ -19,9 +19,11 @@ from shared.contracts import (
     DroppedItem,
     ItemDecision,
     Plan,
+    PlanChanges,
     PlanItem,
     PlannerProfile,
     PlanScores,
+    PlanStatus,
     Priority,
     Session,
 )
@@ -96,11 +98,18 @@ def make_plan(
     mode: str = "balanced",
     plan_id: Optional[str] = None,
     run_id: Optional[str] = None,
+    locked: Optional[dict[str, list[tuple[datetime, datetime]]]] = None,
+    not_before: Optional[datetime] = None,
+    previous: Optional[dict[str, list[tuple[datetime, datetime]]]] = None,
 ) -> Plan:
+    """Plan one alternative. ``locked`` and ``not_before`` are used by :func:`replan`."""
     run_id = run_id or new_run_id(profile.user_id)
+    locked = locked or {}
     candidates = merge_duplicates(p for p in proposals if p.user_id == profile.user_id)
     by_id = {c.proposal.proposal_id: c for c in candidates}
-    res = solve(candidates, profile, horizon_start, days, mode=mode)
+    res = solve(
+        candidates, profile, horizon_start, days, mode=mode, locked=locked, not_before=not_before, previous=previous
+    )
 
     items: list[PlanItem] = []
     dropped: list[DroppedItem] = []
@@ -118,7 +127,10 @@ def make_plan(
                     title=c.proposal.title,
                     sessions=[Session(start=s, end=e) for s, e in sess],
                     value=c.proposal.value.as_dict(),
-                    explanation=explain_scheduled(c, sess),
+                    explanation=(
+                        "You accepted this; it stays at the same time." if pid in locked else explain_scheduled(c, sess)
+                    ),
+                    decision=ItemDecision.ACCEPTED if pid in locked else ItemDecision.PENDING,
                 )
             )
         else:
@@ -177,3 +189,82 @@ def approved_as_busy(plan: Plan) -> list[BusyBlock]:
         if item.decision == ItemDecision.ACCEPTED
         for s in item.sessions
     ]
+
+
+def replan(
+    base: Plan,
+    proposals: list[ActivityProposal],
+    profile: PlannerProfile,
+    *,
+    not_before: Optional[datetime] = None,
+    modes: Optional[Iterable[str]] = None,
+) -> list[Plan]:
+    """Plan again after something changed, keeping what the user already accepted.
+
+    - accepted items keep their exact times (unless their proposal was withdrawn,
+      or a new busy block now clashes with them; then they are planned again)
+    - rejected items are left out
+    - pending items and new proposals are planned freely, not before ``not_before``
+    - same horizon as ``base``; one plan per mode (default: the base plan's mode)
+    """
+    rejected = {i.proposal_id for i in base.items if i.decision == ItemDecision.REJECTED}
+    available = {p.proposal_id: p for p in proposals if p.user_id == base.user_id and p.proposal_id not in rejected}
+    notes: list[str] = []
+
+    locked: dict[str, list[tuple[datetime, datetime]]] = {}
+    for item in base.items:
+        if item.decision != ItemDecision.ACCEPTED:
+            continue
+        if item.proposal_id not in available:
+            notes.append(f"'{item.title}' was withdrawn by the {'/'.join(item.source_agents)} agent.")
+            continue
+        sessions = [(s.start, s.end) for s in item.sessions]
+        clash = next(
+            (b for b in profile.busy_blocks for a, e in sessions if b.start < e and a < b.end),
+            None,
+        )
+        if clash is not None:
+            notes.append(f"'{item.title}' now clashes with '{clash.title}', so it was planned again.")
+            continue
+        locked[item.proposal_id] = sessions
+
+    previous = {
+        i.proposal_id: [(s.start, s.end) for s in i.sessions]
+        for i in base.items
+        if i.decision == ItemDecision.PENDING and i.proposal_id not in locked
+    }
+    horizon_start = base.horizon_start.date()
+    days = (base.horizon_end - base.horizon_start).days
+    run_id = new_run_id(base.user_id)
+    plans = []
+    for mode in modes or [base.mode]:
+        plan = make_plan(
+            list(available.values()),
+            profile,
+            horizon_start,
+            days,
+            mode=mode,
+            run_id=run_id,
+            locked=locked,
+            not_before=not_before,
+            previous=previous,
+        )
+        plan.based_on = base.plan_id
+        plan.changes = compare_plans(base, plan, notes)
+        if any(i.decision == ItemDecision.ACCEPTED for i in plan.items):
+            plan.status = PlanStatus.PARTIAL
+        plans.append(plan)
+    return plans
+
+
+def compare_plans(old: Plan, new: Plan, notes: Optional[list[str]] = None) -> PlanChanges:
+    """What changed from ``old`` to ``new``, by proposal."""
+    before = {i.proposal_id: [(s.start, s.end) for s in i.sessions] for i in old.items}
+    after = {i.proposal_id: [(s.start, s.end) for s in i.sessions] for i in new.items}
+    added = sorted(set(after) - set(before))
+    removed = sorted(set(before) - set(after))
+    moved = sorted(pid for pid in set(before) & set(after) if before[pid] != after[pid])
+    kept = len(set(before) & set(after)) - len(moved)
+    parts = [f"{n} {word}" for n, word in ((len(added), "added"), (len(moved), "moved"), (len(removed), "removed"))]
+    summary = ", ".join(parts) + f", {kept} unchanged" if (added or moved or removed) else "No changes"
+    return PlanChanges(added=added, removed=removed, moved=moved, kept=kept, notes=list(notes or []), summary=summary)

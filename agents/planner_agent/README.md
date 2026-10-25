@@ -84,6 +84,8 @@ you can try it without Docker. Tables are created on first start.
 | GET | `/planner/plans/{plan_id}` | One plan |
 | GET | `/planner/users/{user_id}/current` | The plan the student is working with |
 | POST | `/planner/plans/{plan_id}/decisions` | Accept / reject items |
+| POST | `/planner/plans/{plan_id}/replan` | Re-plan this plan (see below) |
+| POST | `/planner/users/{user_id}/replan` | Re-plan the student's current plan |
 | GET | `/planner/plans/{plan_id}/ics` | Calendar export |
 
 Rules the API applies:
@@ -92,6 +94,30 @@ Rules the API applies:
 - A rejected item's proposal is marked `rejected` and is not planned again. If the
   agent sends it again, it stays rejected; if the user un-rejects it, it is active again.
 - A withdrawn proposal becomes active again if the agent sends it again.
+
+## Re-planning
+
+Call a replan endpoint whenever something changes: an agent pushes new
+proposals, withdraws one, or the student's profile gets a new busy block.
+
+- **Accepted** items keep their exact times.
+- **Rejected** items are left out.
+- **Pending** items and new proposals are planned again around them. Moving a
+  pending item costs a little, so a re-plan only moves what it has to.
+- With `"not_before": "<now>"` in the body, nothing new is placed in the past;
+  events that already started are dropped with an explanation.
+- An accepted item whose proposal was withdrawn, or that now clashes with a new
+  busy block, is removed or planned again, and the plan's `changes.notes` says so.
+- The new plan has `based_on` = the old plan and a `changes` summary
+  (added / moved / removed / unchanged). The old plan becomes `superseded`.
+
+Typical flow from the backend:
+
+```text
+POST /proposals                         (an agent found a new event)
+POST /planner/users/student001/replan   {"not_before": "2026-11-09T12:00"}
+→ show changes.summary and changes.notes to the student
+```
 
 Tests run on in-memory SQLite. To also run them on PostgreSQL (CI does this):
 
@@ -114,6 +140,7 @@ After changing the model, regenerate it: `python -m shared.contracts.export_sche
 - [ ] Agree the contract with all agent owners (PR review)
 - [ ] Career Agent returns `ActivityProposal` directly → delete `adapters/career.py`
 - [x] Persist proposals and plans in PostgreSQL
-- [ ] Re-plan when a new high-priority proposal arrives (keep accepted items via `approved_as_busy`)
+- [x] Re-plan when something changes, keeping accepted items
+- [ ] Trigger re-planning automatically from the backend (scheduler / new proposals)
 - [ ] LLM layer: rewrite explanations in friendly language; parse requests like "keep Friday evening free"
 - [ ] Learn weights from accept/reject decisions

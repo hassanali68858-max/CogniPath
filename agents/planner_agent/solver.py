@@ -17,6 +17,8 @@ Hard constraints
   - dependencies: q only if p is scheduled, and every q session starts after
     every p session ends
   - hard proposals are always scheduled (the model is INFEASIBLE otherwise)
+  - locked items (accepted by the user, when re-planning) keep their exact sessions
+  - with not_before, nothing new is placed before that moment (re-planning mid-week)
 
 Time is a grid of 30-minute slots starting at horizon_start 00:00.
 """
@@ -27,6 +29,7 @@ import math
 import time as _time
 from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta
+from typing import Optional
 
 from ortools.sat.python import cp_model
 
@@ -37,6 +40,7 @@ SLOTS_PER_DAY = 24 * 60 // SLOT_MIN
 OBJECTIVES = ("study", "career", "social")
 LOSS_SCALE = 1000
 FRAGMENT_PENALTY = 50  # per session used: prefer fewer, longer sessions; small next to dropping an item
+MOVE_PENALTY = 100  # per session moved away from the previous plan when re-planning
 
 MODES: dict[str, dict[str, float]] = {
     "balanced": {"study": 1.0, "career": 1.0, "social": 1.0},
@@ -96,8 +100,18 @@ def solve(
     days: int,
     mode: str = "balanced",
     time_limit_s: float = 10.0,
-    workers: int = 8,
+    workers: int = 1,  # 1 = same plan every run (good for demos); raise for big problems
+    locked: Optional[dict[str, list[tuple[datetime, datetime]]]] = None,
+    not_before: Optional[datetime] = None,
+    previous: Optional[dict[str, list[tuple[datetime, datetime]]]] = None,
 ) -> SolveResult:
+    """Solve one planning problem.
+
+    locked:     proposal_id -> sessions the user already accepted; kept exactly as they are
+    not_before: nothing that is not locked may start before this moment
+    previous:   proposal_id -> sessions in the plan being replaced; moving them costs a little,
+                so a re-plan changes only what it has to
+    """
     if mode not in MODES:
         raise ValueError(f"unknown mode {mode!r}; choose from {sorted(MODES)}")
     t0 = _time.perf_counter()
@@ -105,6 +119,11 @@ def solve(
     n_slots = days * SLOTS_PER_DAY
     day_lo, day_hi = _minute_slot(profile.day_start), _minute_slot(profile.day_end)
     evening_slot = _minute_slot(profile.evening_after)
+    locked = locked or {}
+    previous = previous or {}
+    stay_flags: list = []
+    nb = max(0, _slot_of(hs, not_before, ceil=True)) if not_before else 0
+    locked_load: dict[int, int] = {d: 0 for d in range(days)}
 
     m = cp_model.CpModel()
     result = SolveResult(status="UNKNOWN")
@@ -130,12 +149,31 @@ def solve(
         x[pid] = xp
         sessions[pid] = []
 
+        # ---- locked item: accepted earlier, keep its sessions exactly
+        if pid in locked:
+            m.Add(xp == 1)
+            for a, b in locked[pid]:
+                s = max(0, _slot_of(hs, a))
+                e = min(n_slots, _slot_of(hs, b, ceil=True))
+                if e <= s:
+                    continue  # outside this horizon
+                intervals.append(m.NewFixedSizeIntervalVar(s, e - s, f"lock_{pid}_{s}"))
+                d = s // SLOTS_PER_DAY
+                per_day_load[d].append(e - s)
+                locked_load[d] += e - s
+                sessions[pid].append(_Session(d, s, e, xp))
+            continue
+
         # ---- fixed-time item
         if p.is_fixed:
             s = _slot_of(hs, p.fixed_time.start)
             e = _slot_of(hs, p.fixed_time.end, ceil=True)
             if s < 0 or e > n_slots:
                 result.unschedulable[pid] = "outside_horizon"
+                m.Add(xp == 0)
+                continue
+            if s < nb:
+                result.unschedulable[pid] = "already_started"
                 m.Add(xp == 0)
                 continue
             intervals.append(m.NewOptionalFixedSizeIntervalVar(s, e - s, xp, f"iv_{pid}"))
@@ -153,6 +191,7 @@ def solve(
             d
             for d in range(first_day, last_day + 1)
             if (horizon_start + timedelta(days=d)).weekday() not in profile.free_weekdays
+            and d * SLOTS_PER_DAY + day_hi - min_len >= nb  # still time left that day
         ]
         if not eligible or day_hi - day_lo < min_len or len(eligible) * min(max_len, day_hi - day_lo) < total:
             result.unschedulable[pid] = "no_free_time_in_window"
@@ -167,7 +206,7 @@ def solve(
             ln = m.NewIntVar(0, max_len, f"len_{pid}_{d}")
             m.Add(ln >= min_len).OnlyEnforceIf(used)
             m.Add(ln == 0).OnlyEnforceIf(used.Not())
-            st = m.NewIntVar(base + day_lo, base + day_hi - min_len, f"s_{pid}_{d}")
+            st = m.NewIntVar(max(base + day_lo, nb), base + day_hi - min_len, f"s_{pid}_{d}")
             en = m.NewIntVar(base + day_lo, base + day_hi, f"e_{pid}_{d}")
             m.Add(en == st + ln)
             intervals.append(m.NewOptionalIntervalVar(st, ln, en, used, f"iv_{pid}_{d}"))
@@ -182,12 +221,25 @@ def solve(
             sessions[pid].append(_Session(d, st, en, used))
         m.Add(sum(lengths) == total * xp)
 
+        # re-planning: reward keeping each previous session where it was
+        by_day = {sess.day: sess for sess in sessions[pid]}
+        for a, b in previous.get(pid, []):
+            s0, e0 = _slot_of(hs, a), _slot_of(hs, b, ceil=True)
+            sess = by_day.get(s0 // SLOTS_PER_DAY) if 0 <= s0 < n_slots else None
+            if sess is None:
+                continue
+            stay = m.NewBoolVar(f"stay_{pid}_{s0}")
+            m.Add(sess.start == s0).OnlyEnforceIf(stay)
+            m.Add(sess.end == e0).OnlyEnforceIf(stay)
+            m.AddImplication(stay, sess.used)
+            stay_flags.append(stay)
+
     # ---- no overlap, daily cap
     m.AddNoOverlap(intervals)
     cap = profile.daily_cap_min // SLOT_MIN
-    for terms in per_day_load.values():
-        if terms:
-            m.Add(sum(terms) <= cap)
+    for d, terms in per_day_load.items():
+        if terms:  # accepted items may already exceed a lowered cap; never make that infeasible
+            m.Add(sum(terms) <= max(cap, locked_load[d]))
 
     # ---- dependencies and hard proposals
     for cand in candidates:
@@ -201,7 +253,11 @@ def solve(
                     if sp.day > sq.day:  # prerequisite later than the dependent: not both
                         m.AddBoolOr([sq.used.Not(), sp.used.Not()])
                     elif sp.day == sq.day:
-                        m.Add(sq.start >= sp.end).OnlyEnforceIf([sq.used, sp.used])
+                        if isinstance(sq.start, int) and isinstance(sp.end, int):
+                            if sq.start < sp.end:  # both fixed and in the wrong order
+                                m.AddBoolOr([sq.used.Not(), sp.used.Not()])
+                        else:
+                            m.Add(sq.start >= sp.end).OnlyEnforceIf([sq.used, sp.used])
         if q.hard:
             m.Add(x[q.proposal_id] == 1)
 
@@ -231,6 +287,7 @@ def solve(
         obj_terms.append(round(10 * profile.fairness_weight) * worst)
     obj_terms.append(round(LOSS_SCALE * profile.conflict_weight) * sum(evening_flags))
     obj_terms.append(FRAGMENT_PENALTY * sum(session_flags))
+    obj_terms.append(MOVE_PENALTY * (len(stay_flags) - sum(stay_flags)))
     m.Minimize(sum(obj_terms))
 
     solver = cp_model.CpSolver()
@@ -248,6 +305,9 @@ def solve(
         p = cand.proposal
         pid = p.proposal_id
         if not solver.Value(x[pid]):
+            continue
+        if pid in locked:
+            result.scheduled[pid] = SolvedItem(pid, sorted(locked[pid]))
             continue
         if p.is_fixed:  # report the real times, not the 30-minute grid
             result.scheduled[pid] = SolvedItem(pid, [(p.fixed_time.start, p.fixed_time.end)])

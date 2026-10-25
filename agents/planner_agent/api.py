@@ -13,7 +13,7 @@ Without DATABASE_URL the API uses a local SQLite file (cognipath_dev.db).
 from __future__ import annotations
 
 from contextlib import asynccontextmanager
-from datetime import date
+from datetime import date, datetime
 from typing import Annotated, Optional
 
 from fastapi import Depends, FastAPI, HTTPException, Request
@@ -23,7 +23,7 @@ from pydantic import BaseModel, Field
 from shared.contracts import ActivityProposal, ItemDecision, Plan, PlannerProfile, PlanStatus
 
 from .io import to_ics
-from .planner import make_plans
+from .planner import make_plans, replan
 from .solver import MODES
 from .store import PlannerStore, ProposalStatus
 
@@ -36,6 +36,13 @@ class RunRequest(BaseModel):
     horizon_start: date
     days: int = Field(14, ge=1, le=28)
     modes: list[str] = Field(default_factory=lambda: list(MODES))
+
+
+class ReplanRequest(BaseModel):
+    """Re-plan after something changed (new proposals, a withdrawn event, a new busy block)."""
+
+    not_before: Optional[datetime] = Field(None, description="Nothing new is placed before this; usually 'now'")
+    modes: Optional[list[str]] = Field(None, description="Default: the mode of the plan being re-planned")
 
 
 class Decision(BaseModel):
@@ -184,6 +191,32 @@ def create_app(store: Optional[PlannerStore] = None) -> FastAPI:
                 p.status = PlanStatus.DISCARDED
         store.save_plans(siblings)
         return plan
+
+    def do_replan(base: Plan, req: ReplanRequest, store: PlannerStore) -> list[Plan]:
+        if base.status in (PlanStatus.DISCARDED, PlanStatus.SUPERSEDED):
+            raise HTTPException(409, f"plan is {base.status.value}; re-plan the current plan")
+        if req.modes:
+            check_modes(req.modes)
+        profile = store.get_profile(base.user_id)
+        if profile is None:
+            raise HTTPException(404, "no stored profile for this user")
+        plans = replan(base, store.list_proposals(base.user_id), profile, not_before=req.not_before, modes=req.modes)
+        base.status = PlanStatus.SUPERSEDED
+        store.save_plans([base, *plans])
+        return plans
+
+    @app.post("/planner/plans/{plan_id}/replan")
+    def replan_plan(plan_id: str, store: Store, req: Optional[ReplanRequest] = None) -> list[Plan]:
+        """Keep accepted items, drop rejected ones, plan everything else again (incl. new proposals)."""
+        return do_replan(load_plan(plan_id, store), req or ReplanRequest(), store)
+
+    @app.post("/planner/users/{user_id}/replan")
+    def replan_user(user_id: str, store: Store, req: Optional[ReplanRequest] = None) -> list[Plan]:
+        """Same as above, for the user's current plan. Call it after agents push new proposals."""
+        base = store.current_plan(user_id)
+        if base is None:
+            raise HTTPException(404, "no plan yet for this user")
+        return do_replan(base, req or ReplanRequest(), store)
 
     @app.get("/planner/plans/{plan_id}/ics", response_class=PlainTextResponse)
     def plan_ics(plan_id: str, store: Store) -> str:

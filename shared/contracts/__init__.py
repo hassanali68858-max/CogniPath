@@ -9,7 +9,7 @@ from .activity_proposal import (
     SourceAgent,
     TimeWindow,
 )
-from .plan import DroppedItem, ItemDecision, Plan, PlanItem, PlanScores, PlanStatus, Session
+from .plan import DroppedItem, ItemDecision, Plan, PlanChanges, PlanItem, PlanScores, PlanStatus, Session
 from .profile import BusyBlock, ObjectiveWeights, PlannerProfile
 
 __all__ = [
@@ -22,6 +22,7 @@ __all__ = [
     "ObjectiveValue",
     "ObjectiveWeights",
     "Plan",
+    "PlanChanges",
     "PlanItem",
     "PlanScores",
     "PlanStatus",
