@@ -1,6 +1,8 @@
 
-from rdflib import Graph
+import json
 from pathlib import Path
+from rdflib import Graph
+
 
 # Load Career Ontology
 graph = Graph()
@@ -146,7 +148,6 @@ for activity in activities:
 
 
 
-import json
 
 # Prepare output for Planner Agent
 career_output = {

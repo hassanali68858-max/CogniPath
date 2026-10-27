@@ -1,0 +1,7 @@
+{
+  "title": "any",
+  "countries": ["FI"],
+  "city": "espoo",
+  "work_mode": "any",
+  "opportunity_type": ["internship", "master_thesis"]
+}
