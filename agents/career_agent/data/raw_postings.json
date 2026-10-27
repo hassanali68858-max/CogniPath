@@ -1,5 +1,16 @@
 [
   {
+    "title": "AI Developer Intern",
+    "company": "Example AI Ltd",
+    "country": "FI",
+    "city": "Helsinki",
+    "work_mode": "hybrid",
+    "type": "internship",
+    "posted_at": "2026-10-27T08:00:00Z",
+    "url": "https://example.com/1",
+    "description": "Python, Docker, machine learning"
+  },
+  {
     "title": "Master Thesis: LLM Agents",
     "company": "Aalto Lab",
     "country": "FI",

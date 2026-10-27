@@ -1,0 +1,177 @@
+@prefix career: <https://example.org/cognipath/career#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/cognipath/career> a owl:Ontology .
+
+career:AaltoLabMasterThesisLlmAgents a career:ThesisOpportunity ;
+    career:jobTitle "Master Thesis: LLM Agents" ;
+    career:requiresSkill career:Langgraph,
+        career:Python,
+        career:Rdf ;
+    career:sourceURL "https://example.com/2"^^xsd:anyURI .
+
+career:DockerTutorial a owl:NamedIndividual,
+        career:LearningResource ;
+    career:helpsLearnSkill career:Docker ;
+    career:resourceURL "https://docs.docker.com/get-started/"^^xsd:anyURI .
+
+career:ElhamPournouri a owl:NamedIndividual,
+        career:Student ;
+    career:hasCareerGoal career:GetAIInternship ;
+    career:hasCareerPlan career:ElhamCareerPlan ;
+    career:hasSkill career:Python .
+
+career:ExampleAiLtdAiDeveloperIntern a career:Internship ;
+    career:jobTitle "AI Developer Intern" ;
+    career:requiresSkill career:Docker,
+        career:MachineLearning,
+        career:Python ;
+    career:sourceURL "https://example.com/1"^^xsd:anyURI .
+
+career:Job a owl:Class ;
+    rdfs:subClassOf career:CareerOpportunity .
+
+career:achievesGoal a owl:ObjectProperty ;
+    rdfs:domain career:CareerPlan ;
+    rdfs:range career:CareerGoal .
+
+career:completedCourse a owl:ObjectProperty ;
+    rdfs:domain career:Student ;
+    rdfs:range career:Course .
+
+career:courseCode a owl:DatatypeProperty ;
+    rdfs:domain career:Course ;
+    rdfs:range xsd:string .
+
+career:createdAt a owl:DatatypeProperty ;
+    rdfs:domain career:CareerPlan ;
+    rdfs:range xsd:dateTime .
+
+career:deadline a owl:DatatypeProperty ;
+    rdfs:domain career:CareerOpportunity ;
+    rdfs:range xsd:dateTime .
+
+career:durationMinutes a owl:DatatypeProperty ;
+    rdfs:domain career:CareerActivity ;
+    rdfs:range xsd:integer .
+
+career:hasCareerGoal a owl:ObjectProperty ;
+    rdfs:domain career:Student ;
+    rdfs:range career:CareerGoal .
+
+career:hasCareerPlan a owl:ObjectProperty ;
+    rdfs:domain career:Student ;
+    rdfs:range career:CareerPlan .
+
+career:hasSkill a owl:ObjectProperty ;
+    rdfs:domain career:Student ;
+    rdfs:range career:Skill .
+
+career:helpsLearnSkill a owl:ObjectProperty ;
+    rdfs:domain career:LearningResource ;
+    rdfs:range career:Skill .
+
+career:includesActivity a owl:ObjectProperty ;
+    rdfs:domain career:CareerPlan ;
+    rdfs:range career:CareerActivity .
+
+career:jobTitle a owl:DatatypeProperty ;
+    rdfs:domain career:CareerOpportunity ;
+    rdfs:range xsd:string .
+
+career:offeredBy a owl:ObjectProperty ;
+    rdfs:domain career:CareerOpportunity ;
+    rdfs:range career:Organization .
+
+career:organizationName a owl:DatatypeProperty ;
+    rdfs:domain career:Organization ;
+    rdfs:range xsd:string .
+
+career:requiresSkill a owl:ObjectProperty ;
+    rdfs:domain career:CareerOpportunity ;
+    rdfs:range career:Skill .
+
+career:resourceURL a owl:DatatypeProperty ;
+    rdfs:domain career:LearningResource ;
+    rdfs:range xsd:anyURI .
+
+career:skillName a owl:DatatypeProperty ;
+    rdfs:domain career:Skill ;
+    rdfs:range xsd:string .
+
+career:sourceURL a owl:DatatypeProperty ;
+    rdfs:domain career:CareerOpportunity ;
+    rdfs:range xsd:anyURI .
+
+career:studentId a owl:DatatypeProperty ;
+    rdfs:domain career:Student ;
+    rdfs:range xsd:string .
+
+career:targetsOpportunity a owl:ObjectProperty ;
+    rdfs:domain career:CareerActivity ;
+    rdfs:range career:CareerOpportunity .
+
+career:teachesSkill a owl:ObjectProperty ;
+    rdfs:domain career:Course ;
+    rdfs:range career:Skill .
+
+career:topObjectProperty a owl:ObjectProperty ;
+    rdfs:domain career:CareerOpportunity ;
+    rdfs:range career:Skill .
+
+career:AIInternship001 a owl:NamedIndividual,
+        career:Internship ;
+    career:requiresSkill career:Docker,
+        career:Python .
+
+career:ElhamCareerPlan a owl:NamedIndividual,
+        career:CareerPlan ;
+    career:achievesGoal career:GetAIInternship ;
+    career:includesActivity career:LearnDocker .
+
+career:Langgraph a career:Skill .
+
+career:LearnDocker a owl:NamedIndividual,
+        career:CareerActivity ;
+    career:durationMinutes 180 ;
+    career:targetsOpportunity career:AIInternship001 .
+
+career:MachineLearning a career:Skill .
+
+career:Rdf a career:Skill .
+
+career:ThesisOpportunity a owl:Class ;
+    rdfs:subClassOf career:CareerOpportunity .
+
+career:GetAIInternship a owl:NamedIndividual,
+        career:CareerGoal .
+
+career:Internship a owl:Class ;
+    rdfs:subClassOf career:CareerOpportunity .
+
+career:Organization a owl:Class .
+
+career:CareerGoal a owl:Class .
+
+career:Course a owl:Class .
+
+career:Docker a owl:NamedIndividual,
+        career:Skill .
+
+career:LearningResource a owl:Class .
+
+career:CareerActivity a owl:Class .
+
+career:Python a owl:NamedIndividual,
+        career:Skill .
+
+career:CareerPlan a owl:Class .
+
+career:Student a owl:Class .
+
+career:CareerOpportunity a owl:Class .
+
+career:Skill a owl:Class .
+
