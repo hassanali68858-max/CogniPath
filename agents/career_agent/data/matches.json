@@ -4,11 +4,11 @@
     "score": 0.33,
     "missing": [
       {
-        "skill": "Langgraph",
+        "skill": "LangGraph",
         "resource": null
       },
       {
-        "skill": "Rdf",
+        "skill": "RDF",
         "resource": null
       }
     ]
@@ -18,12 +18,12 @@
     "score": 0.33,
     "missing": [
       {
-        "skill": "MachineLearning",
-        "resource": null
-      },
-      {
         "skill": "Docker",
         "resource": "https://docs.docker.com/get-started/"
+      },
+      {
+        "skill": "MachineLearning",
+        "resource": null
       }
     ]
   }

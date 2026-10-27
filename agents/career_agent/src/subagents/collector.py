@@ -7,14 +7,14 @@ DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 
 def load_postings(path):
     text = Path(path).read_text(encoding="utf-8")
-    postings = json.loads(text)          # متن JSON را به لیست پایتون تبدیل کن
+    postings = json.loads(text)          
     return postings
 
 def filter_recent(postings, now, hours=24):
     recent = []
     for p in postings:
         posted = datetime.fromisoformat(p["posted_at"].replace("Z", "+00:00"))
-        if now - posted < timedelta(hours=hours):                # آیا فاصله now تا posted کمتر از hours ساعت است؟
+        if now - posted < timedelta(hours=hours):               
             recent.append(p)
     return recent
 
@@ -22,7 +22,7 @@ def filter_title(postings, wanted):
     if wanted == "any":
         return postings
     pattern = re.compile(rf"\b{re.escape(wanted)}\b", re.IGNORECASE)
-    return [p for p in postings if pattern.search(p["title"])]     # آیا pattern در عنوان آگهی پیدا می‌شود؟
+    return [p for p in postings if pattern.search(p["title"])]    
 def matches_any(value, wanted):
     return wanted == "any" or value in wanted
 

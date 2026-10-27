@@ -38,8 +38,9 @@ TYPE_TO_CLASS = {
 
 
 def slug(text):
-    return re.sub(r"[^A-Za-z0-9]", "", text.title())   # "Machine Learning" -> "MachineLearning"
-
+    clean = re.sub(r"[^A-Za-z0-9 ]", "", text)
+    words = clean.split()
+    return "".join(w[:1].upper() + w[1:] for w in words)           
 
 def add_to_graph(g, p):
     opp = CAREER[slug(p["company"] + " " + p["title"])]

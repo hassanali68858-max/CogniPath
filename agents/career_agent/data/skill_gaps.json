@@ -3,17 +3,12 @@
   "student": "ElhamPournouri",
   "gaps": [
     {
-      "skill": "Langgraph",
+      "skill": "LangGraph",
       "needed_by": 1,
       "resource": null
     },
     {
-      "skill": "Rdf",
-      "needed_by": 1,
-      "resource": null
-    },
-    {
-      "skill": "MachineLearning",
+      "skill": "RDF",
       "needed_by": 1,
       "resource": null
     },
@@ -21,6 +16,11 @@
       "skill": "Docker",
       "needed_by": 1,
       "resource": "https://docs.docker.com/get-started/"
+    },
+    {
+      "skill": "MachineLearning",
+      "needed_by": 1,
+      "resource": null
     }
   ]
 }

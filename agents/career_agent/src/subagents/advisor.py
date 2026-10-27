@@ -13,13 +13,13 @@ def make_activities(match):
             "resource": m["resource"],
             "duration_minutes": 180,
             "scores": {"academic": 0.5, "career": 0.8, "social": 0.0},
-            "why": f"Needed for {match['title']}",      # توضیح: چرا این مهارت را یاد بگیری؟ (اسم آگهی را بیاور)
+            "why": f"Needed for {match['title']}",    
         })
     acts.append({
         "type": "apply",
         "name": f"Apply: {match['title']}",
         "duration_minutes": 60,
-        "scores": {"academic": 0.0, "career": match['score'], "social": 0.0},   # هرچه تطابق بیشتر، ارزش اپلای بیشتر
+        "scores": {"academic": 0.0, "career": match['score'], "social": 0.0},   
         "why": f"Match score {match['score']:.0%}",
     })
     return acts
