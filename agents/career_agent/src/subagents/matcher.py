@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 from rdflib import Graph, Namespace
+from collections import Counter
 
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 CAREER = Namespace("https://example.org/cognipath/career#")
@@ -44,10 +45,12 @@ if __name__ == "__main__":
 
     resources = {row.skill: (str(row.url) if row.url else None) for row in g.query(RESOURCES)}
     results = []
+    gap_counter = Counter()
 
     for title, skills in required.items():
         matched = have & skills
         missing = skills - have
+        gap_counter.update(short(s) for s in missing)
         score = len(matched) / len(skills)
         print(f"{title}: {score:.0%}  missing: {[short(s) for s in missing]}")
         results.append({
@@ -59,3 +62,14 @@ if __name__ == "__main__":
     out = DATA_DIR / "matches.json"
     out.write_text(json.dumps(results, indent=2), encoding="utf-8")
     print("Saved", out.name)
+    skill_gaps = {
+        "agent": "career",
+        "student": "ElhamPournouri",
+        "gaps": [
+            {"skill": skill, "needed_by": count, "resource": resources.get(CAREER[skill])}
+            for skill, count in gap_counter.most_common()
+        ],
+    }
+    (DATA_DIR / "skill_gaps.json").write_text(json.dumps(skill_gaps, indent=2), encoding="utf-8")
+    print("Saved skill_gaps.json")
+      
