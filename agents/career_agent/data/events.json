@@ -1,0 +1,5 @@
+[
+  {"name": "Helsinki AI Meetup", "date": "2026-11-05", "companies": ["Example AI Ltd"], "topics": ["Docker", "Machine Learning"]},
+  {"name": "Aalto LLM Seminar", "date": "2026-11-08", "companies": ["Aalto Lab"], "topics": ["LangGraph"]},
+  {"name": "Rock Festival", "date": "2026-11-06", "companies": [], "topics": []}
+]
