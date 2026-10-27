@@ -13,31 +13,42 @@ def make_activities(match):
             "resource": m["resource"],
             "duration_minutes": 180,
             "scores": {"academic": 0.5, "career": 0.8, "social": 0.0},
-            "why": f"Needed for {match['title']}",    
+            "why": f"Needed for {match['title']}",
         })
     acts.append({
         "type": "apply",
         "name": f"Apply: {match['title']}",
         "duration_minutes": 60,
-        "scores": {"academic": 0.0, "career": match['score'], "social": 0.0},   
+        "scores": {"academic": 0.0, "career": match["score"], "social": 0.0},
         "why": f"Match score {match['score']:.0%}",
     })
     return acts
-def score_events(events, companies, missing_skills):
+
+
+def social_score(event_topics, interests):
+    if not event_topics:
+        return 0.3
+    matched = sum(1 for t in event_topics if t.lower() in interests)
+    return 0.3 + 0.7 * matched / len(event_topics)
+
+
+def score_events(events, companies, missing_skills, interests):
     acts = []
     for e in events:
         meets = [c for c in e["companies"] if c in companies]
         learns = [t for t in e["topics"] if t.replace(" ", "") in missing_skills]
         career = min(1.0, 0.6 * len(meets) + 0.2 * len(learns))
+        social = social_score(e["topics"], interests)
         acts.append({
             "type": "network",
             "name": f"Attend {e['name']}",
             "date": e["date"],
             "duration_minutes": 120,
-            "scores": {"academic": 0.0, "career": round(career, 2), "social": 0.8},
+            "scores": {"academic": 0.0, "career": round(career, 2), "social": round(social, 2)},
             "why": (f"Meet {', '.join(meets)}. " if meets else "") + (f"Learn about {', '.join(learns)}." if learns else "") or "Social only, no career value",
         })
     return acts
+
 
 if __name__ == "__main__":
     matches = json.loads((DATA_DIR / "matches.json").read_text(encoding="utf-8"))
@@ -49,9 +60,11 @@ if __name__ == "__main__":
     companies = {p["company"] for p in raw}
     missing_skills = {m["skill"] for match in matches for m in match["missing"]}
     events = json.loads((DATA_DIR / "events.json").read_text(encoding="utf-8"))
-    plan["activities"] += score_events(events, companies, missing_skills)
+    profile = json.loads((DATA_DIR / "user_profile.json").read_text(encoding="utf-8"))
+    interests = [i.lower() for i in profile.get("interests", [])]
+    plan["activities"] += score_events(events, companies, missing_skills, interests)
 
     for a in plan["activities"]:
-        print(a["name"], "|", a["why"])
+        print(a["name"], "|", a["scores"], "|", a["why"])
     (DATA_DIR / "career_plan.json").write_text(json.dumps(plan, indent=2), encoding="utf-8")
     print("Saved career_plan.json")

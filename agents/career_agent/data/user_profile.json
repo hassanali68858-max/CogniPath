@@ -3,5 +3,8 @@
   "countries": ["FI"],
   "city": null,
   "work_mode": "any",
-  "opportunity_type": "any"
+  "opportunity_type": "any",
+  "interests": ["AI", "music", "startups"],
+  "courses": ["Semantic Web", "Machine Learning"],
+  "thesis_topic": "LLM agents with RDF"
 }
