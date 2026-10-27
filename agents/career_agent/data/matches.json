@@ -18,12 +18,12 @@
     "score": 0.33,
     "missing": [
       {
-        "skill": "Docker",
-        "resource": "https://docs.docker.com/get-started/"
-      },
-      {
         "skill": "MachineLearning",
         "resource": null
+      },
+      {
+        "skill": "Docker",
+        "resource": "https://docs.docker.com/get-started/"
       }
     ]
   }
