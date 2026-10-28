@@ -6,5 +6,8 @@
   "opportunity_type": "any",
   "interests": ["AI", "music", "startups"],
   "courses": ["Semantic Web", "Machine Learning"],
-  "thesis_topic": "LLM agents with RDF"
+  "thesis_topic": "LLM agents with RDF",
+  "thesis_concepts": ["AIAgents", "RDF"]
 }
+ 
+  

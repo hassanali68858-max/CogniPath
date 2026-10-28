@@ -68,12 +68,13 @@ def norm(text):
 
 def study_score(skill, profile):
     s = norm(skill)
-    if s in norm(profile.get("thesis_topic", "")):
-        return 0.9                                   # part of the thesis topic
-    if any(s == norm(c) for c in profile.get("courses", [])):
-        return 0.6                                   # matches a course
+    concepts = profile.get("thesis_concepts", [])
+    d = min((x for x in (distance(skill, c) for c in concepts) if x is not None), default=None)
+    if s in norm(profile.get("thesis_topic", "")) or d == 0:
+        return 0.9                                   # the thesis concept itself
+    if d == 1 or any(s == norm(c) for c in profile.get("courses", [])):
+        return 0.6                                   # one step from the thesis, or a course
     return 0.3                                       # general skill
-
 
 def make_activities(match, profile):
     acts = []
