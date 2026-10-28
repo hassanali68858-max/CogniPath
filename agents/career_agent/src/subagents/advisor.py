@@ -8,19 +8,19 @@ def make_activities(match):
     acts = []
     for m in match["missing"]:
         acts.append({
-            "type": "learn",
-            "name": f"Learn {m['skill']}",
+            "type": "learning",
+            "title": f"Learn {m['skill']}",
             "resource": m["resource"],
-            "duration_minutes": 180,
-            "scores": {"academic": 0.5, "career": 0.8, "social": 0.0},
-            "why": f"Needed for {match['title']}",
+            "duration_min": 180,
+            "value": {"study": 0.5, "career": 0.8, "social": 0.0},
+            "reason": f"Needed for {match['title']}",
         })
     acts.append({
-        "type": "apply",
-        "name": f"Apply: {match['title']}",
-        "duration_minutes": 60,
-        "scores": {"academic": 0.0, "career": match["score"], "social": 0.0},
-        "why": f"Match score {match['score']:.0%}",
+        "type": "application",
+        "title": f"Apply: {match['title']}",
+        "duration_min": 60,
+        "value": {"study": 0.0, "career": match["score"], "social": 0.0},
+        "reason": f"Match score {match['score']:.0%}",
     })
     return acts
 
@@ -40,12 +40,12 @@ def score_events(events, companies, missing_skills, interests):
         career = min(1.0, 0.6 * len(meets) + 0.2 * len(learns))
         social = social_score(e["topics"], interests)
         acts.append({
-            "type": "network",
-            "name": f"Attend {e['name']}",
+            "type": "event",
+            "title": f"Attend {e['name']}",
             "date": e["date"],
-            "duration_minutes": 120,
-            "scores": {"academic": 0.0, "career": round(career, 2), "social": round(social, 2)},
-            "why": (f"Meet {', '.join(meets)}. " if meets else "") + (f"Learn about {', '.join(learns)}." if learns else "") or "Social only, no career value",
+            "duration_min": 120,
+            "value": {"study": 0.0, "career": round(career, 2), "social": round(social, 2)},
+            "reason": (f"Meet {', '.join(meets)}. " if meets else "") + (f"Learn about {', '.join(learns)}." if learns else "") or "Social only, no career value",
         })
     return acts
 
@@ -65,6 +65,6 @@ if __name__ == "__main__":
     plan["activities"] += score_events(events, companies, missing_skills, interests)
 
     for a in plan["activities"]:
-        print(a["name"], "|", a["scores"], "|", a["why"])
+        print(a["title"], "|", a["value"], "|", a["reason"])
     (DATA_DIR / "career_plan.json").write_text(json.dumps(plan, indent=2), encoding="utf-8")
     print("Saved career_plan.json")
