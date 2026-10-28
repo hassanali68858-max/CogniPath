@@ -18,8 +18,7 @@ W1 = 0.5  # Company opportunity relevance
 W2 = 0.3  # Skill gap coverage
 W3 = 0.2  # Career goal alignment
 
-# Temporary semantic links until we use career.owl
-RELATED = {"LangGraph": "AI", "Machine Learning": "AI", "RDF": "AI"}
+
 
 CAREER = Namespace("https://example.org/cognipath/career#")
 ONTO_DIR = Path(__file__).resolve().parents[2] / "ontology"
@@ -113,14 +112,14 @@ def social_score(event_topics, interests):
     return 0.3 + 0.7 * matched / len(event_topics)
 
 
-def score_events(events, companies, missing_skills, interests):
+def score_events(events, companies, missing_skills, interests, goal):
     acts = []
     for e in events:
         meets = [c for c in e["companies"] if c in companies]
         learns = [t for t in e["topics"] if t.replace(" ", "") in missing_skills]
         c1 = 1.0 if meets else 0.0                                         # company relevance
         c2 = len(learns) / len(missing_skills) if missing_skills else 0.0  # gap coverage
-        c3 = c3_goal(e["topics"], "AI")                                    # goal relevance
+        c3 = c3_goal(e["topics"], goal)                                    # goal relevance    
         career = round(W1 * c1 + W2 * c2 + W3 * c3, 2)
         social = social_score(e["topics"], interests)
         start = datetime.fromisoformat(e["date"] + "T" + e.get("start", "17:00"))
@@ -145,14 +144,14 @@ if __name__ == "__main__":
 
     user_id = profile.get("user_id", "demo-user")
     interests = [i.lower() for i in profile.get("interests", [])]
+    goal = profile.get("career_goal", "AI")
     companies = {p["company"] for p in raw}
     missing_skills = {m["skill"] for match in matches for m in match["missing"]}
 
     acts = []
     for match in matches:
         acts += make_activities(match, profile)
-    acts += score_events(events, companies, missing_skills, interests)
-
+    acts += score_events(events, companies, missing_skills, interests, goal)
     for a in acts:
         a["source_agent"] = "career"
         a["user_id"] = user_id

@@ -13,14 +13,14 @@
       "resource": null
     },
     {
-      "skill": "MachineLearning",
-      "needed_by": 1,
-      "resource": null
-    },
-    {
       "skill": "Docker",
       "needed_by": 1,
       "resource": "https://docs.docker.com/get-started/"
+    },
+    {
+      "skill": "MachineLearning",
+      "needed_by": 1,
+      "resource": null
     }
   ]
 }
