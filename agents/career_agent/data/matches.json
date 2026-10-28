@@ -4,11 +4,11 @@
     "score": 0.33,
     "missing": [
       {
-        "skill": "LangGraph",
+        "skill": "RDF",
         "resource": null
       },
       {
-        "skill": "RDF",
+        "skill": "LangGraph",
         "resource": null
       }
     ]

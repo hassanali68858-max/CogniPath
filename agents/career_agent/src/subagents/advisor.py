@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT))
 from shared.contracts import ProposalBatch           # the team contract
 
 TODAY = date.today()
+
 # MAVT weights derived from swing weighting (100, 60, 40)
 W1 = 0.5  # Company opportunity relevance
 W2 = 0.3  # Skill gap coverage
@@ -28,6 +29,7 @@ def c3_goal(topics, goal):
             best = max(best, 0.5)      # indirect match
     return best
 
+
 def make_id(kind, title):
     return "career-" + kind + "-" + re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
 
@@ -37,7 +39,20 @@ def window(deadline=None):
     return {"earliest": TODAY.isoformat(), "deadline": end}
 
 
-def make_activities(match):
+def norm(text):
+    return text.lower().replace(" ", "")
+
+
+def study_score(skill, profile):
+    s = norm(skill)
+    if s in norm(profile.get("thesis_topic", "")):
+        return 0.9                                   # part of the thesis topic
+    if any(s == norm(c) for c in profile.get("courses", [])):
+        return 0.6                                   # matches a course
+    return 0.3                                       # general skill
+
+
+def make_activities(match, profile):
     acts = []
     for m in match["missing"]:
         title = f"Learn {m['skill']}"
@@ -50,7 +65,7 @@ def make_activities(match):
             "opportunity_ref": None if res.startswith("http") else (res or None),
             "duration_min": 180,
             "window": window(match.get("deadline")),
-            "value": {"study": 0.5, "career": 0.8, "social": 0.0},
+            "value": {"study": study_score(m["skill"], profile), "career": 0.8, "social": 0.0},
             "reason": f"Needed for {match['title']}",
         })
     title = f"Apply: {match['title']}"
@@ -92,7 +107,7 @@ def score_events(events, companies, missing_skills, interests):
             "title": title,
             "fixed_time": {"start": start.isoformat(), "end": (start + timedelta(minutes=120)).isoformat()},
             "location": e.get("location"),
-            "value": {"study": 0.0, "career": round(career, 2), "social": round(social, 2)},
+            "value": {"study": 0.0, "career": career, "social": round(social, 2)},
             "reason": (f"Meet {', '.join(meets)}. " if meets else "") + (f"Learn about {', '.join(learns)}." if learns else "") or "Social only, no career value",
         })
     return acts
@@ -111,7 +126,7 @@ if __name__ == "__main__":
 
     acts = []
     for match in matches:
-        acts += make_activities(match)
+        acts += make_activities(match, profile)
     acts += score_events(events, companies, missing_skills, interests)
 
     for a in acts:
