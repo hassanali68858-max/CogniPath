@@ -3,6 +3,8 @@ import re
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
+from rdflib import Graph, Namespace      # ← new
+from rdflib.namespace import SKOS        # ← new
 
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 ROOT = Path(__file__).resolve().parents[4]          # CogniPath-Team
@@ -19,15 +21,36 @@ W3 = 0.2  # Career goal alignment
 # Temporary semantic links until we use career.owl
 RELATED = {"LangGraph": "AI", "Machine Learning": "AI", "RDF": "AI"}
 
+CAREER = Namespace("https://example.org/cognipath/career#")
+ONTO_DIR = Path(__file__).resolve().parents[2] / "ontology"
+HIER = Graph().parse(ONTO_DIR / "skill_hierarchy.ttl")
+
+
+def distance(skill, target):
+    """Number of skos:broader steps from skill up to target, or None."""
+    start, goal = CAREER[skill.replace(" ", "")], CAREER[target]
+    level, seen, step = [start], {start}, 0
+    while level:
+        if goal in level:
+            return step
+        nxt = []
+        for node in level:
+            for parent in HIER.objects(node, SKOS.broader):
+                if parent not in seen:
+                    seen.add(parent)
+                    nxt.append(parent)
+        level, step = nxt, step + 1
+    return None
+
+def relevance(skill, target):
+    """Turn graph distance into a 0-1 score (closer = more relevant)."""
+    d = distance(skill, target)
+    if d is None:
+        return 0.0
+    return {0: 1.0, 1: 0.6}.get(d, 0.3)
 
 def c3_goal(topics, goal):
-    best = 0.0
-    for t in topics:
-        if t == goal:
-            best = max(best, 1.0)      # direct match
-        elif RELATED.get(t) == goal:
-            best = max(best, 0.5)      # indirect match
-    return best
+    return max((relevance(t, goal) for t in topics), default=0.0)
 
 
 def make_id(kind, title):
@@ -115,6 +138,7 @@ def score_events(events, companies, missing_skills, interests):
 
 if __name__ == "__main__":
     matches = json.loads((DATA_DIR / "matches.json").read_text(encoding="utf-8"))
+    print("TEST", distance("LangGraph", "AI"), distance("Machine Learning", "AI"), distance("Docker", "AI"))
     raw = json.loads((DATA_DIR / "raw_postings.json").read_text(encoding="utf-8"))
     events = json.loads((DATA_DIR / "events.json").read_text(encoding="utf-8"))
     profile = json.loads((DATA_DIR / "user_profile.json").read_text(encoding="utf-8"))

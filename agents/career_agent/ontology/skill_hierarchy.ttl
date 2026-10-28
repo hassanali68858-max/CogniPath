@@ -1,0 +1,11 @@
+@prefix career: <https://example.org/cognipath/career#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+
+# Skill concept hierarchy (child skos:broader parent)
+career:LangGraph        skos:broader career:AIAgents .
+career:AIAgents         skos:broader career:AI .
+career:LLMAgents        skos:broader career:AIAgents .
+career:MachineLearning  skos:broader career:AI .
+career:RDF              skos:broader career:SemanticWeb .
+career:SemanticWeb      skos:broader career:KnowledgeRepresentation .
+career:Docker           skos:broader career:DevOps .
