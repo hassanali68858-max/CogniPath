@@ -3,8 +3,8 @@ import re
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
-from rdflib import Graph, Namespace      # ← new
-from rdflib.namespace import SKOS        # ← new
+from rdflib import Graph, Namespace
+from rdflib.namespace import SKOS
 
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 ROOT = Path(__file__).resolve().parents[4]          # CogniPath-Team
@@ -13,12 +13,14 @@ from shared.contracts import ProposalBatch           # the team contract
 
 TODAY = date.today()
 
-# MAVT weights derived from swing weighting (100, 60, 40)
+# Event career weights (swing weighting: 100, 60, 40)
 W1 = 0.5  # Company opportunity relevance
 W2 = 0.3  # Skill gap coverage
 W3 = 0.2  # Career goal alignment
 
-
+# Learning activity weights (swing weighting: goal 100, gap closure 60)
+WL1 = 0.375  # Gap closure for the opportunity
+WL2 = 0.625  # Career goal relevance
 
 CAREER = Namespace("https://example.org/cognipath/career#")
 ONTO_DIR = Path(__file__).resolve().parents[2] / "ontology"
@@ -41,12 +43,14 @@ def distance(skill, target):
         level, step = nxt, step + 1
     return None
 
+
 def relevance(skill, target):
     """Turn graph distance into a 0-1 score (closer = more relevant)."""
     d = distance(skill, target)
     if d is None:
         return 0.0
     return {0: 1.0, 1: 0.6}.get(d, 0.3)
+
 
 def c3_goal(topics, goal):
     return max((relevance(t, goal) for t in topics), default=0.0)
@@ -75,7 +79,14 @@ def study_score(skill, profile):
         return 0.6                                   # one step from the thesis, or a course
     return 0.3                                       # general skill
 
-def make_activities(match, profile):
+
+def learn_career(skill, match, goal):
+    l1 = 1 / len(match["missing"])        # share of the skill gap this closes
+    l2 = relevance(skill, goal)           # ontology distance to the career goal
+    return round(WL1 * l1 + WL2 * l2, 2)
+
+
+def make_activities(match, profile, goal):
     acts = []
     for m in match["missing"]:
         title = f"Learn {m['skill']}"
@@ -88,7 +99,9 @@ def make_activities(match, profile):
             "opportunity_ref": None if res.startswith("http") else (res or None),
             "duration_min": 180,
             "window": window(match.get("deadline")),
-            "value": {"study": study_score(m["skill"], profile), "career": 0.8, "social": 0.0},
+            "value": {"study": study_score(m["skill"], profile),
+                      "career": learn_career(m["skill"], match, goal),
+                      "social": 0.0},
             "reason": f"Needed for {match['title']}",
         })
     title = f"Apply: {match['title']}"
@@ -119,7 +132,7 @@ def score_events(events, companies, missing_skills, interests, goal):
         learns = [t for t in e["topics"] if t.replace(" ", "") in missing_skills]
         c1 = 1.0 if meets else 0.0                                         # company relevance
         c2 = len(learns) / len(missing_skills) if missing_skills else 0.0  # gap coverage
-        c3 = c3_goal(e["topics"], goal)                                    # goal relevance    
+        c3 = c3_goal(e["topics"], goal)                                    # goal relevance
         career = round(W1 * c1 + W2 * c2 + W3 * c3, 2)
         social = social_score(e["topics"], interests)
         start = datetime.fromisoformat(e["date"] + "T" + e.get("start", "17:00"))
@@ -150,8 +163,9 @@ if __name__ == "__main__":
 
     acts = []
     for match in matches:
-        acts += make_activities(match, profile)
+        acts += make_activities(match, profile, goal)
     acts += score_events(events, companies, missing_skills, interests, goal)
+
     for a in acts:
         a["source_agent"] = "career"
         a["user_id"] = user_id
