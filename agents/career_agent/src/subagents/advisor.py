@@ -139,7 +139,6 @@ def score_events(events, companies, missing_skills, interests):
 
 if __name__ == "__main__":
     matches = json.loads((DATA_DIR / "matches.json").read_text(encoding="utf-8"))
-    print("TEST", distance("LangGraph", "AI"), distance("Machine Learning", "AI"), distance("Docker", "AI"))
     raw = json.loads((DATA_DIR / "raw_postings.json").read_text(encoding="utf-8"))
     events = json.loads((DATA_DIR / "events.json").read_text(encoding="utf-8"))
     profile = json.loads((DATA_DIR / "user_profile.json").read_text(encoding="utf-8"))
