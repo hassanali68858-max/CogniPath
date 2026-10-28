@@ -10,7 +10,23 @@ sys.path.insert(0, str(ROOT))
 from shared.contracts import ProposalBatch           # the team contract
 
 TODAY = date.today()
+# MAVT weights derived from swing weighting (100, 60, 40)
+W1 = 0.5  # Company opportunity relevance
+W2 = 0.3  # Skill gap coverage
+W3 = 0.2  # Career goal alignment
 
+# Temporary semantic links until we use career.owl
+RELATED = {"LangGraph": "AI", "Machine Learning": "AI", "RDF": "AI"}
+
+
+def c3_goal(topics, goal):
+    best = 0.0
+    for t in topics:
+        if t == goal:
+            best = max(best, 1.0)      # direct match
+        elif RELATED.get(t) == goal:
+            best = max(best, 0.5)      # indirect match
+    return best
 
 def make_id(kind, title):
     return "career-" + kind + "-" + re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
@@ -63,7 +79,10 @@ def score_events(events, companies, missing_skills, interests):
     for e in events:
         meets = [c for c in e["companies"] if c in companies]
         learns = [t for t in e["topics"] if t.replace(" ", "") in missing_skills]
-        career = min(1.0, 0.6 * len(meets) + 0.2 * len(learns))
+        c1 = 1.0 if meets else 0.0                                         # company relevance
+        c2 = len(learns) / len(missing_skills) if missing_skills else 0.0  # gap coverage
+        c3 = c3_goal(e["topics"], "AI")                                    # goal relevance
+        career = round(W1 * c1 + W2 * c2 + W3 * c3, 2)
         social = social_score(e["topics"], interests)
         start = datetime.fromisoformat(e["date"] + "T" + e.get("start", "17:00"))
         title = f"Attend {e['name']}"

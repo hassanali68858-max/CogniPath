@@ -3,12 +3,12 @@
   "student": "ElhamPournouri",
   "gaps": [
     {
-      "skill": "RDF",
+      "skill": "LangGraph",
       "needed_by": 1,
       "resource": null
     },
     {
-      "skill": "LangGraph",
+      "skill": "RDF",
       "needed_by": 1,
       "resource": null
     },
