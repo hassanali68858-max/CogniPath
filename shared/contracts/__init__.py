@@ -3,14 +3,25 @@ from .activity_proposal import (
     ActivityType,
     FixedTime,
     ObjectiveValue,
-    Priority,
     ProposalBatch,
     SessionSplit,
     SourceAgent,
     TimeWindow,
 )
-from .plan import DroppedItem, ItemDecision, Plan, PlanChanges, PlanItem, PlanScores, PlanStatus, Session
-from .profile import BusyBlock, ObjectiveWeights, PlannerProfile
+from .plan import (
+    DroppedItem,
+    ItemDecision,
+    ObjectiveClass,
+    Plan,
+    PlanChanges,
+    PlanItem,
+    PlanScores,
+    PlanStatus,
+    Preference,
+    Session,
+    TradeOff,
+)
+from .profile import BusyBlock, PlannerProfile
 
 __all__ = [
     "ActivityProposal",
@@ -20,17 +31,18 @@ __all__ = [
     "FixedTime",
     "ItemDecision",
     "ObjectiveValue",
-    "ObjectiveWeights",
+    "ObjectiveClass",
     "Plan",
     "PlanChanges",
     "PlanItem",
     "PlanScores",
     "PlanStatus",
     "PlannerProfile",
-    "Priority",
+    "Preference",
     "ProposalBatch",
     "Session",
     "SessionSplit",
     "SourceAgent",
     "TimeWindow",
+    "TradeOff",
 ]

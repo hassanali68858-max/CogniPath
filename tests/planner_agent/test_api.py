@@ -25,10 +25,17 @@ def _run(client, user_id="student001", **extra):
     return r.json()
 
 
-def test_end_to_end_flow(client, proposals, profile):
+def test_roomy_week_needs_no_trade_off(client, proposals, profile):
     _setup(client, proposals, profile)
     plans = _run(client)
-    assert [p["mode"] for p in plans] == ["balanced", "study_first", "career_first"]
+    assert [p["mode"] for p in plans] == ["balanced"]  # every alternative would be the same plan
+
+
+def test_end_to_end_flow(client, proposals, profile):
+    _setup(client, proposals, profile.model_copy(update={"daily_cap_min": 120}))
+    plans = _run(client)
+    assert plans[0]["mode"] == "balanced" and len(plans) >= 2  # identical / dominated alternatives are left out
+    assert all(p["tradeoff"]["compared_to"] == plans[0]["plan_id"] for p in plans[1:])
     assert len({p["run_id"] for p in plans}) == 1
 
     plan = plans[0]

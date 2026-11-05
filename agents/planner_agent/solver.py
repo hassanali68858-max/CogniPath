@@ -1,11 +1,21 @@
-"""CP-SAT model for the Planner.
+"""CP-SAT model for the Planner: constraints + one multi-objective target per solve.
 
-Minimise  sum_k lambda_k * L_k  +  lambda_f * C  +  mu * max_k L_k  (+ a small per-session penalty)
+Objectives (kept separate, never added with fixed weights or priorities)
+  G_k  for k in study, career, social: the share of all proposed value for goal k
+       that the plan contains, in permille (0..1000). Bigger is better.
 
-  L_k  loss of objective k (study, career, social): the share of proposed,
-       priority-weighted value that is NOT scheduled (scaled to 0..1000)
-  C    soft conflicts: flexible sessions that end after the evening cut-off
-  mu   fairness ("nobody gets ignored"): penalises the worst-off objective
+A solve optimises one Target:
+  max k   best G_k alone (payoff table, step 1)
+  sum     best G_1 + G_2 + G_3 (payoff table, step 2: with G_k fixed at its best, so the
+          row is not weakly dominated; together they give the ideal and nadir points)
+  asf     reference-point Achievement Scalarizing Function (Wierzbicki):
+              minimise  max_{k in active} w_k (ref_k - G_k)  +  rho * sum_k w_k (ref_k - G_k)
+          with w_k = 1 / (ideal_k - nadir_k). The result is Pareto-optimal and lies
+          as close to the reference point as possible. ref = ideal gives the balanced plan.
+  lower   optional bounds G_k >= lower_k (NIMBUS "keep" and "worsen down to a limit")
+
+Tie-breakers, far smaller than any change in a goal: fewer late-evening sessions,
+fewer separate sessions, and (when re-planning) moving fewer sessions.
 
 Hard constraints
   - nothing overlaps (scheduled items + busy blocks)
@@ -29,7 +39,7 @@ import math
 import time as _time
 from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta
-from typing import Optional
+from typing import Literal, Optional
 
 from ortools.sat.python import cp_model
 
@@ -38,15 +48,11 @@ from shared.contracts import ActivityProposal, PlannerProfile
 SLOT_MIN = 30
 SLOTS_PER_DAY = 24 * 60 // SLOT_MIN
 OBJECTIVES = ("study", "career", "social")
-LOSS_SCALE = 1000
-FRAGMENT_PENALTY = 50  # per session used: prefer fewer, longer sessions; small next to dropping an item
+SCALE = 1000  # goal shares in permille
+FRAGMENT_PENALTY = 50  # per session used: prefer fewer, longer sessions
 MOVE_PENALTY = 100  # per session moved away from the previous plan when re-planning
-
-MODES: dict[str, dict[str, float]] = {
-    "balanced": {"study": 1.0, "career": 1.0, "social": 1.0},
-    "study_first": {"study": 3.0, "career": 1.0, "social": 1.0},
-    "career_first": {"study": 1.0, "career": 3.0, "social": 1.0},
-}
+_ASF_W = 100_000  # w_k = _ASF_W / range_k (integer)
+_ASF_RHO = 100  # augmentation rho = 1 / _ASF_RHO
 
 
 @dataclass
@@ -55,6 +61,36 @@ class Candidate:
 
     proposal: ActivityProposal
     source_agents: list[str]
+
+
+@dataclass
+class Target:
+    """What one solve optimises; see the module docstring."""
+
+    kind: Literal["max", "sum", "asf"] = "asf"
+    objective: Optional[str] = None  # for kind="max"
+    reference: dict[str, int] = field(default_factory=dict)  # permille; default: 1000 (everything)
+    ranges: dict[str, int] = field(default_factory=dict)  # ideal - nadir, permille; default: 1000
+    active: Optional[set[str]] = None  # objectives inside the max term; default: all with value
+    lower: dict[str, int] = field(default_factory=dict)  # G_k >= lower_k
+
+
+def gain_coefficients(candidates: list["Candidate"]) -> dict[str, dict[str, int]]:
+    """objective -> proposal_id -> its share of that goal's proposed value, in permille.
+
+    Objectives nobody proposed anything for are left out.
+    """
+    out: dict[str, dict[str, int]] = {}
+    for k in OBJECTIVES:
+        total = sum(c.proposal.value.as_dict()[k] for c in candidates)
+        if total <= 0:
+            continue
+        out[k] = {
+            c.proposal.proposal_id: round(SCALE * c.proposal.value.as_dict()[k] / total)
+            for c in candidates
+            if c.proposal.value.as_dict()[k] > 0
+        }
+    return out
 
 
 @dataclass
@@ -70,6 +106,7 @@ class SolveResult:
     unschedulable: dict[str, str] = field(default_factory=dict)  # proposal_id -> reason code
     evening_sessions: int = 0
     seconds: float = 0.0
+    gains: dict[str, int] = field(default_factory=dict)  # G_k in permille
 
 
 @dataclass
@@ -98,7 +135,7 @@ def solve(
     profile: PlannerProfile,
     horizon_start: date,
     days: int,
-    mode: str = "balanced",
+    target: Optional[Target] = None,
     time_limit_s: float = 10.0,
     workers: int = 1,  # 1 = same plan every run (good for demos); raise for big problems
     locked: Optional[dict[str, list[tuple[datetime, datetime]]]] = None,
@@ -112,8 +149,9 @@ def solve(
     previous:   proposal_id -> sessions in the plan being replaced; moving them costs a little,
                 so a re-plan changes only what it has to
     """
-    if mode not in MODES:
-        raise ValueError(f"unknown mode {mode!r}; choose from {sorted(MODES)}")
+    target = target or Target()
+    if target.kind == "max" and target.objective not in OBJECTIVES:
+        raise ValueError(f"kind='max' needs objective in {OBJECTIVES}")
     t0 = _time.perf_counter()
     hs = datetime.combine(horizon_start, datetime.min.time())
     n_slots = days * SLOTS_PER_DAY
@@ -261,40 +299,67 @@ def solve(
         if q.hard:
             m.Add(x[q.proposal_id] == 1)
 
-    # ---- objective
-    mult = MODES[mode]
-    weights = profile.weights.model_dump()
-    losses = []
-    obj_terms = []
-    for k in OBJECTIVES:
-        total_k = sum(c.proposal.value.as_dict()[k] * c.proposal.priority.weight for c in candidates)
-        if total_k <= 0:
-            continue
-        coeffs = {
-            c.proposal.proposal_id: round(
-                LOSS_SCALE * c.proposal.value.as_dict()[k] * c.proposal.priority.weight / total_k
-            )
-            for c in candidates
-        }
-        loss_k = m.NewIntVar(0, LOSS_SCALE * 2, f"loss_{k}")
-        m.Add(loss_k == sum(a * (1 - x[pid]) for pid, a in coeffs.items() if a))
-        losses.append(loss_k)
-        obj_terms.append(round(10 * weights[k] * mult[k]) * loss_k)
+    # ---- goals
+    coeffs = gain_coefficients(candidates)
+    gains: dict[str, cp_model.IntVar] = {}
+    for k, ck in coeffs.items():
+        g = m.NewIntVar(0, 2 * SCALE, f"gain_{k}")
+        m.Add(g == sum(a * x[pid] for pid, a in ck.items() if pid in x))
+        gains[k] = g
+    for k, lo in target.lower.items():
+        if k in gains and lo > 0:
+            m.Add(gains[k] >= lo)
 
-    if losses:
-        worst = m.NewIntVar(0, LOSS_SCALE * 2, "worst_loss")
-        m.AddMaxEquality(worst, losses)
-        obj_terms.append(round(10 * profile.fairness_weight) * worst)
-    obj_terms.append(round(LOSS_SCALE * profile.conflict_weight) * sum(evening_flags))
-    obj_terms.append(FRAGMENT_PENALTY * sum(session_flags))
-    obj_terms.append(MOVE_PENALTY * (len(stay_flags) - sum(stay_flags)))
-    m.Minimize(sum(obj_terms))
+    tiebreak = (
+        round(SCALE * profile.conflict_weight) * sum(evening_flags)
+        + FRAGMENT_PENALTY * sum(session_flags)
+        + MOVE_PENALTY * (len(stay_flags) - sum(stay_flags))
+    )
+    value = None  # goal part of the objective (minimised first)
+    if target.kind == "max":  # payoff table only: no tie-breakers, the plan is never shown
+        m.Maximize(gains.get(target.objective, 0))
+    elif target.kind == "sum":
+        m.Maximize(sum(gains.values()))
+    elif gains:
+        active = [k for k in (target.active or gains) if k in gains] or list(gains)
+        terms = {}
+        for k, g in gains.items():
+            w = max(1, round(_ASF_W / max(1, target.ranges.get(k, SCALE))))
+            terms[k] = w * (target.reference.get(k, SCALE) - g)
+        bound = max(abs(_ASF_W) * 2 * SCALE, 1)
+        worst = m.NewIntVar(-bound, bound, "asf_worst")
+        for k in active:
+            m.Add(worst >= terms[k])
+        value = _ASF_RHO * worst + sum(terms.values())
+        m.Minimize(value)
+    else:
+        m.Minimize(tiebreak)
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = time_limit_s
     solver.parameters.num_workers = workers
     solver.parameters.random_seed = 42
     status = solver.Solve(m)
+
+    # Stage 2 (lexicographic): keep the goals exactly as good, then place sessions nicely
+    # (fewer evenings, fewer pieces, fewer moves). Two short solves beat one big weighted one.
+    if value is not None and status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        best = round(solver.ObjectiveValue())
+        m.Add(value <= best)
+        m.ClearHints()
+        for i in range(len(m.Proto().variables)):
+            m.AddHint(m.GetIntVarFromProtoIndex(i), solver.Value(m.GetIntVarFromProtoIndex(i)))
+        m.Minimize(tiebreak)
+        first = solver
+        solver = cp_model.CpSolver()
+        solver.parameters.max_time_in_seconds = max(1.0, time_limit_s / 2)
+        solver.parameters.num_workers = workers
+        solver.parameters.random_seed = 42
+        status2 = solver.Solve(m)
+        if status2 not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+            solver = first  # cannot happen in theory; fall back to the stage-1 plan
+        else:
+            status = status2 if status2 == cp_model.FEASIBLE and status == cp_model.OPTIMAL else status
     result.status = solver.StatusName(status)
     result.seconds = _time.perf_counter() - t0
 
@@ -319,4 +384,5 @@ def solve(
         ]
         result.scheduled[pid] = SolvedItem(pid, sorted(out))
     result.evening_sessions = sum(solver.Value(f) for f in evening_flags)
+    result.gains = {k: solver.Value(g) for k, g in gains.items()}
     return result

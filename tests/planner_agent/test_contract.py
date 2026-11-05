@@ -72,3 +72,13 @@ def test_committed_json_schema_is_up_to_date():
     Regenerate with:  python -m shared.contracts.export_schema
     """
     assert json.loads(SCHEMA.read_text()) == ActivityProposal.model_json_schema()
+
+
+def test_priority_is_no_longer_part_of_the_contract():
+    """Importance lives only in `value`; old outputs that still send priority are accepted, the field ignored."""
+    p = ActivityProposal(
+        **BASE, duration_min=60, window={"earliest": "2026-11-02", "deadline": "2026-11-03"}, priority="high"
+    )
+    assert "priority" not in p.model_dump()
+    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    assert "priority" not in schema["properties"]

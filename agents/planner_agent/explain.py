@@ -18,7 +18,8 @@ def _fmt(t: datetime) -> str:
 
 
 def _weighted(c: Candidate) -> float:
-    return sum(c.proposal.value.as_dict().values()) * c.proposal.priority.weight
+    """Only used to name the most valuable rival in a sentence; never to decide anything."""
+    return sum(c.proposal.value.as_dict().values())
 
 
 def explain_scheduled(c: Candidate, sessions: list[tuple[datetime, datetime]]) -> str:
@@ -67,9 +68,7 @@ def explain_dropped(
         ]
         if rivals:
             best = max(rivals, key=_weighted)
-            return (
-                f"Overlaps with '{best.proposal.title}' ({_fmt(s)}), which scores higher on your current goal weights."
-            )
+            return f"Overlaps with '{best.proposal.title}' ({_fmt(s)}), which adds more to your goals in this plan."
         same_day = [
             (by_id[pid], sum(int((b - a).total_seconds() // 60) for a, b in item.sessions if a.date() == s.date()))
             for pid, item in result.scheduled.items()

@@ -1,11 +1,16 @@
 """Database storage for the Planner (PostgreSQL in Docker, SQLite for quick local runs and tests).
 
-Tables (all prefixed ``planner_`` so they can share one database with the backend):
+One PostgreSQL database ``cognipath``, one schema per agent (team decision):
 
-  planner_profiles    one row per user: PlannerProfile as JSON
-  planner_proposals   one row per (user, proposal_id): ActivityProposal as JSON + status
-  planner_plans       one row per plan alternative: Plan as JSON + run_id, mode, status
-  planner_decisions   audit log of every accept / reject the user makes
+  shared.users                    the only common table; the Planner only adds missing user_ids
+  planner.profiles                one row per user: PlannerProfile as JSON
+  planner.proposals               one row per (user, proposal_id): ActivityProposal as JSON + status
+  planner.plans                   one row per plan alternative: Plan as JSON + run_id, mode, status
+  planner.decisions               audit log of every accept / reject the user makes
+  planner.scheduled_activities    the user's accepted sessions, one row each (other agents may read it)
+
+The Planner never writes another agent's schema. Agents send proposals through the API.
+On SQLite (no schemas) the same tables are created without the schema prefix.
 
 Whole Pydantic models are stored as JSON, with the columns we filter on copied
 next to them. This keeps the schema small while the contracts are still changing.
@@ -23,7 +28,9 @@ from datetime import datetime
 from enum import Enum
 from typing import Iterable, Optional
 
-from sqlalchemy import JSON, DateTime, ForeignKey, Integer, String, create_engine, delete, select
+from sqlalchemy import JSON, DateTime, ForeignKey, Integer, MetaData, String, create_engine, delete, func, select, text
+from sqlalchemy.dialects.postgresql import insert as pg_insert
+from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 from sqlalchemy.pool import StaticPool
 
@@ -38,8 +45,22 @@ class ProposalStatus(str, Enum):
     WITHDRAWN = "withdrawn"  # the agent took it back (event cancelled, job closed)
 
 
+PLANNER_SCHEMA = "planner"
+SHARED_SCHEMA = "shared"
+
+
 class Base(DeclarativeBase):
-    pass
+    metadata = MetaData(schema=PLANNER_SCHEMA)
+
+
+class UserRow(Base):
+    """shared.users: common to all agents. The Planner only needs user_id to exist."""
+
+    __tablename__ = "users"
+    __table_args__ = {"schema": SHARED_SCHEMA}
+
+    user_id: Mapped[str] = mapped_column(String(100), primary_key=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
 
 def _now() -> datetime:
@@ -47,7 +68,7 @@ def _now() -> datetime:
 
 
 class ProfileRow(Base):
-    __tablename__ = "planner_profiles"
+    __tablename__ = "profiles"
 
     user_id: Mapped[str] = mapped_column(String(100), primary_key=True)
     data: Mapped[dict] = mapped_column(JSON)
@@ -55,7 +76,7 @@ class ProfileRow(Base):
 
 
 class ProposalRow(Base):
-    __tablename__ = "planner_proposals"
+    __tablename__ = "proposals"
 
     user_id: Mapped[str] = mapped_column(String(100), primary_key=True)
     proposal_id: Mapped[str] = mapped_column(String(200), primary_key=True)
@@ -67,7 +88,7 @@ class ProposalRow(Base):
 
 
 class PlanRow(Base):
-    __tablename__ = "planner_plans"
+    __tablename__ = "plans"
 
     plan_id: Mapped[str] = mapped_column(String(200), primary_key=True)
     run_id: Mapped[str] = mapped_column(String(200), index=True)
@@ -80,14 +101,29 @@ class PlanRow(Base):
 
 
 class DecisionRow(Base):
-    __tablename__ = "planner_decisions"
+    __tablename__ = "decisions"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    plan_id: Mapped[str] = mapped_column(ForeignKey("planner_plans.plan_id"), index=True)
+    plan_id: Mapped[str] = mapped_column(ForeignKey(f"{PLANNER_SCHEMA}.plans.plan_id"), index=True)
     item_id: Mapped[str] = mapped_column(String(250))
     proposal_id: Mapped[str] = mapped_column(String(200))
     decision: Mapped[str] = mapped_column(String(20))
     decided_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
+
+
+class ScheduledActivityRow(Base):
+    """One accepted session in the user's calendar (rebuilt whenever the user decides)."""
+
+    __tablename__ = "scheduled_activities"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    user_id: Mapped[str] = mapped_column(String(100), index=True)
+    plan_id: Mapped[str] = mapped_column(String(200))
+    proposal_id: Mapped[str] = mapped_column(String(200))
+    title: Mapped[str] = mapped_column(String(300))
+    source_agents: Mapped[str] = mapped_column(String(60))
+    start: Mapped[datetime] = mapped_column(DateTime)
+    end: Mapped[datetime] = mapped_column(DateTime)
 
 
 # plans the user can still act on, newest first
@@ -101,7 +137,15 @@ class PlannerStore:
             kwargs["connect_args"] = {"check_same_thread": False}
             if ":memory:" in url or url in ("sqlite://", "sqlite+pysqlite://"):
                 kwargs["poolclass"] = StaticPool  # one shared in-memory database
-        self.engine = create_engine(url, **kwargs)
+        engine = create_engine(url, **kwargs)
+        self.is_postgres = engine.dialect.name == "postgresql"
+        if self.is_postgres:
+            with engine.begin() as conn:
+                for schema in (SHARED_SCHEMA, PLANNER_SCHEMA):
+                    conn.execute(text(f"CREATE SCHEMA IF NOT EXISTS {schema}"))
+        else:  # no schemas on SQLite: plain table names
+            engine = engine.execution_options(schema_translate_map={PLANNER_SCHEMA: None, SHARED_SCHEMA: None})
+        self.engine = engine
         self._session = sessionmaker(self.engine, expire_on_commit=False)
         Base.metadata.create_all(self.engine)
 
@@ -110,12 +154,27 @@ class PlannerStore:
         return cls(os.environ.get("DATABASE_URL", DEFAULT_DATABASE_URL))
 
     def drop_all(self) -> None:
-        """Delete every planner table (tests only)."""
-        Base.metadata.drop_all(self.engine)
+        """Delete every planner table (tests only). shared.users is left alone."""
+        Base.metadata.drop_all(
+            self.engine, tables=[t for t in Base.metadata.sorted_tables if t.schema != SHARED_SCHEMA]
+        )
+
+    def _ensure_users(self, s, user_ids: Iterable[str]) -> None:
+        ids = sorted(set(user_ids))
+        if not ids:
+            return
+        insert = pg_insert if self.is_postgres else sqlite_insert
+        stmt = insert(UserRow).values([{"user_id": u} for u in ids]).on_conflict_do_nothing(index_elements=["user_id"])
+        s.execute(stmt)
+
+    def users(self) -> list[str]:
+        with self._session() as s:
+            return list(s.scalars(select(UserRow.user_id).order_by(UserRow.user_id)).all())
 
     # ---- profiles
     def save_profile(self, profile: PlannerProfile) -> None:
         with self._session.begin() as s:
+            self._ensure_users(s, [profile.user_id])
             s.merge(ProfileRow(user_id=profile.user_id, data=profile.model_dump(mode="json")))
 
     def get_profile(self, user_id: str) -> Optional[PlannerProfile]:
@@ -131,7 +190,9 @@ class PlannerStore:
         rejected stays rejected.
         """
         n = 0
+        proposals = list(proposals)
         with self._session.begin() as s:
+            self._ensure_users(s, [p.user_id for p in proposals])
             for p in proposals:
                 row = s.get(ProposalRow, (p.user_id, p.proposal_id))
                 data = p.model_dump(mode="json")
@@ -204,17 +265,53 @@ class PlannerStore:
             q = select(PlanRow).where(PlanRow.user_id == user_id, PlanRow.status.in_(_LIVE))
             rows = s.scalars(q.order_by(PlanRow.created_at.desc())).all()
             chosen = [r for r in rows if r.status != PlanStatus.DRAFT.value]
+            if not chosen and rows:  # only drafts: the newest run's balanced plan is the starting point
+                newest = [r for r in rows if r.run_id == rows[0].run_id]
+                chosen = [r for r in newest if r.mode == "balanced"] or newest
             row = (chosen or rows or [None])[0]
             return Plan.model_validate(row.data) if row else None
 
     def record_decisions(self, plan: Plan, decisions: Iterable[tuple[str, str, ItemDecision]]) -> None:
-        """Save the updated plan and log (item_id, proposal_id, decision) rows."""
+        """Save the updated plan, log (item_id, proposal_id, decision) rows, rebuild scheduled_activities."""
         self.save_plans([plan])
         with self._session.begin() as s:
             for item_id, proposal_id, decision in decisions:
                 s.add(
                     DecisionRow(plan_id=plan.plan_id, item_id=item_id, proposal_id=proposal_id, decision=decision.value)
                 )
+            s.execute(delete(ScheduledActivityRow).where(ScheduledActivityRow.user_id == plan.user_id))
+            for item in plan.items:
+                if item.decision != ItemDecision.ACCEPTED:
+                    continue
+                for sess in item.sessions:
+                    s.add(
+                        ScheduledActivityRow(
+                            user_id=plan.user_id,
+                            plan_id=plan.plan_id,
+                            proposal_id=item.proposal_id,
+                            title=item.title,
+                            source_agents="+".join(item.source_agents),
+                            start=sess.start,
+                            end=sess.end,
+                        )
+                    )
+
+    def scheduled(self, user_id: str) -> list[dict]:
+        """The user's accepted sessions, in time order."""
+        with self._session() as s:
+            q = select(ScheduledActivityRow).where(ScheduledActivityRow.user_id == user_id)
+            rows = s.scalars(q.order_by(ScheduledActivityRow.start)).all()
+            return [
+                {
+                    "proposal_id": r.proposal_id,
+                    "plan_id": r.plan_id,
+                    "title": r.title,
+                    "source_agents": r.source_agents.split("+"),
+                    "start": r.start,
+                    "end": r.end,
+                }
+                for r in rows
+            ]
 
     def delete_user(self, user_id: str) -> None:
         """Remove everything stored for one user (demo reset)."""
@@ -222,6 +319,7 @@ class PlannerStore:
             plan_ids = s.scalars(select(PlanRow.plan_id).where(PlanRow.user_id == user_id)).all()
             if plan_ids:
                 s.execute(delete(DecisionRow).where(DecisionRow.plan_id.in_(plan_ids)))
+            s.execute(delete(ScheduledActivityRow).where(ScheduledActivityRow.user_id == user_id))
             s.execute(delete(PlanRow).where(PlanRow.user_id == user_id))
             s.execute(delete(ProposalRow).where(ProposalRow.user_id == user_id))
             s.execute(delete(ProfileRow).where(ProfileRow.user_id == user_id))

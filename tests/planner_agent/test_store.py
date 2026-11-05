@@ -41,7 +41,7 @@ def test_upsert_updates_content(store, proposals):
 
 
 def test_plans_round_trip_and_current_plan(store, proposals, profile):
-    plans = make_plans(proposals, profile, START, DAYS)
+    plans = make_plans(proposals, profile.model_copy(update={"daily_cap_min": 120}), START, DAYS)
     store.save_plans(plans)
     run_id = plans[0].run_id
     assert [p.mode for p in store.plans_in_run(run_id)] == sorted(p.mode for p in plans)

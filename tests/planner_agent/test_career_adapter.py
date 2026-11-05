@@ -31,12 +31,9 @@ def test_converts_elhams_prototype_output():
 
 def test_uses_optional_fields_when_present():
     data = sample()
-    data["activities"][0].update(
-        deadline="2026-11-06", priority="high", value={"career": 1.0}, estimated_duration_minutes=100
-    )
+    data["activities"][0].update(deadline="2026-11-06", value={"career": 1.0}, estimated_duration_minutes=100)
     [p] = from_career_output(data, today=TODAY)
     assert p.window.deadline == date(2026, 11, 6)
-    assert p.priority.value == "high"
     assert p.value.career == 1.0
     assert p.duration_min == 120  # rounded up to the 30-min grid
     assert p.user_id == "ElhamPournouri"  # falls back to the document's student

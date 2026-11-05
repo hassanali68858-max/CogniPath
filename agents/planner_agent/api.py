@@ -20,11 +20,10 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel, Field
 
-from shared.contracts import ActivityProposal, ItemDecision, Plan, PlannerProfile, PlanStatus
+from shared.contracts import ActivityProposal, ItemDecision, Plan, PlannerProfile, PlanStatus, Preference, ProposalBatch
 
 from .io import to_ics
-from .planner import make_plans, replan
-from .solver import MODES
+from .planner import MODES, PlanningError, make_plans, nimbus, replan
 from .store import PlannerStore, ProposalStatus
 
 
@@ -43,6 +42,21 @@ class ReplanRequest(BaseModel):
 
     not_before: Optional[datetime] = Field(None, description="Nothing new is placed before this; usually 'now'")
     modes: Optional[list[str]] = Field(None, description="Default: the mode of the plan being re-planned")
+
+
+class NimbusRequest(Preference):
+    """Classify each goal of the plan: improve, keep, or worsen (optionally not below a limit)."""
+
+    not_before: Optional[datetime] = Field(None, description="Nothing new is placed before this; usually 'now'")
+
+
+class ScheduledActivity(BaseModel):
+    proposal_id: str
+    plan_id: str
+    title: str
+    source_agents: list[str]
+    start: datetime
+    end: datetime
 
 
 class Decision(BaseModel):
@@ -66,7 +80,7 @@ def create_app(store: Optional[PlannerStore] = None) -> FastAPI:
             app.state.store = PlannerStore.from_env()
         yield
 
-    app = FastAPI(title="CogniPath Planner", version="0.2.0", lifespan=lifespan)
+    app = FastAPI(title="CogniPath Planner", version="0.3.0", lifespan=lifespan)
     app.state.store = store
 
     def load_plan(plan_id: str, store: PlannerStore) -> Plan:
@@ -103,6 +117,14 @@ def create_app(store: Optional[PlannerStore] = None) -> FastAPI:
     @app.post("/proposals", status_code=201)
     def add_proposals(proposals: list[ActivityProposal], store: Store) -> dict:
         return {"stored": store.upsert_proposals(proposals)}
+
+    @app.post("/proposals/batch", status_code=201)
+    def add_batch(batch: ProposalBatch, store: Store) -> dict:
+        """Store one agent run (the shared ProposalBatch format, e.g. the Career Agent's career_plan.json)."""
+        wrong = [p.proposal_id for p in batch.proposals if p.user_id != batch.user_id]
+        if wrong:
+            raise HTTPException(422, f"proposals for another user than the batch: {wrong}")
+        return {"stored": store.upsert_proposals(batch.proposals), "source_agent": batch.source_agent.value}
 
     @app.get("/proposals")
     def list_proposals(
@@ -187,7 +209,7 @@ def create_app(store: Optional[PlannerStore] = None) -> FastAPI:
 
         siblings = [p for p in store.plans_in_run(plan.run_id or plan.plan_id) if p.plan_id != plan.plan_id]
         for p in siblings:
-            if p.status == PlanStatus.DRAFT:
+            if p.status in (PlanStatus.DRAFT, PlanStatus.PARTIAL):
                 p.status = PlanStatus.DISCARDED
         store.save_plans(siblings)
         return plan
@@ -200,7 +222,12 @@ def create_app(store: Optional[PlannerStore] = None) -> FastAPI:
         profile = store.get_profile(base.user_id)
         if profile is None:
             raise HTTPException(404, "no stored profile for this user")
-        plans = replan(base, store.list_proposals(base.user_id), profile, not_before=req.not_before, modes=req.modes)
+        try:
+            plans = replan(
+                base, store.list_proposals(base.user_id), profile, not_before=req.not_before, modes=req.modes
+            )
+        except PlanningError as e:
+            raise HTTPException(422, str(e)) from e
         base.status = PlanStatus.SUPERSEDED
         store.save_plans([base, *plans])
         return plans
@@ -217,6 +244,32 @@ def create_app(store: Optional[PlannerStore] = None) -> FastAPI:
         if base is None:
             raise HTTPException(404, "no plan yet for this user")
         return do_replan(base, req or ReplanRequest(), store)
+
+    @app.post("/planner/plans/{plan_id}/nimbus")
+    def steer_plan(plan_id: str, req: NimbusRequest, store: Store) -> Plan:
+        """NIMBUS step: "improve career, keep study, social may get worse" -> a new Pareto-optimal plan.
+
+        The new plan joins the same run as another alternative (with a trade-off against this plan).
+        Accepted items stay where they are. 422 with a plain-language reason if it cannot be done.
+        """
+        base = load_plan(plan_id, store)
+        if base.status in (PlanStatus.DISCARDED, PlanStatus.SUPERSEDED):
+            raise HTTPException(409, f"plan is {base.status.value}; use the current plan")
+        profile = store.get_profile(base.user_id)
+        if profile is None:
+            raise HTTPException(404, "no stored profile for this user")
+        pref = Preference(classes=req.classes, limits=req.limits)
+        try:
+            plan = nimbus(base, store.list_proposals(base.user_id), profile, pref, not_before=req.not_before)
+        except PlanningError as e:
+            raise HTTPException(422, str(e)) from e
+        store.save_plans([plan])
+        return plan
+
+    @app.get("/planner/users/{user_id}/schedule")
+    def schedule(user_id: str, store: Store) -> list[ScheduledActivity]:
+        """Accepted sessions (planner.scheduled_activities). Other agents can read this to avoid clashes."""
+        return [ScheduledActivity(**row) for row in store.scheduled(user_id)]
 
     @app.get("/planner/plans/{plan_id}/ics", response_class=PlainTextResponse)
     def plan_ics(plan_id: str, store: Store) -> str:

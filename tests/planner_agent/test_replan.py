@@ -17,7 +17,6 @@ NEW_HACK_NIGHT = {
     "title": "Hack night",
     "fixed_time": {"start": "2026-11-12T17:00", "end": "2026-11-12T19:00"},
     "value": {"social": 0.6, "career": 0.6},
-    "priority": "high",
     "reason": "New event matching your interests",
 }
 
@@ -148,5 +147,5 @@ def test_replan_endpoints(client, proposals, profile):
     assert client.post(f"/planner/plans/{base['plan_id']}/replan").status_code == 409
 
     # plan-level endpoint with an explicit mode, no body needed otherwise
-    r = client.post(f"/planner/plans/{new['plan_id']}/replan", json={"modes": ["study_first"]})
-    assert r.status_code == 200 and r.json()[0]["mode"] == "study_first"
+    r = client.post(f"/planner/plans/{new['plan_id']}/replan", json={"modes": ["lean_study"]})
+    assert r.status_code == 200 and r.json()[0]["mode"] == "lean_study"
