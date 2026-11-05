@@ -17,10 +17,15 @@ export const GOAL_META: Record<Goal, { label: string; icon: LucideIcon; question
 };
 
 export const MODE_META: Record<string, { label: string; blurb: string }> = {
-  balanced: { label: "Balanced", blurb: "Treats all three goals equally" },
-  study_first: { label: "Study first", blurb: "Protects study time when time is short" },
-  career_first: { label: "Career first", blurb: "Protects career steps when time is short" },
+  balanced: { label: "Balanced", blurb: "Best compromise: no goal is left far behind its best" },
+  lean_study: { label: "More study", blurb: "Gets study close to its best; the others give a little" },
+  lean_career: { label: "More career", blurb: "Gets career close to its best; the others give a little" },
+  lean_social: { label: "More social", blurb: "Gets social close to its best; the others give a little" },
+  nimbus: { label: "Your adjustment", blurb: "Made from your improve / keep / can give choices" },
 };
 
-export const WEIGHT_WORDS = (w: number) =>
-  w === 0 ? "Not at all" : w < 1 ? "A little" : w === 1 ? "Normal" : w < 2.5 ? "More" : "Top priority";
+export const CLASS_META = {
+  improve: { label: "Improve", hint: "Make this better" },
+  keep: { label: "Keep", hint: "Don't let this get worse" },
+  worsen: { label: "Can give", hint: "This may get worse to pay for it" },
+} as const;

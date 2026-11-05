@@ -16,7 +16,6 @@ import {
   type ActivityType,
   GOALS,
   type Goal,
-  type Priority,
   type ProposalStatus,
   type SourceAgent,
 } from "@/lib/types";
@@ -79,7 +78,6 @@ type Form = {
   earliest: string;
   deadline: string;
   value: Record<Goal, number>;
-  priority: Priority;
   hard: boolean;
 };
 
@@ -94,7 +92,6 @@ const EMPTY_FORM: Form = {
   earliest: "2026-11-02",
   deadline: "2026-11-15",
   value: { study: 0, career: 0.6, social: 0.6 },
-  priority: "high",
   hard: false,
 };
 
@@ -170,7 +167,6 @@ export default function SuggestionsPage() {
       title: form.title,
       reason: form.reason,
       value: form.value,
-      priority: form.priority,
       hard: form.hard,
       ...(form.kind === "fixed"
         ? { fixed_time: { start: form.start, end: form.end } }
@@ -259,11 +255,6 @@ export default function SuggestionsPage() {
               <div className="s-card-top">
                 <AgentBadge agent={p.source_agent} />
                 <span className="pill">{p.fixed_time ? "Fixed time" : "Flexible"}</span>
-                {p.priority === "high" && (
-                  <span className="pill partial">
-                    <Flag size={10} /> High
-                  </span>
-                )}
                 {p.hard && (
                   <span className="pill rejected">
                     <Lock size={10} /> Must happen
@@ -386,13 +377,7 @@ export default function SuggestionsPage() {
               ))}
             </div>
             <div className="row">
-              <div className="segmented">
-                {(["low", "medium", "high"] as Priority[]).map((pr) => (
-                  <button key={pr} className={form.priority === pr ? "on" : ""} onClick={() => f("priority", pr)}>
-                    {pr[0].toUpperCase() + pr.slice(1)} priority
-                  </button>
-                ))}
-              </div>
+              <span className="small muted grow">Importance comes only from the three scores. There is no priority.</span>
               <label className="row small">
                 <input type="checkbox" checked={form.hard} onChange={(e) => f("hard", e.target.checked)} /> Must happen
               </label>

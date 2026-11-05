@@ -1,7 +1,7 @@
 // Small client for the CogniPath backend. All calls go to /api/..., which
 // next.config.ts forwards to the FastAPI server.
 
-import type { ActivityProposal, Decision, Plan, PlannerProfile, ProposalStatus } from "./types";
+import type { ActivityProposal, Decision, Plan, PlannerProfile, Preference, ProposalStatus } from "./types";
 
 export class ApiError extends Error {
   constructor(
@@ -62,8 +62,11 @@ export const api = {
   withdraw: (userId: string, proposalId: string) =>
     call<unknown>(`/proposals/${enc(userId)}/${enc(proposalId)}/withdraw`, { method: "POST" }),
 
-  run: (userId: string, horizonStart: string, days: number, modes: string[]) =>
-    call<Plan[]>("/planner/runs", { method: "POST", body: json({ user_id: userId, horizon_start: horizonStart, days, modes }) }),
+  run: (userId: string, horizonStart: string, days: number) =>
+    call<Plan[]>("/planner/runs", { method: "POST", body: json({ user_id: userId, horizon_start: horizonStart, days }) }),
+  getRun: (runId: string) => call<Plan[]>(`/planner/runs/${enc(runId)}`),
+  steer: (planId: string, pref: Preference) =>
+    call<Plan>(`/planner/plans/${enc(planId)}/nimbus`, { method: "POST", body: json(pref) }),
   currentPlan: (userId: string) => call<Plan>(`/planner/users/${enc(userId)}/current`),
   getPlan: (planId: string) => call<Plan>(`/planner/plans/${enc(planId)}`),
   decide: (planId: string, decisions: { item_id: string; decision: Decision }[]) =>

@@ -9,7 +9,9 @@ import {
   Loader2,
   MousePointerClick,
   RefreshCw,
+  Scale,
   Settings2,
+  SlidersHorizontal,
   Sparkles,
   Undo2,
   X,
@@ -22,10 +24,10 @@ import { useStatus } from "@/components/StatusProvider";
 import { errorText, useToast } from "@/components/Toast";
 import { useUser } from "@/components/UserProvider";
 import { WeekCalendar } from "@/components/WeekCalendar";
-import { api } from "@/lib/api";
+import { ApiError, api } from "@/lib/api";
 import { addDays, datePart, dayLabel, minutesLabel, rangeLabel, timePart } from "@/lib/format";
-import { MODE_META } from "@/lib/meta";
-import { type Decision, MODES, type Plan, type PlanItem } from "@/lib/types";
+import { CLASS_META, GOAL_META, MODE_META } from "@/lib/meta";
+import { type Decision, type Goal, type GoalClass, GOALS, type Plan, type PlanItem } from "@/lib/types";
 
 const hourOf = (t: string, up = false) => {
   const h = Number(t.slice(0, 2)) + Number(t.slice(3, 5)) / 60;
@@ -38,15 +40,11 @@ function PlanOptions({
   setStart,
   days,
   setDays,
-  modes,
-  setModes,
 }: {
   start: string;
   setStart: (v: string) => void;
   days: number;
   setDays: (v: number) => void;
-  modes: string[];
-  setModes: (v: string[]) => void;
 }) {
   return (
     <div className="fields" style={{ alignItems: "end" }}>
@@ -58,20 +56,105 @@ function PlanOptions({
         <span className="field-label">Plan {days} days</span>
         <input type="range" min={7} max={28} step={7} value={days} onChange={(e) => setDays(Number(e.target.value))} />
       </label>
-      <div className="field" style={{ gridColumn: "span 2" }}>
-        <span className="field-label">Versions to compare</span>
-        <div className="chips">
-          {MODES.map((m) => (
-            <button
-              key={m}
-              className={`chip${modes.includes(m) ? " on" : ""}`}
-              onClick={() => setModes(modes.includes(m) ? modes.filter((x) => x !== m) : [...modes, m])}
-              title={MODE_META[m].blurb}
-            >
-              {modes.includes(m) && <Check size={13} />} {MODE_META[m].label}
-            </button>
-          ))}
-        </div>
+    </div>
+  );
+}
+
+const planName = (p: Plan) => p.label || MODE_META[p.mode]?.label || p.mode;
+
+/** NIMBUS-style steering: per goal, improve / keep / can give (optionally not below a limit). */
+function SteerPanel({
+  plan,
+  disabled,
+  busy,
+  onSteer,
+}: {
+  plan: Plan;
+  disabled: boolean;
+  busy: boolean;
+  onSteer: (classes: Partial<Record<Goal, GoalClass>>, limits: Partial<Record<Goal, number>>) => void;
+}) {
+  const goals = GOALS.filter((g) => plan.scores.achieved[g] !== undefined);
+  const [classes, setClasses] = useState<Partial<Record<Goal, GoalClass>>>({});
+  const [limits, setLimits] = useState<Partial<Record<Goal, number>>>({});
+  useEffect(() => {
+    setClasses({});
+    setLimits({});
+  }, [plan.plan_id]);
+
+  const cls = (g: Goal): GoalClass => classes[g] ?? "keep";
+  const improve = goals.filter((g) => cls(g) === "improve");
+  const give = goals.filter((g) => cls(g) === "worsen");
+  const hint = !improve.length
+    ? "Pick a goal to improve."
+    : !give.length
+      ? "Every version is already the best possible balance, so another goal has to give a little."
+      : `Look for more ${improve.map((g) => GOAL_META[g].label.toLowerCase()).join(" and ")}, paid for by ${give
+          .map((g) => GOAL_META[g].label.toLowerCase())
+          .join(" and ")}.`;
+
+  return (
+    <div style={{ marginTop: 18 }}>
+      <div className="row" style={{ gap: 8, marginBottom: 6 }}>
+        <SlidersHorizontal size={16} style={{ color: "var(--brand)" }} />
+        <b>Not quite right? Steer it</b>
+      </div>
+      <p className="small muted" style={{ marginBottom: 6 }}>
+        You decide the trade-off. Say what should get better, what must stay, and what may give way.
+      </p>
+      {goals.map((g) => {
+        const Icon = GOAL_META[g].icon;
+        const now = Math.floor((plan.scores.achieved[g] ?? 0) * 100);
+        return (
+          <div className="steer-row" key={g}>
+            <span className="goal-name">
+              <Icon size={13} /> {GOAL_META[g].label}
+            </span>
+            <div className="segmented" role="radiogroup" aria-label={`${GOAL_META[g].label}`}>
+              {(Object.keys(CLASS_META) as GoalClass[]).map((c) => (
+                <button
+                  key={c}
+                  role="radio"
+                  aria-checked={cls(g) === c}
+                  className={`${cls(g) === c ? "on " : ""}${c}`}
+                  title={CLASS_META[c].hint}
+                  onClick={() => setClasses({ ...classes, [g]: c })}
+                >
+                  {CLASS_META[c].label}
+                </button>
+              ))}
+            </div>
+            {cls(g) === "worsen" && (
+              <label className="steer-limit">
+                not below
+                <input
+                  type="range"
+                  min={0}
+                  max={now}
+                  step={1}
+                  value={limits[g] !== undefined ? Math.round(limits[g]! * 100) : 0}
+                  onChange={(e) => setLimits({ ...limits, [g]: Number(e.target.value) / 100 })}
+                />
+                <b>{limits[g] ? `${Math.round(limits[g]! * 100)}%` : "any"}</b>
+              </label>
+            )}
+          </div>
+        );
+      })}
+      <div className="row" style={{ marginTop: 10, alignItems: "center" }}>
+        <span className="small muted grow">{hint}</span>
+        <button
+          className="btn primary small"
+          disabled={disabled || busy || !improve.length || !give.length}
+          onClick={() =>
+            onSteer(
+              Object.fromEntries(goals.map((g) => [g, cls(g)])),
+              Object.fromEntries(give.filter((g) => limits[g]).map((g) => [g, limits[g]!])),
+            )
+          }
+        >
+          {busy ? <Loader2 size={14} className="spin" /> : <Sparkles size={14} />} Find that plan
+        </button>
       </div>
     </div>
   );
@@ -88,7 +171,6 @@ export default function PlanPage() {
   const [week, setWeek] = useState(0);
   const [start, setStart] = useState("2026-11-02");
   const [days, setDays] = useState(14);
-  const [modes, setModes] = useState<string[]>([...MODES]);
   const [notBefore, setNotBefore] = useState("");
   const [showNew, setShowNew] = useState(false);
   const [busy, setBusy] = useState<string | null>(null);
@@ -96,7 +178,10 @@ export default function PlanPage() {
   const loadCurrent = useCallback(async () => {
     try {
       const current = await api.currentPlan(userId);
-      setPlans([current]);
+      // show the other live versions of the same run too, so the trade-offs stay visible
+      const run = current.run_id ? await api.getRun(current.run_id).catch(() => [current]) : [current];
+      const live = run.filter((p) => p.status !== "superseded" && (p.status !== "discarded" || p.plan_id === current.plan_id));
+      setPlans(live.length ? live : [current]);
       setPlanId(current.plan_id);
       setStart(datePart(current.horizon_start));
     } catch {
@@ -147,8 +232,7 @@ export default function PlanPage() {
   const makePlan = () =>
     act("run", async () => {
       if (!profile) throw new Error("Set up About you first, or load the demo student on the Start page.");
-      if (!modes.length) throw new Error("Pick at least one version to compare.");
-      const result = await api.run(userId, start, days, modes);
+      const result = await api.run(userId, start, days);
       setPlans(result);
       setPlanId(result[0].plan_id);
       setSelected(null);
@@ -157,7 +241,9 @@ export default function PlanPage() {
       toast(
         "success",
         result.length > 1 ? `${result.length} versions ready` : "Your plan is ready",
-        result.length > 1 ? "Compare them, then start accepting items in the one you like." : "Review the items on the right.",
+        result.length > 1
+          ? "Each is a fair compromise. Compare what they trade, then accept items in the one you like."
+          : "Your goals don't compete this time, so there is just one plan.",
       );
     });
 
@@ -170,7 +256,11 @@ export default function PlanPage() {
       );
       setPlans((ps) =>
         (ps ?? []).map((p) =>
-          p.plan_id === updated.plan_id ? updated : p.status === "draft" ? { ...p, status: "discarded" } : p,
+          p.plan_id === updated.plan_id
+            ? updated
+            : p.run_id === updated.run_id && (p.status === "draft" || p.status === "partial")
+              ? { ...p, status: "discarded" }
+              : p,
         ),
       );
       if (decision === "rejected" && list.length === 1)
@@ -186,6 +276,24 @@ export default function PlanPage() {
       setPlanId(result[0].plan_id);
       setSelected(null);
       toast("success", "Re-planned", result[0].changes?.summary ?? "");
+    });
+
+  const steer = (classes: Partial<Record<Goal, GoalClass>>, limits: Partial<Record<Goal, number>>) =>
+    act("steer", async () => {
+      if (!plan) return;
+      let result: Plan;
+      try {
+        result = await api.steer(plan.plan_id, { classes, limits });
+      } catch (e) {
+        // 422 = the request itself cannot be met; that is an answer, not an error
+        if (e instanceof ApiError && e.status === 422) return toast("info", "Not possible with those rules", e.message);
+        throw e;
+      }
+      setPlans((ps) => [...(ps ?? []).filter((p) => p.plan_id !== result.plan_id), result]);
+      setPlanId(result.plan_id);
+      setSelected(null);
+      if (result.message) toast("info", "No better plan under those rules", result.message);
+      else toast("success", `New version: ${planName(result)}`, result.tradeoff?.summary ?? "");
     });
 
   function select(itemId: string) {
@@ -247,11 +355,11 @@ export default function PlanPage() {
           <h2>Ready to plan your week</h2>
           <p>
             {status.proposals.length
-              ? `${status.proposals.length} suggestions are waiting. You'll get up to three versions to compare: balanced, study first and career first.`
+              ? `${status.proposals.length} suggestions are waiting. You'll get a balanced plan, plus versions that lean towards study, career or social when your goals compete.`
               : "There are no suggestions yet. Load the demo student on the Start page first."}
           </p>
           <div style={{ maxWidth: 640, margin: "0 auto 18px", textAlign: "left" }}>
-            <PlanOptions start={start} setStart={setStart} days={days} setDays={setDays} modes={modes} setModes={setModes} />
+            <PlanOptions start={start} setStart={setStart} days={days} setDays={setDays} />
           </div>
           <button className="btn primary big" onClick={makePlan} disabled={!!busy || !status.proposals.length}>
             {busy === "run" ? <Loader2 size={18} className="spin" /> : <Sparkles size={18} />} Make my plan
@@ -267,7 +375,7 @@ export default function PlanPage() {
                   <p>Plans again from scratch with the current profile and suggestions. Use Re-plan instead to keep your decisions.</p>
                 </div>
               </div>
-              <PlanOptions start={start} setStart={setStart} days={days} setDays={setDays} modes={modes} setModes={setModes} />
+              <PlanOptions start={start} setStart={setStart} days={days} setDays={setDays} />
               <div className="row" style={{ marginTop: 14 }}>
                 <button className="btn primary" onClick={makePlan} disabled={!!busy}>
                   {busy === "run" ? <Loader2 size={16} className="spin" /> : <Sparkles size={16} />} Make new plan
@@ -280,11 +388,11 @@ export default function PlanPage() {
             </section>
           )}
 
-          {runs && (
+          {runs ? (
             <>
               <p className="muted" style={{ marginBottom: 10 }}>
-                <b style={{ color: "var(--text)" }}>Pick a version.</b> They differ only when time is short. Your first
-                accept or reject locks in the version you are looking at.
+                <b style={{ color: "var(--text)" }}>Pick a version.</b> No version is better on every goal: each one gains
+                somewhere and gives up somewhere else. Your first accept or reject locks in the one you are looking at.
               </p>
               <div className="alt-grid">
                 {plans!.map((p) => (
@@ -294,12 +402,28 @@ export default function PlanPage() {
                     onClick={() => setPlanId(p.plan_id)}
                   >
                     <div className="row">
-                      <b>{MODE_META[p.mode]?.label ?? p.mode}</b>
+                      <b>{planName(p)}</b>
                       <span className="grow" />
                       <span className={`pill ${p.status}`}>{p.status}</span>
                     </div>
                     <span className="small muted">{MODE_META[p.mode]?.blurb}</span>
-                    <GoalMeters loss={p.scores.loss} compact />
+                    <GoalMeters scores={p.scores} deltas={p.tradeoff?.deltas} compact />
+                    {p.tradeoff ? (
+                      <span className="tradeoff">
+                        {p.tradeoff.gained.length > 0 && (
+                          <>
+                            <b>Adds</b> {p.tradeoff.gained.join(", ")}.{" "}
+                          </>
+                        )}
+                        {p.tradeoff.given_up.length > 0 && (
+                          <>
+                            <b>Gives up</b> {p.tradeoff.given_up.join(", ")}.
+                          </>
+                        )}
+                      </span>
+                    ) : (
+                      <span className="tradeoff">The starting point the others are compared with.</span>
+                    )}
                     <span className="small faint">
                       {p.items.length} planned · {p.dropped.length} didn&apos;t fit
                     </span>
@@ -307,6 +431,23 @@ export default function PlanPage() {
                 ))}
               </div>
             </>
+          ) : (
+            GOALS.every((g) => (plan.scores.ideal[g] ?? 0) - (plan.scores.achieved[g] ?? 0) < 0.005) && (
+              <div className="notice calm">
+                <Scale size={18} style={{ flex: "none", marginTop: 1, color: "var(--ok)" }} />
+                <span>
+                  <b>No trade-offs needed.</b> Every goal is at the best it can reach with these suggestions, so there is
+                  only one version.
+                </span>
+              </div>
+            )
+          )}
+
+          {plan.message && (
+            <div className="notice">
+              <Scale size={18} style={{ flex: "none", marginTop: 1, color: "var(--warn)" }} />
+              <span>{plan.message}</span>
+            </div>
           )}
 
           {plan.changes && (
@@ -414,14 +555,17 @@ export default function PlanPage() {
                   <div className="card-head">
                     <div className="grow">
                       <h2>Goal balance</h2>
-                      <p>How much of each goal&apos;s suggested value made it into the plan.</p>
+                      <p>
+                        How much of each goal&apos;s suggested value is in this plan. The dark mark is the best that goal
+                        could reach on its own.
+                      </p>
                     </div>
                   </div>
-                  <GoalMeters loss={plan.scores.loss} />
+                  <GoalMeters scores={plan.scores} />
                   <p className="small faint" style={{ marginTop: 12 }}>
-                    {MODE_META[plan.mode]?.label ?? plan.mode} version · solved {plan.solver_status.toLowerCase()} in{" "}
-                    {plan.solve_seconds}s
+                    {planName(plan)} · solved {plan.solver_status.toLowerCase()} in {plan.solve_seconds}s
                   </p>
+                  <SteerPanel plan={plan} disabled={readOnly} busy={busy === "steer"} onSteer={steer} />
                 </section>
 
                 <section className="card">

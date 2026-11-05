@@ -4,7 +4,6 @@ export type Goal = "study" | "career" | "social";
 export const GOALS: Goal[] = ["study", "career", "social"];
 
 export type SourceAgent = "event" | "tutor" | "career" | "user";
-export type Priority = "low" | "medium" | "high";
 export type ActivityType = "event" | "learning" | "course_work" | "application" | "quiz" | "social" | "other";
 
 export interface ActivityProposal {
@@ -20,7 +19,6 @@ export interface ActivityProposal {
   window?: { earliest: string; deadline: string } | null;
   split?: { min_session_min: number; max_session_min: number };
   value: Partial<Record<Goal, number>>;
-  priority?: Priority;
   hard?: boolean;
   depends_on?: string[];
   location?: string | null;
@@ -35,14 +33,12 @@ export interface BusyBlock {
 
 export interface PlannerProfile {
   user_id: string;
-  weights: Record<Goal, number>;
   day_start: string;
   day_end: string;
   evening_after: string;
   daily_cap_min: number;
   free_weekdays: number[];
   busy_blocks: BusyBlock[];
-  fairness_weight: number;
   conflict_weight: number;
 }
 
@@ -93,6 +89,9 @@ export interface Plan {
   items: PlanItem[];
   dropped: DroppedItem[];
   scores: {
+    achieved: Partial<Record<Goal, number>>; // share of each goal's proposed value in the plan (0-1)
+    ideal: Partial<Record<Goal, number>>; // best reachable for that goal alone
+    nadir: Partial<Record<Goal, number>>; // worst among the single-goal best plans
     loss: Record<Goal, number>;
     fairness_gap: number;
     soft_conflicts: number;
@@ -101,8 +100,27 @@ export interface Plan {
   solver_status: string;
   solve_seconds: number;
   changes?: PlanChanges | null;
+  label?: string;
+  tradeoff?: TradeOff | null;
+  preference?: Preference | null;
+  message?: string | null;
+}
+
+export interface TradeOff {
+  compared_to: string;
+  deltas: Partial<Record<Goal, number>>;
+  gained: string[];
+  given_up: string[];
+  summary: string;
+}
+
+// NIMBUS: what the student wants for each goal of the plan they are looking at
+export type GoalClass = "improve" | "keep" | "worsen";
+export interface Preference {
+  classes: Partial<Record<Goal, GoalClass>>;
+  limits?: Partial<Record<Goal, number>>;
 }
 
 export type ProposalStatus = "active" | "rejected" | "withdrawn";
 
-export const MODES = ["balanced", "study_first", "career_first"] as const;
+export const MODES = ["balanced", "lean_study", "lean_career", "lean_social"] as const;

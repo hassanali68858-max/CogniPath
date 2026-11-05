@@ -814,14 +814,14 @@ input[type="range"] {
 
 .goal-meter {
   display: grid;
-  grid-template-columns: 84px 1fr 40px;
+  grid-template-columns: 84px 1fr 64px;
   align-items: center;
   gap: 10px;
   font-size: 13px;
 }
 
 .goal-meters.compact .goal-meter {
-  grid-template-columns: 70px 1fr 34px;
+  grid-template-columns: 70px 1fr 58px;
   font-size: 12px;
   gap: 6px;
 }
@@ -840,12 +840,34 @@ input[type="range"] {
 }
 
 .meter {
+  position: relative;
   height: 8px;
   border-radius: 99px;
   background: var(--surface-2);
   border: 1px solid var(--border);
   overflow: hidden;
 }
+
+/* best this goal could reach on its own */
+.meter-best {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--text);
+  opacity: 0.55;
+}
+
+.goal-pct em {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 650;
+  margin-left: 4px;
+}
+
+.goal-pct em.up { color: var(--ok); }
+.goal-pct em.down { color: var(--bad); }
 
 .meter-fill {
   height: 100%;
@@ -1380,6 +1402,61 @@ a.journey-card:hover {
 
 .alt-card.off {
   opacity: 0.55;
+}
+
+.alt-card .tradeoff {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+
+.alt-card .tradeoff b { color: var(--text); font-weight: 600; }
+
+/* ============ steer (NIMBUS) ============ */
+.steer-row {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+}
+
+.steer-row:first-of-type { border-top: none; }
+
+.steer-row .segmented { width: 100%; }
+.steer-row .segmented button { flex: 1; padding: 6px 6px; font-size: 12px; }
+
+.steer-row .segmented button.on.improve { background: var(--ok-soft); color: var(--ok); }
+.steer-row .segmented button.on.worsen { background: var(--warn-soft); color: var(--warn); }
+
+.steer-limit {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.steer-limit input { flex: 1; }
+
+.notice {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: var(--warn-soft);
+  border: 1px solid color-mix(in srgb, var(--warn) 30%, transparent);
+  color: var(--text);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.notice.calm {
+  background: var(--ok-soft);
+  border-color: color-mix(in srgb, var(--ok) 30%, transparent);
 }
 
 .changes {

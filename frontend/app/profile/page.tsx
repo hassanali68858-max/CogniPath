@@ -8,7 +8,7 @@ import { errorText, useToast } from "@/components/Toast";
 import { useUser } from "@/components/UserProvider";
 import { api } from "@/lib/api";
 import { datePart, dayLabel, minutesLabel, timePart, weekday } from "@/lib/format";
-import { GOAL_META, WEIGHT_WORDS } from "@/lib/meta";
+import { GOAL_META } from "@/lib/meta";
 import { type BusyBlock, GOALS, type PlannerProfile } from "@/lib/types";
 
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -18,20 +18,20 @@ const toMin = (t: string) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3, 5));
 function defaults(userId: string): PlannerProfile {
   return {
     user_id: userId,
-    weights: { study: 1, career: 1, social: 1 },
     day_start: "09:00",
     day_end: "22:00",
     evening_after: "20:00",
     daily_cap_min: 180,
     free_weekdays: [],
     busy_blocks: [],
-    fairness_weight: 1,
     conflict_weight: 0.2,
   };
 }
 
 function normalise(p: PlannerProfile): PlannerProfile {
-  return { ...p, day_start: hhmm(p.day_start), day_end: hhmm(p.day_end), evening_after: hhmm(p.evening_after) };
+  // older saved profiles may still carry weights / fairness_weight; the backend ignores them, so drop them here too
+  const { weights: _w, fairness_weight: _f, ...rest } = p as PlannerProfile & { weights?: unknown; fairness_weight?: unknown };
+  return { ...rest, day_start: hhmm(p.day_start), day_end: hhmm(p.day_end), evening_after: hhmm(p.evening_after) };
 }
 
 export default function ProfilePage() {
@@ -69,7 +69,6 @@ export default function ProfilePage() {
     () => [...profile.busy_blocks].sort((a, b) => a.start.localeCompare(b.start)),
     [profile.busy_blocks],
   );
-  const weightTotal = GOALS.reduce((s, g) => s + profile.weights[g], 0) || 1;
 
   function addBlock() {
     if (!block.title || !block.start || !block.end) {
@@ -109,8 +108,8 @@ export default function ProfilePage() {
           <span className="eyebrow">Step 1</span>
           <h1>About you</h1>
           <p>
-            The planner only uses your free time. Set when your day runs, how much planned work is realistic, and which
-            goals matter most. {exists ? "" : "Nothing is saved yet for this student."}
+            The planner only uses your free time. Set when your day runs, how much planned work is realistic, and what
+            is already fixed. {exists ? "" : "Nothing is saved yet for this student."}
           </p>
         </div>
       </div>
@@ -191,53 +190,32 @@ export default function ProfilePage() {
         <section className="card">
           <div className="card-head">
             <div className="grow">
-              <h2>What matters to you</h2>
-              <p>When there isn&apos;t time for everything, these decide what stays.</p>
+              <h2>How your goals are balanced</h2>
+              <p>No sliders and no priorities. The planner never ranks one goal or agent above another.</p>
             </div>
           </div>
           {GOALS.map((g) => {
             const Icon = GOAL_META[g].icon;
             return (
-              <div className="weight-row" key={g}>
+              <div className="weight-row" key={g} style={{ gridTemplateColumns: "36px 1fr" }}>
                 <span className={`agent-avatar ${g === "study" ? "tutor" : g === "career" ? "career" : "event"}`} style={{ width: 36, height: 36 }}>
                   <Icon size={18} />
                 </span>
                 <div>
                   <b>{GOAL_META[g].label}</b> <span className="small faint">{GOAL_META[g].question}</span>
-                  <input
-                    type="range"
-                    min={0}
-                    max={3}
-                    step={0.5}
-                    value={profile.weights[g]}
-                    onChange={(e) => set("weights", { ...profile.weights, [g]: Number(e.target.value) })}
-                  />
                 </div>
-                <span className="weight-word">
-                  {WEIGHT_WORDS(profile.weights[g])}
-                  <span className="small faint" style={{ display: "block", fontWeight: 500 }}>
-                    {Math.round((profile.weights[g] / weightTotal) * 100)}% of the weight
-                  </span>
-                </span>
               </div>
             );
           })}
-          <div className="weight-row">
+          <div className="weight-row" style={{ gridTemplateColumns: "36px 1fr" }}>
             <span className="agent-avatar user" style={{ width: 36, height: 36 }}>
               <Scale size={18} />
             </span>
-            <div>
-              <b>Fairness</b> <span className="small faint">Don&apos;t let one goal fall far behind</span>
-              <input
-                type="range"
-                min={0}
-                max={3}
-                step={0.5}
-                value={profile.fairness_weight}
-                onChange={(e) => set("fairness_weight", Number(e.target.value))}
-              />
-            </div>
-            <span className="weight-word">{profile.fairness_weight === 0 ? "Off" : WEIGHT_WORDS(profile.fairness_weight)}</span>
+            <p className="small muted" style={{ margin: 0 }}>
+              Each suggestion scores 0–1 for study, career and social. When time is short you get a balanced plan
+              plus versions that lean towards one goal, and you can steer any of them on the plan page:{" "}
+              <b>improve</b> this, <b>keep</b> that, this one <b>can give</b>.
+            </p>
           </div>
         </section>
       </div>

@@ -173,7 +173,8 @@ export default function StartPage() {
           </div>
           <p className="small muted" style={{ marginTop: 14 }}>
             Hard rules: nothing overlaps, deadlines are met, your daily limit is respected, must-do items always stay.
-            A fairness rule stops one goal from being sacrificed for the others.
+            Within those rules the three goals are never added into one score: you get Pareto-optimal versions to
+            choose from (none is better on every goal), and you steer the trade-off yourself.
           </p>
         </section>
 
