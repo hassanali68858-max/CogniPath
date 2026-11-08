@@ -1,2 +1,14 @@
+fastapi
+uvicorn
+streamlit
+pydantic
+requests
+certifi
+langgraph
+anthropic
+python-dotenv
+sqlalchemy
+psycopg[binary]
+pypdf
+python-docx
 rdflib
-PyMuPDF
