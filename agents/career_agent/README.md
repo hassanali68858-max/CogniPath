@@ -25,7 +25,7 @@ pip install -r requirements.txt
 copy .env.example .env    # then fill in your own values
 ```
 
-Never commit `.env`.
+
 
 ## Run
 
