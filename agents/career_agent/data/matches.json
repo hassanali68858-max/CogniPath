@@ -1,29 +1,3911 @@
 [
   {
-    "title": "Master Thesis: LLM Agents",
-    "score": 0.33,
+    "title": "SC Cleared Python/Django Engineers - Outside iR35 (freelance)",
+    "score": 0.0,
+    "required": [
+      "Automation",
+      "DatabaseManagement",
+      "Django",
+      "Python",
+      "RESTAPI",
+      "Security",
+      "VersionControlSystemsEgGit",
+      "WebDevelopment"
+    ],
     "missing": [
       {
-        "skill": "RDF",
+        "skill": "VersionControlSystemsEgGit",
         "resource": null
       },
       {
-        "skill": "LangGraph",
+        "skill": "WebDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "Django",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "RESTAPI",
+        "resource": null
+      },
+      {
+        "skill": "Security",
+        "resource": null
+      },
+      {
+        "skill": "Automation",
+        "resource": null
+      },
+      {
+        "skill": "DatabaseManagement",
         "resource": null
       }
     ]
   },
   {
-    "title": "AI Developer Intern",
-    "score": 0.33,
+    "title": "Data Engineer, Snowflake & Data Platforms",
+    "score": 0.0,
+    "required": [
+      "BigDataProcessing",
+      "CloudTechnologies",
+      "DataTransformation",
+      "DataWarehousing",
+      "ETL",
+      "Python",
+      "SQL",
+      "Snowflake"
+    ],
+    "missing": [
+      {
+        "skill": "SQL",
+        "resource": null
+      },
+      {
+        "skill": "ETL",
+        "resource": null
+      },
+      {
+        "skill": "DataTransformation",
+        "resource": null
+      },
+      {
+        "skill": "BigDataProcessing",
+        "resource": null
+      },
+      {
+        "skill": "CloudTechnologies",
+        "resource": null
+      },
+      {
+        "skill": "DataWarehousing",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "Snowflake",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Trainee, Test Systems & Data",
+    "score": 0.0,
+    "required": [
+      "APITesting",
+      "AutomationScripting",
+      "DataAnalysis",
+      "Python",
+      "SQL",
+      "TestAutomation",
+      "TestingFrameworks",
+      "VersionControl"
+    ],
+    "missing": [
+      {
+        "skill": "VersionControl",
+        "resource": null
+      },
+      {
+        "skill": "SQL",
+        "resource": null
+      },
+      {
+        "skill": "AutomationScripting",
+        "resource": null
+      },
+      {
+        "skill": "TestingFrameworks",
+        "resource": null
+      },
+      {
+        "skill": "APITesting",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "TestAutomation",
+        "resource": null
+      },
+      {
+        "skill": "DataAnalysis",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Site Execution Coordinator",
+    "score": 0.75,
+    "required": [
+      "Budgeting",
+      "Communication",
+      "ConstructionKnowledge",
+      "MSProject",
+      "ProjectManagement",
+      "QualityControl",
+      "RiskManagement",
+      "Scheduling"
+    ],
+    "missing": [
+      {
+        "skill": "QualityControl",
+        "resource": null
+      },
+      {
+        "skill": "ConstructionKnowledge",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "R&D Engineer (Robotics & Automation)",
+    "score": 0.0,
+    "required": [
+      "Arduino",
+      "AutomationSoftware",
+      "C",
+      "ComputerVision",
+      "EmbeddedSystems",
+      "MachineLearning",
+      "Python",
+      "RoboticsFramework"
+    ],
     "missing": [
       {
         "skill": "MachineLearning",
         "resource": null
       },
       {
+        "skill": "Arduino",
+        "resource": null
+      },
+      {
+        "skill": "RoboticsFramework",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "ComputerVision",
+        "resource": null
+      },
+      {
+        "skill": "C",
+        "resource": null
+      },
+      {
+        "skill": "AutomationSoftware",
+        "resource": null
+      },
+      {
+        "skill": "EmbeddedSystems",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Harjoittelu kuljettajana: L\u00e4nsi-Suomi",
+    "score": 0.0,
+    "required": [
+      "CustomerService",
+      "DrivingLicense",
+      "ForkliftOperation",
+      "ForkliftSafety",
+      "GPSNavigation",
+      "LogisticsKnowledge",
+      "TimeManagement",
+      "TrafficAwareness"
+    ],
+    "missing": [
+      {
+        "skill": "CustomerService",
+        "resource": null
+      },
+      {
+        "skill": "ForkliftOperation",
+        "resource": null
+      },
+      {
+        "skill": "TrafficAwareness",
+        "resource": null
+      },
+      {
+        "skill": "LogisticsKnowledge",
+        "resource": null
+      },
+      {
+        "skill": "DrivingLicense",
+        "resource": null
+      },
+      {
+        "skill": "TimeManagement",
+        "resource": null
+      },
+      {
+        "skill": "ForkliftSafety",
+        "resource": null
+      },
+      {
+        "skill": "GPSNavigation",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Critical Facilities Engineer IV \u2013 Electrical",
+    "score": 0.0,
+    "required": [
+      "BuildingAutomationSystems",
+      "ElectricalCodeCompliance",
+      "ElectricalDesign",
+      "EmergencyPowerSystems",
+      "HVACControls",
+      "MaintenanceAndRepair",
+      "PowerSystemAnalysis",
+      "UPSAndPowerDistribution"
+    ],
+    "missing": [
+      {
+        "skill": "ElectricalDesign",
+        "resource": null
+      },
+      {
+        "skill": "MaintenanceAndRepair",
+        "resource": null
+      },
+      {
+        "skill": "PowerSystemAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "ElectricalCodeCompliance",
+        "resource": null
+      },
+      {
+        "skill": "EmergencyPowerSystems",
+        "resource": null
+      },
+      {
+        "skill": "BuildingAutomationSystems",
+        "resource": null
+      },
+      {
+        "skill": "UPSAndPowerDistribution",
+        "resource": null
+      },
+      {
+        "skill": "HVACControls",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "L\u00e4nsi-Uudenmaan hyvinvointialue",
+    "score": 0.0,
+    "required": [
+      "AWS",
+      "C",
+      "DataAnalysis",
+      "GIS",
+      "Java",
+      "JavaScript",
+      "MachineLearning",
+      "Nodejs",
+      "Programming",
+      "Python",
+      "React",
+      "SQL",
+      "StatisticalAnalysis",
+      "WebDevelopment"
+    ],
+    "missing": [
+      {
+        "skill": "Programming",
+        "resource": null
+      },
+      {
+        "skill": "SQL",
+        "resource": null
+      },
+      {
+        "skill": "MachineLearning",
+        "resource": null
+      },
+      {
+        "skill": "WebDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "JavaScript",
+        "resource": null
+      },
+      {
+        "skill": "DataAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "AWS",
+        "resource": null
+      },
+      {
+        "skill": "React",
+        "resource": null
+      },
+      {
+        "skill": "C",
+        "resource": null
+      },
+      {
+        "skill": "StatisticalAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "GIS",
+        "resource": null
+      },
+      {
+        "skill": "Nodejs",
+        "resource": null
+      },
+      {
+        "skill": "Java",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "AI Developer Intern",
+    "score": 0.0,
+    "required": [
+      "Docker",
+      "MachineLearning",
+      "Python"
+    ],
+    "missing": [
+      {
         "skill": "Docker",
         "resource": "https://docs.docker.com/get-started/"
+      },
+      {
+        "skill": "MachineLearning",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "AI Integration Engineer",
+    "score": 0.0,
+    "required": [
+      "APIDevelopment",
+      "AlgorithmDesign",
+      "CloudComputing",
+      "DataStructures",
+      "DeepLearning",
+      "MachineLearning",
+      "Python",
+      "SQL"
+    ],
+    "missing": [
+      {
+        "skill": "DataStructures",
+        "resource": null
+      },
+      {
+        "skill": "SQL",
+        "resource": null
+      },
+      {
+        "skill": "MachineLearning",
+        "resource": null
+      },
+      {
+        "skill": "DeepLearning",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "CloudComputing",
+        "resource": null
+      },
+      {
+        "skill": "APIDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "AlgorithmDesign",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Field Service Engineer - DCS",
+    "score": 0.12,
+    "required": [
+      "ControlSystems",
+      "FieldbusProtocols",
+      "IndustrialNetworking",
+      "MaintenanceScheduling",
+      "PLCProgramming",
+      "SCADASystems",
+      "TechnicalSupport",
+      "Troubleshooting"
+    ],
+    "missing": [
+      {
+        "skill": "SCADASystems",
+        "resource": null
+      },
+      {
+        "skill": "ControlSystems",
+        "resource": null
+      },
+      {
+        "skill": "IndustrialNetworking",
+        "resource": null
+      },
+      {
+        "skill": "PLCProgramming",
+        "resource": null
+      },
+      {
+        "skill": "TechnicalSupport",
+        "resource": null
+      },
+      {
+        "skill": "Troubleshooting",
+        "resource": null
+      },
+      {
+        "skill": "FieldbusProtocols",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Senior Data Platform Engineer",
+    "score": 0.0,
+    "required": [
+      "ApacheSpark",
+      "BigDataProcessing",
+      "CloudInfrastructure",
+      "ETLTools",
+      "Hadoop",
+      "NoSQLDatabases",
+      "Python",
+      "SQL"
+    ],
+    "missing": [
+      {
+        "skill": "SQL",
+        "resource": null
+      },
+      {
+        "skill": "BigDataProcessing",
+        "resource": null
+      },
+      {
+        "skill": "ApacheSpark",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "ETLTools",
+        "resource": null
+      },
+      {
+        "skill": "NoSQLDatabases",
+        "resource": null
+      },
+      {
+        "skill": "Hadoop",
+        "resource": null
+      },
+      {
+        "skill": "CloudInfrastructure",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Administrative Coordinator",
+    "score": 0.24,
+    "required": [
+      "Accounting",
+      "AttentionToDetail",
+      "AuditPreparation",
+      "BudgetTracking",
+      "Communication",
+      "DocumentManagement",
+      "English",
+      "EventAndTravelOrganization",
+      "Excel",
+      "ExpenseProcessing",
+      "FinanceBasics",
+      "FinancialCompliance",
+      "InvoiceProcessing",
+      "Japanese",
+      "LegalBasics",
+      "NEDOAdministration",
+      "Organization",
+      "PowerPoint",
+      "ProcessBuilding",
+      "ProcurementAdministration",
+      "Reporting",
+      "StakeholderCoordination",
+      "Translation",
+      "VendorManagement",
+      "Word"
+    ],
+    "missing": [
+      {
+        "skill": "StakeholderCoordination",
+        "resource": null
+      },
+      {
+        "skill": "NEDOAdministration",
+        "resource": null
+      },
+      {
+        "skill": "FinancialCompliance",
+        "resource": null
+      },
+      {
+        "skill": "Translation",
+        "resource": null
+      },
+      {
+        "skill": "LegalBasics",
+        "resource": null
+      },
+      {
+        "skill": "English",
+        "resource": null
+      },
+      {
+        "skill": "VendorManagement",
+        "resource": null
+      },
+      {
+        "skill": "FinanceBasics",
+        "resource": null
+      },
+      {
+        "skill": "InvoiceProcessing",
+        "resource": null
+      },
+      {
+        "skill": "ProcessBuilding",
+        "resource": null
+      },
+      {
+        "skill": "Word",
+        "resource": null
+      },
+      {
+        "skill": "EventAndTravelOrganization",
+        "resource": null
+      },
+      {
+        "skill": "Organization",
+        "resource": null
+      },
+      {
+        "skill": "Accounting",
+        "resource": null
+      },
+      {
+        "skill": "AttentionToDetail",
+        "resource": null
+      },
+      {
+        "skill": "ExpenseProcessing",
+        "resource": null
+      },
+      {
+        "skill": "AuditPreparation",
+        "resource": null
+      },
+      {
+        "skill": "Japanese",
+        "resource": null
+      },
+      {
+        "skill": "PowerPoint",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Advanced Full Stack Software Engineer",
+    "score": 0.05,
+    "required": [
+      "ArgoWorkflows",
+      "AsynchronousWorkflowSystems",
+      "BackendDevelopment",
+      "CICD",
+      "CodeReview",
+      "Communication",
+      "Debugging",
+      "Docker",
+      "FrontendDevelopment",
+      "JavaScript",
+      "Nodejs",
+      "OpenTelemetry",
+      "PostgreSQL",
+      "QuantumComputing",
+      "RESTAPIs",
+      "Redis",
+      "TypeScript",
+      "UXDesign",
+      "Vuejs",
+      "WorkingIndependently"
+    ],
+    "missing": [
+      {
+        "skill": "QuantumComputing",
+        "resource": null
+      },
+      {
+        "skill": "CodeReview",
+        "resource": null
+      },
+      {
+        "skill": "Debugging",
+        "resource": null
+      },
+      {
+        "skill": "AsynchronousWorkflowSystems",
+        "resource": null
+      },
+      {
+        "skill": "Redis",
+        "resource": null
+      },
+      {
+        "skill": "WorkingIndependently",
+        "resource": null
+      },
+      {
+        "skill": "BackendDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "ArgoWorkflows",
+        "resource": null
+      },
+      {
+        "skill": "Docker",
+        "resource": "https://docs.docker.com/get-started/"
+      },
+      {
+        "skill": "RESTAPIs",
+        "resource": null
+      },
+      {
+        "skill": "JavaScript",
+        "resource": null
+      },
+      {
+        "skill": "FrontendDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "TypeScript",
+        "resource": null
+      },
+      {
+        "skill": "CICD",
+        "resource": null
+      },
+      {
+        "skill": "Nodejs",
+        "resource": null
+      },
+      {
+        "skill": "PostgreSQL",
+        "resource": null
+      },
+      {
+        "skill": "UXDesign",
+        "resource": null
+      },
+      {
+        "skill": "OpenTelemetry",
+        "resource": null
+      },
+      {
+        "skill": "Vuejs",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Business Development Manager",
+    "score": 0.05,
+    "required": [
+      "AccountManagement",
+      "BusinessDevelopment",
+      "CDCS",
+      "Communication",
+      "ComplexDealClosing",
+      "CustomerRelationshipManagement",
+      "DataCenterIndustryKnowledge",
+      "FluentEnglish",
+      "FluentGerman",
+      "HighPerformanceComputing",
+      "ITIL",
+      "MarketInsights",
+      "PipelineManagement",
+      "PresentingAtConferences",
+      "PublicFunding",
+      "PublicTenders",
+      "QuantumComputingKnowledge",
+      "Sales",
+      "StakeholderManagement",
+      "TrustBuilding",
+      "WillingnessToTravel"
+    ],
+    "missing": [
+      {
+        "skill": "MarketInsights",
+        "resource": null
+      },
+      {
+        "skill": "CDCS",
+        "resource": null
+      },
+      {
+        "skill": "CustomerRelationshipManagement",
+        "resource": null
+      },
+      {
+        "skill": "AccountManagement",
+        "resource": null
+      },
+      {
+        "skill": "BusinessDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "StakeholderManagement",
+        "resource": null
+      },
+      {
+        "skill": "ITIL",
+        "resource": null
+      },
+      {
+        "skill": "QuantumComputingKnowledge",
+        "resource": null
+      },
+      {
+        "skill": "PipelineManagement",
+        "resource": null
+      },
+      {
+        "skill": "WillingnessToTravel",
+        "resource": null
+      },
+      {
+        "skill": "Sales",
+        "resource": null
+      },
+      {
+        "skill": "FluentGerman",
+        "resource": null
+      },
+      {
+        "skill": "FluentEnglish",
+        "resource": null
+      },
+      {
+        "skill": "PublicTenders",
+        "resource": null
+      },
+      {
+        "skill": "HighPerformanceComputing",
+        "resource": null
+      },
+      {
+        "skill": "PresentingAtConferences",
+        "resource": null
+      },
+      {
+        "skill": "DataCenterIndustryKnowledge",
+        "resource": null
+      },
+      {
+        "skill": "TrustBuilding",
+        "resource": null
+      },
+      {
+        "skill": "ComplexDealClosing",
+        "resource": null
+      },
+      {
+        "skill": "PublicFunding",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Cleanroom Coordinator",
+    "score": 0.21,
+    "required": [
+      "AttentionToDetail",
+      "CleanroomExperience",
+      "Documentation",
+      "English",
+      "EquipmentInstallation",
+      "InventoryManagement",
+      "MESIntegration",
+      "MeetingCoordination",
+      "Organization",
+      "Planning",
+      "PreventiveMaintenancePlanning",
+      "ProgressTracking",
+      "ProjectCoordination",
+      "Reporting",
+      "Scheduling",
+      "SemiconductorManufacturing",
+      "SparePartsManagement",
+      "StakeholderCommunication",
+      "SubcontractorCoordination",
+      "UtilityHookups",
+      "VendorManagement",
+      "VerbalCommunication",
+      "WorkingUnderPressure",
+      "WrittenCommunication"
+    ],
+    "missing": [
+      {
+        "skill": "SubcontractorCoordination",
+        "resource": null
+      },
+      {
+        "skill": "SparePartsManagement",
+        "resource": null
+      },
+      {
+        "skill": "InventoryManagement",
+        "resource": null
+      },
+      {
+        "skill": "VerbalCommunication",
+        "resource": null
+      },
+      {
+        "skill": "Organization",
+        "resource": null
+      },
+      {
+        "skill": "EquipmentInstallation",
+        "resource": null
+      },
+      {
+        "skill": "ProjectCoordination",
+        "resource": null
+      },
+      {
+        "skill": "PreventiveMaintenancePlanning",
+        "resource": null
+      },
+      {
+        "skill": "English",
+        "resource": null
+      },
+      {
+        "skill": "VendorManagement",
+        "resource": null
+      },
+      {
+        "skill": "WorkingUnderPressure",
+        "resource": null
+      },
+      {
+        "skill": "AttentionToDetail",
+        "resource": null
+      },
+      {
+        "skill": "Planning",
+        "resource": null
+      },
+      {
+        "skill": "CleanroomExperience",
+        "resource": null
+      },
+      {
+        "skill": "ProgressTracking",
+        "resource": null
+      },
+      {
+        "skill": "MESIntegration",
+        "resource": null
+      },
+      {
+        "skill": "SemiconductorManufacturing",
+        "resource": null
+      },
+      {
+        "skill": "WrittenCommunication",
+        "resource": null
+      },
+      {
+        "skill": "UtilityHookups",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Communications Manager",
+    "score": 0.06,
+    "required": [
+      "AttentionToDetail",
+      "B2BTechnologyCommunications",
+      "CommunicationsCalendarManagement",
+      "CorporateCommunications",
+      "CoverageReporting",
+      "ExecutiveMediaCoaching",
+      "ExplainingTechnicalConcepts",
+      "IndependentWorking",
+      "JournalistRelationshipBuilding",
+      "MediaMonitoring",
+      "MediaRelations",
+      "PRAgencyManagement",
+      "PressReleaseWriting",
+      "PublicRelations",
+      "SocialMediaAmplification",
+      "StakeholderCoordination",
+      "StoryPitching",
+      "WritingAndEditing"
+    ],
+    "missing": [
+      {
+        "skill": "CorporateCommunications",
+        "resource": null
+      },
+      {
+        "skill": "StakeholderCoordination",
+        "resource": null
+      },
+      {
+        "skill": "MediaMonitoring",
+        "resource": null
+      },
+      {
+        "skill": "ExplainingTechnicalConcepts",
+        "resource": null
+      },
+      {
+        "skill": "JournalistRelationshipBuilding",
+        "resource": null
+      },
+      {
+        "skill": "B2BTechnologyCommunications",
+        "resource": null
+      },
+      {
+        "skill": "ExecutiveMediaCoaching",
+        "resource": null
+      },
+      {
+        "skill": "IndependentWorking",
+        "resource": null
+      },
+      {
+        "skill": "MediaRelations",
+        "resource": null
+      },
+      {
+        "skill": "PRAgencyManagement",
+        "resource": null
+      },
+      {
+        "skill": "AttentionToDetail",
+        "resource": null
+      },
+      {
+        "skill": "SocialMediaAmplification",
+        "resource": null
+      },
+      {
+        "skill": "PressReleaseWriting",
+        "resource": null
+      },
+      {
+        "skill": "PublicRelations",
+        "resource": null
+      },
+      {
+        "skill": "StoryPitching",
+        "resource": null
+      },
+      {
+        "skill": "WritingAndEditing",
+        "resource": null
+      },
+      {
+        "skill": "CommunicationsCalendarManagement",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Design Engineer, Microelectronics Packaging",
+    "score": 0.05,
+    "required": [
+      "3DIntegration",
+      "BumpBonding",
+      "CeramicGlassAndSiliconProcesses",
+      "CrossteamCoordination",
+      "CryogenicMeasurement",
+      "DCCharacterization",
+      "DiePackaging",
+      "ElectricalEngineering",
+      "English",
+      "ExperimentalPhysics",
+      "Japanese",
+      "MicrowaveCharacterization",
+      "PCB",
+      "PackageDesignCAD",
+      "PartnerCollaboration",
+      "RDLFanout",
+      "SuperconductingMaterials",
+      "SuperconductingQuantumHardware",
+      "TechnicalDocumentation",
+      "TestAndValidationPlanning",
+      "ThermalCharacterization"
+    ],
+    "missing": [
+      {
+        "skill": "BumpBonding",
+        "resource": null
+      },
+      {
+        "skill": "CryogenicMeasurement",
+        "resource": null
+      },
+      {
+        "skill": "ElectricalEngineering",
+        "resource": null
+      },
+      {
+        "skill": "ThermalCharacterization",
+        "resource": null
+      },
+      {
+        "skill": "PCB",
+        "resource": null
+      },
+      {
+        "skill": "PackageDesignCAD",
+        "resource": null
+      },
+      {
+        "skill": "PartnerCollaboration",
+        "resource": null
+      },
+      {
+        "skill": "DCCharacterization",
+        "resource": null
+      },
+      {
+        "skill": "3DIntegration",
+        "resource": null
+      },
+      {
+        "skill": "MicrowaveCharacterization",
+        "resource": null
+      },
+      {
+        "skill": "English",
+        "resource": null
+      },
+      {
+        "skill": "CeramicGlassAndSiliconProcesses",
+        "resource": null
+      },
+      {
+        "skill": "SuperconductingQuantumHardware",
+        "resource": null
+      },
+      {
+        "skill": "CrossteamCoordination",
+        "resource": null
+      },
+      {
+        "skill": "DiePackaging",
+        "resource": null
+      },
+      {
+        "skill": "SuperconductingMaterials",
+        "resource": null
+      },
+      {
+        "skill": "TestAndValidationPlanning",
+        "resource": null
+      },
+      {
+        "skill": "RDLFanout",
+        "resource": null
+      },
+      {
+        "skill": "Japanese",
+        "resource": null
+      },
+      {
+        "skill": "ExperimentalPhysics",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "FPGA Design Engineer",
+    "score": 0.04,
+    "required": [
+      "Benchmarking",
+      "ClockDomainCrossing",
+      "ContinuousIntegration",
+      "CrossdisciplinaryCollaboration",
+      "DigitalLogic",
+      "FPGADesign",
+      "FPGAIPBlockDesign",
+      "FPGAToolchains",
+      "HDL",
+      "HardwaresoftwareInterfaces",
+      "HighperformanceFPGAFamilies",
+      "HighspeedCommunicationProtocols",
+      "IntelAlteraFPGAs",
+      "Oscilloscope",
+      "PerformanceProfiling",
+      "Quartus",
+      "RealtimeSystemsOptimization",
+      "Scripting",
+      "Simulation",
+      "SpectrumAnalyzer",
+      "TechnicalDocumentation",
+      "VHDL",
+      "Verification"
+    ],
+    "missing": [
+      {
+        "skill": "SpectrumAnalyzer",
+        "resource": null
+      },
+      {
+        "skill": "PerformanceProfiling",
+        "resource": null
+      },
+      {
+        "skill": "FPGAIPBlockDesign",
+        "resource": null
+      },
+      {
+        "skill": "ClockDomainCrossing",
+        "resource": null
+      },
+      {
+        "skill": "HardwaresoftwareInterfaces",
+        "resource": null
+      },
+      {
+        "skill": "HighperformanceFPGAFamilies",
+        "resource": null
+      },
+      {
+        "skill": "HDL",
+        "resource": null
+      },
+      {
+        "skill": "ContinuousIntegration",
+        "resource": null
+      },
+      {
+        "skill": "IntelAlteraFPGAs",
+        "resource": null
+      },
+      {
+        "skill": "CrossdisciplinaryCollaboration",
+        "resource": null
+      },
+      {
+        "skill": "RealtimeSystemsOptimization",
+        "resource": null
+      },
+      {
+        "skill": "Benchmarking",
+        "resource": null
+      },
+      {
+        "skill": "Verification",
+        "resource": null
+      },
+      {
+        "skill": "Scripting",
+        "resource": null
+      },
+      {
+        "skill": "HighspeedCommunicationProtocols",
+        "resource": null
+      },
+      {
+        "skill": "Quartus",
+        "resource": null
+      },
+      {
+        "skill": "DigitalLogic",
+        "resource": null
+      },
+      {
+        "skill": "Simulation",
+        "resource": null
+      },
+      {
+        "skill": "FPGAToolchains",
+        "resource": null
+      },
+      {
+        "skill": "VHDL",
+        "resource": null
+      },
+      {
+        "skill": "Oscilloscope",
+        "resource": null
+      },
+      {
+        "skill": "FPGADesign",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Junior Quantum Engineer (PhD candidate)",
+    "score": 0.12,
+    "required": [
+      "Collaboration",
+      "Communication",
+      "DataAnalysis",
+      "Documentation",
+      "LaboratoryExperiments",
+      "ProblemSolving",
+      "Python",
+      "QuantumComputing",
+      "QuantumErrorCorrection",
+      "QuantumInformationProcessing",
+      "QuantumProcessingUnits",
+      "QubitCalibration",
+      "ScientificWriting",
+      "SoftwareTesting",
+      "SuperconductingQubits",
+      "VersionControl"
+    ],
+    "missing": [
+      {
+        "skill": "QubitCalibration",
+        "resource": null
+      },
+      {
+        "skill": "QuantumComputing",
+        "resource": null
+      },
+      {
+        "skill": "QuantumInformationProcessing",
+        "resource": null
+      },
+      {
+        "skill": "LaboratoryExperiments",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "DataAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "Collaboration",
+        "resource": null
+      },
+      {
+        "skill": "VersionControl",
+        "resource": null
+      },
+      {
+        "skill": "QuantumErrorCorrection",
+        "resource": null
+      },
+      {
+        "skill": "SoftwareTesting",
+        "resource": null
+      },
+      {
+        "skill": "ScientificWriting",
+        "resource": null
+      },
+      {
+        "skill": "ProblemSolving",
+        "resource": null
+      },
+      {
+        "skill": "QuantumProcessingUnits",
+        "resource": null
+      },
+      {
+        "skill": "SuperconductingQubits",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Program Manager",
+    "score": 0.19,
+    "required": [
+      "AIToolsForAutomation",
+      "AuditAndAssessorEvidencePreparation",
+      "CommercialAndBusinessDevelopment",
+      "CostControl",
+      "CostEstimationReview",
+      "CrossfunctionalCollaboration",
+      "Cryogenics",
+      "ExecutiveCommunication",
+      "FundingAndGrantManagement",
+      "HPCdataCentres",
+      "HardwareAndSoftwareProgramDelivery",
+      "IPAndFreedomtooperateStrategy",
+      "LicensingStrategy",
+      "MilestonebasedContractManagement",
+      "PMSoftware",
+      "ProcurementManagement",
+      "ProgramManagement",
+      "QuantumComputingSystemArchitecture",
+      "RiskManagement",
+      "RoadmapPlanning",
+      "ScheduleAndCriticalPathManagement",
+      "StakeholderManagement",
+      "SubcontractorManagement",
+      "SuperconductingSystems",
+      "TechnicalReportWriting",
+      "UKFundingSystemKnowledge"
+    ],
+    "missing": [
+      {
+        "skill": "SubcontractorManagement",
+        "resource": null
+      },
+      {
+        "skill": "Cryogenics",
+        "resource": null
+      },
+      {
+        "skill": "QuantumComputingSystemArchitecture",
+        "resource": null
+      },
+      {
+        "skill": "StakeholderManagement",
+        "resource": null
+      },
+      {
+        "skill": "CostControl",
+        "resource": null
+      },
+      {
+        "skill": "CostEstimationReview",
+        "resource": null
+      },
+      {
+        "skill": "HPCdataCentres",
+        "resource": null
+      },
+      {
+        "skill": "RoadmapPlanning",
+        "resource": null
+      },
+      {
+        "skill": "LicensingStrategy",
+        "resource": null
+      },
+      {
+        "skill": "HardwareAndSoftwareProgramDelivery",
+        "resource": null
+      },
+      {
+        "skill": "ExecutiveCommunication",
+        "resource": null
+      },
+      {
+        "skill": "AuditAndAssessorEvidencePreparation",
+        "resource": null
+      },
+      {
+        "skill": "AIToolsForAutomation",
+        "resource": null
+      },
+      {
+        "skill": "UKFundingSystemKnowledge",
+        "resource": null
+      },
+      {
+        "skill": "IPAndFreedomtooperateStrategy",
+        "resource": null
+      },
+      {
+        "skill": "CommercialAndBusinessDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "MilestonebasedContractManagement",
+        "resource": null
+      },
+      {
+        "skill": "CrossfunctionalCollaboration",
+        "resource": null
+      },
+      {
+        "skill": "ProgramManagement",
+        "resource": null
+      },
+      {
+        "skill": "SuperconductingSystems",
+        "resource": null
+      },
+      {
+        "skill": "FundingAndGrantManagement",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Project Manager",
+    "score": 0.37,
+    "required": [
+      "AgileScrum",
+      "BudgetManagement",
+      "ConflictMediation",
+      "Confluence",
+      "CrossfunctionalCoordination",
+      "Cryogenics",
+      "DependencyMapping",
+      "Documentation",
+      "English",
+      "FundingAgencyReporting",
+      "GermanC1",
+      "GermanPublicFundingProgrammes",
+      "GrantManagement",
+      "HorizonEurope",
+      "IPMA",
+      "Jira",
+      "PMP",
+      "PRINCE2",
+      "ProcessImprovement",
+      "ProjectManagement",
+      "ProjectScheduling",
+      "QuantumComputing",
+      "RDCoordination",
+      "ResearchAdministration",
+      "RiskManagement",
+      "Semiconductors",
+      "StakeholderCommunication",
+      "TeamMotivation",
+      "TechnicalCommunication",
+      "WorkBreakdownStructure"
+    ],
+    "missing": [
+      {
+        "skill": "QuantumComputing",
+        "resource": null
+      },
+      {
+        "skill": "TeamMotivation",
+        "resource": null
+      },
+      {
+        "skill": "GrantManagement",
+        "resource": null
+      },
+      {
+        "skill": "Semiconductors",
+        "resource": null
+      },
+      {
+        "skill": "Confluence",
+        "resource": null
+      },
+      {
+        "skill": "English",
+        "resource": null
+      },
+      {
+        "skill": "GermanPublicFundingProgrammes",
+        "resource": null
+      },
+      {
+        "skill": "DependencyMapping",
+        "resource": null
+      },
+      {
+        "skill": "GermanC1",
+        "resource": null
+      },
+      {
+        "skill": "RDCoordination",
+        "resource": null
+      },
+      {
+        "skill": "HorizonEurope",
+        "resource": null
+      },
+      {
+        "skill": "ProcessImprovement",
+        "resource": null
+      },
+      {
+        "skill": "TechnicalCommunication",
+        "resource": null
+      },
+      {
+        "skill": "ConflictMediation",
+        "resource": null
+      },
+      {
+        "skill": "WorkBreakdownStructure",
+        "resource": null
+      },
+      {
+        "skill": "PMP",
+        "resource": null
+      },
+      {
+        "skill": "CrossfunctionalCoordination",
+        "resource": null
+      },
+      {
+        "skill": "Cryogenics",
+        "resource": null
+      },
+      {
+        "skill": "ResearchAdministration",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Quantum Engineer, Calibration Automation",
+    "score": 0.04,
+    "required": [
+      "AITooling",
+      "BayesianOptimization",
+      "CodeReview",
+      "Communication",
+      "DataAnalysis",
+      "ExperimentalDesign",
+      "HighperformanceComputing",
+      "MachineLearning",
+      "ModelDeployment",
+      "Parallelization",
+      "Physics",
+      "Problemsolving",
+      "Python",
+      "QuantumEngineering",
+      "QuantumSystemCalibration",
+      "QubitReadout",
+      "ReinforcementLearning",
+      "SinglequbitGates",
+      "SoftwareEngineering",
+      "SoftwareTesting",
+      "StatisticalMethods",
+      "TimeseriesAnalysis",
+      "TwoqubitGates",
+      "VersionControl"
+    ],
+    "missing": [
+      {
+        "skill": "ExperimentalDesign",
+        "resource": null
+      },
+      {
+        "skill": "MachineLearning",
+        "resource": null
+      },
+      {
+        "skill": "BayesianOptimization",
+        "resource": null
+      },
+      {
+        "skill": "TwoqubitGates",
+        "resource": null
+      },
+      {
+        "skill": "CodeReview",
+        "resource": null
+      },
+      {
+        "skill": "Problemsolving",
+        "resource": null
+      },
+      {
+        "skill": "Parallelization",
+        "resource": null
+      },
+      {
+        "skill": "SinglequbitGates",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "DataAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "StatisticalMethods",
+        "resource": null
+      },
+      {
+        "skill": "QubitReadout",
+        "resource": null
+      },
+      {
+        "skill": "ReinforcementLearning",
+        "resource": null
+      },
+      {
+        "skill": "QuantumEngineering",
+        "resource": null
+      },
+      {
+        "skill": "QuantumSystemCalibration",
+        "resource": null
+      },
+      {
+        "skill": "VersionControl",
+        "resource": null
+      },
+      {
+        "skill": "Physics",
+        "resource": null
+      },
+      {
+        "skill": "SoftwareTesting",
+        "resource": null
+      },
+      {
+        "skill": "SoftwareEngineering",
+        "resource": null
+      },
+      {
+        "skill": "AITooling",
+        "resource": null
+      },
+      {
+        "skill": "TimeseriesAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "ModelDeployment",
+        "resource": null
+      },
+      {
+        "skill": "HighperformanceComputing",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Quantum Engineer, Calibration & Benchmarking",
+    "score": 0.07,
+    "required": [
+      "AnalyticalThinking",
+      "AttentionToDetail",
+      "Benchmarking",
+      "Communication",
+      "CrossfunctionalCollaboration",
+      "ExperimentalQuantumHardware",
+      "Mentoring",
+      "OptimizationAlgorithms",
+      "Problemsolving",
+      "Python",
+      "QPUCalibration",
+      "QuantumComputing",
+      "QuantumMechanics",
+      "ScientificDataAnalysis",
+      "SuperconductingQubits"
+    ],
+    "missing": [
+      {
+        "skill": "ExperimentalQuantumHardware",
+        "resource": null
+      },
+      {
+        "skill": "AttentionToDetail",
+        "resource": null
+      },
+      {
+        "skill": "AnalyticalThinking",
+        "resource": null
+      },
+      {
+        "skill": "QuantumComputing",
+        "resource": null
+      },
+      {
+        "skill": "QPUCalibration",
+        "resource": null
+      },
+      {
+        "skill": "Problemsolving",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "QuantumMechanics",
+        "resource": null
+      },
+      {
+        "skill": "OptimizationAlgorithms",
+        "resource": null
+      },
+      {
+        "skill": "CrossfunctionalCollaboration",
+        "resource": null
+      },
+      {
+        "skill": "Benchmarking",
+        "resource": null
+      },
+      {
+        "skill": "ScientificDataAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "Mentoring",
+        "resource": null
+      },
+      {
+        "skill": "SuperconductingQubits",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Quantum Engineer, Fabrication",
+    "score": 0.06,
+    "required": [
+      "CleanroomProcesses",
+      "CrossfunctionalCollaboration",
+      "DataAnalysis",
+      "ExperimentalDesign",
+      "MaterialsScience",
+      "Mentoring",
+      "Micronanofabrication",
+      "PatentsAndPublications",
+      "Physics",
+      "ProcessDevelopment",
+      "QuantumChipFabrication",
+      "RD",
+      "ScalingRDToManufacturing",
+      "SemiconductorFabrication",
+      "TechnicalCommunication",
+      "TechnicalDocumentation",
+      "TechnologyDevelopment",
+      "Troubleshooting"
+    ],
+    "missing": [
+      {
+        "skill": "ExperimentalDesign",
+        "resource": null
+      },
+      {
+        "skill": "RD",
+        "resource": null
+      },
+      {
+        "skill": "TechnologyDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "ProcessDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "TechnicalCommunication",
+        "resource": null
+      },
+      {
+        "skill": "DataAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "ScalingRDToManufacturing",
+        "resource": null
+      },
+      {
+        "skill": "Mentoring",
+        "resource": null
+      },
+      {
+        "skill": "CleanroomProcesses",
+        "resource": null
+      },
+      {
+        "skill": "Physics",
+        "resource": null
+      },
+      {
+        "skill": "QuantumChipFabrication",
+        "resource": null
+      },
+      {
+        "skill": "PatentsAndPublications",
+        "resource": null
+      },
+      {
+        "skill": "Micronanofabrication",
+        "resource": null
+      },
+      {
+        "skill": "SemiconductorFabrication",
+        "resource": null
+      },
+      {
+        "skill": "CrossfunctionalCollaboration",
+        "resource": null
+      },
+      {
+        "skill": "Troubleshooting",
+        "resource": null
+      },
+      {
+        "skill": "MaterialsScience",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Quantum Engineer, Gates",
+    "score": 0.09,
+    "required": [
+      "AnalyticalSkills",
+      "CalibrationAndCharacterizationRoutines",
+      "CalibrationAutomation",
+      "CollaborativeSoftwareDevelopment",
+      "Communication",
+      "CrossteamCollaboration",
+      "CryogenicHardware",
+      "Documentation",
+      "GateFidelityAnalysis",
+      "GatebasedQuantumComputation",
+      "IndependentProblemsolving",
+      "Mentoring",
+      "Python",
+      "QuantumControlFrameworks",
+      "QuantumErrorCorrection",
+      "QuantumGateControl",
+      "QuantumProcessorBenchmarking",
+      "RandomizedBenchmarking",
+      "ScientificPublication",
+      "SingleAndTwoqubitGateDevelopment",
+      "SuperconductingQubits",
+      "VersionControl"
+    ],
+    "missing": [
+      {
+        "skill": "CalibrationAutomation",
+        "resource": null
+      },
+      {
+        "skill": "AnalyticalSkills",
+        "resource": null
+      },
+      {
+        "skill": "CrossteamCollaboration",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "RandomizedBenchmarking",
+        "resource": null
+      },
+      {
+        "skill": "SuperconductingQubits",
+        "resource": null
+      },
+      {
+        "skill": "Mentoring",
+        "resource": null
+      },
+      {
+        "skill": "CollaborativeSoftwareDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "VersionControl",
+        "resource": null
+      },
+      {
+        "skill": "ScientificPublication",
+        "resource": null
+      },
+      {
+        "skill": "SingleAndTwoqubitGateDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "CalibrationAndCharacterizationRoutines",
+        "resource": null
+      },
+      {
+        "skill": "GatebasedQuantumComputation",
+        "resource": null
+      },
+      {
+        "skill": "QuantumProcessorBenchmarking",
+        "resource": null
+      },
+      {
+        "skill": "QuantumControlFrameworks",
+        "resource": null
+      },
+      {
+        "skill": "GateFidelityAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "CryogenicHardware",
+        "resource": null
+      },
+      {
+        "skill": "QuantumGateControl",
+        "resource": null
+      },
+      {
+        "skill": "IndependentProblemsolving",
+        "resource": null
+      },
+      {
+        "skill": "QuantumErrorCorrection",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Quantum Engineer, Readout",
+    "score": 0.05,
+    "required": [
+      "Benchmarking",
+      "CircuitQED",
+      "CrossfunctionalCollaboration",
+      "CryogenicMicrowaveEngineering",
+      "DataAnalysis",
+      "ExperimentalLabWork",
+      "Git",
+      "ParametricAmplifiersJPATWPA",
+      "PatentContribution",
+      "Physics",
+      "ProblemSolving",
+      "Python",
+      "QPUDesign",
+      "QuantumErrorCorrection",
+      "QuantumReadoutTechniques",
+      "QubitCalibration",
+      "ScientificPublishing",
+      "SimulationAndModeling",
+      "SuperconductingQubits",
+      "TechnicalDocumentation"
+    ],
+    "missing": [
+      {
+        "skill": "QubitCalibration",
+        "resource": null
+      },
+      {
+        "skill": "SimulationAndModeling",
+        "resource": null
+      },
+      {
+        "skill": "ExperimentalLabWork",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "Git",
+        "resource": null
+      },
+      {
+        "skill": "CryogenicMicrowaveEngineering",
+        "resource": null
+      },
+      {
+        "skill": "Benchmarking",
+        "resource": null
+      },
+      {
+        "skill": "DataAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "ParametricAmplifiersJPATWPA",
+        "resource": null
+      },
+      {
+        "skill": "SuperconductingQubits",
+        "resource": null
+      },
+      {
+        "skill": "CircuitQED",
+        "resource": null
+      },
+      {
+        "skill": "Physics",
+        "resource": null
+      },
+      {
+        "skill": "QuantumReadoutTechniques",
+        "resource": null
+      },
+      {
+        "skill": "PatentContribution",
+        "resource": null
+      },
+      {
+        "skill": "ProblemSolving",
+        "resource": null
+      },
+      {
+        "skill": "CrossfunctionalCollaboration",
+        "resource": null
+      },
+      {
+        "skill": "QPUDesign",
+        "resource": null
+      },
+      {
+        "skill": "ScientificPublishing",
+        "resource": null
+      },
+      {
+        "skill": "QuantumErrorCorrection",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Quantum Error Correction Engineer",
+    "score": 0.04,
+    "required": [
+      "BeliefPropagation",
+      "CC",
+      "CodeQuality",
+      "DecodingAlgorithms",
+      "Documentation",
+      "FPGA",
+      "FaultTolerantQuantumAlgorithms",
+      "FaultTolerantQuantumComputing",
+      "LatticeSurgery",
+      "MachineLearningDecoding",
+      "MinimumWeightPerfectMatching",
+      "Python",
+      "QuantumErrorCorrectingCodes",
+      "QuantumErrorCorrection",
+      "ResourceEstimation",
+      "Rust",
+      "ScientificPublishing",
+      "ScientificSoftwareDevelopment",
+      "SuperconductingQubits",
+      "Teamwork",
+      "TechnicalCommunication",
+      "Testing",
+      "TheoreticalPhysics",
+      "UnionFind"
+    ],
+    "missing": [
+      {
+        "skill": "UnionFind",
+        "resource": null
+      },
+      {
+        "skill": "FaultTolerantQuantumAlgorithms",
+        "resource": null
+      },
+      {
+        "skill": "BeliefPropagation",
+        "resource": null
+      },
+      {
+        "skill": "CodeQuality",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "ScientificSoftwareDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "TechnicalCommunication",
+        "resource": null
+      },
+      {
+        "skill": "CC",
+        "resource": null
+      },
+      {
+        "skill": "SuperconductingQubits",
+        "resource": null
+      },
+      {
+        "skill": "ScientificPublishing",
+        "resource": null
+      },
+      {
+        "skill": "MachineLearningDecoding",
+        "resource": null
+      },
+      {
+        "skill": "FPGA",
+        "resource": null
+      },
+      {
+        "skill": "ResourceEstimation",
+        "resource": null
+      },
+      {
+        "skill": "Testing",
+        "resource": null
+      },
+      {
+        "skill": "DecodingAlgorithms",
+        "resource": null
+      },
+      {
+        "skill": "LatticeSurgery",
+        "resource": null
+      },
+      {
+        "skill": "TheoreticalPhysics",
+        "resource": null
+      },
+      {
+        "skill": "MinimumWeightPerfectMatching",
+        "resource": null
+      },
+      {
+        "skill": "QuantumErrorCorrectingCodes",
+        "resource": null
+      },
+      {
+        "skill": "Teamwork",
+        "resource": null
+      },
+      {
+        "skill": "Rust",
+        "resource": null
+      },
+      {
+        "skill": "FaultTolerantQuantumComputing",
+        "resource": null
+      },
+      {
+        "skill": "QuantumErrorCorrection",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Quantum Error Correction Experiment Engineer",
+    "score": 0.06,
+    "required": [
+      "Collaboration",
+      "DataAnalysis",
+      "DecodingAlgorithms",
+      "Documentation",
+      "English",
+      "EnvironmentManagement",
+      "ErrorModelling",
+      "ExperimentalQuantumComputing",
+      "LatticeSurgery",
+      "Python",
+      "QuantumComputerControlHardware",
+      "QuantumErrorCorrection",
+      "QuantumInformationTheory",
+      "QubitCalibration",
+      "SoftwareTesting",
+      "SuperconductingQuantumProcessors",
+      "VersionControl",
+      "WrittenAndVerbalCommunication"
+    ],
+    "missing": [
+      {
+        "skill": "QubitCalibration",
+        "resource": null
+      },
+      {
+        "skill": "QuantumInformationTheory",
+        "resource": null
+      },
+      {
+        "skill": "ExperimentalQuantumComputing",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "DataAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "ErrorModelling",
+        "resource": null
+      },
+      {
+        "skill": "Collaboration",
+        "resource": null
+      },
+      {
+        "skill": "English",
+        "resource": null
+      },
+      {
+        "skill": "QuantumComputerControlHardware",
+        "resource": null
+      },
+      {
+        "skill": "VersionControl",
+        "resource": null
+      },
+      {
+        "skill": "SoftwareTesting",
+        "resource": null
+      },
+      {
+        "skill": "DecodingAlgorithms",
+        "resource": null
+      },
+      {
+        "skill": "LatticeSurgery",
+        "resource": null
+      },
+      {
+        "skill": "WrittenAndVerbalCommunication",
+        "resource": null
+      },
+      {
+        "skill": "SuperconductingQuantumProcessors",
+        "resource": null
+      },
+      {
+        "skill": "EnvironmentManagement",
+        "resource": null
+      },
+      {
+        "skill": "QuantumErrorCorrection",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Quantum Hardware Engineer",
+    "score": 0.06,
+    "required": [
+      "AutomatedDataAcquisition",
+      "CryogenicExperiments",
+      "CryostatOperation",
+      "DataAnalysis",
+      "ElectricalDesign",
+      "ExperimentalPhysics",
+      "LowTemperatureInstrumentation",
+      "MeasurementInstrumentation",
+      "MechanicalDesign",
+      "MicrowaveMeasurements",
+      "PrecisionDCMeasurements",
+      "ProblemSolving",
+      "Scripting",
+      "TechnicalDocumentation",
+      "Troubleshooting",
+      "VacuumSystems"
+    ],
+    "missing": [
+      {
+        "skill": "PrecisionDCMeasurements",
+        "resource": null
+      },
+      {
+        "skill": "VacuumSystems",
+        "resource": null
+      },
+      {
+        "skill": "CryogenicExperiments",
+        "resource": null
+      },
+      {
+        "skill": "DataAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "Scripting",
+        "resource": null
+      },
+      {
+        "skill": "MicrowaveMeasurements",
+        "resource": null
+      },
+      {
+        "skill": "MeasurementInstrumentation",
+        "resource": null
+      },
+      {
+        "skill": "MechanicalDesign",
+        "resource": null
+      },
+      {
+        "skill": "ElectricalDesign",
+        "resource": null
+      },
+      {
+        "skill": "LowTemperatureInstrumentation",
+        "resource": null
+      },
+      {
+        "skill": "ProblemSolving",
+        "resource": null
+      },
+      {
+        "skill": "CryostatOperation",
+        "resource": null
+      },
+      {
+        "skill": "AutomatedDataAcquisition",
+        "resource": null
+      },
+      {
+        "skill": "Troubleshooting",
+        "resource": null
+      },
+      {
+        "skill": "ExperimentalPhysics",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Quantum System Implementation Engineer",
+    "score": 0.04,
+    "required": [
+      "4wireLowResistanceMeasurements",
+      "5SLeanPractices",
+      "CryogenicSystems",
+      "DataAnalysis",
+      "DilutionRefrigerators",
+      "ESDSafePractices",
+      "HighVacuum",
+      "ImpedanceMatching",
+      "LabSafety",
+      "MicrowaveComponentTesting",
+      "Multimeter",
+      "NoiseTroubleshooting",
+      "PrecisionWiring",
+      "ProblemSolving",
+      "QuantumTechnology",
+      "RFCablingAndCoaxialAssemblies",
+      "RFEngineering",
+      "RFMeasurements",
+      "SignalGenerator",
+      "SignalIntegrity",
+      "Soldering",
+      "Sparameters",
+      "SpectrumAnalyser",
+      "TechnicalDocumentation",
+      "TransmissionLines",
+      "Troubleshooting",
+      "VNA"
+    ],
+    "missing": [
+      {
+        "skill": "ESDSafePractices",
+        "resource": null
+      },
+      {
+        "skill": "MicrowaveComponentTesting",
+        "resource": null
+      },
+      {
+        "skill": "Soldering",
+        "resource": null
+      },
+      {
+        "skill": "QuantumTechnology",
+        "resource": null
+      },
+      {
+        "skill": "DilutionRefrigerators",
+        "resource": null
+      },
+      {
+        "skill": "VNA",
+        "resource": null
+      },
+      {
+        "skill": "SignalIntegrity",
+        "resource": null
+      },
+      {
+        "skill": "TransmissionLines",
+        "resource": null
+      },
+      {
+        "skill": "5SLeanPractices",
+        "resource": null
+      },
+      {
+        "skill": "HighVacuum",
+        "resource": null
+      },
+      {
+        "skill": "DataAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "RFCablingAndCoaxialAssemblies",
+        "resource": null
+      },
+      {
+        "skill": "SignalGenerator",
+        "resource": null
+      },
+      {
+        "skill": "NoiseTroubleshooting",
+        "resource": null
+      },
+      {
+        "skill": "Sparameters",
+        "resource": null
+      },
+      {
+        "skill": "CryogenicSystems",
+        "resource": null
+      },
+      {
+        "skill": "Multimeter",
+        "resource": null
+      },
+      {
+        "skill": "RFMeasurements",
+        "resource": null
+      },
+      {
+        "skill": "SpectrumAnalyser",
+        "resource": null
+      },
+      {
+        "skill": "4wireLowResistanceMeasurements",
+        "resource": null
+      },
+      {
+        "skill": "ProblemSolving",
+        "resource": null
+      },
+      {
+        "skill": "PrecisionWiring",
+        "resource": null
+      },
+      {
+        "skill": "RFEngineering",
+        "resource": null
+      },
+      {
+        "skill": "Troubleshooting",
+        "resource": null
+      },
+      {
+        "skill": "LabSafety",
+        "resource": null
+      },
+      {
+        "skill": "ImpedanceMatching",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "R&D Site Lead",
+    "score": 0.21,
+    "required": [
+      "Benchmarking",
+      "BudgetManagement",
+      "ControlSystems",
+      "ControlstackIntegration",
+      "CostCompliance",
+      "HPC",
+      "HiringAndLineManagement",
+      "HybridQuantumclassicalWorkflows",
+      "IPAndDataAgreements",
+      "JobScheduling",
+      "LowlatencyProcessing",
+      "MilestoneReporting",
+      "PartnershipManagement",
+      "PhDInPhysicsEEOrCS",
+      "ProjectManagement",
+      "QuantumComputing",
+      "QuantumErrorCorrection",
+      "QuantumHardware",
+      "RDTeamLeadership",
+      "RealtimeDecoding",
+      "ResourcePlanning",
+      "SoftwareIntegration",
+      "StakeholderCommunication",
+      "TeamBuilding"
+    ],
+    "missing": [
+      {
+        "skill": "QuantumComputing",
+        "resource": null
+      },
+      {
+        "skill": "ControlSystems",
+        "resource": null
+      },
+      {
+        "skill": "RealtimeDecoding",
+        "resource": null
+      },
+      {
+        "skill": "PartnershipManagement",
+        "resource": null
+      },
+      {
+        "skill": "PhDInPhysicsEEOrCS",
+        "resource": null
+      },
+      {
+        "skill": "Benchmarking",
+        "resource": null
+      },
+      {
+        "skill": "LowlatencyProcessing",
+        "resource": null
+      },
+      {
+        "skill": "IPAndDataAgreements",
+        "resource": null
+      },
+      {
+        "skill": "SoftwareIntegration",
+        "resource": null
+      },
+      {
+        "skill": "TeamBuilding",
+        "resource": null
+      },
+      {
+        "skill": "HiringAndLineManagement",
+        "resource": null
+      },
+      {
+        "skill": "HybridQuantumclassicalWorkflows",
+        "resource": null
+      },
+      {
+        "skill": "ResourcePlanning",
+        "resource": null
+      },
+      {
+        "skill": "RDTeamLeadership",
+        "resource": null
+      },
+      {
+        "skill": "ControlstackIntegration",
+        "resource": null
+      },
+      {
+        "skill": "CostCompliance",
+        "resource": null
+      },
+      {
+        "skill": "QuantumHardware",
+        "resource": null
+      },
+      {
+        "skill": "HPC",
+        "resource": null
+      },
+      {
+        "skill": "QuantumErrorCorrection",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Senior Partnership Manager, Cryogenic Components",
+    "score": 0.13,
+    "required": [
+      "ContractAndIPAgreements",
+      "CryogenicRFAndMicrowaveComponents",
+      "Cryogenics",
+      "DilutionRefrigerators",
+      "ExportControl",
+      "FluentEnglish",
+      "GrantProjectCoordination",
+      "HardwareRoadmapPlanning",
+      "InternationalTravel",
+      "LowTemperaturePhysics",
+      "Negotiation",
+      "PartnershipManagement",
+      "QuantumHardware",
+      "RelationshipManagement",
+      "StakeholderCommunication",
+      "SuperconductingQubits",
+      "SupplierEvaluationAndQualification",
+      "SupplierManagement",
+      "SupplyChainDevelopment",
+      "SupplyRiskAssessment",
+      "TechnicalBusinessDevelopment",
+      "TechnicalReportWriting",
+      "ThermalisationAndHeatLoads"
+    ],
+    "missing": [
+      {
+        "skill": "LowTemperaturePhysics",
+        "resource": null
+      },
+      {
+        "skill": "TechnicalBusinessDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "DilutionRefrigerators",
+        "resource": null
+      },
+      {
+        "skill": "HardwareRoadmapPlanning",
+        "resource": null
+      },
+      {
+        "skill": "PartnershipManagement",
+        "resource": null
+      },
+      {
+        "skill": "RelationshipManagement",
+        "resource": null
+      },
+      {
+        "skill": "Negotiation",
+        "resource": null
+      },
+      {
+        "skill": "GrantProjectCoordination",
+        "resource": null
+      },
+      {
+        "skill": "FluentEnglish",
+        "resource": null
+      },
+      {
+        "skill": "SupplyRiskAssessment",
+        "resource": null
+      },
+      {
+        "skill": "ContractAndIPAgreements",
+        "resource": null
+      },
+      {
+        "skill": "InternationalTravel",
+        "resource": null
+      },
+      {
+        "skill": "ThermalisationAndHeatLoads",
+        "resource": null
+      },
+      {
+        "skill": "SupplyChainDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "QuantumHardware",
+        "resource": null
+      },
+      {
+        "skill": "SupplierEvaluationAndQualification",
+        "resource": null
+      },
+      {
+        "skill": "CryogenicRFAndMicrowaveComponents",
+        "resource": null
+      },
+      {
+        "skill": "Cryogenics",
+        "resource": null
+      },
+      {
+        "skill": "ExportControl",
+        "resource": null
+      },
+      {
+        "skill": "SuperconductingQubits",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Software Cyber Security Specialist",
+    "score": 0.16,
+    "required": [
+      "Agile",
+      "AuditPreparation",
+      "BusinessContinuity",
+      "Coaching",
+      "ComplianceDocumentation",
+      "CrisisManagement",
+      "CyberSecurity",
+      "English",
+      "IEC62443",
+      "IncidentResponse",
+      "InformationSecurity",
+      "NetworkSecurity",
+      "PenetrationTesting",
+      "ProblemSolving",
+      "RiskAssessment",
+      "SecureSoftwareDevelopment",
+      "SecurityControls",
+      "SecurityProtocols",
+      "SecurityTooling",
+      "ShiftLeftSecurity",
+      "SoftwareQualityAssurance",
+      "StakeholderCommunication",
+      "TechnicalDocumentation",
+      "ThreatManagement",
+      "VulnerabilityManagement"
+    ],
+    "missing": [
+      {
+        "skill": "IncidentResponse",
+        "resource": null
+      },
+      {
+        "skill": "InformationSecurity",
+        "resource": null
+      },
+      {
+        "skill": "PenetrationTesting",
+        "resource": null
+      },
+      {
+        "skill": "RiskAssessment",
+        "resource": null
+      },
+      {
+        "skill": "BusinessContinuity",
+        "resource": null
+      },
+      {
+        "skill": "English",
+        "resource": null
+      },
+      {
+        "skill": "ThreatManagement",
+        "resource": null
+      },
+      {
+        "skill": "SoftwareQualityAssurance",
+        "resource": null
+      },
+      {
+        "skill": "VulnerabilityManagement",
+        "resource": null
+      },
+      {
+        "skill": "NetworkSecurity",
+        "resource": null
+      },
+      {
+        "skill": "Coaching",
+        "resource": null
+      },
+      {
+        "skill": "AuditPreparation",
+        "resource": null
+      },
+      {
+        "skill": "SecurityControls",
+        "resource": null
+      },
+      {
+        "skill": "SecurityTooling",
+        "resource": null
+      },
+      {
+        "skill": "ProblemSolving",
+        "resource": null
+      },
+      {
+        "skill": "ShiftLeftSecurity",
+        "resource": null
+      },
+      {
+        "skill": "CrisisManagement",
+        "resource": null
+      },
+      {
+        "skill": "SecureSoftwareDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "IEC62443",
+        "resource": null
+      },
+      {
+        "skill": "CyberSecurity",
+        "resource": null
+      },
+      {
+        "skill": "SecurityProtocols",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Sourcing Manager",
+    "score": 0.14,
+    "required": [
+      "CapitalEquipmentPurchasing",
+      "CategoryManagement",
+      "Communication",
+      "ContractManagement",
+      "CrossfunctionalCollaboration",
+      "Cryomechanics",
+      "Cryostats",
+      "DataAnalysis",
+      "Decisionmaking",
+      "ERPSystems",
+      "ESGCompliance",
+      "ElectronicsAndSemiconductors",
+      "FluentEnglish",
+      "HightechManufacturing",
+      "KPIAnalysis",
+      "MechanicalComponents",
+      "Negotiation",
+      "OutsourcingAndSubcontracting",
+      "Procurement",
+      "QualityManagement",
+      "QuantumTechnology",
+      "RegulatoryCompliance",
+      "StakeholderManagement",
+      "StrategicSourcing",
+      "StrategicThinking",
+      "SupplierManagement",
+      "SupplierRiskManagement",
+      "SupplyChainManagement",
+      "TechnicalSpecsAndPartDrawings"
+    ],
+    "missing": [
+      {
+        "skill": "QuantumTechnology",
+        "resource": null
+      },
+      {
+        "skill": "Decisionmaking",
+        "resource": null
+      },
+      {
+        "skill": "Cryostats",
+        "resource": null
+      },
+      {
+        "skill": "TechnicalSpecsAndPartDrawings",
+        "resource": null
+      },
+      {
+        "skill": "ESGCompliance",
+        "resource": null
+      },
+      {
+        "skill": "StakeholderManagement",
+        "resource": null
+      },
+      {
+        "skill": "CategoryManagement",
+        "resource": null
+      },
+      {
+        "skill": "MechanicalComponents",
+        "resource": null
+      },
+      {
+        "skill": "Cryomechanics",
+        "resource": null
+      },
+      {
+        "skill": "Negotiation",
+        "resource": null
+      },
+      {
+        "skill": "StrategicThinking",
+        "resource": null
+      },
+      {
+        "skill": "DataAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "FluentEnglish",
+        "resource": null
+      },
+      {
+        "skill": "ElectronicsAndSemiconductors",
+        "resource": null
+      },
+      {
+        "skill": "HightechManufacturing",
+        "resource": null
+      },
+      {
+        "skill": "OutsourcingAndSubcontracting",
+        "resource": null
+      },
+      {
+        "skill": "ERPSystems",
+        "resource": null
+      },
+      {
+        "skill": "ContractManagement",
+        "resource": null
+      },
+      {
+        "skill": "StrategicSourcing",
+        "resource": null
+      },
+      {
+        "skill": "RegulatoryCompliance",
+        "resource": null
+      },
+      {
+        "skill": "KPIAnalysis",
+        "resource": null
+      },
+      {
+        "skill": "QualityManagement",
+        "resource": null
+      },
+      {
+        "skill": "CrossfunctionalCollaboration",
+        "resource": null
+      },
+      {
+        "skill": "CapitalEquipmentPurchasing",
+        "resource": null
+      },
+      {
+        "skill": "SupplyChainManagement",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Team Leader, Production",
+    "score": 0.1,
+    "required": [
+      "5S",
+      "ChangeManagement",
+      "Coaching",
+      "Communication",
+      "ContinuousImprovement",
+      "DailyManagement",
+      "DatadrivenDecisionMaking",
+      "Electronics",
+      "KPITracking",
+      "LeanManufacturing",
+      "MechanicalDesign",
+      "NonconformityHandling",
+      "OnepieceFlow",
+      "ProblemSolving",
+      "ProductionManagement",
+      "ProductionPlanning",
+      "QualityManagement",
+      "SafetyManagement",
+      "StakeholderManagement",
+      "TeamLeadership",
+      "TechnicalDocumentation"
+    ],
+    "missing": [
+      {
+        "skill": "5S",
+        "resource": null
+      },
+      {
+        "skill": "ProductionPlanning",
+        "resource": null
+      },
+      {
+        "skill": "ProductionManagement",
+        "resource": null
+      },
+      {
+        "skill": "StakeholderManagement",
+        "resource": null
+      },
+      {
+        "skill": "NonconformityHandling",
+        "resource": null
+      },
+      {
+        "skill": "TeamLeadership",
+        "resource": null
+      },
+      {
+        "skill": "ChangeManagement",
+        "resource": null
+      },
+      {
+        "skill": "KPITracking",
+        "resource": null
+      },
+      {
+        "skill": "Electronics",
+        "resource": null
+      },
+      {
+        "skill": "LeanManufacturing",
+        "resource": null
+      },
+      {
+        "skill": "MechanicalDesign",
+        "resource": null
+      },
+      {
+        "skill": "ContinuousImprovement",
+        "resource": null
+      },
+      {
+        "skill": "DatadrivenDecisionMaking",
+        "resource": null
+      },
+      {
+        "skill": "Coaching",
+        "resource": null
+      },
+      {
+        "skill": "DailyManagement",
+        "resource": null
+      },
+      {
+        "skill": "ProblemSolving",
+        "resource": null
+      },
+      {
+        "skill": "QualityManagement",
+        "resource": null
+      },
+      {
+        "skill": "SafetyManagement",
+        "resource": null
+      },
+      {
+        "skill": "OnepieceFlow",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Technical Sales Engineer / Solutions Consultant - South-Korea",
+    "score": 0.05,
+    "required": [
+      "AI",
+      "BidManagement",
+      "BusinessDevelopment",
+      "CloudTechnologies",
+      "CrossculturalCommunication",
+      "CustomerEngagement",
+      "FluentEnglish",
+      "HighPerformanceComputing",
+      "Korean",
+      "Problemsolving",
+      "ProofOfConceptDelivery",
+      "QuantumComputing",
+      "RFIRFPRFQResponses",
+      "SolutionDesign",
+      "StakeholderManagement",
+      "TechnicalPresentations",
+      "TechnicalProposalWriting",
+      "TechnicalSales",
+      "TechnicalWorkshops",
+      "Travel"
+    ],
+    "missing": [
+      {
+        "skill": "CustomerEngagement",
+        "resource": null
+      },
+      {
+        "skill": "QuantumComputing",
+        "resource": null
+      },
+      {
+        "skill": "ProofOfConceptDelivery",
+        "resource": null
+      },
+      {
+        "skill": "CloudTechnologies",
+        "resource": null
+      },
+      {
+        "skill": "Problemsolving",
+        "resource": null
+      },
+      {
+        "skill": "StakeholderManagement",
+        "resource": null
+      },
+      {
+        "skill": "BusinessDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "TechnicalProposalWriting",
+        "resource": null
+      },
+      {
+        "skill": "TechnicalWorkshops",
+        "resource": null
+      },
+      {
+        "skill": "SolutionDesign",
+        "resource": null
+      },
+      {
+        "skill": "FluentEnglish",
+        "resource": null
+      },
+      {
+        "skill": "BidManagement",
+        "resource": null
+      },
+      {
+        "skill": "TechnicalPresentations",
+        "resource": null
+      },
+      {
+        "skill": "HighPerformanceComputing",
+        "resource": null
+      },
+      {
+        "skill": "RFIRFPRFQResponses",
+        "resource": null
+      },
+      {
+        "skill": "AI",
+        "resource": null
+      },
+      {
+        "skill": "CrossculturalCommunication",
+        "resource": null
+      },
+      {
+        "skill": "Korean",
+        "resource": null
+      },
+      {
+        "skill": "TechnicalSales",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "VP, Product",
+    "score": 0.05,
+    "required": [
+      "BudgetPlanning",
+      "BusinessModels",
+      "CloudComputing",
+      "CustomerInsight",
+      "DeepTech",
+      "ExecutiveCommunication",
+      "Gotomarket",
+      "HPC",
+      "ManagerOfManagers",
+      "MarketOpportunityIdentification",
+      "ProductGovernance",
+      "ProductManagement",
+      "ProductPortfolioManagement",
+      "ProductRoadmap",
+      "ProductStrategy",
+      "PublicSpeaking",
+      "QuantumComputing",
+      "StakeholderAlignment",
+      "StrategicPrioritization",
+      "TeamLeadership"
+    ],
+    "missing": [
+      {
+        "skill": "ProductManagement",
+        "resource": null
+      },
+      {
+        "skill": "ProductGovernance",
+        "resource": null
+      },
+      {
+        "skill": "ProductRoadmap",
+        "resource": null
+      },
+      {
+        "skill": "QuantumComputing",
+        "resource": null
+      },
+      {
+        "skill": "CustomerInsight",
+        "resource": null
+      },
+      {
+        "skill": "StakeholderAlignment",
+        "resource": null
+      },
+      {
+        "skill": "ProductStrategy",
+        "resource": null
+      },
+      {
+        "skill": "TeamLeadership",
+        "resource": null
+      },
+      {
+        "skill": "CloudComputing",
+        "resource": null
+      },
+      {
+        "skill": "BusinessModels",
+        "resource": null
+      },
+      {
+        "skill": "MarketOpportunityIdentification",
+        "resource": null
+      },
+      {
+        "skill": "ProductPortfolioManagement",
+        "resource": null
+      },
+      {
+        "skill": "ExecutiveCommunication",
+        "resource": null
+      },
+      {
+        "skill": "DeepTech",
+        "resource": null
+      },
+      {
+        "skill": "StrategicPrioritization",
+        "resource": null
+      },
+      {
+        "skill": "ManagerOfManagers",
+        "resource": null
+      },
+      {
+        "skill": "HPC",
+        "resource": null
+      },
+      {
+        "skill": "Gotomarket",
+        "resource": null
+      },
+      {
+        "skill": "PublicSpeaking",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Magnolia CMS Developer",
+    "score": 0.0,
+    "required": [
+      "ContentManagementSystemsCMS",
+      "HTMLCSS",
+      "Java",
+      "JavaScript",
+      "MagentoExperience",
+      "RESTfulAPIs",
+      "SpringFramework",
+      "VersionControlGit"
+    ],
+    "missing": [
+      {
+        "skill": "JavaScript",
+        "resource": null
+      },
+      {
+        "skill": "MagentoExperience",
+        "resource": null
+      },
+      {
+        "skill": "SpringFramework",
+        "resource": null
+      },
+      {
+        "skill": "ContentManagementSystemsCMS",
+        "resource": null
+      },
+      {
+        "skill": "HTMLCSS",
+        "resource": null
+      },
+      {
+        "skill": "VersionControlGit",
+        "resource": null
+      },
+      {
+        "skill": "RESTfulAPIs",
+        "resource": null
+      },
+      {
+        "skill": "Java",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Full Stack Developer (ReactJS, NodeJS, AWS)",
+    "score": 0.0,
+    "required": [
+      "AWS",
+      "HTMLCSS",
+      "JavaScript",
+      "NodeJS",
+      "RESTfulAPIs",
+      "ReactJS",
+      "SQL",
+      "VersionControlGit"
+    ],
+    "missing": [
+      {
+        "skill": "SQL",
+        "resource": null
+      },
+      {
+        "skill": "JavaScript",
+        "resource": null
+      },
+      {
+        "skill": "NodeJS",
+        "resource": null
+      },
+      {
+        "skill": "HTMLCSS",
+        "resource": null
+      },
+      {
+        "skill": "AWS",
+        "resource": null
+      },
+      {
+        "skill": "RESTfulAPIs",
+        "resource": null
+      },
+      {
+        "skill": "ReactJS",
+        "resource": null
+      },
+      {
+        "skill": "VersionControlGit",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Data Analyst",
+    "score": 0.12,
+    "required": [
+      "DataCleaning",
+      "Excel",
+      "MachineLearning",
+      "Python",
+      "R",
+      "SQL",
+      "StatisticalAnalysis",
+      "Tableau"
+    ],
+    "missing": [
+      {
+        "skill": "SQL",
+        "resource": null
+      },
+      {
+        "skill": "MachineLearning",
+        "resource": null
+      },
+      {
+        "skill": "R",
+        "resource": null
+      },
+      {
+        "skill": "Tableau",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "DataCleaning",
+        "resource": null
+      },
+      {
+        "skill": "StatisticalAnalysis",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Web Scraping Specialist - EU Remote CET",
+    "score": 0.0,
+    "required": [
+      "APIIntegration",
+      "AutomationTools",
+      "DataCleaning",
+      "DataParsing",
+      "HTMLCSSKnowledge",
+      "Python",
+      "SQL",
+      "WebScrapingLibraries"
+    ],
+    "missing": [
+      {
+        "skill": "SQL",
+        "resource": null
+      },
+      {
+        "skill": "HTMLCSSKnowledge",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "APIIntegration",
+        "resource": null
+      },
+      {
+        "skill": "DataCleaning",
+        "resource": null
+      },
+      {
+        "skill": "DataParsing",
+        "resource": null
+      },
+      {
+        "skill": "AutomationTools",
+        "resource": null
+      },
+      {
+        "skill": "WebScrapingLibraries",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Web Designer Intern",
+    "score": 0.0,
+    "required": [
+      "FrontendFrameworksReactAngularVuejs",
+      "GraphicDesign",
+      "HTMLCSS",
+      "JavaScript",
+      "ResponsiveDesign",
+      "SEOPrinciples",
+      "UserExperienceUXDesign",
+      "VersionControlGit"
+    ],
+    "missing": [
+      {
+        "skill": "JavaScript",
+        "resource": null
+      },
+      {
+        "skill": "ResponsiveDesign",
+        "resource": null
+      },
+      {
+        "skill": "UserExperienceUXDesign",
+        "resource": null
+      },
+      {
+        "skill": "HTMLCSS",
+        "resource": null
+      },
+      {
+        "skill": "FrontendFrameworksReactAngularVuejs",
+        "resource": null
+      },
+      {
+        "skill": "GraphicDesign",
+        "resource": null
+      },
+      {
+        "skill": "VersionControlGit",
+        "resource": null
+      },
+      {
+        "skill": "SEOPrinciples",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Lead Service Engineer - Low Voltage",
+    "score": 0.25,
+    "required": [
+      "CustomerInteraction",
+      "ElectricalEngineeringFundamentals",
+      "LowVoltageSystemsDesign",
+      "ProjectManagement",
+      "SchematicReading",
+      "TechnicalDocumentation",
+      "TestingAndCommissioning",
+      "TroubleshootingTechniques"
+    ],
+    "missing": [
+      {
+        "skill": "ElectricalEngineeringFundamentals",
+        "resource": null
+      },
+      {
+        "skill": "CustomerInteraction",
+        "resource": null
+      },
+      {
+        "skill": "TroubleshootingTechniques",
+        "resource": null
+      },
+      {
+        "skill": "TestingAndCommissioning",
+        "resource": null
+      },
+      {
+        "skill": "LowVoltageSystemsDesign",
+        "resource": null
+      },
+      {
+        "skill": "SchematicReading",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Service Engineer",
+    "score": 0.14,
+    "required": [
+      "CustomerInteraction",
+      "Documentation",
+      "HardwareInstallation",
+      "NetworkConfiguration",
+      "ScriptingLanguages",
+      "SoftwareInstallation",
+      "Troubleshooting"
+    ],
+    "missing": [
+      {
+        "skill": "SoftwareInstallation",
+        "resource": null
+      },
+      {
+        "skill": "CustomerInteraction",
+        "resource": null
+      },
+      {
+        "skill": "NetworkConfiguration",
+        "resource": null
+      },
+      {
+        "skill": "ScriptingLanguages",
+        "resource": null
+      },
+      {
+        "skill": "Troubleshooting",
+        "resource": null
+      },
+      {
+        "skill": "HardwareInstallation",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "UPS Service Engineer",
+    "score": 0.0,
+    "required": [
+      "CustomerService",
+      "ElectricalEngineering",
+      "InstallationAndMaintenance",
+      "Networking",
+      "SafetyProcedures",
+      "TechnicalSupport",
+      "Troubleshooting",
+      "UPSSystemKnowledge"
+    ],
+    "missing": [
+      {
+        "skill": "InstallationAndMaintenance",
+        "resource": null
+      },
+      {
+        "skill": "ElectricalEngineering",
+        "resource": null
+      },
+      {
+        "skill": "CustomerService",
+        "resource": null
+      },
+      {
+        "skill": "TechnicalSupport",
+        "resource": null
+      },
+      {
+        "skill": "UPSSystemKnowledge",
+        "resource": null
+      },
+      {
+        "skill": "SafetyProcedures",
+        "resource": null
+      },
+      {
+        "skill": "Troubleshooting",
+        "resource": null
+      },
+      {
+        "skill": "Networking",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Python Engineer with QA Automation experience (Accessibility Product House)",
+    "score": 0.0,
+    "required": [
+      "AccessibilityTesting",
+      "AutomationTesting",
+      "Git",
+      "Jenkins",
+      "Pytest",
+      "Python",
+      "SQL",
+      "Selenium"
+    ],
+    "missing": [
+      {
+        "skill": "SQL",
+        "resource": null
+      },
+      {
+        "skill": "Pytest",
+        "resource": null
+      },
+      {
+        "skill": "Jenkins",
+        "resource": null
+      },
+      {
+        "skill": "Git",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "AccessibilityTesting",
+        "resource": null
+      },
+      {
+        "skill": "AutomationTesting",
+        "resource": null
+      },
+      {
+        "skill": "Selenium",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Software Engineer",
+    "score": 0.0,
+    "required": [
+      "APIDevelopment",
+      "C",
+      "DataStructures",
+      "Git",
+      "Java",
+      "JavaScript",
+      "Python",
+      "SQL"
+    ],
+    "missing": [
+      {
+        "skill": "DataStructures",
+        "resource": null
+      },
+      {
+        "skill": "SQL",
+        "resource": null
+      },
+      {
+        "skill": "JavaScript",
+        "resource": null
+      },
+      {
+        "skill": "Git",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "C",
+        "resource": null
+      },
+      {
+        "skill": "APIDevelopment",
+        "resource": null
+      },
+      {
+        "skill": "Java",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "AI Agent Engineer",
+    "score": 0.0,
+    "required": [
+      "CloudComputing",
+      "DataStructuresAndAlgorithms",
+      "DeepLearning",
+      "MachineLearning",
+      "NaturalLanguageProcessing",
+      "Python",
+      "SQL",
+      "VersionControl"
+    ],
+    "missing": [
+      {
+        "skill": "VersionControl",
+        "resource": null
+      },
+      {
+        "skill": "SQL",
+        "resource": null
+      },
+      {
+        "skill": "MachineLearning",
+        "resource": null
+      },
+      {
+        "skill": "DataStructuresAndAlgorithms",
+        "resource": null
+      },
+      {
+        "skill": "DeepLearning",
+        "resource": null
+      },
+      {
+        "skill": "Python",
+        "resource": null
+      },
+      {
+        "skill": "CloudComputing",
+        "resource": null
+      },
+      {
+        "skill": "NaturalLanguageProcessing",
+        "resource": null
+      }
+    ]
+  },
+  {
+    "title": "Senior GitLab Engineer",
+    "score": 0.0,
+    "required": [
+      "CICDPipelines",
+      "ContinuousIntegration",
+      "DevOps",
+      "Git",
+      "GitLab",
+      "Linux",
+      "ProblemSolving",
+      "VersionControl"
+    ],
+    "missing": [
+      {
+        "skill": "VersionControl",
+        "resource": null
+      },
+      {
+        "skill": "CICDPipelines",
+        "resource": null
+      },
+      {
+        "skill": "Linux",
+        "resource": null
+      },
+      {
+        "skill": "DevOps",
+        "resource": null
+      },
+      {
+        "skill": "Git",
+        "resource": null
+      },
+      {
+        "skill": "ContinuousIntegration",
+        "resource": null
+      },
+      {
+        "skill": "ProblemSolving",
+        "resource": null
+      },
+      {
+        "skill": "GitLab",
+        "resource": null
       }
     ]
   }

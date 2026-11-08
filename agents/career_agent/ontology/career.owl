@@ -358,27 +358,7 @@
     </owl:NamedIndividual>
     
 
-
-    <!-- https://example.org/cognipath/career#ElhamCareerPlan -->
-
-    <owl:NamedIndividual rdf:about="https://example.org/cognipath/career#ElhamCareerPlan">
-        <rdf:type rdf:resource="https://example.org/cognipath/career#CareerPlan"/>
-        <career:achievesGoal rdf:resource="https://example.org/cognipath/career#GetAIInternship"/>
-        <career:includesActivity rdf:resource="https://example.org/cognipath/career#LearnDocker"/>
-    </owl:NamedIndividual>
     
-
-
-    <!-- https://example.org/cognipath/career#ElhamPournouri -->
-
-    <owl:NamedIndividual rdf:about="https://example.org/cognipath/career#ElhamPournouri">
-        <rdf:type rdf:resource="https://example.org/cognipath/career#Student"/>
-        <career:hasCareerGoal rdf:resource="https://example.org/cognipath/career#GetAIInternship"/>
-        <career:hasCareerPlan rdf:resource="https://example.org/cognipath/career#ElhamCareerPlan"/>
-        <career:hasSkill rdf:resource="https://example.org/cognipath/career#Python"/>
-    </owl:NamedIndividual>
-    
-
 
     <!-- https://example.org/cognipath/career#GetAIInternship -->
 

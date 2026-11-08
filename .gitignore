@@ -15,3 +15,11 @@ career_plan.json
 # frontend
 node_modules/
 .next/
+# Personal data: never upload
+agents/career_agent/data/cvs/
+agents/career_agent/data/job_emails/
+agents/career_agent/data/letters/
+agents/career_agent/data/career_plan_*.json
+agents/career_agent/data/pipeline_log.txt
+__pycache__/
+agents/career_agent/data/user_profile.json

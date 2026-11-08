@@ -1,26 +1,2561 @@
 {
   "agent": "career",
-  "student": "ElhamPournouri",
+  "student": "mira",
   "gaps": [
     {
-      "skill": "RDF",
-      "needed_by": 1,
+      "skill": "Python",
+      "needed_by": 20,
       "resource": null
     },
     {
-      "skill": "LangGraph",
-      "needed_by": 1,
+      "skill": "SQL",
+      "needed_by": 11,
+      "resource": null
+    },
+    {
+      "skill": "DataAnalysis",
+      "needed_by": 10,
+      "resource": null
+    },
+    {
+      "skill": "VersionControl",
+      "needed_by": 7,
       "resource": null
     },
     {
       "skill": "MachineLearning",
-      "needed_by": 1,
+      "needed_by": 7,
+      "resource": null
+    },
+    {
+      "skill": "QuantumComputing",
+      "needed_by": 7,
+      "resource": null
+    },
+    {
+      "skill": "ProblemSolving",
+      "needed_by": 7,
+      "resource": null
+    },
+    {
+      "skill": "JavaScript",
+      "needed_by": 6,
+      "resource": null
+    },
+    {
+      "skill": "Troubleshooting",
+      "needed_by": 6,
+      "resource": null
+    },
+    {
+      "skill": "English",
+      "needed_by": 6,
+      "resource": null
+    },
+    {
+      "skill": "QuantumErrorCorrection",
+      "needed_by": 6,
+      "resource": null
+    },
+    {
+      "skill": "SuperconductingQubits",
+      "needed_by": 6,
+      "resource": null
+    },
+    {
+      "skill": "StakeholderManagement",
+      "needed_by": 5,
+      "resource": null
+    },
+    {
+      "skill": "CrossfunctionalCollaboration",
+      "needed_by": 5,
+      "resource": null
+    },
+    {
+      "skill": "AttentionToDetail",
+      "needed_by": 4,
+      "resource": null
+    },
+    {
+      "skill": "FluentEnglish",
+      "needed_by": 4,
+      "resource": null
+    },
+    {
+      "skill": "Benchmarking",
+      "needed_by": 4,
+      "resource": null
+    },
+    {
+      "skill": "Git",
+      "needed_by": 4,
+      "resource": null
+    },
+    {
+      "skill": "C",
+      "needed_by": 3,
+      "resource": null
+    },
+    {
+      "skill": "Java",
+      "needed_by": 3,
+      "resource": null
+    },
+    {
+      "skill": "CloudComputing",
+      "needed_by": 3,
+      "resource": null
+    },
+    {
+      "skill": "QubitCalibration",
+      "needed_by": 3,
+      "resource": null
+    },
+    {
+      "skill": "SoftwareTesting",
+      "needed_by": 3,
+      "resource": null
+    },
+    {
+      "skill": "Cryogenics",
+      "needed_by": 3,
+      "resource": null
+    },
+    {
+      "skill": "TechnicalCommunication",
+      "needed_by": 3,
+      "resource": null
+    },
+    {
+      "skill": "Problemsolving",
+      "needed_by": 3,
+      "resource": null
+    },
+    {
+      "skill": "Physics",
+      "needed_by": 3,
+      "resource": null
+    },
+    {
+      "skill": "Mentoring",
+      "needed_by": 3,
+      "resource": null
+    },
+    {
+      "skill": "HTMLCSS",
+      "needed_by": 3,
+      "resource": null
+    },
+    {
+      "skill": "VersionControlGit",
+      "needed_by": 3,
+      "resource": null
+    },
+    {
+      "skill": "WebDevelopment",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "BigDataProcessing",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "CloudTechnologies",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "CustomerService",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "ElectricalDesign",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "AWS",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "StatisticalAnalysis",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "Nodejs",
+      "needed_by": 2,
       "resource": null
     },
     {
       "skill": "Docker",
-      "needed_by": 1,
+      "needed_by": 2,
       "resource": "https://docs.docker.com/get-started/"
+    },
+    {
+      "skill": "DataStructures",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "DeepLearning",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "APIDevelopment",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "ControlSystems",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "TechnicalSupport",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "StakeholderCoordination",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "VendorManagement",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "Organization",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "AuditPreparation",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "Japanese",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "CodeReview",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "BusinessDevelopment",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "HighPerformanceComputing",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "ElectricalEngineering",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "ExperimentalPhysics",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "ContinuousIntegration",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "Scripting",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "Collaboration",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "ExecutiveCommunication",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "ExperimentalDesign",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "ScientificPublishing",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "DecodingAlgorithms",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "LatticeSurgery",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "MechanicalDesign",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "QuantumTechnology",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "DilutionRefrigerators",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "PartnershipManagement",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "QuantumHardware",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "HPC",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "Negotiation",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "Coaching",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "QualityManagement",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "TeamLeadership",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "RESTfulAPIs",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "DataCleaning",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "CustomerInteraction",
+      "needed_by": 2,
+      "resource": null
+    },
+    {
+      "skill": "VersionControlSystemsEgGit",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Django",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RESTAPI",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Security",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Automation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DatabaseManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ETL",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DataTransformation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DataWarehousing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Snowflake",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AutomationScripting",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TestingFrameworks",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "APITesting",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TestAutomation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QualityControl",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ConstructionKnowledge",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Arduino",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RoboticsFramework",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ComputerVision",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AutomationSoftware",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "EmbeddedSystems",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ForkliftOperation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TrafficAwareness",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "LogisticsKnowledge",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DrivingLicense",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TimeManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ForkliftSafety",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "GPSNavigation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MaintenanceAndRepair",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PowerSystemAnalysis",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ElectricalCodeCompliance",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "EmergencyPowerSystems",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "BuildingAutomationSystems",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "UPSAndPowerDistribution",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HVACControls",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Programming",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "React",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "GIS",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AlgorithmDesign",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SCADASystems",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "IndustrialNetworking",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PLCProgramming",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FieldbusProtocols",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ApacheSpark",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ETLTools",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "NoSQLDatabases",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Hadoop",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CloudInfrastructure",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "NEDOAdministration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FinancialCompliance",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Translation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "LegalBasics",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FinanceBasics",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "InvoiceProcessing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProcessBuilding",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Word",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "EventAndTravelOrganization",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Accounting",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ExpenseProcessing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PowerPoint",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Debugging",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AsynchronousWorkflowSystems",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Redis",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "WorkingIndependently",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "BackendDevelopment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ArgoWorkflows",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RESTAPIs",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FrontendDevelopment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TypeScript",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CICD",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PostgreSQL",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "UXDesign",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "OpenTelemetry",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Vuejs",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MarketInsights",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CDCS",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CustomerRelationshipManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AccountManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ITIL",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumComputingKnowledge",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PipelineManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "WillingnessToTravel",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Sales",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FluentGerman",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PublicTenders",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PresentingAtConferences",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DataCenterIndustryKnowledge",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TrustBuilding",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ComplexDealClosing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PublicFunding",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SubcontractorCoordination",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SparePartsManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "InventoryManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "VerbalCommunication",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "EquipmentInstallation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProjectCoordination",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PreventiveMaintenancePlanning",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "WorkingUnderPressure",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Planning",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CleanroomExperience",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProgressTracking",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MESIntegration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SemiconductorManufacturing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "WrittenCommunication",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "UtilityHookups",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CorporateCommunications",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MediaMonitoring",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ExplainingTechnicalConcepts",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "JournalistRelationshipBuilding",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "B2BTechnologyCommunications",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ExecutiveMediaCoaching",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "IndependentWorking",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MediaRelations",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PRAgencyManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SocialMediaAmplification",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PressReleaseWriting",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PublicRelations",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "StoryPitching",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "WritingAndEditing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CommunicationsCalendarManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "BumpBonding",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CryogenicMeasurement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ThermalCharacterization",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PCB",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PackageDesignCAD",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PartnerCollaboration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DCCharacterization",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "3DIntegration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MicrowaveCharacterization",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CeramicGlassAndSiliconProcesses",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SuperconductingQuantumHardware",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CrossteamCoordination",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DiePackaging",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SuperconductingMaterials",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TestAndValidationPlanning",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RDLFanout",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SpectrumAnalyzer",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PerformanceProfiling",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FPGAIPBlockDesign",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ClockDomainCrossing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HardwaresoftwareInterfaces",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HighperformanceFPGAFamilies",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HDL",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "IntelAlteraFPGAs",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CrossdisciplinaryCollaboration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RealtimeSystemsOptimization",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Verification",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HighspeedCommunicationProtocols",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Quartus",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DigitalLogic",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Simulation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FPGAToolchains",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "VHDL",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Oscilloscope",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FPGADesign",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumInformationProcessing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "LaboratoryExperiments",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ScientificWriting",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumProcessingUnits",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SubcontractorManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumComputingSystemArchitecture",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CostControl",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CostEstimationReview",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HPCdataCentres",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RoadmapPlanning",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "LicensingStrategy",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HardwareAndSoftwareProgramDelivery",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AuditAndAssessorEvidencePreparation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AIToolsForAutomation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "UKFundingSystemKnowledge",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "IPAndFreedomtooperateStrategy",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CommercialAndBusinessDevelopment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MilestonebasedContractManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProgramManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SuperconductingSystems",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FundingAndGrantManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TeamMotivation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "GrantManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Semiconductors",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Confluence",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "GermanPublicFundingProgrammes",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DependencyMapping",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "GermanC1",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RDCoordination",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HorizonEurope",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProcessImprovement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ConflictMediation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "WorkBreakdownStructure",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PMP",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CrossfunctionalCoordination",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ResearchAdministration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "BayesianOptimization",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TwoqubitGates",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Parallelization",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SinglequbitGates",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "StatisticalMethods",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QubitReadout",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ReinforcementLearning",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumEngineering",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumSystemCalibration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SoftwareEngineering",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AITooling",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TimeseriesAnalysis",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ModelDeployment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HighperformanceComputing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ExperimentalQuantumHardware",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AnalyticalThinking",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QPUCalibration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumMechanics",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "OptimizationAlgorithms",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ScientificDataAnalysis",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RD",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TechnologyDevelopment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProcessDevelopment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ScalingRDToManufacturing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CleanroomProcesses",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumChipFabrication",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PatentsAndPublications",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Micronanofabrication",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SemiconductorFabrication",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MaterialsScience",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CalibrationAutomation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AnalyticalSkills",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CrossteamCollaboration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RandomizedBenchmarking",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CollaborativeSoftwareDevelopment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ScientificPublication",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SingleAndTwoqubitGateDevelopment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CalibrationAndCharacterizationRoutines",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "GatebasedQuantumComputation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumProcessorBenchmarking",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumControlFrameworks",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "GateFidelityAnalysis",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CryogenicHardware",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumGateControl",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "IndependentProblemsolving",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SimulationAndModeling",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ExperimentalLabWork",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CryogenicMicrowaveEngineering",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ParametricAmplifiersJPATWPA",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CircuitQED",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumReadoutTechniques",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PatentContribution",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QPUDesign",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "UnionFind",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FaultTolerantQuantumAlgorithms",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "BeliefPropagation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CodeQuality",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ScientificSoftwareDevelopment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CC",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MachineLearningDecoding",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FPGA",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ResourceEstimation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Testing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TheoreticalPhysics",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MinimumWeightPerfectMatching",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumErrorCorrectingCodes",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Teamwork",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Rust",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FaultTolerantQuantumComputing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumInformationTheory",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ExperimentalQuantumComputing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ErrorModelling",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "QuantumComputerControlHardware",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "WrittenAndVerbalCommunication",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SuperconductingQuantumProcessors",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "EnvironmentManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PrecisionDCMeasurements",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "VacuumSystems",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CryogenicExperiments",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MicrowaveMeasurements",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MeasurementInstrumentation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "LowTemperatureInstrumentation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CryostatOperation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AutomatedDataAcquisition",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ESDSafePractices",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MicrowaveComponentTesting",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Soldering",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "VNA",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SignalIntegrity",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TransmissionLines",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "5SLeanPractices",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HighVacuum",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RFCablingAndCoaxialAssemblies",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SignalGenerator",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "NoiseTroubleshooting",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Sparameters",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CryogenicSystems",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Multimeter",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RFMeasurements",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SpectrumAnalyser",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "4wireLowResistanceMeasurements",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PrecisionWiring",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RFEngineering",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "LabSafety",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ImpedanceMatching",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RealtimeDecoding",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PhDInPhysicsEEOrCS",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "LowlatencyProcessing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "IPAndDataAgreements",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SoftwareIntegration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TeamBuilding",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HiringAndLineManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HybridQuantumclassicalWorkflows",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ResourcePlanning",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RDTeamLeadership",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ControlstackIntegration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CostCompliance",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "LowTemperaturePhysics",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TechnicalBusinessDevelopment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HardwareRoadmapPlanning",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RelationshipManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "GrantProjectCoordination",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SupplyRiskAssessment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ContractAndIPAgreements",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "InternationalTravel",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ThermalisationAndHeatLoads",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SupplyChainDevelopment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SupplierEvaluationAndQualification",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CryogenicRFAndMicrowaveComponents",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ExportControl",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "IncidentResponse",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "InformationSecurity",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PenetrationTesting",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RiskAssessment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "BusinessContinuity",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ThreatManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SoftwareQualityAssurance",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "VulnerabilityManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "NetworkSecurity",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SecurityControls",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SecurityTooling",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ShiftLeftSecurity",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CrisisManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SecureSoftwareDevelopment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "IEC62443",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CyberSecurity",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SecurityProtocols",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Decisionmaking",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Cryostats",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TechnicalSpecsAndPartDrawings",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ESGCompliance",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CategoryManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MechanicalComponents",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Cryomechanics",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "StrategicThinking",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ElectronicsAndSemiconductors",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HightechManufacturing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "OutsourcingAndSubcontracting",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ERPSystems",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ContractManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "StrategicSourcing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RegulatoryCompliance",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "KPIAnalysis",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CapitalEquipmentPurchasing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SupplyChainManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "5S",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProductionPlanning",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProductionManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "NonconformityHandling",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ChangeManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "KPITracking",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Electronics",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "LeanManufacturing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ContinuousImprovement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DatadrivenDecisionMaking",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DailyManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SafetyManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "OnepieceFlow",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CustomerEngagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProofOfConceptDelivery",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TechnicalProposalWriting",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TechnicalWorkshops",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SolutionDesign",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "BidManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TechnicalPresentations",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "RFIRFPRFQResponses",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AI",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CrossculturalCommunication",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Korean",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TechnicalSales",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProductManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProductGovernance",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProductRoadmap",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CustomerInsight",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "StakeholderAlignment",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProductStrategy",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "BusinessModels",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MarketOpportunityIdentification",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ProductPortfolioManagement",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DeepTech",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "StrategicPrioritization",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ManagerOfManagers",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Gotomarket",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "PublicSpeaking",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "MagentoExperience",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SpringFramework",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ContentManagementSystemsCMS",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "NodeJS",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ReactJS",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "R",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Tableau",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HTMLCSSKnowledge",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "APIIntegration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DataParsing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AutomationTools",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "WebScrapingLibraries",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ResponsiveDesign",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "UserExperienceUXDesign",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "FrontendFrameworksReactAngularVuejs",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "GraphicDesign",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SEOPrinciples",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ElectricalEngineeringFundamentals",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TroubleshootingTechniques",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "TestingAndCommissioning",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "LowVoltageSystemsDesign",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SchematicReading",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SoftwareInstallation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "NetworkConfiguration",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "ScriptingLanguages",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "HardwareInstallation",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "InstallationAndMaintenance",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "UPSSystemKnowledge",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "SafetyProcedures",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Networking",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Pytest",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Jenkins",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AccessibilityTesting",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "AutomationTesting",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Selenium",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DataStructuresAndAlgorithms",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "NaturalLanguageProcessing",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "CICDPipelines",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "Linux",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "DevOps",
+      "needed_by": 1,
+      "resource": null
+    },
+    {
+      "skill": "GitLab",
+      "needed_by": 1,
+      "resource": null
     }
   ]
 }

@@ -5,23 +5,106 @@
 
 <https://example.org/cognipath/career> a owl:Ontology .
 
-career:AaltoLabMasterThesisLLMAgents a career:ThesisOpportunity ;
-    career:jobTitle "Master Thesis: LLM Agents" ;
-    career:requiresSkill career:LangGraph,
+career:9amSCClearedPythonDjangoEngineersOutsideIR35Freelance a career:Job ;
+    career:jobTitle "SC Cleared Python/Django Engineers - Outside iR35 (freelance)" ;
+    career:requiresSkill career:Automation,
+        career:DatabaseManagement,
+        career:Django,
         career:Python,
-        career:RDF ;
-    career:sourceURL "https://example.com/2"^^xsd:anyURI .
+        career:RESTAPI,
+        career:Security,
+        career:VersionControlSystemsEgGit,
+        career:WebDevelopment ;
+    career:sourceURL "https://www.linkedin.com/jobs/view/4069571425/"^^xsd:anyURI .
+
+career:ABBDataEngineerSnowflakeDataPlatforms a career:Job ;
+    career:jobTitle "Data Engineer, Snowflake & Data Platforms" ;
+    career:requiresSkill career:BigDataProcessing,
+        career:CloudTechnologies,
+        career:DataTransformation,
+        career:DataWarehousing,
+        career:ETL,
+        career:Python,
+        career:SQL,
+        career:Snowflake ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=109&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&ea=1&cs=1_d4359689&cb=1793865223362&jobListingId=1010314622117&jrtk=5-yul1-0-1k6lb631pj0p3801-e5505a028abecd61&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos9-age2d-1010314622117&ja=403223503"^^xsd:anyURI .
+
+career:BlueforsTraineeTestSystemsData a career:Internship ;
+    career:jobTitle "Trainee, Test Systems & Data" ;
+    career:requiresSkill career:APITesting,
+        career:AutomationScripting,
+        career:DataAnalysis,
+        career:Python,
+        career:SQL,
+        career:TestAutomation,
+        career:TestingFrameworks,
+        career:VersionControl ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=103&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&ea=1&cs=1_007ad050&cb=1793865223361&jobListingId=1010310569614&jrtk=5-yul1-0-1k6lb631pj0p3801-7db62717d8cf011a&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos3-age6d-1010310569614&ja=403223503"^^xsd:anyURI .
+
+career:COEGroupSiteExecutionCoordinator a career:Job ;
+    career:jobTitle "Site Execution Coordinator" ;
+    career:requiresSkill career:Budgeting,
+        career:Communication,
+        career:ConstructionKnowledge,
+        career:MSProject,
+        career:ProjectManagement,
+        career:QualityControl,
+        career:RiskManagement,
+        career:Scheduling ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=111&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&cs=1_d7749c59&cb=1793865223362&jobListingId=1010310838841&jrtk=5-yul1-0-1k6lb631pj0p3801-844a3e6e5bbc66db&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos11-age6d-1010310838841&ja=403223503"^^xsd:anyURI .
+
+career:CurifyLabsRDEngineerRoboticsAutomation a career:Job ;
+    career:jobTitle "R&D Engineer (Robotics & Automation)" ;
+    career:requiresSkill career:Arduino,
+        career:AutomationSoftware,
+        career:C,
+        career:ComputerVision,
+        career:EmbeddedSystems,
+        career:MachineLearning,
+        career:Python,
+        career:RoboticsFramework ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=102&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&cs=1_30dacf84&cb=1793865223361&jobListingId=1010317122930&jrtk=5-yul1-0-1k6lb631pj0p3801-cd5671bd8ecc8eb3&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos2-agept-1010317122930&ja=403223503"^^xsd:anyURI .
+
+career:DSVGlobalTransportAndLogisticsHarjoitteluKuljettajanaLnsiSuomi a career:Job ;
+    career:jobTitle "Harjoittelu kuljettajana: Länsi-Suomi" ;
+    career:requiresSkill career:CustomerService,
+        career:DrivingLicense,
+        career:ForkliftOperation,
+        career:ForkliftSafety,
+        career:GPSNavigation,
+        career:LogisticsKnowledge,
+        career:TimeManagement,
+        career:TrafficAwareness ;
+    career:sourceURL "https://www.linkedin.com/jobs/view/4452725439/"^^xsd:anyURI .
 
 career:DockerTutorial a owl:NamedIndividual,
         career:LearningResource ;
     career:helpsLearnSkill career:Docker ;
     career:resourceURL "https://docs.docker.com/get-started/"^^xsd:anyURI .
 
-career:ElhamPournouri a owl:NamedIndividual,
-        career:Student ;
-    career:hasCareerGoal career:GetAIInternship ;
-    career:hasCareerPlan career:ElhamCareerPlan ;
-    career:hasSkill career:Python .
+career:EquinixCriticalFacilitiesEngineerIVElectrical a career:Job ;
+    career:jobTitle "Critical Facilities Engineer IV – Electrical" ;
+    career:requiresSkill career:BuildingAutomationSystems,
+        career:ElectricalCodeCompliance,
+        career:ElectricalDesign,
+        career:EmergencyPowerSystems,
+        career:HVACControls,
+        career:MaintenanceAndRepair,
+        career:PowerSystemAnalysis,
+        career:UPSAndPowerDistribution ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=112&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&cs=1_4de75180&cb=1793865223362&jobListingId=1010314556208&jrtk=5-yul1-0-1k6lb631pj0p3801-a641db56dfe14fbc&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos12-age2d-1010314556208&ja=403223503"^^xsd:anyURI .
+
+career:EspooLnsiUudenmaanHyvinvointialue a career:Job ;
+    career:jobTitle "Länsi-Uudenmaan hyvinvointialue" ;
+    career:requiresSkill career:AWS,
+        career:C,
+        career:Java,
+        career:JavaScript,
+        career:Nodejs,
+        career:Python,
+        career:React,
+        career:SQL ;
+    career:sourceURL "https://www.linkedin.com/jobs/view/4485713905/"^^xsd:anyURI .
 
 career:ExampleAILtdAIDeveloperIntern a career:Internship ;
     career:jobTitle "AI Developer Intern" ;
@@ -30,8 +113,885 @@ career:ExampleAILtdAIDeveloperIntern a career:Internship ;
         career:Python ;
     career:sourceURL "https://example.com/1"^^xsd:anyURI .
 
-career:Job a owl:Class ;
+career:FrendsAIIntegrationEngineer a career:Job ;
+    career:jobTitle "AI Integration Engineer" ;
+    career:requiresSkill career:APIDevelopment,
+        career:AlgorithmDesign,
+        career:CloudComputing,
+        career:DataStructures,
+        career:DeepLearning,
+        career:MachineLearning,
+        career:Python,
+        career:SQL ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=104&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&cs=1_2c71f614&cb=1793865223361&jobListingId=1010311451789&jrtk=5-yul1-0-1k6lb631pj0p3801-db06e06386e9aa80&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos4-age5d-1010311451789&ja=403223503"^^xsd:anyURI .
+
+career:GetAIInternship a owl:NamedIndividual,
+        career:CareerGoal .
+
+career:HoneywellTechnologiesFieldServiceEngineerDCS a career:Job ;
+    career:jobTitle "Field Service Engineer - DCS" ;
+    career:requiresSkill career:ControlSystems,
+        career:FieldbusProtocols,
+        career:IndustrialNetworking,
+        career:MaintenanceScheduling,
+        career:PLCProgramming,
+        career:SCADASystems,
+        career:TechnicalSupport,
+        career:Troubleshooting ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=105&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&cs=1_116c7b21&cb=1793865223361&jobListingId=1010317023864&jrtk=5-yul1-0-1k6lb631pj0p3801-18d27f7e530aa721&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos5-agept-1010317023864&ja=403223503"^^xsd:anyURI .
+
+career:HuhtamkiSeniorDataPlatformEngineer a career:Job ;
+    career:jobTitle "Senior Data Platform Engineer" ;
+    career:requiresSkill career:ApacheSpark,
+        career:BigDataProcessing,
+        career:CloudInfrastructure,
+        career:ETLTools,
+        career:Hadoop,
+        career:NoSQLDatabases,
+        career:Python,
+        career:SQL ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=106&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&cs=1_d1a6392f&cb=1793865223362&jobListingId=1010316800845&jrtk=5-yul1-0-1k6lb631pj0p3801-404dbaef6e019ea6&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos6-agept-1010316800845&ja=403223503"^^xsd:anyURI .
+
+career:IQMQuantumComputersAdministrativeCoordinator a career:Job ;
+    career:jobTitle "Administrative Coordinator" ;
+    career:requiresSkill career:Accounting,
+        career:AttentionToDetail,
+        career:AuditPreparation,
+        career:BudgetTracking,
+        career:Communication,
+        career:DocumentManagement,
+        career:English,
+        career:EventAndTravelOrganization,
+        career:Excel,
+        career:ExpenseProcessing,
+        career:FinanceBasics,
+        career:FinancialCompliance,
+        career:InvoiceProcessing,
+        career:Japanese,
+        career:LegalBasics,
+        career:NEDOAdministration,
+        career:Organization,
+        career:PowerPoint,
+        career:ProcessBuilding,
+        career:ProcurementAdministration,
+        career:Reporting,
+        career:StakeholderCoordination,
+        career:Translation,
+        career:VendorManagement,
+        career:Word ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8185103-administrative-coordinator"^^xsd:anyURI .
+
+career:IQMQuantumComputersAdvancedFullStackSoftwareEngineer a career:Job ;
+    career:jobTitle "Advanced Full Stack Software Engineer" ;
+    career:requiresSkill career:ArgoWorkflows,
+        career:AsynchronousWorkflowSystems,
+        career:BackendDevelopment,
+        career:CICD,
+        career:CodeReview,
+        career:Communication,
+        career:Debugging,
+        career:Docker,
+        career:FrontendDevelopment,
+        career:JavaScript,
+        career:Nodejs,
+        career:OpenTelemetry,
+        career:PostgreSQL,
+        career:QuantumComputing,
+        career:RESTAPIs,
+        career:Redis,
+        career:TypeScript,
+        career:UXDesign,
+        career:Vuejs,
+        career:WorkingIndependently ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8672718-advanced-full-stack-software-engineer"^^xsd:anyURI .
+
+career:IQMQuantumComputersBusinessDevelopmentManager a career:Job ;
+    career:jobTitle "Business Development Manager" ;
+    career:requiresSkill career:AccountManagement,
+        career:BusinessDevelopment,
+        career:CDCS,
+        career:Communication,
+        career:ComplexDealClosing,
+        career:CustomerRelationshipManagement,
+        career:DataCenterIndustryKnowledge,
+        career:FluentEnglish,
+        career:FluentGerman,
+        career:HighPerformanceComputing,
+        career:ITIL,
+        career:MarketInsights,
+        career:PipelineManagement,
+        career:PresentingAtConferences,
+        career:PublicFunding,
+        career:PublicTenders,
+        career:QuantumComputingKnowledge,
+        career:Sales,
+        career:StakeholderManagement,
+        career:TrustBuilding,
+        career:WillingnessToTravel ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8551361-business-development-manager"^^xsd:anyURI .
+
+career:IQMQuantumComputersCleanroomCoordinator a career:Job ;
+    career:jobTitle "Cleanroom Coordinator" ;
+    career:requiresSkill career:AttentionToDetail,
+        career:CleanroomExperience,
+        career:Documentation,
+        career:English,
+        career:EquipmentInstallation,
+        career:InventoryManagement,
+        career:MESIntegration,
+        career:MeetingCoordination,
+        career:Organization,
+        career:Planning,
+        career:PreventiveMaintenancePlanning,
+        career:ProgressTracking,
+        career:ProjectCoordination,
+        career:Reporting,
+        career:Scheduling,
+        career:SemiconductorManufacturing,
+        career:SparePartsManagement,
+        career:StakeholderCommunication,
+        career:SubcontractorCoordination,
+        career:UtilityHookups,
+        career:VendorManagement,
+        career:VerbalCommunication,
+        career:WorkingUnderPressure,
+        career:WrittenCommunication ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8569876-cleanroom-coordinator"^^xsd:anyURI .
+
+career:IQMQuantumComputersCommunicationsManager a career:Job ;
+    career:jobTitle "Communications Manager" ;
+    career:requiresSkill career:AttentionToDetail,
+        career:B2BTechnologyCommunications,
+        career:CommunicationsCalendarManagement,
+        career:CorporateCommunications,
+        career:CoverageReporting,
+        career:ExecutiveMediaCoaching,
+        career:ExplainingTechnicalConcepts,
+        career:IndependentWorking,
+        career:JournalistRelationshipBuilding,
+        career:MediaMonitoring,
+        career:MediaRelations,
+        career:PRAgencyManagement,
+        career:PressReleaseWriting,
+        career:PublicRelations,
+        career:SocialMediaAmplification,
+        career:StakeholderCoordination,
+        career:StoryPitching,
+        career:WritingAndEditing ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8666346-communications-manager"^^xsd:anyURI .
+
+career:IQMQuantumComputersDesignEngineerMicroelectronicsPackaging a career:Job ;
+    career:jobTitle "Design Engineer, Microelectronics Packaging" ;
+    career:requiresSkill career:3DIntegration,
+        career:BumpBonding,
+        career:CeramicGlassAndSiliconProcesses,
+        career:CrossteamCoordination,
+        career:CryogenicMeasurement,
+        career:DCCharacterization,
+        career:DiePackaging,
+        career:ElectricalEngineering,
+        career:English,
+        career:ExperimentalPhysics,
+        career:Japanese,
+        career:MicrowaveCharacterization,
+        career:PCB,
+        career:PackageDesignCAD,
+        career:PartnerCollaboration,
+        career:RDLFanout,
+        career:SuperconductingMaterials,
+        career:SuperconductingQuantumHardware,
+        career:TechnicalDocumentation,
+        career:TestAndValidationPlanning,
+        career:ThermalCharacterization ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8377212-design-engineer-microelectronics-packaging"^^xsd:anyURI .
+
+career:IQMQuantumComputersFPGADesignEngineer a career:Job ;
+    career:jobTitle "FPGA Design Engineer" ;
+    career:requiresSkill career:Benchmarking,
+        career:ClockDomainCrossing,
+        career:ContinuousIntegration,
+        career:CrossdisciplinaryCollaboration,
+        career:DigitalLogic,
+        career:FPGADesign,
+        career:FPGAIPBlockDesign,
+        career:FPGAToolchains,
+        career:HDL,
+        career:HardwaresoftwareInterfaces,
+        career:HighperformanceFPGAFamilies,
+        career:HighspeedCommunicationProtocols,
+        career:IntelAlteraFPGAs,
+        career:Oscilloscope,
+        career:PerformanceProfiling,
+        career:Quartus,
+        career:RealtimeSystemsOptimization,
+        career:Scripting,
+        career:Simulation,
+        career:SpectrumAnalyzer,
+        career:TechnicalDocumentation,
+        career:VHDL,
+        career:Verification ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8181072-fpga-design-engineer"^^xsd:anyURI .
+
+career:IQMQuantumComputersJuniorQuantumEngineerPhDCandidate a career:Job ;
+    career:jobTitle "Junior Quantum Engineer (PhD candidate)" ;
+    career:requiresSkill career:Collaboration,
+        career:Communication,
+        career:DataAnalysis,
+        career:Documentation,
+        career:LaboratoryExperiments,
+        career:ProblemSolving,
+        career:Python,
+        career:QuantumComputing,
+        career:QuantumErrorCorrection,
+        career:QuantumInformationProcessing,
+        career:QuantumProcessingUnits,
+        career:QubitCalibration,
+        career:ScientificWriting,
+        career:SoftwareTesting,
+        career:SuperconductingQubits,
+        career:VersionControl ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8522248-junior-quantum-engineer-phd-candidate"^^xsd:anyURI .
+
+career:IQMQuantumComputersOpenApplication a career:Job ;
+    career:jobTitle "Open application" ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/1347124-open-application"^^xsd:anyURI .
+
+career:IQMQuantumComputersProgramManager a career:Job ;
+    career:jobTitle "Program Manager" ;
+    career:requiresSkill career:AIToolsForAutomation,
+        career:AuditAndAssessorEvidencePreparation,
+        career:CommercialAndBusinessDevelopment,
+        career:CostControl,
+        career:CostEstimationReview,
+        career:CrossfunctionalCollaboration,
+        career:Cryogenics,
+        career:ExecutiveCommunication,
+        career:FundingAndGrantManagement,
+        career:HPCdataCentres,
+        career:HardwareAndSoftwareProgramDelivery,
+        career:IPAndFreedomtooperateStrategy,
+        career:LicensingStrategy,
+        career:MilestonebasedContractManagement,
+        career:PMSoftware,
+        career:ProcurementManagement,
+        career:ProgramManagement,
+        career:QuantumComputingSystemArchitecture,
+        career:RiskManagement,
+        career:RoadmapPlanning,
+        career:ScheduleAndCriticalPathManagement,
+        career:StakeholderManagement,
+        career:SubcontractorManagement,
+        career:SuperconductingSystems,
+        career:TechnicalReportWriting,
+        career:UKFundingSystemKnowledge ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8633768-program-manager"^^xsd:anyURI .
+
+career:IQMQuantumComputersProjectManager a career:Job ;
+    career:jobTitle "Project Manager" ;
+    career:requiresSkill career:AgileScrum,
+        career:BudgetManagement,
+        career:ConflictMediation,
+        career:Confluence,
+        career:CrossfunctionalCoordination,
+        career:Cryogenics,
+        career:DependencyMapping,
+        career:Documentation,
+        career:English,
+        career:FundingAgencyReporting,
+        career:GermanC1,
+        career:GermanPublicFundingProgrammes,
+        career:GrantManagement,
+        career:HorizonEurope,
+        career:IPMA,
+        career:Jira,
+        career:PMP,
+        career:PRINCE2,
+        career:ProcessImprovement,
+        career:ProjectManagement,
+        career:ProjectScheduling,
+        career:QuantumComputing,
+        career:RDCoordination,
+        career:ResearchAdministration,
+        career:RiskManagement,
+        career:Semiconductors,
+        career:StakeholderCommunication,
+        career:TeamMotivation,
+        career:TechnicalCommunication,
+        career:WorkBreakdownStructure ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8399629-project-manager"^^xsd:anyURI .
+
+career:IQMQuantumComputersQuantumEngineerCalibrationAutomation a career:Job ;
+    career:jobTitle "Quantum Engineer, Calibration Automation" ;
+    career:requiresSkill career:AITooling,
+        career:BayesianOptimization,
+        career:CodeReview,
+        career:Communication,
+        career:DataAnalysis,
+        career:ExperimentalDesign,
+        career:HighperformanceComputing,
+        career:MachineLearning,
+        career:ModelDeployment,
+        career:Parallelization,
+        career:Physics,
+        career:Problemsolving,
+        career:Python,
+        career:QuantumEngineering,
+        career:QuantumSystemCalibration,
+        career:QubitReadout,
+        career:ReinforcementLearning,
+        career:SinglequbitGates,
+        career:SoftwareEngineering,
+        career:SoftwareTesting,
+        career:StatisticalMethods,
+        career:TimeseriesAnalysis,
+        career:TwoqubitGates,
+        career:VersionControl ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8217161-quantum-engineer-calibration-automation"^^xsd:anyURI .
+
+career:IQMQuantumComputersQuantumEngineerCalibrationBenchmarking a career:Job ;
+    career:jobTitle "Quantum Engineer, Calibration & Benchmarking" ;
+    career:requiresSkill career:AnalyticalThinking,
+        career:AttentionToDetail,
+        career:Benchmarking,
+        career:Communication,
+        career:CrossfunctionalCollaboration,
+        career:ExperimentalQuantumHardware,
+        career:Mentoring,
+        career:OptimizationAlgorithms,
+        career:Problemsolving,
+        career:Python,
+        career:QPUCalibration,
+        career:QuantumComputing,
+        career:QuantumMechanics,
+        career:ScientificDataAnalysis,
+        career:SuperconductingQubits ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/7549223-quantum-engineer-calibration-benchmarking"^^xsd:anyURI .
+
+career:IQMQuantumComputersQuantumEngineerFabrication a career:Job ;
+    career:jobTitle "Quantum Engineer, Fabrication" ;
+    career:requiresSkill career:CleanroomProcesses,
+        career:CrossfunctionalCollaboration,
+        career:DataAnalysis,
+        career:ExperimentalDesign,
+        career:MaterialsScience,
+        career:Mentoring,
+        career:Micronanofabrication,
+        career:PatentsAndPublications,
+        career:Physics,
+        career:ProcessDevelopment,
+        career:QuantumChipFabrication,
+        career:RD,
+        career:ScalingRDToManufacturing,
+        career:SemiconductorFabrication,
+        career:TechnicalCommunication,
+        career:TechnicalDocumentation,
+        career:TechnologyDevelopment,
+        career:Troubleshooting ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/7986220-quantum-engineer-fabrication"^^xsd:anyURI .
+
+career:IQMQuantumComputersQuantumEngineerGates a career:Job ;
+    career:jobTitle "Quantum Engineer, Gates" ;
+    career:requiresSkill career:AnalyticalSkills,
+        career:CalibrationAndCharacterizationRoutines,
+        career:CalibrationAutomation,
+        career:CollaborativeSoftwareDevelopment,
+        career:Communication,
+        career:CrossteamCollaboration,
+        career:CryogenicHardware,
+        career:Documentation,
+        career:GateFidelityAnalysis,
+        career:GatebasedQuantumComputation,
+        career:IndependentProblemsolving,
+        career:Mentoring,
+        career:Python,
+        career:QuantumControlFrameworks,
+        career:QuantumErrorCorrection,
+        career:QuantumGateControl,
+        career:QuantumProcessorBenchmarking,
+        career:RandomizedBenchmarking,
+        career:ScientificPublication,
+        career:SingleAndTwoqubitGateDevelopment,
+        career:SuperconductingQubits,
+        career:VersionControl ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8109358-quantum-engineer-gates"^^xsd:anyURI .
+
+career:IQMQuantumComputersQuantumEngineerReadout a career:Job ;
+    career:jobTitle "Quantum Engineer, Readout" ;
+    career:requiresSkill career:Benchmarking,
+        career:CircuitQED,
+        career:CrossfunctionalCollaboration,
+        career:CryogenicMicrowaveEngineering,
+        career:DataAnalysis,
+        career:ExperimentalLabWork,
+        career:Git,
+        career:ParametricAmplifiersJPATWPA,
+        career:PatentContribution,
+        career:Physics,
+        career:ProblemSolving,
+        career:Python,
+        career:QPUDesign,
+        career:QuantumErrorCorrection,
+        career:QuantumReadoutTechniques,
+        career:QubitCalibration,
+        career:ScientificPublishing,
+        career:SimulationAndModeling,
+        career:SuperconductingQubits,
+        career:TechnicalDocumentation ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/7544717-quantum-engineer-readout"^^xsd:anyURI .
+
+career:IQMQuantumComputersQuantumErrorCorrectionEngineer a career:Job ;
+    career:jobTitle "Quantum Error Correction Engineer" ;
+    career:requiresSkill career:BeliefPropagation,
+        career:CC,
+        career:CodeQuality,
+        career:DecodingAlgorithms,
+        career:Documentation,
+        career:FPGA,
+        career:FaultTolerantQuantumAlgorithms,
+        career:FaultTolerantQuantumComputing,
+        career:LatticeSurgery,
+        career:MachineLearningDecoding,
+        career:MinimumWeightPerfectMatching,
+        career:Python,
+        career:QuantumErrorCorrectingCodes,
+        career:QuantumErrorCorrection,
+        career:ResourceEstimation,
+        career:Rust,
+        career:ScientificPublishing,
+        career:ScientificSoftwareDevelopment,
+        career:SuperconductingQubits,
+        career:Teamwork,
+        career:TechnicalCommunication,
+        career:Testing,
+        career:TheoreticalPhysics,
+        career:UnionFind ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/7267642-quantum-error-correction-engineer"^^xsd:anyURI .
+
+career:IQMQuantumComputersQuantumErrorCorrectionExperimentEngineer a career:Job ;
+    career:jobTitle "Quantum Error Correction Experiment Engineer" ;
+    career:requiresSkill career:Collaboration,
+        career:DataAnalysis,
+        career:DecodingAlgorithms,
+        career:Documentation,
+        career:English,
+        career:EnvironmentManagement,
+        career:ErrorModelling,
+        career:ExperimentalQuantumComputing,
+        career:LatticeSurgery,
+        career:Python,
+        career:QuantumComputerControlHardware,
+        career:QuantumErrorCorrection,
+        career:QuantumInformationTheory,
+        career:QubitCalibration,
+        career:SoftwareTesting,
+        career:SuperconductingQuantumProcessors,
+        career:VersionControl,
+        career:WrittenAndVerbalCommunication ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/7384822-quantum-error-correction-experiment-engineer"^^xsd:anyURI .
+
+career:IQMQuantumComputersQuantumHardwareEngineer a career:Job ;
+    career:jobTitle "Quantum Hardware Engineer" ;
+    career:requiresSkill career:AutomatedDataAcquisition,
+        career:CryogenicExperiments,
+        career:CryostatOperation,
+        career:DataAnalysis,
+        career:ElectricalDesign,
+        career:ExperimentalPhysics,
+        career:LowTemperatureInstrumentation,
+        career:MeasurementInstrumentation,
+        career:MechanicalDesign,
+        career:MicrowaveMeasurements,
+        career:PrecisionDCMeasurements,
+        career:ProblemSolving,
+        career:Scripting,
+        career:TechnicalDocumentation,
+        career:Troubleshooting,
+        career:VacuumSystems ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8581428-quantum-hardware-engineer"^^xsd:anyURI .
+
+career:IQMQuantumComputersQuantumSystemImplementationEngineer a career:Job ;
+    career:jobTitle "Quantum System Implementation Engineer" ;
+    career:requiresSkill career:4wireLowResistanceMeasurements,
+        career:5SLeanPractices,
+        career:CryogenicSystems,
+        career:DataAnalysis,
+        career:DilutionRefrigerators,
+        career:ESDSafePractices,
+        career:HighVacuum,
+        career:ImpedanceMatching,
+        career:LabSafety,
+        career:MicrowaveComponentTesting,
+        career:Multimeter,
+        career:NoiseTroubleshooting,
+        career:PrecisionWiring,
+        career:ProblemSolving,
+        career:QuantumTechnology,
+        career:RFCablingAndCoaxialAssemblies,
+        career:RFEngineering,
+        career:RFMeasurements,
+        career:SignalGenerator,
+        career:SignalIntegrity,
+        career:Soldering,
+        career:Sparameters,
+        career:SpectrumAnalyser,
+        career:TechnicalDocumentation,
+        career:TransmissionLines,
+        career:Troubleshooting,
+        career:VNA ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8655755-quantum-system-implementation-engineer"^^xsd:anyURI .
+
+career:IQMQuantumComputersRDSiteLead a career:Job ;
+    career:jobTitle "R&D Site Lead" ;
+    career:requiresSkill career:Benchmarking,
+        career:BudgetManagement,
+        career:ControlSystems,
+        career:ControlstackIntegration,
+        career:CostCompliance,
+        career:HPC,
+        career:HiringAndLineManagement,
+        career:HybridQuantumclassicalWorkflows,
+        career:IPAndDataAgreements,
+        career:JobScheduling,
+        career:LowlatencyProcessing,
+        career:MilestoneReporting,
+        career:PartnershipManagement,
+        career:PhDInPhysicsEEOrCS,
+        career:ProjectManagement,
+        career:QuantumComputing,
+        career:QuantumErrorCorrection,
+        career:QuantumHardware,
+        career:RDTeamLeadership,
+        career:RealtimeDecoding,
+        career:ResourcePlanning,
+        career:SoftwareIntegration,
+        career:StakeholderCommunication,
+        career:TeamBuilding ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8633825-r-d-site-lead"^^xsd:anyURI .
+
+career:IQMQuantumComputersSeniorPartnershipManagerCryogenicComponents a career:Job ;
+    career:jobTitle "Senior Partnership Manager, Cryogenic Components" ;
+    career:requiresSkill career:ContractAndIPAgreements,
+        career:CryogenicRFAndMicrowaveComponents,
+        career:Cryogenics,
+        career:DilutionRefrigerators,
+        career:ExportControl,
+        career:FluentEnglish,
+        career:GrantProjectCoordination,
+        career:HardwareRoadmapPlanning,
+        career:InternationalTravel,
+        career:LowTemperaturePhysics,
+        career:Negotiation,
+        career:PartnershipManagement,
+        career:QuantumHardware,
+        career:RelationshipManagement,
+        career:StakeholderCommunication,
+        career:SuperconductingQubits,
+        career:SupplierEvaluationAndQualification,
+        career:SupplierManagement,
+        career:SupplyChainDevelopment,
+        career:SupplyRiskAssessment,
+        career:TechnicalBusinessDevelopment,
+        career:TechnicalReportWriting,
+        career:ThermalisationAndHeatLoads ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8630369-senior-partnership-manager-cryogenic-components"^^xsd:anyURI .
+
+career:IQMQuantumComputersSoftwareCyberSecuritySpecialist a career:Job ;
+    career:jobTitle "Software Cyber Security Specialist" ;
+    career:requiresSkill career:Agile,
+        career:AuditPreparation,
+        career:BusinessContinuity,
+        career:Coaching,
+        career:ComplianceDocumentation,
+        career:CrisisManagement,
+        career:CyberSecurity,
+        career:English,
+        career:IEC62443,
+        career:IncidentResponse,
+        career:InformationSecurity,
+        career:NetworkSecurity,
+        career:PenetrationTesting,
+        career:ProblemSolving,
+        career:RiskAssessment,
+        career:SecureSoftwareDevelopment,
+        career:SecurityControls,
+        career:SecurityProtocols,
+        career:SecurityTooling,
+        career:ShiftLeftSecurity,
+        career:SoftwareQualityAssurance,
+        career:StakeholderCommunication,
+        career:TechnicalDocumentation,
+        career:ThreatManagement,
+        career:VulnerabilityManagement ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8430241-software-cyber-security-specialist"^^xsd:anyURI .
+
+career:IQMQuantumComputersSourcingManager a career:Job ;
+    career:jobTitle "Sourcing Manager" ;
+    career:requiresSkill career:CapitalEquipmentPurchasing,
+        career:CategoryManagement,
+        career:Communication,
+        career:ContractManagement,
+        career:CrossfunctionalCollaboration,
+        career:Cryomechanics,
+        career:Cryostats,
+        career:DataAnalysis,
+        career:Decisionmaking,
+        career:ERPSystems,
+        career:ESGCompliance,
+        career:ElectronicsAndSemiconductors,
+        career:FluentEnglish,
+        career:HightechManufacturing,
+        career:KPIAnalysis,
+        career:MechanicalComponents,
+        career:Negotiation,
+        career:OutsourcingAndSubcontracting,
+        career:Procurement,
+        career:QualityManagement,
+        career:QuantumTechnology,
+        career:RegulatoryCompliance,
+        career:StakeholderManagement,
+        career:StrategicSourcing,
+        career:StrategicThinking,
+        career:SupplierManagement,
+        career:SupplierRiskManagement,
+        career:SupplyChainManagement,
+        career:TechnicalSpecsAndPartDrawings ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8590375-sourcing-manager"^^xsd:anyURI .
+
+career:IQMQuantumComputersTeamLeaderProduction a career:Job ;
+    career:jobTitle "Team Leader, Production" ;
+    career:requiresSkill career:5S,
+        career:ChangeManagement,
+        career:Coaching,
+        career:Communication,
+        career:ContinuousImprovement,
+        career:DailyManagement,
+        career:DatadrivenDecisionMaking,
+        career:Electronics,
+        career:KPITracking,
+        career:LeanManufacturing,
+        career:MechanicalDesign,
+        career:NonconformityHandling,
+        career:OnepieceFlow,
+        career:ProblemSolving,
+        career:ProductionManagement,
+        career:ProductionPlanning,
+        career:QualityManagement,
+        career:SafetyManagement,
+        career:StakeholderManagement,
+        career:TeamLeadership,
+        career:TechnicalDocumentation ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8637614-team-leader-production"^^xsd:anyURI .
+
+career:IQMQuantumComputersTechnicalSalesEngineerSolutionsConsultantSouthKorea a career:Job ;
+    career:jobTitle "Technical Sales Engineer / Solutions Consultant - South-Korea" ;
+    career:requiresSkill career:AI,
+        career:BidManagement,
+        career:BusinessDevelopment,
+        career:CloudTechnologies,
+        career:CrossculturalCommunication,
+        career:CustomerEngagement,
+        career:FluentEnglish,
+        career:HighPerformanceComputing,
+        career:Korean,
+        career:Problemsolving,
+        career:ProofOfConceptDelivery,
+        career:QuantumComputing,
+        career:RFIRFPRFQResponses,
+        career:SolutionDesign,
+        career:StakeholderManagement,
+        career:TechnicalPresentations,
+        career:TechnicalProposalWriting,
+        career:TechnicalSales,
+        career:TechnicalWorkshops,
+        career:Travel ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/7850776-technical-sales-engineer-solutions-consultant-south-korea"^^xsd:anyURI .
+
+career:IQMQuantumComputersVPProduct a career:Job ;
+    career:jobTitle "VP, Product" ;
+    career:requiresSkill career:BudgetPlanning,
+        career:BusinessModels,
+        career:CloudComputing,
+        career:CustomerInsight,
+        career:DeepTech,
+        career:ExecutiveCommunication,
+        career:Gotomarket,
+        career:HPC,
+        career:ManagerOfManagers,
+        career:MarketOpportunityIdentification,
+        career:ProductGovernance,
+        career:ProductManagement,
+        career:ProductPortfolioManagement,
+        career:ProductRoadmap,
+        career:ProductStrategy,
+        career:PublicSpeaking,
+        career:QuantumComputing,
+        career:StakeholderAlignment,
+        career:StrategicPrioritization,
+        career:TeamLeadership ;
+    career:sourceURL "https://iqm.teamtailor.com/jobs/8452441-vp-product"^^xsd:anyURI .
+
+career:IntuitionITIntuitiveTechnologyRecruitmentMagnoliaCMSDeveloper a career:Job ;
+    career:jobTitle "Magnolia CMS Developer" ;
+    career:requiresSkill career:ContentManagementSystemsCMS,
+        career:HTMLCSS,
+        career:Java,
+        career:JavaScript,
+        career:MagentoExperience,
+        career:RESTfulAPIs,
+        career:SpringFramework,
+        career:VersionControlGit ;
+    career:sourceURL "https://www.linkedin.com/jobs/view/4064299312/"^^xsd:anyURI .
+
+career:LearnDocker a owl:NamedIndividual,
+        career:CareerActivity ;
+    career:durationMinutes 180 ;
+    career:targetsOpportunity career:AIInternship001 .
+
+career:RaseborgLnsiUudenmaanHyvinvointialue a career:Job ;
+    career:jobTitle "Länsi-Uudenmaan hyvinvointialue" ;
+    career:requiresSkill career:DataAnalysis,
+        career:GIS,
+        career:MachineLearning,
+        career:Programming,
+        career:Python,
+        career:SQL,
+        career:StatisticalAnalysis,
+        career:WebDevelopment ;
+    career:sourceURL "https://www.linkedin.com/jobs/view/4487603484/"^^xsd:anyURI .
+
+career:RevolutionTechnologyFullStackDeveloperReactJSNodeJSAWS a career:Job ;
+    career:jobTitle "Full Stack Developer (ReactJS, NodeJS, AWS)" ;
+    career:requiresSkill career:AWS,
+        career:HTMLCSS,
+        career:JavaScript,
+        career:NodeJS,
+        career:RESTfulAPIs,
+        career:ReactJS,
+        career:SQL,
+        career:VersionControlGit ;
+    career:sourceURL "https://www.linkedin.com/jobs/view/4067193479/"^^xsd:anyURI .
+
+career:RovioDataAnalyst a career:Job ;
+    career:jobTitle "Data Analyst" ;
+    career:requiresSkill career:DataCleaning,
+        career:Excel,
+        career:MachineLearning,
+        career:Python,
+        career:R,
+        career:SQL,
+        career:StatisticalAnalysis,
+        career:Tableau ;
+    career:sourceURL "https://cts.indeed.com/v3/H4sIAAAAAAAA_42RUW-iQBDHvwvJ-XRUVnQBE3MR1BMV1NKe1hezuyy4LLCCC1abfvdu76FN7umSSSb5_TOZyfzetEYbaicpz5dht5uwB1bGlMYPRBTdmnRJzn9lfIQSFEOcEAfaKIGDQSepRTHKBGY9dFStQJKc9JoiIlmLJBOlTkt95h9pgVjekXwEOEwhlg5IBbZso9_BeBTL-_UStj1Hn4vfcYX3kuZhwzcrM5Lu3q-24BBVAhuHP_GM63n1-ELnXsoOEpdHeLlNAqdXzUvQ25erY3_veaR2beHFa-yEaz1Sp69lMVsID-fr0mmRbufulbYBr-vl82G7Y6uwxcKGmRi8vpysRRbtHu8WPefYwk-TW-VPbhMzDKzC9RkF7gouQ-Aamcto02fnmYNCEE2nbbDs0-cf5qTzygkeRWI8hlbQI9tpSqa7sT8w1vjOYy_ebDp1dv5-hZHUOZW2YWg_tUIbvmmIENGU0o-VENNwjIEJoKNClKYLgf9iYJiqYN8CQAUkZ4Q_nWrRpCcVyrqhX_R2pgq1jF6VHkU_hSnwv8rUhOSfC__Rpr2_fwCMJ3xjMgIAAA/hExCR3gyafI1uddFBsNJ-Ym17Lah5vFZLp0hSgz7lu4"^^xsd:anyURI .
+
+career:SEONWebScrapingSpecialistEURemoteCET a career:Job ;
+    career:jobTitle "Web Scraping Specialist - EU Remote CET" ;
+    career:requiresSkill career:APIIntegration,
+        career:AutomationTools,
+        career:DataCleaning,
+        career:DataParsing,
+        career:HTMLCSSKnowledge,
+        career:Python,
+        career:SQL,
+        career:WebScrapingLibraries ;
+    career:sourceURL "https://www.linkedin.com/jobs/view/4051311121/"^^xsd:anyURI .
+
+career:SRIYOGWebDesignerIntern a career:Internship ;
+    career:jobTitle "Web Designer Intern" ;
+    career:requiresSkill career:FrontendFrameworksReactAngularVuejs,
+        career:GraphicDesign,
+        career:HTMLCSS,
+        career:JavaScript,
+        career:ResponsiveDesign,
+        career:SEOPrinciples,
+        career:UserExperienceUXDesign,
+        career:VersionControlGit ;
+    career:sourceURL "https://www.linkedin.com/jobs/view/4487639317/"^^xsd:anyURI .
+
+career:SchneiderElectricLeadServiceEngineerLowVoltage a career:Job ;
+    career:jobTitle "Lead Service Engineer - Low Voltage" ;
+    career:requiresSkill career:CustomerInteraction,
+        career:ElectricalEngineeringFundamentals,
+        career:LowVoltageSystemsDesign,
+        career:ProjectManagement,
+        career:SchematicReading,
+        career:TechnicalDocumentation,
+        career:TestingAndCommissioning,
+        career:TroubleshootingTechniques ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=113&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&cs=1_0830ee14&cb=1793865223362&jobListingId=1010316073986&jrtk=5-yul1-0-1k6lb631pj0p3801-87d824eb02d0212f&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos13-age1d-1010316073986&ja=403223503"^^xsd:anyURI .
+
+career:SchneiderElectricServiceEngineer a career:Job ;
+    career:jobTitle "Service Engineer" ;
+    career:requiresSkill career:CustomerInteraction,
+        career:Documentation,
+        career:HardwareInstallation,
+        career:NetworkConfiguration,
+        career:ScriptingLanguages,
+        career:SoftwareInstallation,
+        career:Troubleshooting ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=107&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&cs=1_0ca4d351&cb=1793865223362&jobListingId=1010312133330&jrtk=5-yul1-0-1k6lb631pj0p3801-58f954b7646ad80f&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos7-age5d-1010312133330&ja=403223503"^^xsd:anyURI .
+
+career:SchneiderElectricUPSServiceEngineer a career:Job ;
+    career:jobTitle "UPS Service Engineer" ;
+    career:requiresSkill career:CustomerService,
+        career:ElectricalEngineering,
+        career:InstallationAndMaintenance,
+        career:Networking,
+        career:SafetyProcedures,
+        career:TechnicalSupport,
+        career:Troubleshooting,
+        career:UPSSystemKnowledge ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=108&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&cs=1_9a017068&cb=1793865223362&jobListingId=1010312133321&jrtk=5-yul1-0-1k6lb631pj0p3801-5759faddbe599319&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos8-age5d-1010312133321&ja=403223503"^^xsd:anyURI .
+
+career:SigmaSoftwareGroupPythonEngineerWithQAAutomationExperienceAccessibilityProductHouse a career:Job ;
+    career:jobTitle "Python Engineer with QA Automation experience (Accessibility Product House)" ;
+    career:requiresSkill career:AccessibilityTesting,
+        career:AutomationTesting,
+        career:Git,
+        career:Jenkins,
+        career:Pytest,
+        career:Python,
+        career:SQL,
+        career:Selenium ;
+    career:sourceURL "https://www.linkedin.com/jobs/view/4069892480/"^^xsd:anyURI .
+
+career:SignifyTechnologySoftwareEngineer a career:Job ;
+    career:jobTitle "Software Engineer" ;
+    career:requiresSkill career:APIDevelopment,
+        career:C,
+        career:DataStructures,
+        career:Git,
+        career:Java,
+        career:JavaScript,
+        career:Python,
+        career:SQL ;
+    career:sourceURL "https://www.linkedin.com/jobs/view/4067401546/"^^xsd:anyURI .
+
+career:StoraEnsoAIAgentEngineer a career:Job ;
+    career:jobTitle "AI Agent Engineer" ;
+    career:requiresSkill career:CloudComputing,
+        career:DataStructuresAndAlgorithms,
+        career:DeepLearning,
+        career:MachineLearning,
+        career:NaturalLanguageProcessing,
+        career:Python,
+        career:SQL,
+        career:VersionControl ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=101&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&cs=1_8726dd3a&cb=1793865223361&jobListingId=1010316998431&jrtk=5-yul1-0-1k6lb631pj0p3801-1e6fd9b42e1fd56d&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos1-agept-1010316998431&ja=403223503"^^xsd:anyURI .
+
+career:ThesisOpportunity a owl:Class ;
     rdfs:subClassOf career:CareerOpportunity .
+
+career:VerdaSeniorGitLabEngineer a career:Job ;
+    career:jobTitle "Senior GitLab Engineer" ;
+    career:requiresSkill career:CICDPipelines,
+        career:ContinuousIntegration,
+        career:DevOps,
+        career:Git,
+        career:GitLab,
+        career:Linux,
+        career:ProblemSolving,
+        career:VersionControl ;
+    career:sourceURL "https://www.glassdoor.com/partner/jobListing.htm?pos=110&ao=1136043&s=224&guid=000001a1aa94fe2c943f634e91492f93&src=GD_JOB_AD&t=JA&vt=e&uido=65037B6D8AE28E8D539E56167EF3A25E&cs=1_57429ef1&cb=1793865223362&jobListingId=1010311756937&jrtk=5-yul1-0-1k6lb631pj0p3801-add70f650a9370f6&tgt=GD_JOB_VIEW&utm_medium=email&utm_source=jobalert&utm_campaign=jobAlertAlert&utm_content=ja-jobpos10-age5d-1010311756937&ja=403223503"^^xsd:anyURI .
 
 career:achievesGoal a owl:ObjectProperty ;
     rdfs:domain career:CareerPlan ;
@@ -81,6 +1041,26 @@ career:jobTitle a owl:DatatypeProperty ;
     rdfs:domain career:CareerOpportunity ;
     rdfs:range xsd:string .
 
+career:mira a career:Student ;
+    career:hasSkill career:Agile,
+        career:Budgeting,
+        career:Documentation,
+        career:Excel,
+        career:Jira,
+        career:MSProject,
+        career:MeetingOrganisation,
+        career:PRINCE2,
+        career:Procurement,
+        career:ProjectManagement,
+        career:Reporting,
+        career:RiskManagement,
+        career:Scheduling,
+        career:Scrum,
+        career:ScrumMaster,
+        career:StakeholderCommunication,
+        career:SupplierManagement,
+        career:TravelCoordination .
+
 career:offeredBy a owl:ObjectProperty ;
     rdfs:domain career:CareerOpportunity ;
     rdfs:range career:Organization .
@@ -121,57 +1101,1137 @@ career:topObjectProperty a owl:ObjectProperty ;
     rdfs:domain career:CareerOpportunity ;
     rdfs:range career:Skill .
 
+career:3DIntegration a career:Skill .
+
+career:4wireLowResistanceMeasurements a career:Skill .
+
+career:5S a career:Skill .
+
+career:5SLeanPractices a career:Skill .
+
+career:AI a career:Skill .
+
 career:AIInternship001 a owl:NamedIndividual,
         career:Internship ;
     career:requiresSkill career:Docker,
         career:Python .
 
-career:ElhamCareerPlan a owl:NamedIndividual,
-        career:CareerPlan ;
-    career:achievesGoal career:GetAIInternship ;
-    career:includesActivity career:LearnDocker .
+career:AITooling a career:Skill .
 
-career:LangGraph a career:Skill .
+career:AIToolsForAutomation a career:Skill .
 
-career:LearnDocker a owl:NamedIndividual,
-        career:CareerActivity ;
-    career:durationMinutes 180 ;
-    career:targetsOpportunity career:AIInternship001 .
+career:APIIntegration a career:Skill .
 
-career:MachineLearning a career:Skill .
+career:APITesting a career:Skill .
 
-career:RDF a career:Skill .
+career:AccessibilityTesting a career:Skill .
 
-career:ThesisOpportunity a owl:Class ;
-    rdfs:subClassOf career:CareerOpportunity .
+career:AccountManagement a career:Skill .
 
-career:GetAIInternship a owl:NamedIndividual,
-        career:CareerGoal .
+career:Accounting a career:Skill .
 
-career:Internship a owl:Class ;
-    rdfs:subClassOf career:CareerOpportunity .
+career:AgileScrum a career:Skill .
 
-career:Organization a owl:Class .
+career:AlgorithmDesign a career:Skill .
+
+career:AnalyticalSkills a career:Skill .
+
+career:AnalyticalThinking a career:Skill .
+
+career:ApacheSpark a career:Skill .
+
+career:Arduino a career:Skill .
+
+career:ArgoWorkflows a career:Skill .
+
+career:AsynchronousWorkflowSystems a career:Skill .
+
+career:AuditAndAssessorEvidencePreparation a career:Skill .
+
+career:AutomatedDataAcquisition a career:Skill .
+
+career:Automation a career:Skill .
+
+career:AutomationScripting a career:Skill .
+
+career:AutomationSoftware a career:Skill .
+
+career:AutomationTesting a career:Skill .
+
+career:AutomationTools a career:Skill .
+
+career:B2BTechnologyCommunications a career:Skill .
+
+career:BackendDevelopment a career:Skill .
+
+career:BayesianOptimization a career:Skill .
+
+career:BeliefPropagation a career:Skill .
+
+career:BidManagement a career:Skill .
+
+career:BudgetPlanning a career:Skill .
+
+career:BudgetTracking a career:Skill .
+
+career:BuildingAutomationSystems a career:Skill .
+
+career:BumpBonding a career:Skill .
+
+career:BusinessContinuity a career:Skill .
+
+career:BusinessModels a career:Skill .
+
+career:CC a career:Skill .
+
+career:CDCS a career:Skill .
+
+career:CICD a career:Skill .
+
+career:CICDPipelines a career:Skill .
+
+career:CalibrationAndCharacterizationRoutines a career:Skill .
+
+career:CalibrationAutomation a career:Skill .
+
+career:CapitalEquipmentPurchasing a career:Skill .
+
+career:CategoryManagement a career:Skill .
+
+career:CeramicGlassAndSiliconProcesses a career:Skill .
+
+career:ChangeManagement a career:Skill .
+
+career:CircuitQED a career:Skill .
+
+career:CleanroomExperience a career:Skill .
+
+career:CleanroomProcesses a career:Skill .
+
+career:ClockDomainCrossing a career:Skill .
+
+career:CloudInfrastructure a career:Skill .
+
+career:CodeQuality a career:Skill .
+
+career:CollaborativeSoftwareDevelopment a career:Skill .
+
+career:CommercialAndBusinessDevelopment a career:Skill .
+
+career:CommunicationsCalendarManagement a career:Skill .
+
+career:ComplexDealClosing a career:Skill .
+
+career:ComplianceDocumentation a career:Skill .
+
+career:ComputerVision a career:Skill .
+
+career:ConflictMediation a career:Skill .
+
+career:Confluence a career:Skill .
+
+career:ConstructionKnowledge a career:Skill .
+
+career:ContentManagementSystemsCMS a career:Skill .
+
+career:ContinuousImprovement a career:Skill .
+
+career:ContractAndIPAgreements a career:Skill .
+
+career:ContractManagement a career:Skill .
+
+career:ControlstackIntegration a career:Skill .
+
+career:CorporateCommunications a career:Skill .
+
+career:CostCompliance a career:Skill .
+
+career:CostControl a career:Skill .
+
+career:CostEstimationReview a career:Skill .
+
+career:CoverageReporting a career:Skill .
+
+career:CrisisManagement a career:Skill .
+
+career:CrossculturalCommunication a career:Skill .
+
+career:CrossdisciplinaryCollaboration a career:Skill .
+
+career:CrossfunctionalCoordination a career:Skill .
+
+career:CrossteamCollaboration a career:Skill .
+
+career:CrossteamCoordination a career:Skill .
+
+career:CryogenicExperiments a career:Skill .
+
+career:CryogenicHardware a career:Skill .
+
+career:CryogenicMeasurement a career:Skill .
+
+career:CryogenicMicrowaveEngineering a career:Skill .
+
+career:CryogenicRFAndMicrowaveComponents a career:Skill .
+
+career:CryogenicSystems a career:Skill .
+
+career:Cryomechanics a career:Skill .
+
+career:CryostatOperation a career:Skill .
+
+career:Cryostats a career:Skill .
+
+career:CustomerEngagement a career:Skill .
+
+career:CustomerInsight a career:Skill .
+
+career:CustomerRelationshipManagement a career:Skill .
+
+career:CyberSecurity a career:Skill .
+
+career:DCCharacterization a career:Skill .
+
+career:DailyManagement a career:Skill .
+
+career:DataCenterIndustryKnowledge a career:Skill .
+
+career:DataParsing a career:Skill .
+
+career:DataStructuresAndAlgorithms a career:Skill .
+
+career:DataTransformation a career:Skill .
+
+career:DataWarehousing a career:Skill .
+
+career:DatabaseManagement a career:Skill .
+
+career:DatadrivenDecisionMaking a career:Skill .
+
+career:Debugging a career:Skill .
+
+career:Decisionmaking a career:Skill .
+
+career:DeepTech a career:Skill .
+
+career:DependencyMapping a career:Skill .
+
+career:DevOps a career:Skill .
+
+career:DiePackaging a career:Skill .
+
+career:DigitalLogic a career:Skill .
+
+career:Django a career:Skill .
+
+career:DocumentManagement a career:Skill .
+
+career:DrivingLicense a career:Skill .
+
+career:ERPSystems a career:Skill .
+
+career:ESDSafePractices a career:Skill .
+
+career:ESGCompliance a career:Skill .
+
+career:ETL a career:Skill .
+
+career:ETLTools a career:Skill .
+
+career:ElectricalCodeCompliance a career:Skill .
+
+career:ElectricalEngineeringFundamentals a career:Skill .
+
+career:Electronics a career:Skill .
+
+career:ElectronicsAndSemiconductors a career:Skill .
+
+career:EmbeddedSystems a career:Skill .
+
+career:EmergencyPowerSystems a career:Skill .
+
+career:EnvironmentManagement a career:Skill .
+
+career:EquipmentInstallation a career:Skill .
+
+career:ErrorModelling a career:Skill .
+
+career:EventAndTravelOrganization a career:Skill .
+
+career:ExecutiveMediaCoaching a career:Skill .
+
+career:ExpenseProcessing a career:Skill .
+
+career:ExperimentalLabWork a career:Skill .
+
+career:ExperimentalQuantumComputing a career:Skill .
+
+career:ExperimentalQuantumHardware a career:Skill .
+
+career:ExplainingTechnicalConcepts a career:Skill .
+
+career:ExportControl a career:Skill .
+
+career:FPGA a career:Skill .
+
+career:FPGADesign a career:Skill .
+
+career:FPGAIPBlockDesign a career:Skill .
+
+career:FPGAToolchains a career:Skill .
+
+career:FaultTolerantQuantumAlgorithms a career:Skill .
+
+career:FaultTolerantQuantumComputing a career:Skill .
+
+career:FieldbusProtocols a career:Skill .
+
+career:FinanceBasics a career:Skill .
+
+career:FinancialCompliance a career:Skill .
+
+career:FluentGerman a career:Skill .
+
+career:ForkliftOperation a career:Skill .
+
+career:ForkliftSafety a career:Skill .
+
+career:FrontendDevelopment a career:Skill .
+
+career:FrontendFrameworksReactAngularVuejs a career:Skill .
+
+career:FundingAgencyReporting a career:Skill .
+
+career:FundingAndGrantManagement a career:Skill .
+
+career:GIS a career:Skill .
+
+career:GPSNavigation a career:Skill .
+
+career:GateFidelityAnalysis a career:Skill .
+
+career:GatebasedQuantumComputation a career:Skill .
+
+career:GermanC1 a career:Skill .
+
+career:GermanPublicFundingProgrammes a career:Skill .
+
+career:GitLab a career:Skill .
+
+career:Gotomarket a career:Skill .
+
+career:GrantManagement a career:Skill .
+
+career:GrantProjectCoordination a career:Skill .
+
+career:GraphicDesign a career:Skill .
+
+career:HDL a career:Skill .
+
+career:HPCdataCentres a career:Skill .
+
+career:HTMLCSSKnowledge a career:Skill .
+
+career:HVACControls a career:Skill .
+
+career:Hadoop a career:Skill .
+
+career:HardwareAndSoftwareProgramDelivery a career:Skill .
+
+career:HardwareInstallation a career:Skill .
+
+career:HardwareRoadmapPlanning a career:Skill .
+
+career:HardwaresoftwareInterfaces a career:Skill .
+
+career:HighVacuum a career:Skill .
+
+career:HighperformanceComputing a career:Skill .
+
+career:HighperformanceFPGAFamilies a career:Skill .
+
+career:HighspeedCommunicationProtocols a career:Skill .
+
+career:HightechManufacturing a career:Skill .
+
+career:HiringAndLineManagement a career:Skill .
+
+career:HorizonEurope a career:Skill .
+
+career:HybridQuantumclassicalWorkflows a career:Skill .
+
+career:IEC62443 a career:Skill .
+
+career:IPAndDataAgreements a career:Skill .
+
+career:IPAndFreedomtooperateStrategy a career:Skill .
+
+career:IPMA a career:Skill .
+
+career:ITIL a career:Skill .
+
+career:ImpedanceMatching a career:Skill .
+
+career:IncidentResponse a career:Skill .
+
+career:IndependentProblemsolving a career:Skill .
+
+career:IndependentWorking a career:Skill .
+
+career:IndustrialNetworking a career:Skill .
+
+career:InformationSecurity a career:Skill .
+
+career:InstallationAndMaintenance a career:Skill .
+
+career:IntelAlteraFPGAs a career:Skill .
+
+career:InternationalTravel a career:Skill .
+
+career:InventoryManagement a career:Skill .
+
+career:InvoiceProcessing a career:Skill .
+
+career:Jenkins a career:Skill .
+
+career:JobScheduling a career:Skill .
+
+career:JournalistRelationshipBuilding a career:Skill .
+
+career:KPIAnalysis a career:Skill .
+
+career:KPITracking a career:Skill .
+
+career:Korean a career:Skill .
+
+career:LabSafety a career:Skill .
+
+career:LaboratoryExperiments a career:Skill .
+
+career:LeanManufacturing a career:Skill .
+
+career:LegalBasics a career:Skill .
+
+career:LicensingStrategy a career:Skill .
+
+career:Linux a career:Skill .
+
+career:LogisticsKnowledge a career:Skill .
+
+career:LowTemperatureInstrumentation a career:Skill .
+
+career:LowTemperaturePhysics a career:Skill .
+
+career:LowVoltageSystemsDesign a career:Skill .
+
+career:LowlatencyProcessing a career:Skill .
+
+career:MESIntegration a career:Skill .
+
+career:MachineLearningDecoding a career:Skill .
+
+career:MagentoExperience a career:Skill .
+
+career:MaintenanceAndRepair a career:Skill .
+
+career:MaintenanceScheduling a career:Skill .
+
+career:ManagerOfManagers a career:Skill .
+
+career:MarketInsights a career:Skill .
+
+career:MarketOpportunityIdentification a career:Skill .
+
+career:MaterialsScience a career:Skill .
+
+career:MeasurementInstrumentation a career:Skill .
+
+career:MechanicalComponents a career:Skill .
+
+career:MediaMonitoring a career:Skill .
+
+career:MediaRelations a career:Skill .
+
+career:MeetingCoordination a career:Skill .
+
+career:MeetingOrganisation a career:Skill .
+
+career:Micronanofabrication a career:Skill .
+
+career:MicrowaveCharacterization a career:Skill .
+
+career:MicrowaveComponentTesting a career:Skill .
+
+career:MicrowaveMeasurements a career:Skill .
+
+career:MilestoneReporting a career:Skill .
+
+career:MilestonebasedContractManagement a career:Skill .
+
+career:MinimumWeightPerfectMatching a career:Skill .
+
+career:ModelDeployment a career:Skill .
+
+career:Multimeter a career:Skill .
+
+career:NEDOAdministration a career:Skill .
+
+career:NaturalLanguageProcessing a career:Skill .
+
+career:NetworkConfiguration a career:Skill .
+
+career:NetworkSecurity a career:Skill .
+
+career:Networking a career:Skill .
+
+career:NoSQLDatabases a career:Skill .
+
+career:NodeJS a career:Skill .
+
+career:NoiseTroubleshooting a career:Skill .
+
+career:NonconformityHandling a career:Skill .
+
+career:OnepieceFlow a career:Skill .
+
+career:OpenTelemetry a career:Skill .
+
+career:OptimizationAlgorithms a career:Skill .
+
+career:Oscilloscope a career:Skill .
+
+career:OutsourcingAndSubcontracting a career:Skill .
+
+career:PCB a career:Skill .
+
+career:PLCProgramming a career:Skill .
+
+career:PMP a career:Skill .
+
+career:PMSoftware a career:Skill .
+
+career:PRAgencyManagement a career:Skill .
+
+career:PackageDesignCAD a career:Skill .
+
+career:Parallelization a career:Skill .
+
+career:ParametricAmplifiersJPATWPA a career:Skill .
+
+career:PartnerCollaboration a career:Skill .
+
+career:PatentContribution a career:Skill .
+
+career:PatentsAndPublications a career:Skill .
+
+career:PenetrationTesting a career:Skill .
+
+career:PerformanceProfiling a career:Skill .
+
+career:PhDInPhysicsEEOrCS a career:Skill .
+
+career:PipelineManagement a career:Skill .
+
+career:Planning a career:Skill .
+
+career:PostgreSQL a career:Skill .
+
+career:PowerPoint a career:Skill .
+
+career:PowerSystemAnalysis a career:Skill .
+
+career:PrecisionDCMeasurements a career:Skill .
+
+career:PrecisionWiring a career:Skill .
+
+career:PresentingAtConferences a career:Skill .
+
+career:PressReleaseWriting a career:Skill .
+
+career:PreventiveMaintenancePlanning a career:Skill .
+
+career:ProcessBuilding a career:Skill .
+
+career:ProcessDevelopment a career:Skill .
+
+career:ProcessImprovement a career:Skill .
+
+career:ProcurementAdministration a career:Skill .
+
+career:ProcurementManagement a career:Skill .
+
+career:ProductGovernance a career:Skill .
+
+career:ProductManagement a career:Skill .
+
+career:ProductPortfolioManagement a career:Skill .
+
+career:ProductRoadmap a career:Skill .
+
+career:ProductStrategy a career:Skill .
+
+career:ProductionManagement a career:Skill .
+
+career:ProductionPlanning a career:Skill .
+
+career:ProgramManagement a career:Skill .
+
+career:Programming a career:Skill .
+
+career:ProgressTracking a career:Skill .
+
+career:ProjectCoordination a career:Skill .
+
+career:ProjectScheduling a career:Skill .
+
+career:ProofOfConceptDelivery a career:Skill .
+
+career:PublicFunding a career:Skill .
+
+career:PublicRelations a career:Skill .
+
+career:PublicSpeaking a career:Skill .
+
+career:PublicTenders a career:Skill .
+
+career:Pytest a career:Skill .
+
+career:QPUCalibration a career:Skill .
+
+career:QPUDesign a career:Skill .
+
+career:QualityControl a career:Skill .
+
+career:QuantumChipFabrication a career:Skill .
+
+career:QuantumComputerControlHardware a career:Skill .
+
+career:QuantumComputingKnowledge a career:Skill .
+
+career:QuantumComputingSystemArchitecture a career:Skill .
+
+career:QuantumControlFrameworks a career:Skill .
+
+career:QuantumEngineering a career:Skill .
+
+career:QuantumErrorCorrectingCodes a career:Skill .
+
+career:QuantumGateControl a career:Skill .
+
+career:QuantumInformationProcessing a career:Skill .
+
+career:QuantumInformationTheory a career:Skill .
+
+career:QuantumMechanics a career:Skill .
+
+career:QuantumProcessingUnits a career:Skill .
+
+career:QuantumProcessorBenchmarking a career:Skill .
+
+career:QuantumReadoutTechniques a career:Skill .
+
+career:QuantumSystemCalibration a career:Skill .
+
+career:Quartus a career:Skill .
+
+career:QubitReadout a career:Skill .
+
+career:R a career:Skill .
+
+career:RD a career:Skill .
+
+career:RDCoordination a career:Skill .
+
+career:RDLFanout a career:Skill .
+
+career:RDTeamLeadership a career:Skill .
+
+career:RESTAPI a career:Skill .
+
+career:RESTAPIs a career:Skill .
+
+career:RFCablingAndCoaxialAssemblies a career:Skill .
+
+career:RFEngineering a career:Skill .
+
+career:RFIRFPRFQResponses a career:Skill .
+
+career:RFMeasurements a career:Skill .
+
+career:RandomizedBenchmarking a career:Skill .
+
+career:React a career:Skill .
+
+career:ReactJS a career:Skill .
+
+career:RealtimeDecoding a career:Skill .
+
+career:RealtimeSystemsOptimization a career:Skill .
+
+career:Redis a career:Skill .
+
+career:RegulatoryCompliance a career:Skill .
+
+career:ReinforcementLearning a career:Skill .
+
+career:RelationshipManagement a career:Skill .
+
+career:ResearchAdministration a career:Skill .
+
+career:ResourceEstimation a career:Skill .
+
+career:ResourcePlanning a career:Skill .
+
+career:ResponsiveDesign a career:Skill .
+
+career:RiskAssessment a career:Skill .
+
+career:RoadmapPlanning a career:Skill .
+
+career:RoboticsFramework a career:Skill .
+
+career:Rust a career:Skill .
+
+career:SCADASystems a career:Skill .
+
+career:SEOPrinciples a career:Skill .
+
+career:SafetyManagement a career:Skill .
+
+career:SafetyProcedures a career:Skill .
+
+career:Sales a career:Skill .
+
+career:ScalingRDToManufacturing a career:Skill .
+
+career:ScheduleAndCriticalPathManagement a career:Skill .
+
+career:SchematicReading a career:Skill .
+
+career:ScientificDataAnalysis a career:Skill .
+
+career:ScientificPublication a career:Skill .
+
+career:ScientificSoftwareDevelopment a career:Skill .
+
+career:ScientificWriting a career:Skill .
+
+career:ScriptingLanguages a career:Skill .
+
+career:Scrum a career:Skill .
+
+career:ScrumMaster a career:Skill .
+
+career:SecureSoftwareDevelopment a career:Skill .
+
+career:Security a career:Skill .
+
+career:SecurityControls a career:Skill .
+
+career:SecurityProtocols a career:Skill .
+
+career:SecurityTooling a career:Skill .
+
+career:Selenium a career:Skill .
+
+career:SemiconductorFabrication a career:Skill .
+
+career:SemiconductorManufacturing a career:Skill .
+
+career:Semiconductors a career:Skill .
+
+career:ShiftLeftSecurity a career:Skill .
+
+career:SignalGenerator a career:Skill .
+
+career:SignalIntegrity a career:Skill .
+
+career:Simulation a career:Skill .
+
+career:SimulationAndModeling a career:Skill .
+
+career:SingleAndTwoqubitGateDevelopment a career:Skill .
+
+career:SinglequbitGates a career:Skill .
+
+career:Snowflake a career:Skill .
+
+career:SocialMediaAmplification a career:Skill .
+
+career:SoftwareEngineering a career:Skill .
+
+career:SoftwareInstallation a career:Skill .
+
+career:SoftwareIntegration a career:Skill .
+
+career:SoftwareQualityAssurance a career:Skill .
+
+career:Soldering a career:Skill .
+
+career:SolutionDesign a career:Skill .
+
+career:Sparameters a career:Skill .
+
+career:SparePartsManagement a career:Skill .
+
+career:SpectrumAnalyser a career:Skill .
+
+career:SpectrumAnalyzer a career:Skill .
+
+career:SpringFramework a career:Skill .
+
+career:StakeholderAlignment a career:Skill .
+
+career:StatisticalMethods a career:Skill .
+
+career:StoryPitching a career:Skill .
+
+career:StrategicPrioritization a career:Skill .
+
+career:StrategicSourcing a career:Skill .
+
+career:StrategicThinking a career:Skill .
+
+career:SubcontractorCoordination a career:Skill .
+
+career:SubcontractorManagement a career:Skill .
+
+career:SuperconductingMaterials a career:Skill .
+
+career:SuperconductingQuantumHardware a career:Skill .
+
+career:SuperconductingQuantumProcessors a career:Skill .
+
+career:SuperconductingSystems a career:Skill .
+
+career:SupplierEvaluationAndQualification a career:Skill .
+
+career:SupplierRiskManagement a career:Skill .
+
+career:SupplyChainDevelopment a career:Skill .
+
+career:SupplyChainManagement a career:Skill .
+
+career:SupplyRiskAssessment a career:Skill .
+
+career:Tableau a career:Skill .
+
+career:TeamBuilding a career:Skill .
+
+career:TeamMotivation a career:Skill .
+
+career:Teamwork a career:Skill .
+
+career:TechnicalBusinessDevelopment a career:Skill .
+
+career:TechnicalPresentations a career:Skill .
+
+career:TechnicalProposalWriting a career:Skill .
+
+career:TechnicalSales a career:Skill .
+
+career:TechnicalSpecsAndPartDrawings a career:Skill .
+
+career:TechnicalWorkshops a career:Skill .
+
+career:TechnologyDevelopment a career:Skill .
+
+career:TestAndValidationPlanning a career:Skill .
+
+career:TestAutomation a career:Skill .
+
+career:Testing a career:Skill .
+
+career:TestingAndCommissioning a career:Skill .
+
+career:TestingFrameworks a career:Skill .
+
+career:TheoreticalPhysics a career:Skill .
+
+career:ThermalCharacterization a career:Skill .
+
+career:ThermalisationAndHeatLoads a career:Skill .
+
+career:ThreatManagement a career:Skill .
+
+career:TimeManagement a career:Skill .
+
+career:TimeseriesAnalysis a career:Skill .
+
+career:TrafficAwareness a career:Skill .
+
+career:Translation a career:Skill .
+
+career:TransmissionLines a career:Skill .
+
+career:Travel a career:Skill .
+
+career:TravelCoordination a career:Skill .
+
+career:TroubleshootingTechniques a career:Skill .
+
+career:TrustBuilding a career:Skill .
+
+career:TwoqubitGates a career:Skill .
+
+career:TypeScript a career:Skill .
+
+career:UKFundingSystemKnowledge a career:Skill .
+
+career:UPSAndPowerDistribution a career:Skill .
+
+career:UPSSystemKnowledge a career:Skill .
+
+career:UXDesign a career:Skill .
+
+career:UnionFind a career:Skill .
+
+career:UserExperienceUXDesign a career:Skill .
+
+career:UtilityHookups a career:Skill .
+
+career:VHDL a career:Skill .
+
+career:VNA a career:Skill .
+
+career:VacuumSystems a career:Skill .
+
+career:VerbalCommunication a career:Skill .
+
+career:Verification a career:Skill .
+
+career:VersionControlSystemsEgGit a career:Skill .
+
+career:Vuejs a career:Skill .
+
+career:VulnerabilityManagement a career:Skill .
+
+career:WebScrapingLibraries a career:Skill .
+
+career:WillingnessToTravel a career:Skill .
+
+career:Word a career:Skill .
+
+career:WorkBreakdownStructure a career:Skill .
+
+career:WorkingIndependently a career:Skill .
+
+career:WorkingUnderPressure a career:Skill .
+
+career:WritingAndEditing a career:Skill .
+
+career:WrittenAndVerbalCommunication a career:Skill .
+
+career:WrittenCommunication a career:Skill .
+
+career:APIDevelopment a career:Skill .
+
+career:AWS a career:Skill .
+
+career:Agile a career:Skill .
+
+career:AuditPreparation a career:Skill .
+
+career:BigDataProcessing a career:Skill .
+
+career:BudgetManagement a career:Skill .
+
+career:Budgeting a career:Skill .
+
+career:BusinessDevelopment a career:Skill .
+
+career:CloudTechnologies a career:Skill .
+
+career:Coaching a career:Skill .
+
+career:CodeReview a career:Skill .
+
+career:Collaboration a career:Skill .
+
+career:ContinuousIntegration a career:Skill .
+
+career:ControlSystems a career:Skill .
+
+career:CustomerInteraction a career:Skill .
+
+career:CustomerService a career:Skill .
+
+career:DataCleaning a career:Skill .
+
+career:DataStructures a career:Skill .
+
+career:DecodingAlgorithms a career:Skill .
+
+career:DeepLearning a career:Skill .
+
+career:DilutionRefrigerators a career:Skill .
+
+career:ElectricalDesign a career:Skill .
+
+career:ElectricalEngineering a career:Skill .
+
+career:ExecutiveCommunication a career:Skill .
+
+career:ExperimentalDesign a career:Skill .
+
+career:ExperimentalPhysics a career:Skill .
+
+career:HPC a career:Skill .
+
+career:HighPerformanceComputing a career:Skill .
+
+career:Japanese a career:Skill .
+
+career:Jira a career:Skill .
+
+career:LatticeSurgery a career:Skill .
+
+career:MSProject a career:Skill .
+
+career:MechanicalDesign a career:Skill .
+
+career:Negotiation a career:Skill .
+
+career:Nodejs a career:Skill .
+
+career:PRINCE2 a career:Skill .
+
+career:PartnershipManagement a career:Skill .
+
+career:Procurement a career:Skill .
+
+career:QualityManagement a career:Skill .
+
+career:QuantumHardware a career:Skill .
+
+career:QuantumTechnology a career:Skill .
+
+career:RESTfulAPIs a career:Skill .
+
+career:ScientificPublishing a career:Skill .
+
+career:Scripting a career:Skill .
+
+career:StakeholderCoordination a career:Skill .
+
+career:StatisticalAnalysis a career:Skill .
+
+career:TeamLeadership a career:Skill .
+
+career:TechnicalReportWriting a career:Skill .
+
+career:TechnicalSupport a career:Skill .
+
+career:VendorManagement a career:Skill .
+
+career:WebDevelopment a career:Skill .
+
+career:C a career:Skill .
 
 career:CareerGoal a owl:Class .
 
+career:CloudComputing a career:Skill .
+
 career:Course a owl:Class .
+
+career:Cryogenics a career:Skill .
+
+career:Excel a career:Skill .
+
+career:HTMLCSS a career:Skill .
+
+career:Java a career:Skill .
+
+career:LearningResource a owl:Class .
+
+career:Mentoring a career:Skill .
+
+career:Physics a career:Skill .
+
+career:Problemsolving a career:Skill .
+
+career:QubitCalibration a career:Skill .
+
+career:Reporting a career:Skill .
+
+career:Scheduling a career:Skill .
+
+career:SoftwareTesting a career:Skill .
+
+career:SupplierManagement a career:Skill .
+
+career:TechnicalCommunication a career:Skill .
+
+career:VersionControlGit a career:Skill .
+
+career:AttentionToDetail a career:Skill .
+
+career:Benchmarking a career:Skill .
+
+career:CareerActivity a owl:Class .
+
+career:CareerPlan a owl:Class .
 
 career:Docker a owl:NamedIndividual,
         career:Skill .
 
-career:LearningResource a owl:Class .
+career:FluentEnglish a career:Skill .
 
-career:CareerActivity a owl:Class .
+career:Git a career:Skill .
+
+career:Internship a owl:Class ;
+    rdfs:subClassOf career:CareerOpportunity .
+
+career:Organization a owl:Class,
+        career:Skill .
+
+career:RiskManagement a career:Skill .
+
+career:CrossfunctionalCollaboration a career:Skill .
+
+career:ProjectManagement a career:Skill .
+
+career:StakeholderManagement a career:Skill .
+
+career:English a career:Skill .
+
+career:JavaScript a career:Skill .
+
+career:QuantumErrorCorrection a career:Skill .
+
+career:StakeholderCommunication a career:Skill .
+
+career:Student a owl:Class .
+
+career:SuperconductingQubits a career:Skill .
+
+career:Troubleshooting a career:Skill .
+
+career:MachineLearning a career:Skill .
+
+career:ProblemSolving a career:Skill .
+
+career:QuantumComputing a career:Skill .
+
+career:VersionControl a career:Skill .
+
+career:Documentation a career:Skill .
+
+career:TechnicalDocumentation a career:Skill .
+
+career:CareerOpportunity a owl:Class .
+
+career:Communication a career:Skill .
+
+career:DataAnalysis a career:Skill .
+
+career:SQL a career:Skill .
 
 career:Python a owl:NamedIndividual,
         career:Skill .
 
-career:CareerPlan a owl:Class .
-
-career:Student a owl:Class .
-
-career:CareerOpportunity a owl:Class .
+career:Job a owl:Class ;
+    rdfs:subClassOf career:CareerOpportunity .
 
 career:Skill a owl:Class .
 
