@@ -1,0 +1,24 @@
+# Local PostgreSQL for CogniPath.
+#   start:  docker compose -f infra/docker-compose.yml up -d
+#   stop:   docker compose -f infra/docker-compose.yml down        (add -v to delete the data)
+# Connection string: postgresql+psycopg://cognipath:cognipath@localhost:5432/cognipath
+services:
+  db:
+    image: postgres:16
+    container_name: cognipath-db
+    environment:
+      POSTGRES_USER: cognipath
+      POSTGRES_PASSWORD: cognipath
+      POSTGRES_DB: cognipath
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cognipath -d cognipath"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:

@@ -1,4 +1,7 @@
-"""Adapter: Career Agent prototype output -> ActivityProposal.
+"""Adapter: OLD Career Agent prototype output -> ActivityProposal.
+
+Since 28 Oct 2026 the Career Agent writes a validated ProposalBatch itself
+(see ``io.load_proposals``), so this adapter is only kept for the first prototype.
 
 Elham's prototype (branch ``career-agent``, career_agent/src/career.py) writes
 ``career_plan.json`` shaped like::
@@ -16,7 +19,7 @@ Elham's prototype (branch ``career-agent``, career_agent/src/career.py) writes
 
 That output has no deadline, score or id, so this adapter fills safe defaults.
 Optional keys are already read if the Career Agent starts sending them:
-``deadline`` (YYYY-MM-DD), ``priority`` (low/medium/high), ``value`` (dict),
+``deadline`` (YYYY-MM-DD), ``value`` (dict),
 ``reason`` (str), ``missing_skill`` (str).
 
 Delete this adapter once the Career Agent returns ActivityProposal directly.
@@ -32,7 +35,6 @@ from shared.contracts import (
     ActivityProposal,
     ActivityType,
     ObjectiveValue,
-    Priority,
     SessionSplit,
     SourceAgent,
     TimeWindow,
@@ -96,7 +98,6 @@ def from_career_output(
                 window=TimeWindow(earliest=today, deadline=max(today, deadline)),
                 split=SessionSplit(min_session_min=60, max_session_min=120),
                 value=ObjectiveValue(**(activity.get("value") or DEFAULT_VALUE)),
-                priority=Priority(activity.get("priority", "medium")),
                 reason=reason,
             )
         )

@@ -8,17 +8,46 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: cognipath
+          POSTGRES_PASSWORD: cognipath
+          POSTGRES_DB: cognipath
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U cognipath -d cognipath"
+          --health-interval 5s --health-timeout 3s --health-retries 10
+    env:
+      TEST_DATABASE_URL: postgresql+psycopg://cognipath:cognipath@localhost:5432/cognipath
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          for f in agents/*/requirements.txt; do pip install -r "$f"; done
+          for f in agents/*/requirements.txt; do if [ -f "$f" ]; then pip install -r "$f"; fi; done
       - name: Lint
-        run: ruff check shared agents tests
+        run: ruff check shared agents backend tests
       - name: Test
         # exit code 5 = no tests collected yet; treat as success
         run: pytest || [ $? -eq 5 ]
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run build

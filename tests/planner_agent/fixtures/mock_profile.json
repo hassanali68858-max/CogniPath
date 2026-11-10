@@ -1,10 +1,5 @@
 {
   "user_id": "student001",
-  "weights": {
-    "study": 1.0,
-    "career": 1.0,
-    "social": 1.0
-  },
   "day_start": "09:00",
   "day_end": "22:00",
   "evening_after": "20:00",
@@ -62,6 +57,5 @@
       "end": "2026-11-13T20:00"
     }
   ],
-  "fairness_weight": 1.0,
   "conflict_weight": 0.2
 }
