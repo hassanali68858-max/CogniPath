@@ -9,7 +9,7 @@ from typing import Optional
 
 from pydantic import TypeAdapter
 
-from shared.contracts import ActivityProposal, Plan, PlannerProfile
+from shared.contracts import ActivityProposal, Plan, PlannerProfile, ProposalBatch
 
 from .adapters.career import from_career_output
 
@@ -17,7 +17,13 @@ _proposals = TypeAdapter(list[ActivityProposal])
 
 
 def load_proposals(path: str | Path) -> list[ActivityProposal]:
-    return _proposals.validate_json(Path(path).read_text(encoding="utf-8"))
+    """Read a ProposalBatch (what agents write, e.g. career_plan.json), a list of batches, or a plain list."""
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    if isinstance(data, dict):
+        return ProposalBatch.model_validate(data).proposals
+    if data and isinstance(data[0], dict) and "proposals" in data[0]:
+        return [p for b in data for p in ProposalBatch.model_validate(b).proposals]
+    return _proposals.validate_python(data)
 
 
 def load_profile(path: str | Path) -> PlannerProfile:

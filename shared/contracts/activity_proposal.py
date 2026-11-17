@@ -9,6 +9,11 @@ Two kinds of proposal:
 - Flexible: work that needs ``duration_min`` minutes somewhere inside ``window``
             (a course chapter, "Learn Docker"); the Planner chooses when.
 
+Importance is expressed ONLY through ``value`` (study / career / social, 0-1).
+There are no priorities: the Planner keeps the three objectives separate,
+finds Pareto-optimal compromises and lets the student choose. Deadlines,
+fixed times and ``hard`` are constraints, not rankings.
+
 Times are naive local datetimes (Europe/Helsinki) for now.
 """
 
@@ -36,16 +41,6 @@ class ActivityType(str, Enum):
     QUIZ = "quiz"
     SOCIAL = "social"
     OTHER = "other"
-
-
-class Priority(str, Enum):
-    LOW = "low"
-    MEDIUM = "medium"
-    HIGH = "high"
-
-    @property
-    def weight(self) -> int:
-        return {"low": 1, "medium": 2, "high": 3}[self.value]
 
 
 class ObjectiveValue(BaseModel):
@@ -126,13 +121,22 @@ class ActivityProposal(BaseModel):
     window: Optional[TimeWindow] = None
     split: SessionSplit = Field(default_factory=SessionSplit)
 
+    # How much this serves each goal. This is the ONLY measure of importance:
+    # there is no priority field, so no agent can outrank another (team decision, Nov 2026).
     value: ObjectiveValue
-    priority: Priority = Priority.MEDIUM
-    hard: bool = False  # True = must be scheduled (exam, mandatory lecture)
+    hard: bool = False  # a constraint, not a priority: must be scheduled (exam, mandatory lecture)
     depends_on: list[str] = Field(default_factory=list)  # proposal_ids that must come first
 
     location: Optional[str] = None
     reason: str = Field(..., min_length=1, description="Why the agent proposes this; shown to the user")
+
+    @model_validator(mode="before")
+    @classmethod
+    def _drop_legacy_priority(cls, data):
+        # Older agent outputs still carry "priority"; it is ignored (importance lives in `value`).
+        if isinstance(data, dict) and "priority" in data:
+            data = {k: v for k, v in data.items() if k != "priority"}
+        return data
 
     @model_validator(mode="after")
     def _check_kind(self) -> "ActivityProposal":

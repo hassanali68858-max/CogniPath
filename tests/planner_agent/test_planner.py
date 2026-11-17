@@ -70,13 +70,14 @@ def test_roomy_week_fits_all_study_and_career_work(proposals, profile):
     assert {d.proposal_id for d in plan.dropped} == {"evt-boardgames", "evt-sauna"}
 
 
-def test_tight_week_modes_trade_objectives(proposals, profile):
+def test_tight_week_alternatives_lean_towards_their_goal(proposals, profile):
     tight = profile.model_copy(update={"daily_cap_min": 120})
     plans = {p.mode: p for p in make_plans(proposals, tight, START, DAYS)}
     assert all(p.solver_status == "OPTIMAL" for p in plans.values())
-    assert plans["study_first"].scores.loss["study"] < plans["balanced"].scores.loss["study"]
-    assert plans["study_first"].scores.loss["career"] > plans["balanced"].scores.loss["career"]
-    assert plans["career_first"].scores.loss["career"] <= plans["balanced"].scores.loss["career"]
+    a = {m: p.scores.achieved for m, p in plans.items()}
+    assert a["lean_study"]["study"] > a["balanced"]["study"]
+    assert a["lean_study"]["career"] < a["balanced"]["career"]
+    assert a["lean_career"]["career"] > a["balanced"]["career"]
 
 
 def test_flexible_work_is_split_one_session_per_day(proposals, profile):

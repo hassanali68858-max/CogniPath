@@ -16,13 +16,14 @@ from datetime import date
 from pathlib import Path
 
 from .io import load_career_output, load_profile, load_proposals, to_ics
-from .planner import make_plans
-from .solver import MODES
+from .planner import MODES, make_plans
 
 
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description="CogniPath Planner")
-    ap.add_argument("--proposals", type=Path, help="JSON list of ActivityProposal")
+    ap.add_argument(
+        "--proposals", type=Path, action="append", help="ProposalBatch or list of ActivityProposal (repeatable)"
+    )
     ap.add_argument("--career", type=Path, help="career_plan.json from the Career Agent prototype")
     ap.add_argument("--profile", type=Path, required=True)
     ap.add_argument("--start", type=date.fromisoformat, required=True, help="first day, YYYY-MM-DD")
@@ -35,7 +36,7 @@ def main(argv: list[str] | None = None) -> None:
     profile = load_profile(args.profile)
     if args.daily_cap:
         profile = profile.model_copy(update={"daily_cap_min": args.daily_cap})
-    proposals = load_proposals(args.proposals) if args.proposals else []
+    proposals = [p for path in args.proposals or [] for p in load_proposals(path)]
     if args.career:
         proposals += load_career_output(args.career, today=args.start, horizon_days=args.days, user_id=profile.user_id)
 
@@ -44,12 +45,11 @@ def main(argv: list[str] | None = None) -> None:
 
     for plan in plans:
         s = plan.scores
-        print(f"\n=== {plan.mode.upper()}  ({plan.solver_status}, {plan.solve_seconds}s)")
-        print(
-            "loss  study {study:.0%}  career {career:.0%}  social {social:.0%}".format(**s.loss)
-            + f"   fairness gap {s.fairness_gap:.0%}   evening sessions {s.soft_conflicts}"
-            + f"   planned {s.scheduled_minutes / 60:.1f} h"
-        )
+        print(f"\n=== {plan.label.upper()}  ({plan.solver_status}, {plan.solve_seconds}s)")
+        goals = "  ".join(f"{k} {v:.0%} (best {s.ideal.get(k, v):.0%})" for k, v in s.achieved.items())
+        print(f"achieved  {goals}   evening sessions {s.soft_conflicts}   planned {s.scheduled_minutes / 60:.1f} h")
+        if plan.tradeoff:
+            print("trade-off", plan.tradeoff.summary)
         rows = sorted(
             [(sess.start, sess.end, item) for item in plan.items for sess in item.sessions],
             key=lambda r: r[:2],

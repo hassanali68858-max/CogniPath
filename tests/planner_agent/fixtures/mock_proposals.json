@@ -140,8 +140,7 @@
     "value": {
       "study": 0.9
     },
-    "reason": "Homework 6 deadline on 8 Nov",
-    "priority": "high"
+    "reason": "Homework 6 deadline on 8 Nov"
   },
   {
     "proposal_id": "tut-algo-ex5",
@@ -157,8 +156,7 @@
     "value": {
       "study": 0.8
     },
-    "reason": "Exercise deadline on 6 Nov",
-    "priority": "high"
+    "reason": "Exercise deadline on 6 Nov"
   },
   {
     "proposal_id": "tut-exam-review",
@@ -174,7 +172,6 @@
       "study": 0.9
     },
     "reason": "Last review session before the exam",
-    "priority": "high",
     "hard": true
   },
   {
@@ -260,7 +257,6 @@
       "career": 0.9
     },
     "reason": "Application deadline 12 Nov; strong skill match",
-    "priority": "high",
     "depends_on": [
       "car-update-cv"
     ]
@@ -280,8 +276,7 @@
       "social": 0.3
     },
     "reason": "Three target employers attend",
-    "opportunity_ref": "event:jyu-career-fair-2026",
-    "priority": "high"
+    "opportunity_ref": "event:jyu-career-fair-2026"
   },
   {
     "proposal_id": "car-alumni",
@@ -298,8 +293,7 @@
       "career": 0.4,
       "social": 0.3
     },
-    "reason": "Alumni in AI roles can refer you",
-    "priority": "low"
+    "reason": "Alumni in AI roles can refer you"
   },
   {
     "proposal_id": "car-mock-interview",

@@ -1,0 +1,268 @@
+{
+  "source_agent": "career",
+  "user_id": "demo-user",
+  "generated_at": "2026-11-05T11:25:14.233562",
+  "proposals": [
+    {
+      "proposal_id": "career-learning-learn-rdf",
+      "source_agent": "career",
+      "user_id": "demo-user",
+      "type": "learning",
+      "title": "Learn RDF",
+      "opportunity_ref": null,
+      "resource_url": null,
+      "fixed_time": null,
+      "duration_min": 180,
+      "window": {
+        "earliest": "2026-11-05",
+        "deadline": "2026-12-05"
+      },
+      "split": {
+        "min_session_min": 60,
+        "max_session_min": 120
+      },
+      "value": {
+        "study": 0.9,
+        "career": 0.19,
+        "social": 0.0
+      },
+      "priority": "medium",
+      "hard": false,
+      "depends_on": [],
+      "location": null,
+      "reason": "Needed for Master Thesis: LLM Agents"
+    },
+    {
+      "proposal_id": "career-learning-learn-langgraph",
+      "source_agent": "career",
+      "user_id": "demo-user",
+      "type": "learning",
+      "title": "Learn LangGraph",
+      "opportunity_ref": null,
+      "resource_url": null,
+      "fixed_time": null,
+      "duration_min": 180,
+      "window": {
+        "earliest": "2026-11-05",
+        "deadline": "2026-12-05"
+      },
+      "split": {
+        "min_session_min": 60,
+        "max_session_min": 120
+      },
+      "value": {
+        "study": 0.6,
+        "career": 0.38,
+        "social": 0.0
+      },
+      "priority": "medium",
+      "hard": false,
+      "depends_on": [],
+      "location": null,
+      "reason": "Needed for Master Thesis: LLM Agents"
+    },
+    {
+      "proposal_id": "career-application-apply-master-thesis-llm-agents",
+      "source_agent": "career",
+      "user_id": "demo-user",
+      "type": "application",
+      "title": "Apply: Master Thesis: LLM Agents",
+      "opportunity_ref": "Master Thesis: LLM Agents",
+      "resource_url": null,
+      "fixed_time": null,
+      "duration_min": 60,
+      "window": {
+        "earliest": "2026-11-05",
+        "deadline": "2026-12-05"
+      },
+      "split": {
+        "min_session_min": 60,
+        "max_session_min": 120
+      },
+      "value": {
+        "study": 0.0,
+        "career": 0.33,
+        "social": 0.0
+      },
+      "priority": "medium",
+      "hard": false,
+      "depends_on": [],
+      "location": null,
+      "reason": "Match score 33%"
+    },
+    {
+      "proposal_id": "career-learning-learn-machinelearning",
+      "source_agent": "career",
+      "user_id": "demo-user",
+      "type": "learning",
+      "title": "Learn MachineLearning",
+      "opportunity_ref": null,
+      "resource_url": null,
+      "fixed_time": null,
+      "duration_min": 180,
+      "window": {
+        "earliest": "2026-11-05",
+        "deadline": "2026-12-05"
+      },
+      "split": {
+        "min_session_min": 60,
+        "max_session_min": 120
+      },
+      "value": {
+        "study": 0.6,
+        "career": 0.56,
+        "social": 0.0
+      },
+      "priority": "medium",
+      "hard": false,
+      "depends_on": [],
+      "location": null,
+      "reason": "Needed for AI Developer Intern"
+    },
+    {
+      "proposal_id": "career-learning-learn-docker",
+      "source_agent": "career",
+      "user_id": "demo-user",
+      "type": "learning",
+      "title": "Learn Docker",
+      "opportunity_ref": null,
+      "resource_url": "https://docs.docker.com/get-started/",
+      "fixed_time": null,
+      "duration_min": 180,
+      "window": {
+        "earliest": "2026-11-05",
+        "deadline": "2026-12-05"
+      },
+      "split": {
+        "min_session_min": 60,
+        "max_session_min": 120
+      },
+      "value": {
+        "study": 0.3,
+        "career": 0.19,
+        "social": 0.0
+      },
+      "priority": "medium",
+      "hard": false,
+      "depends_on": [],
+      "location": null,
+      "reason": "Needed for AI Developer Intern"
+    },
+    {
+      "proposal_id": "career-application-apply-ai-developer-intern",
+      "source_agent": "career",
+      "user_id": "demo-user",
+      "type": "application",
+      "title": "Apply: AI Developer Intern",
+      "opportunity_ref": "AI Developer Intern",
+      "resource_url": null,
+      "fixed_time": null,
+      "duration_min": 60,
+      "window": {
+        "earliest": "2026-11-05",
+        "deadline": "2026-12-05"
+      },
+      "split": {
+        "min_session_min": 60,
+        "max_session_min": 120
+      },
+      "value": {
+        "study": 0.0,
+        "career": 0.33,
+        "social": 0.0
+      },
+      "priority": "medium",
+      "hard": false,
+      "depends_on": [],
+      "location": null,
+      "reason": "Match score 33%"
+    },
+    {
+      "proposal_id": "career-event-attend-helsinki-ai-meetup",
+      "source_agent": "career",
+      "user_id": "demo-user",
+      "type": "event",
+      "title": "Attend Helsinki AI Meetup",
+      "opportunity_ref": null,
+      "resource_url": null,
+      "fixed_time": {
+        "start": "2026-11-05T17:00:00",
+        "end": "2026-11-05T19:00:00"
+      },
+      "duration_min": null,
+      "window": null,
+      "split": {
+        "min_session_min": 60,
+        "max_session_min": 120
+      },
+      "value": {
+        "study": 0.0,
+        "career": 0.85,
+        "social": 0.53
+      },
+      "priority": "medium",
+      "hard": false,
+      "depends_on": [],
+      "location": null,
+      "reason": "Meet Example AI Ltd. Learn about Docker, Machine Learning."
+    },
+    {
+      "proposal_id": "career-event-attend-aalto-llm-seminar",
+      "source_agent": "career",
+      "user_id": "demo-user",
+      "type": "event",
+      "title": "Attend Aalto LLM Seminar",
+      "opportunity_ref": null,
+      "resource_url": null,
+      "fixed_time": {
+        "start": "2026-11-08T17:00:00",
+        "end": "2026-11-08T19:00:00"
+      },
+      "duration_min": null,
+      "window": null,
+      "split": {
+        "min_session_min": 60,
+        "max_session_min": 120
+      },
+      "value": {
+        "study": 0.0,
+        "career": 0.64,
+        "social": 0.3
+      },
+      "priority": "medium",
+      "hard": false,
+      "depends_on": [],
+      "location": null,
+      "reason": "Meet Aalto Lab. Learn about LangGraph."
+    },
+    {
+      "proposal_id": "career-event-attend-rock-festival",
+      "source_agent": "career",
+      "user_id": "demo-user",
+      "type": "event",
+      "title": "Attend Rock Festival",
+      "opportunity_ref": null,
+      "resource_url": null,
+      "fixed_time": {
+        "start": "2026-11-06T17:00:00",
+        "end": "2026-11-06T19:00:00"
+      },
+      "duration_min": null,
+      "window": null,
+      "split": {
+        "min_session_min": 60,
+        "max_session_min": 120
+      },
+      "value": {
+        "study": 0.0,
+        "career": 0.0,
+        "social": 0.65
+      },
+      "priority": "medium",
+      "hard": false,
+      "depends_on": [],
+      "location": null,
+      "reason": "Social only, no career value"
+    }
+  ]
+}

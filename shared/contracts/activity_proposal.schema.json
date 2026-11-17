@@ -63,15 +63,6 @@
       "title": "ObjectiveValue",
       "type": "object"
     },
-    "Priority": {
-      "enum": [
-        "low",
-        "medium",
-        "high"
-      ],
-      "title": "Priority",
-      "type": "string"
-    },
     "SessionSplit": {
       "additionalProperties": false,
       "description": "How a flexible activity may be cut into sessions.",
@@ -213,10 +204,6 @@
     },
     "value": {
       "$ref": "#/$defs/ObjectiveValue"
-    },
-    "priority": {
-      "$ref": "#/$defs/Priority",
-      "default": "medium"
     },
     "hard": {
       "default": false,
