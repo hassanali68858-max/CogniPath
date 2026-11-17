@@ -1,84 +1,92 @@
-# Career Agent (CogniPath)
 
+Career Agent (CogniPath)
 Owner: Elham Pournouri
 
-The Career Agent finds job, internship and thesis opportunities, compares them with the
-student's skills, and proposes a career plan (learn / apply / network) with scores for
-three objectives (academic, career, social) for the Planner Agent.
+The Career Agent finds job, internship and thesis opportunities, compares them with the student's CV skills, and proposes career activities (learn / apply / attend) with values for three objectives (study, career, social). It sends them to the Planner through the team's shared API as a ProposalBatch.
 
-The agent only advises and prepares. The student decides and applies.
-No scraping and no automatic applications.
+The agent only advises and prepares. The student decides and applies. No scraping and no automatic applications.
 
-## Architecture
+Architecture
+src/pipeline.py: runs intake, then the 4 sub-agents (collector → extractor → matcher → advisor)
+src/planner_client.py: sends the ProposalBatch to the shared Planner API (POST /proposals/batch)
+src/api.py: Career Agent FastAPI (port 8001), docs at http://127.0.0.1:8001/docs
+src/app.py: Streamlit UI (port 8501), calls the Career API
+src/application_graph.py: LangGraph flow that prepares a cover letter and tailored CV (with user approval)
+PostgreSQL database (schemas shared and career, see db/schema.sql)
+ontology/career.owl + ontology/skill_hierarchy.ttl + ESCO for skills (private to the Career Agent)
+Optional LLM explanations for the top matches (LLM_PROVIDER = claude or ollama)
+Algorithm (9 steps)
+Job collection: job alert emails (Gmail) and public Teamtailor feeds (data/ats_companies.json)
+Job extraction: title, company, location and required skills from each posting
+Database storage: postings saved in PostgreSQL
+Skill extraction: skills mapped to ESCO and the career ontology
+CV matching: required skills compared with the skills read from the user's CV
+Scoring and ranking: match = matched required skills / all required skills
+Recommendation: activities with study / career / social values and skill gaps
+Application tracking: planned, applied, interview, rejected, offer
+Planner integration: one ProposalBatch (shared contract) sent to the Planner API
+Scoring (advisor)
+All values are between 0 and 1.
 
-- `src/app.py`: Streamlit UI (port 8501)
-- `src/api.py`: FastAPI backend (port 8000), docs at http://127.0.0.1:8000/docs
-- `src/pipeline.py`: LangGraph pipeline (collector → extractor → matcher → advisor)
-- PostgreSQL database (schema in `db/schema.sql`)
-- Optional LLM explanations for each match (Anthropic)
-
-## Setup
-
-```
+Activity	Career value	Study value	Social value
+Apply for a job	A1 × (0.375 + 0.625 × A2)	0	0
+Learn a missing skill	0.375 × L1 + 0.625 × L2	0.9 / 0.6 / 0.3	0
+Attend an event	0.5 × C1 + 0.3 × C2 + 0.2 × C3	0	0.3 + 0.7 × matched topics / all topics
+A1 = skill match of the job, A2 = best ESCO relevance of its skills to the career goal
+L1 = share of the job's skill gap this skill closes, L2 = ESCO relevance of the skill to the goal
+C1 = a target company attends, C2 = share of missing skills the event covers, C3 = topic relevance to the goal
+Study value: 0.9 = the thesis concept itself, 0.6 = one step from the thesis or a course, 0.3 = general skill
+Weights come from swing weighting (goal 100, gap 60; company 100, gaps 60, goal 40)
+Jobs below 40 % match are skipped (MIN_APPLY = 0.40), but the best 3 are always kept (KEEP_AT_LEAST = 3)
+Setup
 cd agents/career_agent
 pip install -r requirements.txt
 copy .env.example .env    # then fill in your own values
-```
+For the shared team backend (from the repository root):
 
+pip install -r agents/planner_agent/requirements.txt
+Run
+Terminal 1, shared team backend with the Planner API (repository root, port 8000):
 
+uvicorn backend.main:app --reload
+Terminal 2, Career Agent API (port 8001):
 
-## Run
-
-Terminal 1:
-```
 cd agents/career_agent/src
-uvicorn api:app --reload
-```
+uvicorn api:app --reload --port 8001
+Terminal 3, Streamlit UI:
 
-Terminal 2:
-```
 cd agents/career_agent/src
 python -m streamlit run app.py
-```
-
 Pipeline only (test user):
-```
+
+cd agents/career_agent/src
 python pipeline.py mira
-```
+At the end it prints Sent to Planner API: {'stored': N, 'source_agent': 'career'}. Check the result at http://127.0.0.1:8000/docs → GET /proposals with user_id=mira.
 
-## Sub-agents
+Sub-agents
+Step	File	Role
+Intake	src/gmail_fetch.py, src/job_emails.py	Reads job alert emails into the database
+1. Collector	src/subagents/collector.py	Loads postings that fit the user profile
+2. Extractor	src/subagents/extractor.py	Builds the skill graph with the ontology and ESCO
+3. Matcher	src/subagents/matcher.py	Scores matches and finds skill gaps (SPARQL)
+4. Advisor	src/subagents/advisor.py	Builds the ProposalBatch and sends it to the Planner
+Interfaces with other agents
+Planner ← Career (API): POST {PLANNER_URL}/proposals/batch with a ProposalBatch (shared/contracts/activity_proposal.py). PLANNER_URL is set in .env (default http://127.0.0.1:8000). If the server is not running, the advisor prints a warning and the pipeline continues.
+Fallback file: the same batch is also saved to data/career_plan.json until the Planner reads only from the API.
+Tutor ← skill gaps: data/skill_gaps.json (missing skills and learning resources)
+Event → events: data/events.json (name, date, companies, topics)
+Career Agent API (port 8001)
+Method	Path	Purpose
+POST	/profile/{user_id}	Save job preferences
+POST	/cv/{user_id}	Upload a PDF CV and read its skills
+POST	/run/{user_id}	Run the whole pipeline
+GET	/plan/{user_id}	The user's latest career plan
+POST	/apply/{user_id}/start	Start preparing a cover letter and CV
+GET / POST / PATCH	/tracker/{user_id}	Application tracker
+Privacy
+Personal CVs, letters, job emails, career plans and user_profile.json are not stored in Git.
+Contact information is never sent to the LLM.
+Use only test users (for example mira) for demos.
+Ontology
+Namespace: https://example.org/cognipath/career# Main classes: Student, Skill, CareerOpportunity (Internship, Job, ThesisOpportunity), LearningResource, CareerPlan, CareerActivity.
 
-| Step | File | Role |
-|------|------|------|
-| 1. Collector | `src/subagents/collector.py` | Loads postings that fit the user profile |
-| 2. Extractor | `src/subagents/extractor.py` | Builds the skill graph with `ontology/career.owl` |
-| 3. Matcher | `src/subagents/matcher.py` | Scores matches and finds skill gaps (SPARQL) |
-| 4. Advisor | `src/subagents/advisor.py` | Builds the career plan and match explanations |
-
-## Features
-
-- Profile and CV upload
-- Career plan with match score per opportunity
-- Application tracker (same job is not added twice)
-- Clear error messages in the UI
-
-## Interfaces with other agents (JSON only)
-
-- **Planner ← career plan**: activities with `type`, `name`, `duration_minutes`,
-  `scores {academic, career, social}`, `why`
-- **Tutor ← skill gaps**: missing skills with `needed_by` count and learning `resource`
-- **Event → events**: `name`, `date`, `companies`, `topics`
-
-`career.owl` is private to the Career Agent.
-
-## Privacy
-
-- Personal CVs, letters, job emails, career plans and `user_profile.json` are not stored in Git.
-- Contact information is never sent to the LLM.
-- Use only test users (for example `mira`) for demos.
-
-## Ontology
-
-Namespace: `https://example.org/cognipath/career#`
-Main classes: Student, Skill, CareerOpportunity (Internship, Job, ThesisOpportunity),
-LearningResource, CareerPlan, CareerActivity.
