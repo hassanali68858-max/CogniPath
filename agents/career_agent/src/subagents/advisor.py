@@ -282,8 +282,12 @@ if __name__ == "__main__":
     for p in batch.proposals:
         print(p.title, "|", p.value.as_dict(), "|", p.reason)
     plan_json = batch.model_dump_json(indent=2)
-    # Shared file: the team's Planner agent reads this one, keep the name
+    # Fallback file: kept until the Planner reads only from the API
     (DATA_DIR / "career_plan.json").write_text(plan_json, encoding="utf-8")
     # Per-user file: so plans of different users do not overwrite each other
     (DATA_DIR / f"career_plan_{user_id}.json").write_text(plan_json, encoding="utf-8")
     print(f"Saved career_plan.json and career_plan_{user_id}.json (ProposalBatch)")
+
+    # Main handoff: push the same ProposalBatch to the shared team API
+    from planner_client import send_batch
+    send_batch(plan_json)

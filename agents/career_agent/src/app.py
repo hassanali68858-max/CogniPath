@@ -4,8 +4,7 @@ import requests
 import streamlit as st
 
 # Address of our FastAPI server (api.py must be running)
-API_URL = "http://127.0.0.1:8000"
-API_DOWN = "API is not running. Start it with: uvicorn api:app --reload"
+API_URL = "http://127.0.0.1:8001"  # Career Agent API; the shared team backend uses 8000PI_DOWN = "API is not running. Start it with: uvicorn api:app --reload"
 
 st.title("CogniPath Career Agent")
 
@@ -283,7 +282,7 @@ with tab_plan:
                     # Progress bar shows how well the CV matches this job
                     st.progress(min(match, 100) / 100, text=f"Match {match}%")
                 st.write(p["reason"])
-                st.caption(f"Career value: {p['value']['career']} | Priority: {p['priority']}")
+                st.caption(f"Career value: {p['value']['career']} | Study value: {p['value']['study']} | Social value: {p['value']['social']}")
                 if ptype == "application":
                     prepare_application(p["title"].removeprefix("Apply: "))
                     tracker_buttons(p["title"].removeprefix("Apply: "))
