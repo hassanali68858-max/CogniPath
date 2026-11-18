@@ -50,7 +50,10 @@ SHARED_SCHEMA = "shared"
 
 
 class Base(DeclarativeBase):
-    metadata = MetaData(schema=PLANNER_SCHEMA)
+    # Index names use the table name only ("ix_proposals_status"). The default would include the
+    # schema ("ix_planner_proposals_status"), which clashes on SQLite with indexes left over from
+    # the old planner_* tables in an existing cognipath_dev.db (SQLite index names are global).
+    metadata = MetaData(schema=PLANNER_SCHEMA, naming_convention={"ix": "ix_%(table_name)s_%(column_0_name)s"})
 
 
 class UserRow(Base):

@@ -56,3 +56,28 @@ def test_plans_round_trip_and_current_plan(store, proposals, profile):
     store.record_decisions(chosen, [(chosen.items[0].item_id, chosen.items[0].proposal_id, ItemDecision.ACCEPTED)])
     assert store.current_plan(profile.user_id).plan_id == chosen.plan_id
     assert store.decision_log(chosen.plan_id) == [(chosen.items[0].item_id, "accepted")]
+
+
+def test_starts_on_a_database_from_the_previous_version(tmp_path):
+    """An existing cognipath_dev.db with the old planner_* tables and their indexes must still open."""
+    import sqlite3
+
+    from agents.planner_agent.store import PlannerStore
+
+    db = tmp_path / "old.db"
+    con = sqlite3.connect(db)
+    con.executescript(
+        """
+        CREATE TABLE planner_proposals (user_id TEXT, proposal_id TEXT, status TEXT, source_agent TEXT);
+        CREATE INDEX ix_planner_proposals_status ON planner_proposals (status);
+        CREATE INDEX ix_planner_proposals_source_agent ON planner_proposals (source_agent);
+        CREATE TABLE planner_plans (plan_id TEXT, run_id TEXT, user_id TEXT, status TEXT);
+        CREATE INDEX ix_planner_plans_run_id ON planner_plans (run_id);
+        CREATE INDEX ix_planner_plans_user_id ON planner_plans (user_id);
+        CREATE INDEX ix_planner_plans_status ON planner_plans (status);
+        """
+    )
+    con.close()
+    store = PlannerStore(f"sqlite:///{db}")
+    assert store.users() == []
+    store.engine.dispose()
