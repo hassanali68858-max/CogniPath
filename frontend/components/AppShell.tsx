@@ -16,6 +16,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [draft, setDraft] = useState(userId);
   useEffect(() => setDraft(userId), [userId]);
 
+    if (path === "/cognipath") {
+    return <>{children}</>;
+  }
   const pending = status.plan?.items.filter((i) => i.decision === "pending").length ?? 0;
   const steps = [
     { href: "/", label: "Start", icon: Compass, done: !!status.profile || status.proposals.length > 0, hint: "Overview" },
@@ -41,6 +44,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       hint: status.plan ? (pending ? `${pending} to review` : "All decided") : "Not made yet",
     },
   ];
+
+    if (path === "/cognipath") {
+    return <>{children}</>;
+  }
 
   return (
     <div className="shell">
