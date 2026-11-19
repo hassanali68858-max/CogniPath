@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CogniPath Events</title>
+  <style>
+    :root { color-scheme: light dark; font: 16px/1.5 system-ui, sans-serif; }
+    body { max-width: 44rem; margin: 3rem auto; padding: 0 1rem; }
+    section { margin-block: 1.5rem; padding: 1rem; border: 1px solid GrayText; border-radius: .75rem; }
+    h1, h2, p { margin: 0 0 .75rem; }
+    label { display: block; margin: .75rem 0; }
+    input, button { font: inherit; }
+    button { padding: .35rem .75rem; cursor: pointer; }
+    li { margin: .6rem 0; }
+  </style>
+</head>
+<body>
+  <h1>CogniPath Events</h1>
+  <section aria-label="Account">
+    <label>Planner user ID <input id="user-id" required></label>
+    <label>Event Agent token <input id="token" type="password" autocomplete="off" required></label>
+  </section>
+  <section aria-labelledby="upload-title">
+    <h2 id="upload-title">Analyze a board photo</h2>
+    <form id="upload">
+      <label>Photo <input name="image" type="file" accept="image/jpeg,image/png,image/webp" required></label>
+      <label><input name="share_events" type="checkbox" value="true"> Share extracted event details with other users</label>
+      <p>The configured vision provider processes the photo. CogniPath does not save it.</p>
+      <button>Analyze photo</button>
+    </form>
+  </section>
+  <section aria-labelledby="results-title">
+    <h2 id="results-title">Saved recommendations</h2>
+    <button id="load">Load recommendations</button>
+    <button id="refresh">Refresh matches</button>
+    <ul id="recommendations"></ul>
+  </section>
+  <p id="status" role="status"></p>
+  <script>
+    const statusLine = document.querySelector("#status");
+    const list = document.querySelector("#recommendations");
+    const buttons = document.querySelectorAll("button");
+    const userField = document.querySelector("#user-id");
+    const tokenField = document.querySelector("#token");
+    let accountVersion = 0;
+    for (const field of [userField, tokenField]) {
+      field.addEventListener("input", () => {
+        accountVersion += 1;
+        list.replaceChildren();
+        statusLine.textContent = "";
+      });
+    }
+
+    async function call(path, options = {}, upload = false) {
+      const user = userField.value.trim();
+      const token = tokenField.value.trim();
+      if (!user || !token) {
+        statusLine.textContent = "Enter your user ID and token.";
+        return;
+      }
+      const version = accountVersion;
+      buttons.forEach(button => { button.disabled = true; });
+      statusLine.textContent = upload ? "Analyzing photo…" : "Loading recommendations…";
+      try {
+        const response = await fetch(path.replace("{user}", encodeURIComponent(user)), {
+          ...options,
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(typeof result.detail === "string" ? result.detail : "Request failed.");
+        }
+        if (version !== accountVersion) return;
+        const records = result.recommendations ?? result;
+        list.replaceChildren();
+        for (const row of records) {
+          const item = document.createElement("li");
+          const title = document.createElement("strong");
+          title.textContent = row.event.title;
+          const time = row.event.start ? new Date(row.event.start).toLocaleString("en-FI", {
+            timeZone: "Europe/Helsinki", dateStyle: "medium", timeStyle: "short"
+          }) : (row.event.time_note || "Time needs confirmation");
+          const details = document.createElement("div");
+          details.textContent = [time, row.reason].join(" · ");
+          item.append(title, details);
+          if (row.criteria) {
+            const breakdown = document.createElement("details");
+            const summary = document.createElement("summary");
+            summary.textContent = row.decision === "consider" ? "Consider · assessment" : "Recommended · assessment";
+            const scores = document.createElement("p");
+            scores.textContent = Object.entries(row.criteria)
+              .map(([name, value]) => `${name}: ${value}/100`).join(" · ");
+            breakdown.append(summary, scores);
+            for (const value of [...(row.evidence || []), ...(row.missing_information || [])]) {
+              const fact = document.createElement("p");
+              fact.textContent = value;
+              breakdown.append(fact);
+            }
+            item.append(breakdown);
+          }
+          list.append(item);
+        }
+        const count = `${records.length} matching event${records.length === 1 ? "" : "s"}.`;
+        statusLine.textContent = upload ? `Photo analyzed. ${count} ${result.shared_count} shared.` : count;
+      } catch (error) {
+        if (version === accountVersion) statusLine.textContent = error.message;
+      } finally {
+        buttons.forEach(button => { button.disabled = false; });
+      }
+    }
+
+    document.querySelector("#upload").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      await call("/poster-analysis/{user}", { method: "POST", body: new FormData(event.target) }, true);
+    });
+    document.querySelector("#load").addEventListener("click", () => call("/recommendations/{user}"));
+    document.querySelector("#refresh").addEventListener("click", () => {
+      call("/recommendations/{user}/refresh", { method: "POST" });
+    });
+  </script>
+</body>
+</html>
