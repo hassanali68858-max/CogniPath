@@ -9,7 +9,7 @@ import WeeklyCalendarGrid from './WeeklyCalendarGrid';
 import PlanVersionSwitcher from './PlanVersionSwitcher';
 import DecisionReviewPanel from './DecisionReviewPanel';
 import TutorProgressCard from './TutorProgressCard';
-import CareerSkillGapCard from './CareerSkillGapCard';
+import CareerMatchesLive from './CareerMatchesLive';
 
 /**
  * STUB: replace with `POST /api/replan` to the Planner Agent.
@@ -127,7 +127,7 @@ export default function CogniPathDashboard() {
           <h2 id="goals-heading" className="mb-3 font-display text-xl font-semibold tracking-tight">Keep your goals on track</h2>
           <div className="grid gap-5 lg:grid-cols-2">
             <TutorProgressCard data={MOCK_TUTOR} />
-            <CareerSkillGapCard matches={MOCK_MATCHES} />
+            <CareerMatchesLive />
           </div>
         </section>
       </main>

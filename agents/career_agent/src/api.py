@@ -18,8 +18,17 @@ SRC_DIR = Path(__file__).resolve().parent
 # Plans are written by advisor.py, one file per user
 DATA_DIR = SRC_DIR.parent / "data"
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(title="CogniPath Career Agent API")
 
+# Allow the team's Next.js frontend (port 3000) to call this API from the browser
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Profile(BaseModel):
     """Job preferences a CV cannot tell us."""
@@ -209,3 +218,31 @@ def tracker_update(user_id: str, app_id: int, body: TrackerUpdate):
         fields["accepted"] = "no"
     update_application(app_id, **fields)
     return {"status": "updated", "application_id": app_id}
+
+@app.get("/matches/{user_id}")
+def get_matches(user_id: str, limit: int = 3):
+    """Return the best job matches in the shape the team frontend card expects."""
+    from db import load_recommendations
+
+    def squash(name):
+        # "Quality Control" and "QualityControl" both become "qualitycontrol"
+        return re.sub(r"[^a-z0-9]", "", name.lower())
+
+    result = []
+    for job in load_recommendations(user_id)[:limit]:
+        skills = job["skills"] or []
+        missing_keys = {squash(s) for s in (job["missing_skills"] or [])}
+        # Readable names (with spaces) come from the job's skill list
+        matched = [s for s in skills if squash(s) not in missing_keys]
+        missing = [s for s in skills if squash(s) in missing_keys]
+        result.append({
+            "id": str(job["job_posting_id"]),
+            "org": job["company"],
+            "title": job["title"],
+            "deadline": "not given",
+            "match": round(job["score"] * 100),
+            "matchedSkills": matched,
+            "missingSkills": missing,
+            "coverLetter": "",
+        })
+    return result
