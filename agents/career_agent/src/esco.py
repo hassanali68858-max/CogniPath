@@ -14,6 +14,11 @@ SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
 # Small in-memory copy so the same run does not ask the database twice
 _memory = {}
 
+# Becomes True when the ESCO website does not answer. Then the rest of the run
+# uses only the cache and plain name matching, instead of crashing or waiting.
+_offline = False
+RETRIES = 2
+
 
 def _cached(key):
     """Look up a key in memory first, then in the database."""
@@ -33,11 +38,22 @@ def _get(path, params):
     query = urllib.parse.urlencode({**params, "language": "en"})
     url = f"{ESCO_API}/{path}?{query}"
     data = _cached(url)
-    if data is None:
-        with urllib.request.urlopen(url, timeout=30, context=SSL_CONTEXT) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-        _store(url, data)
-    return data
+    if data is not None:
+        return data
+    global _offline
+    if _offline:
+        return {}  # ESCO already failed in this run: do not wait again
+    for attempt in range(1, RETRIES + 1):
+        try:
+            with urllib.request.urlopen(url, timeout=30, context=SSL_CONTEXT) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            _store(url, data)
+            return data
+        except (OSError, ValueError) as e:  # timeout, no network, HTTP error, bad JSON
+            print(f"ESCO did not answer (try {attempt}/{RETRIES}): {e}")
+    print("ESCO is not reachable: continuing with cached data and plain skill names.")
+    _offline = True
+    return {}  # empty answer: callers treat it as "nothing found"
 
 
 def search_esco(text, kind="skill", limit=5):
@@ -62,7 +78,7 @@ def get_ancestors(uri, max_steps=6):
     chain = []
     current = uri
     for _ in range(max_steps):
-        links = get_skill(current)["_links"]
+        links = get_skill(current).get("_links", {})
         # Skills use broaderHierarchyConcept; higher groups use broaderConcept
         parents = links.get("broaderHierarchyConcept") or links.get("broaderConcept") or []
         if not parents:
@@ -85,7 +101,7 @@ def specific_groups(uri):
 def occupation_groups(occ):
     """All specific groups of the occupation's essential and optional skills."""
     groups = set()
-    links = occ["_links"]
+    links = occ.get("_links", {})
     for s in links.get("hasEssentialSkill", []) + links.get("hasOptionalSkill", []):
         groups |= specific_groups(s["uri"])
     return groups
@@ -93,7 +109,7 @@ def occupation_groups(occ):
 
 def esco_relevance(skill_uri, occ):
     """1.0 essential, 0.6 optional, 0.3 same specific group, else 0."""
-    links = occ["_links"]
+    links = occ.get("_links", {})
     essential = {s["uri"] for s in links.get("hasEssentialSkill", [])}
     optional = {s["uri"] for s in links.get("hasOptionalSkill", [])}
     if skill_uri in essential:
@@ -114,11 +130,15 @@ def map_to_esco(name, kind="skill"):
         return tuple(cached["result"]) if cached["result"] else None
 
     candidates = search_esco(name, kind=kind)
+    if not candidates and _offline:
+        return None  # ESCO is down: do not save "no match" in the cache
     if not candidates:
         # Abbreviations like "SEO" or "AI" may find nothing: ask for the full name and retry
         full = ask_llm(f"Write the full name of the {kind} '{name}'. Answer with the name only.").strip()
         candidates = search_esco(full, kind=kind)
         if not candidates:
+            if _offline:
+                return None  # ESCO went down during the retry: do not cache "no match"
             _store(key, {"result": None})
             return None
 
@@ -191,7 +211,7 @@ def skills_to_uris(names):
         split = re.sub(r"(?<=[a-z])(?=[A-Z])", " ", name)
         text = split if all(len(w) >= 3 for w in split.split()) else name
         candidates = search_esco(text, "skill", limit=5)
-        if not candidates:
+        if not candidates and not _offline:
             # Abbreviations may find nothing: fall back to the old mapper (it retries with the full name)
             result = map_to_esco(text, "skill")
             candidates = [result] if result else []

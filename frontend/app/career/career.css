@@ -1,0 +1,204 @@
+/* Career Agent page. Uses the team's tokens from globals.css (--career = Career Agent colour). */
+
+.career-hero-icon {
+  align-self: flex-start;
+  margin-top: 6px;
+  width: 44px;
+  height: 44px;
+}
+
+.career-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.career-stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 14px 16px;
+}
+
+.career-stat b {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.career-stat span {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.career-stat.accent b {
+  color: var(--career);
+}
+
+/* job + application rows */
+.career-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.career-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.career-row:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.career-row .grow {
+  min-width: 0;
+}
+
+.career-row .title {
+  font-weight: 650;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.career-row .meta {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+.career-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* round match score */
+.match-ring {
+  --p: 0;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(var(--career) calc(var(--p) * 1%), var(--career-soft) 0);
+}
+
+.match-ring > span {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.match-ring.none {
+  background: var(--surface-2);
+}
+
+/* status pills for the tracker */
+.pill.st-planned { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
+.pill.st-applied { background: var(--brand-soft); color: var(--brand-text); border-color: transparent; }
+.pill.st-interview { background: var(--tutor-soft); color: var(--tutor); border-color: transparent; }
+.pill.st-offer { background: var(--ok-soft); color: var(--ok); border-color: transparent; }
+.pill.st-rejected { background: var(--bad-soft); color: var(--bad); border-color: transparent; }
+
+/* career buttons and chips use the Career colour instead of the brand colour */
+.btn.career {
+  background: var(--career);
+  color: #fff;
+  border-color: transparent;
+}
+
+.btn.career:hover:not(:disabled) {
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--career) 35%, transparent);
+}
+
+.chip.career-on {
+  background: var(--career-soft);
+  color: var(--career);
+  border-color: color-mix(in srgb, var(--career) 40%, transparent);
+}
+
+.skill-chip {
+  font-size: 12px;
+  font-weight: 550;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--career-soft);
+  color: var(--career);
+}
+
+/* CV drop zone */
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 26px 16px;
+  border: 1.5px dashed var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--text-2);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.dropzone:hover {
+  border-color: var(--career);
+  background: var(--career-soft);
+}
+
+.dropzone input {
+  display: none;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+}
+
+.search-box svg {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-3);
+}
+
+.search-box input {
+  width: 100%;
+  padding-left: 34px;
+}
+
+@media (max-width: 640px) {
+  .career-row {
+    flex-wrap: wrap;
+  }
+  .career-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

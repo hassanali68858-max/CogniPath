@@ -7,6 +7,8 @@ SUBAGENTS_DIR = SRC_DIR / "subagents"
 
 # Intake: bring new postings into the database first (same for every user)
 INTAKE = ["gmail_fetch.py", "job_emails.py"]
+# Per-user intake: search job APIs with the user's target title (skipped if no API key)
+USER_INTAKE = ["jooble_source.py"]
 # Per-user steps
 STEPS = ["collector.py", "extractor.py", "matcher.py", "advisor.py"]
 
@@ -16,6 +18,14 @@ def run_intake(name):
     result = subprocess.run([sys.executable, str(SRC_DIR / name)])
     # Intake errors (e.g. no internet) should not stop the plan;
     # the database still has the older postings
+    if result.returncode != 0:
+        print(f"{name} failed, continuing with existing postings.")
+
+
+def run_user_intake(name, user_id):
+    print(f"\n=== {name} ===")
+    result = subprocess.run([sys.executable, str(SRC_DIR / name), user_id])
+    # Same as intake: a failing job source should not stop the plan
     if result.returncode != 0:
         print(f"{name} failed, continuing with existing postings.")
 
@@ -34,6 +44,8 @@ if __name__ == "__main__":
     user_id = sys.argv[1] if len(sys.argv) > 1 else input("User ID: ").strip()
     for name in INTAKE:
         run_intake(name)
+    for name in USER_INTAKE:
+        run_user_intake(name, user_id)
     for step in STEPS:
         run_step(step, user_id)
     print(f"\nCareer Agent finished for {user_id}. Output: data/career_plan.json")

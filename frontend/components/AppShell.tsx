@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarCheck, CircleCheckBig, CircleDashed, Compass, Inbox, SlidersHorizontal, Sparkles } from "lucide-react";
+import { Briefcase, CalendarCheck, CircleCheckBig, CircleDashed, Compass, Inbox, SlidersHorizontal, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -86,6 +86,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </Link>
             );
           })}
+        </nav>
+
+        {/* Agent pages (not numbered steps) */}
+        <nav className="steps-nav">
+          <Link href="/career" className={`step-link${path === "/career" ? " active" : ""}`}>
+            <span className="step-icon">
+              <Briefcase size={17} />
+            </span>
+            <span className="step-text">
+              <span>Career Agent</span>
+              <small>Jobs, CV, applications</small>
+            </span>
+          </Link>
         </nav>
 
         <div className="sidebar-foot">
