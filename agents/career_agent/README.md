@@ -76,7 +76,19 @@ cd agents/career_agent/src
 uvicorn api:app --reload --port 8001
 ~~~
 
-Terminal 3, Streamlit UI:
+Terminal 3, team frontend (Next.js, port 3000, needs Node.js 20.19 or newer):
+~~~
+cd frontend
+npm install
+npm run dev
+~~~
+Open http://localhost:3000/career (menu item **Career Agent**) for preferences, CV upload,
+job search, applications and the calendar. The **Internship matches** card on
+http://localhost:3000/cognipath also reads from the Career API (matches and cover letter).
+Choose the student in the left menu (field **Student**). The frontend calls the Career API at
+`NEXT_PUBLIC_CAREER_URL` (default `http://127.0.0.1:8001`).
+
+Optional, the older Streamlit UI (port 8501):
 ~~~
 cd agents/career_agent/src
 python -m streamlit run app.py
@@ -95,6 +107,7 @@ Check the result at http://127.0.0.1:8000/docs → `GET /proposals` with `user_i
 | Step | File | Role |
 |------|------|------|
 | Intake | `src/gmail_fetch.py`, `src/job_emails.py` | Reads job alert emails into the database |
+| Intake (per user) | `src/jooble_source.py` | Searches the Jooble API with the target title (or CV skills); needs `JOOBLE_API_KEY` |
 | 1. Collector | `src/subagents/collector.py` | Loads postings that fit the user profile |
 | 2. Extractor | `src/subagents/extractor.py` | Builds the skill graph with the ontology and ESCO |
 | 3. Matcher | `src/subagents/matcher.py` | Scores matches and finds skill gaps (SPARQL) |
@@ -120,7 +133,13 @@ Check the result at http://127.0.0.1:8000/docs → `GET /proposals` with `user_i
 | POST | `/run/{user_id}` | Run the whole pipeline |
 | GET | `/plan/{user_id}` | The user's latest career plan |
 | POST | `/apply/{user_id}/start` | Start preparing a cover letter and CV |
+| GET | `/profile/{user_id}` | Read saved job preferences |
+| GET | `/matches/{user_id}` | Best matches with skill gaps, deadline and tracker status |
+| GET | `/jobs/{user_id}?q=` | Search all postings (match score and tracker status per job) |
+| POST | `/apply/{user_id}/{job_id}/answer` | Answer the current pause (yes, changes, download) |
+| GET | `/apply/{user_id}/{job_id}/file/{kind}` | Download the cover letter or tailored CV (.docx) |
 | GET / POST / PATCH | `/tracker/{user_id}` | Application tracker |
+| GET | `/calendar/{user_id}` | Apply deadlines and interviews as an .ics file |
 
 ## Privacy
 

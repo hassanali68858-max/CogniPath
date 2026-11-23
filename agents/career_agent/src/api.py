@@ -228,6 +228,10 @@ def get_matches(user_id: str, limit: int = 3):
         # "Quality Control" and "QualityControl" both become "qualitycontrol"
         return re.sub(r"[^a-z0-9]", "", name.lower())
 
+    # Deadline of each posting, and the user's tracker status for each job title
+    deadlines = {p["job_posting_id"]: p["deadline"] for p in load_postings()}
+    tracked = {r["title"]: r for r in load_tracker(user_id)}
+
     result = []
     for job in load_recommendations(user_id)[:limit]:
         skills = job["skills"] or []
@@ -235,14 +239,84 @@ def get_matches(user_id: str, limit: int = 3):
         # Readable names (with spaces) come from the job's skill list
         matched = [s for s in skills if squash(s) not in missing_keys]
         missing = [s for s in skills if squash(s) in missing_keys]
+        deadline = deadlines.get(job["job_posting_id"])
+        row = tracked.get(job["title"])
         result.append({
             "id": str(job["job_posting_id"]),
             "org": job["company"],
             "title": job["title"],
-            "deadline": "not given",
+            "deadline": deadline.isoformat() if deadline else "not given",
             "match": round(job["score"] * 100),
             "matchedSkills": matched,
             "missingSkills": missing,
             "coverLetter": "",
+            "status": row["status"] if row else None,
         })
     return result
+
+
+# ---------- More endpoints for the team frontend (Career Agent page) ----------
+
+@app.get("/profile/{user_id}")
+def get_profile(user_id: str):
+    """Return the saved job preferences of this user (empty values if none yet)."""
+    from db import load_user_profile
+    p = load_user_profile(user_id)
+    if p is None:
+        return {"countries": [], "job_types": [], "work_mode": "any",
+                "target_title": "", "interests": [], "saved": False}
+    return {"countries": p["countries"] or [], "job_types": p["job_types"] or [],
+            "work_mode": p["work_mode"] or "any", "target_title": p["target_title"] or "",
+            "interests": p["interests"] or [], "saved": True}
+
+
+@app.get("/jobs/{user_id}")
+def search_jobs(user_id: str, q: str = "", limit: int = 50):
+    """Search the jobs the Career Agent found for this user (the ones with a match score),
+    plus jobs the user already tracks. A new user sees nothing until the agent has run."""
+    from db import load_recommendations
+    scores = {j["job_posting_id"]: j["score"] for j in load_recommendations(user_id)}
+    tracked = {r["title"]: r for r in load_tracker(user_id)}
+    words = q.lower().split()
+    jobs = []
+    for p in load_postings():
+        # Search in title, company, description and skills; every word must appear
+        text = " ".join([p["title"], p["company"], p.get("description") or "",
+                         " ".join(p["skills"] or [])]).lower()
+        if not all(w in text for w in words):
+            continue
+        score = scores.get(p["job_posting_id"])
+        row = tracked.get(p["title"])
+        if score is None and row is None:
+            continue  # collected for another user: not shown here
+        jobs.append({
+            "id": p["job_posting_id"],
+            "title": p["title"],
+            "company": p["company"],
+            "url": p.get("url"),
+            "deadline": p["deadline"].isoformat() if p.get("deadline") else None,
+            "match": round(score * 100) if score is not None else None,
+            "status": row["status"] if row else None,
+            "application_id": row["application_id"] if row else None,
+        })
+    # Best matches first; jobs without a score at the end
+    jobs.sort(key=lambda j: j["match"] if j["match"] is not None else -1, reverse=True)
+    return jobs[:limit]
+
+
+@app.get("/calendar/{user_id}")
+def get_calendar(user_id: str):
+    """Download apply deadlines and interview dates as an .ics file (Outlook, Google Calendar)."""
+    from fastapi.responses import Response
+    from calendar_export import ics_event
+    events = []
+    for r in load_tracker(user_id):
+        name = f"{r['title']} @ {r['company']}"
+        if r["deadline"] and r["status"] == "planned":
+            events.append(ics_event(f"deadline-{r['application_id']}", r["deadline"], f"Apply deadline: {name}"))
+        if r["interview_date"]:
+            events.append(ics_event(f"interview-{r['application_id']}", r["interview_date"], f"Interview: {name}"))
+    body = ("BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//CogniPath//Career Agent//EN\r\n"
+            + "".join(events) + "END:VCALENDAR\r\n")
+    return Response(body, media_type="text/calendar",
+                    headers={"Content-Disposition": f'attachment; filename="career_{safe_name(user_id)}.ics"'})
