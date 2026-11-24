@@ -1,5 +1,5 @@
 import json
-from turtle import title
+
 import requests
 
 OLLAMA_URL = "http://localhost:11434/api/generate"

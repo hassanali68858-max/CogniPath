@@ -2,12 +2,14 @@ import json
 import re
 import sys
 from pathlib import Path
-from rdflib import Graph, Namespace, Literal, RDF, XSD
+
+from rdflib import RDF, XSD, Graph, Literal, Namespace
 
 # Make src/ importable so we can use llm.py from this subfolder
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from db import ensure_user, latest_cv_skills, load_user_profile, save_postings
 from llm import ask_llm
-from db import ensure_user, save_postings, latest_cv_skills, load_user_profile
+
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 
 # Fallback list, used only if the LLM is not available

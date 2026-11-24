@@ -1,8 +1,8 @@
 
 import json
 from pathlib import Path
-from rdflib import Graph
 
+from rdflib import Graph
 
 # Load Career Ontology
 graph = Graph()

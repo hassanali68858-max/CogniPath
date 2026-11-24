@@ -1,10 +1,11 @@
+import hashlib
 import json
+import re
 import ssl
 import urllib.parse
 import urllib.request
-import hashlib
+
 import certifi
-import re
 from db import cache_get, cache_set
 from llm import ask_llm
 
@@ -162,18 +163,22 @@ Answer with the number only."""
     _store(key, {"result": list(candidates[index])})
     return candidates[index]
 
+def squash(s):
+    """Lower case without spaces and punctuation, e.g. "No SQL" -> "nosql" (keeps # and +)."""
+    return re.sub(r"[^a-z0-9#+]", "", s.lower())
+
+
 def shares_word(a, b):
     """True if two texts are the same or share a meaningful word (or word stem)."""
-    squash = lambda s: re.sub(r"[^a-z0-9#+]", "", s.lower())
     if squash(a) == squash(b):
         return True  # exact match, e.g. "C#", "R", "No SQL" vs "NoSQL"
     stop = {"and", "with", "for", "the", "use", "using"}
-    words = lambda s: {w[:5] for w in re.findall(r"[a-z]+", s.lower()) if len(w) >= 3 and w not in stop}
+    def words(s):
+        return {w[:5] for w in re.findall(r"[a-z]+", s.lower()) if len(w) >= 3 and w not in stop}
     return bool(words(a) & words(b))
 
 def is_good_match(name, title):
     """Ask the LLM if an ESCO skill title really describes the skill name (cached)."""
-    squash = lambda s: re.sub(r"[^a-z0-9#+]", "", s.lower())
     if squash(name) == squash(title):
         return True  # exact match, no need to ask
         # One name contains the other (e.g. "Microsoft Office" in "use microsoft office").

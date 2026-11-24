@@ -12,9 +12,9 @@ from urllib.parse import urlparse
 import certifi
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # src/
-from sqlalchemy import text
 from db import engine
 from llm import ask_llm
+from sqlalchemy import text
 from teamtailor_source import html_to_text
 
 TODAY = date.today()

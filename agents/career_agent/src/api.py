@@ -4,21 +4,19 @@ import subprocess
 import sys
 from pathlib import Path
 
+from application_graph import graph as app_graph
+from cv_reader import CV_DIR, clean_skills, extract_profile, fix_skill_names, read_pdf_text
+from db import add_application, load_postings, load_tracker, save_cv, save_user_profile, update_application
 from fastapi import FastAPI, File, HTTPException, UploadFile
-from pydantic import BaseModel
-
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from langgraph.types import Command
-
-from db import save_user_profile, save_cv, load_postings, load_tracker, add_application, update_application
-from cv_reader import CV_DIR, read_pdf_text, extract_profile, clean_skills, fix_skill_names
-from application_graph import graph as app_graph
+from pydantic import BaseModel
 
 SRC_DIR = Path(__file__).resolve().parent
 # Plans are written by advisor.py, one file per user
 DATA_DIR = SRC_DIR.parent / "data"
 
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="CogniPath Career Agent API")
 
@@ -61,7 +59,7 @@ def save_profile(user_id: str, profile: Profile):
 
 
 @app.post("/cv/{user_id}")
-def upload_cv(user_id: str, file: UploadFile = File(...)):
+def upload_cv(user_id: str, file: UploadFile = File(...)):  # noqa: B008 (normal FastAPI style)
     """Save the uploaded PDF CV, read its skills and store them in the database."""
     if not file.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Please upload a PDF file.")
@@ -319,8 +317,9 @@ def get_calendar(user_id: str):
     """Download apply deadlines and interview dates as an .ics file (Outlook, Google Calendar).
     Includes tracked applications AND the jobs the agent found for the user."""
     from datetime import date
-    from db import load_recommendations
+
     from calendar_export import ics_event
+    from db import load_recommendations
     events = []
     tracked_titles = set()
     for r in load_tracker(user_id):
@@ -335,8 +334,8 @@ def get_calendar(user_id: str):
     for j in load_recommendations(user_id):
         day = deadlines.get(j["job_posting_id"])
         if day and day >= date.today() and j["title"] not in tracked_titles:
-            events.append(ics_event(f"job-{j['job_posting_id']}-{safe_name(user_id)}", day,
-                                    f"Apply deadline: {j['title']} @ {j['company']} ({round(j['score'] * 100)}% match)"))
+            label = f"Apply deadline: {j['title']} @ {j['company']} ({round(j['score'] * 100)}% match)"
+            events.append(ics_event(f"job-{j['job_posting_id']}-{safe_name(user_id)}", day, label))
     return ics_file(events, f"career_{safe_name(user_id)}.ics")
 
 

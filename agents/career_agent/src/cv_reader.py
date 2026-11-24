@@ -1,14 +1,14 @@
 import json
-import sys
 import re
+import sys
 from difflib import SequenceMatcher
 from pathlib import Path
 
 from pypdf import PdfReader
-from cv_writer import save_tailored_cv
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # src/
+from db import cache_get, cache_set, latest_cv_skills, save_cv
 from llm import ask_llm
-from db import save_cv, latest_cv_skills, cache_get, cache_set
 
 CV_DIR = Path(__file__).resolve().parents[1] / "data" / "cvs"
 
@@ -248,10 +248,12 @@ Rules:
 - Use ONLY facts from the CV. Do not invent anything.
 - Take the field of study, degree and job titles ONLY from the CV.
 - Never mix details between different degrees or jobs (each thesis belongs to its own degree).
-- A skill level applies only to the skill it is written next to (e.g. "Python (basic level)" means only Python is basic).
+- A skill level applies only to the skill it is written next to
+  (e.g. "Python (basic level)" means only Python is basic).
 - Exactly 3 sentences.
 - No names, no contact details, no placeholders like [Your Name].
-- Write in third person without a name and without pronouns (no he, she, his, her, they). Start sentences with a noun or verb (e.g. "<degree> student with ...", "Has built ...").
+- Write in third person without a name and without pronouns (no he, she, his, her, they).
+- Start sentences with a noun or verb (e.g. "<degree> student with ...", "Has built ...").
 - Do not use these words: {", ".join(OVERCLAIM_WORDS)}. Describe experience plainly.
 - Return ONLY the 3 profile sentences. No notes, no explanations, no comments about the match.
 JOB POSTING:

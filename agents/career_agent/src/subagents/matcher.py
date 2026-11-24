@@ -1,14 +1,15 @@
 import json
+import logging
+import sys
+from collections import Counter
 from pathlib import Path
 
 from rdflib import Graph, Namespace
-from collections import Counter
-import sys
-import logging
+
 logging.getLogger("rdflib").setLevel(logging.ERROR)  # hide harmless URI warnings
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # src/, for db.py
-from db import save_matches, latest_cv_skills, load_postings, load_user_profile
-from esco import skills_to_uris
+from db import latest_cv_skills, load_postings, load_user_profile, save_matches  # noqa: E402
+from esco import skills_to_uris  # noqa: E402
 
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 CAREER = Namespace("https://example.org/cognipath/career#")

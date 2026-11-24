@@ -2,17 +2,19 @@ import re
 import sys
 from pathlib import Path
 from typing import TypedDict
+
 from langgraph.checkpoint.memory import MemorySaver
-from langgraph.graph import StateGraph, START, END
-from langgraph.types import interrupt, Command
+from langgraph.graph import END, START, StateGraph
+from langgraph.types import Command, interrupt
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # src/
+from cv_reader import CV_DIR, check_profile, read_pdf_text, split_sections, tailor_sections, write_profile
+from cv_writer import save_tailored_cv
 from db import latest_cv_skills, load_postings, save_cover_letter
+from docx import Document
 from esco import skills_to_uris
 from llm import ask_llm
-from cv_reader import read_pdf_text, split_sections, tailor_sections, write_profile, check_profile, CV_DIR
-from cv_writer import save_tailored_cv
-from docx import Document
+
 # Delivery methods the user can choose from
 DELIVERY_OPTIONS = ("download", "email", "drive")
 

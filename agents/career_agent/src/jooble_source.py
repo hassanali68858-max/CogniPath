@@ -31,7 +31,8 @@ PER_PAGE = 20
 
 def search_jooble(keywords, page, location=LOCATION):
     """Ask the Jooble API for one page of jobs that match the keywords."""
-    body = json.dumps({"keywords": keywords, "location": location, "page": page, "ResultOnPage": PER_PAGE}).encode("utf-8")
+    query = {"keywords": keywords, "location": location, "page": page, "ResultOnPage": PER_PAGE}
+    body = json.dumps(query).encode("utf-8")
     request = urllib.request.Request(
         f"{API_HOST}/api/{API_KEY}", data=body,
         headers={"Content-Type": "application/json", "User-Agent": "CogniPath-CareerAgent/0.1"},
@@ -124,8 +125,9 @@ if __name__ == "__main__":
                 # Check: does the same search find jobs without a location?
                 # If yes, the key belongs to another country, or the location name is not known.
                 other = search_jooble(keywords, 1, location="")
+                first = other["jobs"][0] if other.get("jobs") else None
                 print(f"   same search without location: total {other.get('totalCount', 0)}"
-                      + (f", first: {other['jobs'][0].get('title')} ({other['jobs'][0].get('location')})" if other.get("jobs") else ""))
+                      + (f", first: {first.get('title')} ({first.get('location')})" if first else ""))
             if not jobs:
                 break
             for job in jobs:

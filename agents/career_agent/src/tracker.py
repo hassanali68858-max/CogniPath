@@ -1,5 +1,8 @@
 from datetime import date
-from db import load_tracker, update_application, load_recommendations, save_feedback, add_application
+
+from db import add_application, load_recommendations, load_tracker, save_feedback, update_application
+
+
 def show_tracker(user_id):
     """Print the user's applications as a simple table."""
     rows = load_tracker(user_id)

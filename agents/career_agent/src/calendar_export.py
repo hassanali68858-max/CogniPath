@@ -1,5 +1,6 @@
 from datetime import date, datetime
 from pathlib import Path
+
 from db import load_tracker
 
 OUT = Path(__file__).resolve().parent.parent / "data" / "career_calendar.ics"

@@ -33,8 +33,8 @@ def parse_linkedin(body):
         match = re.search(r"View job: \S*/jobs/view/(\d+)", block)
         if not match:
             continue
-        lines = [l.strip() for l in block[:match.start()].splitlines()]
-        lines = [l for l in lines if l and not l.startswith(FILLER)]
+        lines = [line.strip() for line in block[:match.start()].splitlines()]
+        lines = [line for line in lines if line and not line.startswith(FILLER)]
         if len(lines) < 3:
             continue
         # The first card also has the alert header, so take the last 3 lines
@@ -49,7 +49,7 @@ def parse_indeed(body):
     jobs = []
     for match in re.finditer(r"View job: (\S+)", body):
         # The 3 non-empty lines before "View job:" are title, company, location
-        lines = [l.strip() for l in body[:match.start()].splitlines() if l.strip()]
+        lines = [line.strip() for line in body[:match.start()].splitlines() if line.strip()]
         if len(lines) < 3:
             continue
         title, company, location = lines[-3:]
@@ -62,12 +62,12 @@ def parse_glassdoor(body):
     """Extract jobs from a Glassdoor alert (HTML only)."""
     # Job links appear in the same order as the jobs
     links = re.findall(r'href="(https://www\.glassdoor\.com/partner/jobListing\.htm[^"]+)"', body)
-    links = [html.unescape(html.unescape(l)) for l in dict.fromkeys(links)]
+    links = [html.unescape(html.unescape(link)) for link in dict.fromkeys(links)]
     # Turn HTML into clean text lines
     body = re.sub(r"<(style|head)[^>]*>.*?</\1>", "", body, flags=re.S)
     text = html.unescape(re.sub(r"<[^>]+>", "\n", body))
-    lines = [l.strip() for l in text.splitlines() if l.strip()]
-    start = next(i for i, l in enumerate(lines) if l.startswith("Your job listings")) + 3
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    start = next(i for i, line in enumerate(lines) if line.startswith("Your job listings")) + 3
     # Split into blocks; a block ends with the job age, like "2d" or "8h"
     blocks, block = [], []
     for line in lines[start:]:

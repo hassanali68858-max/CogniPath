@@ -26,3 +26,9 @@ agents/career_agent/data/letters/
 agents/career_agent/data/career_plan_*.json
 agents/career_agent/data/pipeline_log.txt
 agents/career_agent/data/user_profile.json
+
+# Career Agent: files the pipeline rebuilds on every run (do not commit)
+agents/career_agent/data/matches.json
+agents/career_agent/data/raw_postings.json
+agents/career_agent/data/skill_gaps.json
+agents/career_agent/data/career_graph.ttl

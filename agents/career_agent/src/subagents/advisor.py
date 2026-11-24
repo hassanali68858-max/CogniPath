@@ -3,16 +3,19 @@ import re
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
+
 from rdflib import Graph, Namespace
 from rdflib.namespace import SKOS
 
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 ROOT = Path(__file__).resolve().parents[4]          # CogniPath-Team
 sys.path.insert(0, str(ROOT))
-from shared.contracts import ProposalBatch           # the team contract
+from shared.contracts import ProposalBatch  # noqa: E402  (the team contract, after sys.path)
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # src/, for esco.py
-from esco import map_to_esco, get_occupation, esco_relevance
-from db import load_user_profile
+from db import load_user_profile  # noqa: E402
+from esco import esco_relevance, get_occupation, map_to_esco  # noqa: E402
+
 TODAY = date.today()
 
 # Event career weights (swing weighting: 100, 60, 40)
@@ -219,14 +222,18 @@ def score_events(events, companies, missing_skills, interests, goal):
         social = social_score(e["topics"], interests)
         start = datetime.fromisoformat(e["date"] + "T" + e.get("start", "17:00"))
         title = f"Attend {e['name']}"
+        reason = ((f"Meet {', '.join(meets)}. " if meets else "")
+                  + (f"Learn about {', '.join(learns)}." if learns else "")) or "Social only, no career value"
         acts.append({
             "proposal_id": make_id("event", title),
             "type": "event",
             "title": title,
             "fixed_time": {"start": start.isoformat(), "end": (start + timedelta(minutes=120)).isoformat()},
             "location": e.get("location"),
+            # Event URL: lets the Planner merge this with the same event from the Event Agent
+            "opportunity_ref": e.get("url"),
             "value": {"study": 0.0, "career": career, "social": round(social, 2)},
-            "reason": (f"Meet {', '.join(meets)}. " if meets else "") + (f"Learn about {', '.join(learns)}." if learns else "") or "Social only, no career value",
+            "reason": reason,
         })
     return acts
 

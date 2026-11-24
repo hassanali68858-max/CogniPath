@@ -1,4 +1,5 @@
 import re
+
 from docx import Document
 
 TITLE_SPLIT = re.compile(r"\s{2,}(?=[A-Z])")
