@@ -1,12 +1,23 @@
 "use client";
 
-import { Check, ExternalLink, Loader2, Plus, Search, SearchX } from "lucide-react";
+import { CalendarPlus, Check, ExternalLink, Loader2, Plus, Search, SearchX } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { errorText, useToast } from "@/components/Toast";
 import { useUser } from "@/components/UserProvider";
 import { type Job, careerApi } from "@/lib/career";
 import { MatchRing } from "./MatchRing";
+
+/** "Closes 5 Dec 2026 · 11 days left" for the job card, or a note that the ad gives no date. */
+function deadlineText(deadline: string | null) {
+  // Many companies recruit on a rolling basis and give no closing date
+  if (!deadline) return { text: "No closing date given · open until filled, apply early", soon: false };
+  const day = new Date(`${deadline}T00:00:00`);
+  const days = Math.round((day.getTime() - new Date().setHours(0, 0, 0, 0)) / 86_400_000);
+  const nice = day.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  const left = days < 0 ? "closed" : days === 0 ? "closes today" : `${days} day${days === 1 ? "" : "s"} left`;
+  return { text: `Apply by ${nice} · ${left}`, soon: days >= 0 && days <= 7 };
+}
 
 /** Search the jobs the Career Agent found for this student. Shows the match score and whether the student already applied. */
 export function JobSearchCard({ refreshKey, onTracked }: { refreshKey: number; onTracked: () => void }) {
@@ -86,7 +97,12 @@ export function JobSearchCard({ refreshKey, onTracked }: { refreshKey: number; o
               <div className="grow">
                 <div className="title">{j.title}</div>
                 <div className="meta">
-                  {j.company} · {j.deadline ? `Closes ${j.deadline}` : "No deadline given"}
+                  {j.company}
+                  {j.match !== null && <> · {j.match}% match</>}
+                </div>
+                {j.summary && <p className="job-summary">{j.summary}</p>}
+                <div className={`meta${deadlineText(j.deadline).soon ? " deadline-soon" : ""}`}>
+                  {deadlineText(j.deadline).text}
                 </div>
               </div>
               <div className="career-actions">
@@ -103,6 +119,11 @@ export function JobSearchCard({ refreshKey, onTracked }: { refreshKey: number; o
                       <Check size={14} /> I applied
                     </button>
                   </>
+                )}
+                {j.deadline && (
+                  <a className="icon-btn" href={careerApi.jobCalendarUrl(userId, j.id)} aria-label="Add deadline to calendar" title="Add deadline to calendar">
+                    <CalendarPlus size={15} />
+                  </a>
                 )}
                 {j.url && (
                   <a className="icon-btn" href={j.url} target="_blank" rel="noreferrer" aria-label="Open posting">

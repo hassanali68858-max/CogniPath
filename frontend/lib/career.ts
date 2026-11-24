@@ -19,8 +19,9 @@ export type Job = {
   id: number;
   title: string;
   company: string;
+  summary: string | null; // one sentence about the ad, written by the enricher
   url: string | null;
-  deadline: string | null;
+  deadline: string | null; // apply deadline found in the ad (YYYY-MM-DD)
   match: number | null; // 0-100, null if the pipeline has not scored this job for the user
   status: Status | null; // null = not in the tracker yet
   application_id: number | null;
@@ -78,4 +79,5 @@ export const careerApi = {
       body: JSON.stringify({ status, interview_date: interview_date || null }),
     }),
   calendarUrl: (u: string) => `${CAREER_URL}/calendar/${enc(u)}`,
+  jobCalendarUrl: (u: string, jobId: number) => `${CAREER_URL}/calendar/${enc(u)}/job/${jobId}`,
 };

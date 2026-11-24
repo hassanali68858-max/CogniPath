@@ -202,3 +202,15 @@
     justify-content: flex-start;
   }
 }
+
+/* Job card: one-sentence summary of the ad and a red deadline when it is close */
+.job-summary {
+  margin: 4px 0 2px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-2, inherit);
+}
+.deadline-soon {
+  color: var(--bad);
+  font-weight: 600;
+}

@@ -293,6 +293,7 @@ def search_jobs(user_id: str, q: str = "", limit: int = 50):
             "id": p["job_posting_id"],
             "title": p["title"],
             "company": p["company"],
+            "summary": p.get("summary"),  # one sentence written by the enricher
             "url": p.get("url"),
             "deadline": p["deadline"].isoformat() if p.get("deadline") else None,
             "match": round(score * 100) if score is not None else None,
@@ -304,19 +305,48 @@ def search_jobs(user_id: str, q: str = "", limit: int = 50):
     return jobs[:limit]
 
 
+def ics_file(events, filename):
+    """Wrap calendar events into one downloadable .ics file."""
+    from fastapi.responses import Response
+    body = ("BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//CogniPath//Career Agent//EN\r\n"
+            + "".join(events) + "END:VCALENDAR\r\n")
+    return Response(body, media_type="text/calendar",
+                    headers={"Content-Disposition": f'attachment; filename="{filename}"'})
+
+
 @app.get("/calendar/{user_id}")
 def get_calendar(user_id: str):
-    """Download apply deadlines and interview dates as an .ics file (Outlook, Google Calendar)."""
-    from fastapi.responses import Response
+    """Download apply deadlines and interview dates as an .ics file (Outlook, Google Calendar).
+    Includes tracked applications AND the jobs the agent found for the user."""
+    from datetime import date
+    from db import load_recommendations
     from calendar_export import ics_event
     events = []
+    tracked_titles = set()
     for r in load_tracker(user_id):
+        tracked_titles.add(r["title"])
         name = f"{r['title']} @ {r['company']}"
         if r["deadline"] and r["status"] == "planned":
             events.append(ics_event(f"deadline-{r['application_id']}", r["deadline"], f"Apply deadline: {name}"))
         if r["interview_date"]:
             events.append(ics_event(f"interview-{r['application_id']}", r["interview_date"], f"Interview: {name}"))
-    body = ("BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//CogniPath//Career Agent//EN\r\n"
-            + "".join(events) + "END:VCALENDAR\r\n")
-    return Response(body, media_type="text/calendar",
-                    headers={"Content-Disposition": f'attachment; filename="career_{safe_name(user_id)}.ics"'})
+    # Found jobs that are not tracked yet but have a deadline in the ad
+    deadlines = {p["job_posting_id"]: p["deadline"] for p in load_postings()}
+    for j in load_recommendations(user_id):
+        day = deadlines.get(j["job_posting_id"])
+        if day and day >= date.today() and j["title"] not in tracked_titles:
+            events.append(ics_event(f"job-{j['job_posting_id']}-{safe_name(user_id)}", day,
+                                    f"Apply deadline: {j['title']} @ {j['company']} ({round(j['score'] * 100)}% match)"))
+    return ics_file(events, f"career_{safe_name(user_id)}.ics")
+
+
+@app.get("/calendar/{user_id}/job/{job_id}")
+def get_job_calendar(user_id: str, job_id: int):
+    """Download the apply deadline of ONE job as an .ics file (the calendar button on a job card)."""
+    from calendar_export import ics_event
+    job = next((p for p in load_postings() if p["job_posting_id"] == job_id), None)
+    if job is None or not job.get("deadline"):
+        raise HTTPException(404, "This job has no deadline in the ad")
+    event = ics_event(f"job-{job_id}-{safe_name(user_id)}", job["deadline"],
+                      f"Apply deadline: {job['title']} @ {job['company']}")
+    return ics_file([event], f"deadline_{job_id}.ics")

@@ -10,7 +10,8 @@ INTAKE = ["gmail_fetch.py", "job_emails.py"]
 # Per-user intake: search job APIs with the user's target title (skipped if no API key)
 USER_INTAKE = ["jooble_source.py"]
 # Per-user steps
-STEPS = ["collector.py", "extractor.py", "matcher.py", "advisor.py"]
+# enricher: apply deadline + one-sentence summary for the matched jobs
+STEPS = ["collector.py", "extractor.py", "matcher.py", "enricher.py", "advisor.py"]
 
 
 def run_intake(name):
