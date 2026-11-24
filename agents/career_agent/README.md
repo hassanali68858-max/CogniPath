@@ -14,6 +14,7 @@ No scraping and no automatic applications.
 
 - `src/pipeline.py`: runs intake, then the 4 sub-agents (collector → extractor → matcher → advisor)
 - `src/planner_client.py`: sends the `ProposalBatch` to the shared Planner API (`POST /proposals/batch`)
+- `src/event_client.py`: reads upcoming events from the Event Agent API (`GET /events`, port 8002); falls back to `data/events.json` when it is not running
 - `src/api.py`: Career Agent FastAPI (port **8001**), docs at http://127.0.0.1:8001/docs
 - `src/app.py`: Streamlit UI (port 8501), calls the Career API
 - `src/application_graph.py`: LangGraph flow that prepares a cover letter and tailored CV (with user approval)

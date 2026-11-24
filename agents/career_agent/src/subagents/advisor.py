@@ -15,6 +15,7 @@ from shared.contracts import ProposalBatch  # noqa: E402  (the team contract, af
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # src/, for esco.py
 from db import load_user_profile  # noqa: E402
 from esco import esco_relevance, get_occupation, map_to_esco  # noqa: E402
+from event_client import load_events  # noqa: E402
 
 TODAY = date.today()
 
@@ -220,7 +221,16 @@ def score_events(events, companies, missing_skills, interests, goal):
         c3 = c3_goal(e["topics"], goal)                                    # goal relevance
         career = round(W1 * c1 + W2 * c2 + W3 * c3, 2)
         social = social_score(e["topics"], interests)
-        start = datetime.fromisoformat(e["date"] + "T" + e.get("start", "17:00"))
+        if e.get("date"):
+            # Sample file: a date and an optional start time
+            start = datetime.fromisoformat(e["date"] + "T" + e.get("start", "17:00"))
+            end = start + timedelta(minutes=120)
+        else:
+            # Event Agent: full start and end times
+            start = datetime.fromisoformat(e["start"].replace("Z", "+00:00"))
+            end = datetime.fromisoformat(e["end"].replace("Z", "+00:00")) if e.get("end") else start
+            if end <= start:
+                end = start + timedelta(minutes=120)  # no real end time: assume 2 hours
         title = f"Attend {e['name']}"
         reason = ((f"Meet {', '.join(meets)}. " if meets else "")
                   + (f"Learn about {', '.join(learns)}." if learns else "")) or "Social only, no career value"
@@ -228,10 +238,11 @@ def score_events(events, companies, missing_skills, interests, goal):
             "proposal_id": make_id("event", title),
             "type": "event",
             "title": title,
-            "fixed_time": {"start": start.isoformat(), "end": (start + timedelta(minutes=120)).isoformat()},
+            "fixed_time": {"start": start.isoformat(), "end": end.isoformat()},
             "location": e.get("location"),
-            # Event URL: lets the Planner merge this with the same event from the Event Agent
-            "opportunity_ref": e.get("url"),
+            # Same id the Event Agent uses, so the Planner can merge the two proposals
+            "opportunity_ref": e.get("id"),
+            "resource_url": e.get("url"),
             "value": {"study": 0.0, "career": career, "social": round(social, 2)},
             "reason": reason,
         })
@@ -241,7 +252,7 @@ def score_events(events, companies, missing_skills, interests, goal):
 if __name__ == "__main__":
     matches = json.loads((DATA_DIR / "matches.json").read_text(encoding="utf-8"))
     raw = json.loads((DATA_DIR / "raw_postings.json").read_text(encoding="utf-8"))
-    events = json.loads((DATA_DIR / "events.json").read_text(encoding="utf-8"))
+    events = load_events()  # Event Agent API, or data/events.json if it is not running
      # Usage: python subagents\advisor.py <user_id>
     user_id = sys.argv[1] if len(sys.argv) > 1 else input("User ID: ").strip()
     profile = load_user_profile(user_id)
