@@ -1,0 +1,82 @@
+[
+  {
+    "id": "kg-summer-2027", "kind": "summer_school",
+    "title": "Summer School on Knowledge Graphs (demo)", "provider": "Demo University of Technology",
+    "url": "https://example.org/kg-summer-school", "location": "Amsterdam, Netherlands",
+    "tags": ["knowledge-graphs", "ai", "semantic-web"],
+    "credits": 5, "credit_module_id": "advanced",
+    "start": "2027-06-14", "end": "2027-06-25", "application_deadline": "2026-12-01"
+  },
+  {
+    "id": "robotics-summer-2027", "kind": "summer_school",
+    "title": "Summer School on Robotics (demo)", "provider": "Demo Robotics Institute",
+    "url": "https://example.org/robotics-summer-school", "location": "Online",
+    "tags": ["robotics"],
+    "credits": 5, "credit_module_id": "electives",
+    "start": "2027-07-05", "end": "2027-07-16", "application_deadline": "2026-12-10"
+  },
+  {
+    "id": "ml-winter-2027", "kind": "winter_school",
+    "title": "Winter School on Machine Learning (demo)", "provider": "Demo AI Network",
+    "url": "https://example.org/ml-winter-school", "location": "Online",
+    "tags": ["machine-learning", "ai"],
+    "credits": 3, "credit_module_id": "electives",
+    "start": "2027-01-18", "end": "2027-01-22", "application_deadline": "2026-11-16"
+  },
+  {
+    "id": "arch-winter-fi-2027", "kind": "winter_school",
+    "title": "Talvikoulu: ohjelmistoarkkitehtuuri (demo)", "provider": "Demo-yliopisto",
+    "language": "fi", "tags": ["software-architecture", "ai"],
+    "credits": 3, "credit_module_id": "electives",
+    "start": "2027-02-01", "end": "2027-02-05", "application_deadline": "2026-11-30"
+  },
+  {
+    "id": "ds-summer-closed", "kind": "summer_school",
+    "title": "Data Science Summer School (demo)", "provider": "Demo Data Academy",
+    "tags": ["data-science", "machine-learning"],
+    "credits": 5, "credit_module_id": "electives",
+    "start": "2027-06-07", "end": "2027-06-18", "application_deadline": "2026-10-15"
+  },
+  {
+    "id": "erasmus-spring-2027-a", "kind": "erasmus",
+    "title": "Erasmus exchange, spring 2027: Demo University A", "provider": "Erasmus+",
+    "url": "https://example.org/erasmus/demo-university-a", "location": "Ghent, Belgium",
+    "tags": ["ai", "hci"],
+    "credits": 30, "credit_module_id": "electives", "min_completed_credits": 10,
+    "start": "2027-01-11", "end": "2027-05-31", "application_deadline": "2026-11-20"
+  },
+  {
+    "id": "erasmus-autumn-2027-b", "kind": "erasmus",
+    "title": "Erasmus exchange, autumn 2027: Demo University B", "provider": "Erasmus+",
+    "url": "https://example.org/erasmus/demo-university-b", "location": "Lisbon, Portugal",
+    "tags": ["ai", "machine-learning"],
+    "credits": 30, "credit_module_id": "electives", "min_completed_credits": 10,
+    "start": "2027-08-30", "end": "2027-12-20", "application_deadline": "2026-12-15"
+  },
+  {
+    "id": "erasmus-autumn-2027-c", "kind": "erasmus",
+    "title": "Erasmus exchange, autumn 2027: Demo University C", "provider": "Erasmus+",
+    "location": "Vienna, Austria",
+    "tags": ["ai", "knowledge-graphs"],
+    "credits": 30, "credit_module_id": "advanced", "min_completed_credits": 60,
+    "start": "2027-09-01", "end": "2028-01-31", "application_deadline": "2026-12-15"
+  },
+  {
+    "id": "forum-ai-students", "kind": "forum",
+    "title": "AI student community (demo)", "provider": "Student union",
+    "url": "https://example.org/forums/ai-students",
+    "tags": ["ai", "machine-learning"]
+  },
+  {
+    "id": "forum-algorithms", "kind": "forum",
+    "title": "Algorithms course Q&A board (demo)", "provider": "Course staff",
+    "url": "https://example.org/forums/algorithms",
+    "related_courses": ["COG1010"]
+  },
+  {
+    "id": "forum-board-games", "kind": "forum",
+    "title": "Board game club (demo)", "provider": "Student union",
+    "url": "https://example.org/forums/board-games",
+    "tags": ["games"]
+  }
+]

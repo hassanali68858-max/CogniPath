@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import { Route } from 'lucide-react';
 import type { ActivityProposal, Decision, PlanVersion, ScheduledItem } from '@/lib/cognipath/types';
-import { DROP_REASONS, MOCK_MATCHES, MOCK_PLANS, MOCK_TUTOR, NOW, TODAY, WEEK_START } from '@/lib/cognipath/mock-data';
+import { DROP_REASONS, MOCK_MATCHES, MOCK_PLANS, NOW, TODAY, WEEK_START } from '@/lib/cognipath/mock-data';
 import { addMinutes, fmtSlot, parseISO } from '@/lib/cognipath/theme';
 import WeeklyCalendarGrid from './WeeklyCalendarGrid';
 import PlanVersionSwitcher from './PlanVersionSwitcher';
@@ -126,7 +126,7 @@ export default function CogniPathDashboard() {
         <section aria-labelledby="goals-heading">
           <h2 id="goals-heading" className="mb-3 font-display text-xl font-semibold tracking-tight">Keep your goals on track</h2>
           <div className="grid gap-5 lg:grid-cols-2">
-            <TutorProgressCard data={MOCK_TUTOR} />
+            <TutorProgressCard />
             <CareerSkillGapCard matches={MOCK_MATCHES} />
           </div>
         </section>

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "msc-cognitive-computing-demo",
+    "name": "MSc Cognitive Computing (demo)",
+    "total_credits": 120,
+    "modules": [
+      {"id": "core", "name": "Core studies", "min_credits": 40, "mandatory": ["COG1010", "COG2400", "TIES4570"]},
+      {"id": "advanced", "name": "Advanced studies", "min_credits": 30, "mandatory": []},
+      {"id": "electives", "name": "Electives", "min_credits": 20, "mandatory": []},
+      {"id": "thesis", "name": "Master's thesis", "min_credits": 30, "mandatory": ["COG9000"]}
+    ]
+  }
+]

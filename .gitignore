@@ -11,6 +11,7 @@ __pycache__/
 # generated outputs
 *.ics
 career_plan.json
+tutor_proposals.json
 
 # frontend
 node_modules/

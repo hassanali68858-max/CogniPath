@@ -39,33 +39,6 @@ export interface PlanVersion {
   dropped_items: ActivityProposal[];
 }
 
-/* ---------- Tutor ---------- */
-export interface QuizQuestion {
-  id: string;
-  prompt: string;
-  options: string[];
-  answerIndex: number;
-  explanation: string;
-}
-export interface WeakTopic {
-  id: string;
-  topic: string;
-  course: string;
-  mastery: number; // 0-100
-  questions: QuizQuestion[];
-}
-export interface CreditBucket {
-  label: string;
-  done: number;
-  total: number;
-}
-export interface TutorProgress {
-  programme: string;
-  credits: CreditBucket[];
-  graduation: { target: string; projected: string; atRisk: boolean; message: string };
-  weakTopics: WeakTopic[];
-}
-
 /* ---------- Career ---------- */
 export interface InternshipMatch {
   id: string;
