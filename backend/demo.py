@@ -13,6 +13,11 @@ from fastapi import APIRouter, HTTPException
 
 from agents.planner_agent.api import Store
 from agents.planner_agent.io import load_profile, load_proposals
+from agents.tutor_agent import propose as tutor_propose
+from agents.tutor_agent.seed import load_student
+from shared.contracts import SourceAgent
+
+from .tutor import tutor_context
 
 FIXTURES = Path(__file__).resolve().parents[1] / "tests" / "planner_agent" / "fixtures"
 DEMO_USER = "student001"
@@ -33,13 +38,15 @@ def demo_info() -> dict:
 def seed(store: Store) -> dict:
     """Store the mock profile and proposals for student001.
 
-    Event and Tutor proposals are mock data; the Career proposals are the real ProposalBatch
+    Event proposals are mock data. The Tutor proposals come from the real Tutor Agent
+    (seed student in data/seed/tutor/). The Career proposals are the real ProposalBatch
     written by the Career Agent (advisor.py), assigned to the demo student.
     """
     if not FIXTURES.exists():
         raise HTTPException(500, f"fixtures folder not found: {FIXTURES}")
     profile = load_profile(FIXTURES / "mock_profile.json").model_copy(update={"daily_cap_min": DEMO_DAILY_CAP})
-    proposals = load_proposals(FIXTURES / "mock_proposals.json")
+    proposals = [p for p in load_proposals(FIXTURES / "mock_proposals.json") if p.source_agent != SourceAgent.TUTOR]
+    proposals += tutor_propose(load_student(DEMO_USER), tutor_context(DEMO_START, DEMO_DAYS))
     proposals += [
         p.model_copy(update={"user_id": DEMO_USER}) for p in load_proposals(FIXTURES / "career_batch_sample.json")
     ]

@@ -16,9 +16,8 @@ def client():
 def test_seed_plan_and_reset(client):
     info = client.get("/demo/info").json()
     r = client.post("/demo/seed")
-    assert (
-        r.status_code == 200 and r.json()["proposals"] == 28
-    )  # 19 mock Event/Tutor/Career + 9 from the real Career Agent
+    # 13 mock Event/Career + 19 from the real Tutor Agent + 9 from the real Career Agent
+    assert r.status_code == 200 and r.json()["proposals"] == 41
 
     r = client.post(
         "/planner/runs",

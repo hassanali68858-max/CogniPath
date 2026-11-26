@@ -1,0 +1,55 @@
+[
+  {"code": "COG1001", "name": "Programming Fundamentals", "credits": 5, "module_id": "core", "tags": ["programming"]},
+  {"code": "COG1100", "name": "Introduction to the Semantic Web", "credits": 5, "module_id": "core", "tags": ["knowledge-graphs", "semantic-web"]},
+  {"code": "COG1200", "name": "Statistics for Data Science", "credits": 5, "module_id": "core", "tags": ["statistics", "data-science"]},
+  {"code": "COG1300", "name": "Data Structures", "credits": 5, "module_id": "core", "tags": ["programming", "algorithms"], "prerequisites": ["COG1001"]},
+  {"code": "COG1400", "name": "Introduction to Artificial Intelligence", "credits": 5, "module_id": "advanced", "tags": ["ai"]},
+  {"code": "COG1500", "name": "Academic English", "credits": 5, "module_id": "electives", "tags": ["writing"]},
+  {"code": "COG1600", "name": "Python for Data Analysis", "credits": 5, "module_id": "electives", "tags": ["programming", "data-science"]},
+  {
+    "code": "COG1010", "name": "Algorithms", "credits": 5, "module_id": "core",
+    "tags": ["algorithms", "programming"], "prerequisites": ["COG1300"],
+    "offerings": [{"period": "2026-P2", "start": "2026-10-26", "end": "2026-12-18", "registration_deadline": "2026-10-19"}]
+  },
+  {
+    "code": "TIES4570", "name": "Cognitive Service Development Project", "credits": 5, "module_id": "core",
+    "tags": ["ai", "knowledge-graphs", "services"], "prerequisites": ["COG1100"],
+    "offerings": [{"period": "2026-P2", "start": "2026-10-26", "end": "2026-12-18", "registration_deadline": "2026-10-19"}]
+  },
+  {
+    "code": "COG2100", "name": "Knowledge Graphs", "credits": 5, "module_id": "advanced",
+    "tags": ["knowledge-graphs", "ai"], "prerequisites": ["COG1100"],
+    "offerings": [{"period": "2027-P3", "start": "2027-01-11", "end": "2027-03-12", "registration_deadline": "2026-11-20"}]
+  },
+  {
+    "code": "COG2200", "name": "Machine Learning", "credits": 5, "module_id": "advanced",
+    "tags": ["ai", "machine-learning"], "prerequisites": ["COG1010", "COG1200"],
+    "offerings": [{"period": "2027-P3", "start": "2027-01-11", "end": "2027-03-12", "registration_deadline": "2026-11-25"}]
+  },
+  {
+    "code": "COG2300", "name": "Deep Learning", "credits": 5, "module_id": "advanced",
+    "tags": ["ai", "machine-learning"], "prerequisites": ["COG2200"],
+    "offerings": [{"period": "2027-P4", "start": "2027-03-15", "end": "2027-05-21", "registration_deadline": "2027-02-28"}]
+  },
+  {
+    "code": "COG2400", "name": "Research Methods", "credits": 5, "module_id": "core",
+    "tags": ["research"],
+    "offerings": [{"period": "2027-P3", "start": "2027-01-11", "end": "2027-03-12", "registration_deadline": "2026-11-15"}]
+  },
+  {
+    "code": "COG2500", "name": "Tietokannat (Databases)", "credits": 5, "module_id": "electives", "language": "fi",
+    "tags": ["databases", "data-science"],
+    "offerings": [{"period": "2027-P3", "start": "2027-01-11", "end": "2027-03-12", "registration_deadline": "2026-11-20"}]
+  },
+  {
+    "code": "COG2600", "name": "Human-Computer Interaction", "credits": 5, "module_id": "electives",
+    "tags": ["hci", "design"],
+    "offerings": [{"period": "2027-P3", "start": "2027-01-11", "end": "2027-03-12", "registration_deadline": "2026-11-20"}]
+  },
+  {
+    "code": "COG2700", "name": "Cloud Computing", "credits": 5, "module_id": "electives",
+    "tags": ["cloud", "machine-learning"],
+    "offerings": [{"period": "2027-P3", "start": "2027-01-11", "end": "2027-03-12", "registration_deadline": "2026-10-20"}]
+  },
+  {"code": "COG9000", "name": "Master's Thesis", "credits": 30, "module_id": "thesis", "tags": ["research"]}
+]

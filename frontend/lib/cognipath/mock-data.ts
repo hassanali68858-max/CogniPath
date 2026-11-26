@@ -1,4 +1,4 @@
-import type { ActivityProposal, AgentSource, ChangeTag, InternshipMatch, PlanVersion, ScheduledItem, TutorProgress } from './types';
+import type { ActivityProposal, AgentSource, ChangeTag, InternshipMatch, PlanVersion, ScheduledItem } from './types';
 
 export const WEEK_START = '2026-11-02'; // Monday
 export const TODAY = '2026-11-04';
@@ -100,37 +100,6 @@ export const DROP_REASONS: Record<string, string> = {
   langgraph: 'Lower priority than study this week: it can move to next week without affecting any deadline.',
   quiz: 'Study is not the focus of this version, and the quiz has no hard deadline yet.',
   board: 'Clash with Career First goals: the evening was needed to keep application prep on schedule.',
-};
-
-export const MOCK_TUTOR: TutorProgress = {
-  programme: 'MSc Information Technology',
-  credits: [
-    { label: 'Core studies', done: 20, total: 40 },
-    { label: 'Specialisation', done: 12, total: 30 },
-    { label: 'Thesis', done: 0, total: 30 },
-  ],
-  graduation: {
-    target: 'May 2028',
-    projected: 'Dec 2028',
-    atRisk: true,
-    message: 'You are 8 credits behind the pace needed for May 2028. Passing the Databases exam this term closes most of the gap.',
-  },
-  weakTopics: [
-    {
-      id: 'prob', topic: 'Probability', course: 'Machine Learning', mastery: 42,
-      questions: [
-        { id: 'q1', prompt: 'Two fair dice are rolled. What is the probability that the sum is 7?', options: ['1/12', '1/6', '1/36', '7/36'], answerIndex: 1, explanation: 'Six of the 36 outcomes sum to 7, so 6/36 = 1/6.' },
-        { id: 'q2', prompt: 'If A and B are independent, P(A and B) equals…', options: ['P(A) + P(B)', 'P(A) × P(B)', 'P(A) / P(B)', 'P(A) − P(B)'], answerIndex: 1, explanation: 'Independence means one event does not change the other’s probability, so the joint probability is the product.' },
-      ],
-    },
-    {
-      id: 'norm', topic: 'Database normalisation', course: 'Databases', mastery: 55,
-      questions: [
-        { id: 'q3', prompt: 'A table is in 2NF when it is in 1NF and…', options: ['has no transitive dependencies', 'has no partial dependencies on a composite key', 'has only one column', 'has no foreign keys'], answerIndex: 1, explanation: '2NF removes attributes that depend on only part of a composite primary key.' },
-        { id: 'q4', prompt: 'Which problem does normalisation mainly reduce?', options: ['Slow network calls', 'Data redundancy and update anomalies', 'Missing indexes', 'Large file sizes'], answerIndex: 1, explanation: 'Storing each fact once avoids inconsistent updates.' },
-      ],
-    },
-  ],
 };
 
 export const MOCK_MATCHES: InternshipMatch[] = [

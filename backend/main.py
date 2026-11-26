@@ -1,7 +1,7 @@
 """CogniPath backend (development version).
 
-For now it serves the Planner API plus a few demo helpers, and allows the
-Next.js frontend to call it. Other agents' endpoints will be added here later.
+It serves the Planner API, the Tutor Agent routes and a few demo helpers, and
+allows the Next.js frontend to call it.
 
 Run from the repository root:
 
@@ -17,6 +17,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from agents.planner_agent.api import create_app
 
 from .demo import router as demo_router
+from .tutor import router as tutor_router
 
 
 def build_app():
@@ -30,6 +31,7 @@ def build_app():
         allow_headers=["*"],
     )
     app.include_router(demo_router)
+    app.include_router(tutor_router)
     return app
 
 

@@ -1,0 +1,34 @@
+[
+  {
+    "user_id": "student001",
+    "programme_id": "msc-cognitive-computing-demo",
+    "study_start": "2025-09-01",
+    "target_graduation": "2027-12-31",
+    "completed": [
+      {"code": "COG1001", "credits": 5, "grade": 4, "completed_on": "2025-10-20"},
+      {"code": "COG1100", "credits": 5, "grade": 5, "completed_on": "2025-12-15"},
+      {"code": "COG1400", "credits": 5, "grade": 4, "completed_on": "2025-12-18"},
+      {"code": "COG1200", "credits": 5, "grade": 3, "completed_on": "2026-03-10"},
+      {"code": "COG1300", "credits": 5, "grade": 4, "completed_on": "2026-03-12"},
+      {"code": "COG1500", "credits": 5, "completed_on": "2026-05-20"},
+      {"code": "COG1600", "credits": 5, "grade": 5, "completed_on": "2026-05-29"}
+    ],
+    "enrolled": [
+      {"code": "COG1010", "exam_date": "2026-11-12"},
+      {"code": "TIES4570"}
+    ],
+    "planned": ["COG2100", "COG2300"],
+    "interests": ["ai", "knowledge-graphs", "machine-learning"],
+    "languages": ["en"],
+    "quiz_history": [
+      {"topic_id": "kg-basics", "correct": 4, "total": 5, "taken_on": "2026-10-10"},
+      {"topic_id": "kg-basics", "correct": 5, "total": 5, "taken_on": "2026-10-24"},
+      {"topic_id": "rdf", "correct": 2, "total": 5, "taken_on": "2026-10-20"},
+      {"topic_id": "sparql", "correct": 1, "total": 4, "taken_on": "2026-10-22"},
+      {"topic_id": "multi-agent", "correct": 4, "total": 4, "taken_on": "2026-10-27"},
+      {"topic_id": "complexity", "correct": 3, "total": 5, "taken_on": "2026-10-15"},
+      {"topic_id": "sorting", "correct": 2, "total": 5, "taken_on": "2026-10-18"},
+      {"topic_id": "sorting", "correct": 3, "total": 5, "taken_on": "2026-10-29"}
+    ]
+  }
+]

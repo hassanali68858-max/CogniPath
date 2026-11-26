@@ -1,0 +1,95 @@
+[
+  {
+    "id": "kg-basics", "name": "Knowledge graph basics", "course_code": "TIES4570",
+    "facts": [
+      {"term": "Knowledge graph", "definition": "A graph of entities connected by typed relationships that represents facts about a domain."},
+      {"term": "Entity", "definition": "A real-world thing, such as a person, place or course, represented as a node in a knowledge graph."},
+      {"term": "Triple", "definition": "A single fact written as subject, predicate and object."},
+      {"term": "Schema", "definition": "The set of types and relationship kinds that the data in a knowledge graph uses."}
+    ],
+    "resources": [{"title": "Knowledge graph (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Knowledge_graph", "minutes": 30}]
+  },
+  {
+    "id": "rdf", "name": "RDF", "course_code": "TIES4570", "prerequisites": ["kg-basics"],
+    "facts": [
+      {"term": "RDF", "definition": "A W3C data model that describes resources as subject-predicate-object triples."},
+      {"term": "IRI", "definition": "A global identifier that RDF uses to name resources and properties."},
+      {"term": "Literal", "definition": "A value such as a string, number or date that can be the object of an RDF triple."},
+      {"term": "Turtle", "definition": "A compact text syntax for writing RDF graphs."},
+      {"term": "Blank node", "definition": "A resource in an RDF graph that has no global identifier."}
+    ],
+    "resources": [{"title": "W3C RDF 1.1 Primer", "url": "https://www.w3.org/TR/rdf11-primer/", "minutes": 60}]
+  },
+  {
+    "id": "sparql", "name": "SPARQL", "course_code": "TIES4570", "prerequisites": ["rdf"],
+    "facts": [
+      {"term": "SPARQL", "definition": "The W3C query language for RDF data."},
+      {"term": "SELECT query", "definition": "A SPARQL query form that returns a table of variable bindings."},
+      {"term": "Triple pattern", "definition": "A triple in which the subject, predicate or object can be a variable."},
+      {"term": "FILTER", "definition": "A SPARQL clause that keeps only the solutions for which a condition is true."},
+      {"term": "OPTIONAL", "definition": "A SPARQL clause that adds matches when they exist but keeps the solution when they do not."}
+    ],
+    "resources": [{"title": "W3C SPARQL 1.1 Query Language", "url": "https://www.w3.org/TR/sparql11-query/", "minutes": 90}]
+  },
+  {
+    "id": "owl", "name": "OWL ontologies", "course_code": "TIES4570", "prerequisites": ["rdf"],
+    "facts": [
+      {"term": "OWL", "definition": "The W3C Web Ontology Language for describing classes, properties and their logical relationships."},
+      {"term": "Class", "definition": "A set of individuals that share characteristics, such as all students."},
+      {"term": "Individual", "definition": "A specific member of a class, such as one particular student."},
+      {"term": "Object property", "definition": "A property that links one individual to another individual."},
+      {"term": "Datatype property", "definition": "A property that links an individual to a literal value."}
+    ],
+    "resources": [{"title": "W3C OWL 2 Primer", "url": "https://www.w3.org/TR/owl2-primer/", "minutes": 90}]
+  },
+  {
+    "id": "multi-agent", "name": "Multi-agent systems", "course_code": "TIES4570",
+    "facts": [
+      {"term": "Agent", "definition": "Software that perceives its environment and acts on its own to reach goals."},
+      {"term": "Multi-agent system", "definition": "A system in which several agents interact to solve a problem that is hard for one agent alone."},
+      {"term": "Orchestrator", "definition": "A component that coordinates other agents and combines their results."},
+      {"term": "Human-in-the-loop", "definition": "A design in which a person reviews or approves actions before they take effect."}
+    ]
+  },
+  {
+    "id": "complexity", "name": "Algorithm complexity", "course_code": "COG1010",
+    "facts": [
+      {"term": "Big-O notation", "definition": "An upper bound on how the running time or memory of an algorithm grows with the input size."},
+      {"term": "Linear time", "definition": "Running time that grows in direct proportion to the input size, O(n)."},
+      {"term": "Logarithmic time", "definition": "Running time that grows with the logarithm of the input size, O(log n), as in binary search."},
+      {"term": "Quadratic time", "definition": "Running time that grows with the square of the input size, O(n^2)."}
+    ],
+    "resources": [{"title": "Big O notation (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Big_O_notation", "minutes": 45}]
+  },
+  {
+    "id": "sorting", "name": "Sorting algorithms", "course_code": "COG1010", "prerequisites": ["complexity"],
+    "facts": [
+      {"term": "Merge sort", "definition": "A divide-and-conquer sort that splits the list, sorts each half and merges them in O(n log n) time."},
+      {"term": "Quicksort", "definition": "A divide-and-conquer sort that partitions around a pivot; O(n log n) on average and O(n^2) in the worst case."},
+      {"term": "Insertion sort", "definition": "A sort that builds the result one element at a time and is fast for small or nearly sorted lists."},
+      {"term": "Stable sort", "definition": "A sort that keeps equal elements in their original relative order."},
+      {"term": "Heapsort", "definition": "An in-place sort that uses a binary heap and runs in O(n log n) time in the worst case."}
+    ],
+    "resources": [{"title": "Sorting algorithm (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Sorting_algorithm", "minutes": 45}]
+  },
+  {
+    "id": "graph-search", "name": "Graph search", "course_code": "COG1010", "prerequisites": ["complexity"],
+    "facts": [
+      {"term": "Breadth-first search", "definition": "A graph traversal that visits all neighbours of a node before it goes deeper; it finds shortest paths in unweighted graphs."},
+      {"term": "Depth-first search", "definition": "A graph traversal that follows one path as deep as possible before it backtracks."},
+      {"term": "Dijkstra's algorithm", "definition": "A shortest-path algorithm for graphs with non-negative edge weights."},
+      {"term": "Adjacency list", "definition": "A graph representation that stores, for each node, the list of its neighbours."}
+    ],
+    "resources": [{"title": "Graph traversal (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Graph_traversal", "minutes": 45}]
+  },
+  {
+    "id": "dynamic-programming", "name": "Dynamic programming", "course_code": "COG1010", "prerequisites": ["complexity"],
+    "facts": [
+      {"term": "Dynamic programming", "definition": "A method that solves a problem from the solutions of overlapping subproblems and stores them to avoid repeated work."},
+      {"term": "Memoization", "definition": "Storing the results of function calls so that the same call is not computed again."},
+      {"term": "Optimal substructure", "definition": "A property where an optimal solution can be built from optimal solutions of its subproblems."},
+      {"term": "Tabulation", "definition": "A bottom-up dynamic programming style that fills a table from the smallest subproblems up."}
+    ],
+    "resources": [{"title": "Dynamic programming (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Dynamic_programming", "minutes": 60}]
+  }
+]
